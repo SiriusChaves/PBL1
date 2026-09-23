@@ -2,8 +2,9 @@ package main.Service;
 
 
 import main.dto.ItemDto;
-import main.dto.NpcDto;
+import main.dto.NpcDtoRecord;
 import main.loader.ChapterLoader;
+import main.mapper.NpcMapper;
 import main.model.*;
 
 import java.util.ArrayList;
@@ -98,14 +99,14 @@ public class StoryService {
         return currentChapter;
     }
 
-    public List<NpcDto> loadRelationshipDto() {
+    public List<NpcDtoRecord> loadRelationshipDto() {
         List<Npc> relationships = new ArrayList<>(
                 player.getRelationships().values());
 
-        List<NpcDto> relationshipsDto = new ArrayList<>();
+        List<NpcDtoRecord> relationshipsDto = new ArrayList<>();
         for (Npc npc : relationships) {
-            relationshipsDto.add(
-                    new NpcDto(npc));
+            NpcDtoRecord npcDtoRecord = NpcMapper.toDto(npc);
+            relationshipsDto.add(npcDtoRecord);
         }
 
         return relationshipsDto;

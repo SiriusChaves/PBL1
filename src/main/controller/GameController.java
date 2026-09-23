@@ -33,7 +33,7 @@ public class GameController {
         return new PlayerDto(gameSession.getPlayer());
     }
 
-    public List<NpcDto> loadRelationshipData() {
+    public List<NpcDtoRecord> loadRelationshipData() {
         return Collections.unmodifiableList(gameSession.getStoryService().loadRelationshipDto());
     }
 

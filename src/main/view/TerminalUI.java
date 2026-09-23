@@ -1,7 +1,7 @@
 package main.view;
 
 import main.dto.ItemDto;
-import main.dto.NpcDto;
+import main.dto.NpcDtoRecord;
 import main.dto.PlayerDto;
 
 import java.util.List;
@@ -38,7 +38,7 @@ public class TerminalUI {
         System.out.println("╚═════════════════════════════════════════════════════════╝");
     }
 
-    public static void showStatusRelationships(List<NpcDto> relationships) {
+    public static void showStatusRelationships(List<NpcDtoRecord> relationships) {
         System.out.println("╔═════════════════════════════════════════════════════════╗");
         System.out.println("║               STATUS DOS RELACIONAMENTOS                ║");
         System.out.println("╠══════════════════════════════════════╦══════════════════╣");
@@ -48,8 +48,8 @@ public class TerminalUI {
         if (relationships.isEmpty()) {
             System.out.printf("║ %-55s ║%n", "Nenhum vínculo estabelecido ainda...");
         } else {
-            for (NpcDto npc : relationships) {
-                System.out.printf("║ %-36s ║ %-16s ║%n", npc.getName(), npc.getRelationshipTier());
+            for (NpcDtoRecord npc : relationships) {
+                System.out.printf("║ %-36s ║ %-16s ║%n", npc.name(), npc.trustLevelTier());
             }
         }
         System.out.println("╚══════════════════════════════════════╩══════════════════╝");
