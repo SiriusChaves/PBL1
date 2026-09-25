@@ -1,8 +1,10 @@
 package main.service;
 
+import main.dto.DialogueDtoRecord;
 import main.dto.ItemDtoRecord;
 import main.dto.NpcDtoRecord;
 import main.loader.ChapterLoader;
+import main.mapper.DialogueMapper;
 import main.mapper.ItemMapper;
 import main.mapper.NpcMapper;
 import main.model.*;
@@ -129,5 +131,17 @@ public class StoryService {
 
             return itemsDto;
         }
+    }
+
+    public List<DialogueDtoRecord> loadDialogueDto() {
+        List<Dialogue> dialoguesScene = currentScene.getDialogues();
+
+        List<DialogueDtoRecord> dialoguesDto = new ArrayList<>();
+        for (Dialogue dialogue : dialoguesScene) {
+            dialoguesDto.add(
+                    DialogueMapper.toDto(dialogue));
+        }
+
+        return dialoguesDto;
     }
 }

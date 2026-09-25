@@ -31,7 +31,7 @@ public class GameView {
     }
 
     public void start() {
-        Menu menuChoice = DEFAULT;
+        Menu menuChoice;
 
         do {
             menuChoice = startMenu();
@@ -44,23 +44,23 @@ public class GameView {
                 case INSTRUCOES -> showInstructions();
                 case CREDITOS -> showCredits();
                 case SAIR -> exitGame();
-                case DEFAULT -> System.out.println("escolha invalida");
+                default -> System.out.println("escolha invalida");
             }
         } while(menuChoice != SAIR);
 
     }
 
     public void runGame() {
-        ChapterDto currentChapter;
+        ChapterDtoRecord currentChapter;
         SceneDtoRecord currentScene;
         String playerInput;
         boolean isRunning = true;
 
         while (isRunning) {
             currentChapter = gameController.loadCurrentChapter();
-            showTitle(currentChapter.getTitle());
+            showTitle(currentChapter.title());
 
-            int numeroDeCenas = currentChapter.getNumberScenes();
+            int numeroDeCenas = currentChapter.numberScenes();
 
             for (int i = 0; i < numeroDeCenas; i++) {
                 currentScene = gameController.loadCurrentScene();
@@ -99,21 +99,21 @@ public class GameView {
                 gameController.advanceToNextScene();
             }
 
-            if (currentChapter.getNumberLastChoices() > 0) {
+            if (currentChapter.numberLastChoices() > 0) {
                 boolean escolhaValidaFinal = false;
 
                 while (!escolhaValidaFinal) {
-                    showChoices(currentChapter.getChoices());
+                    showChoices(currentChapter.choices());
                     System.out.println(">>> Informe o número da Escolha Final do Capítulo: ");
                     playerInput = Leitura.lerString();
 
                     try {
                         int escolhaNumerica = Integer.parseInt(playerInput);
-                        if (escolhaNumerica > 0 && escolhaNumerica <= currentChapter.getNumberLastChoices()) {
+                        if (escolhaNumerica > 0 && escolhaNumerica <= currentChapter.numberLastChoices()) {
                             gameController.applyChapterFinalChoiceConsequence(escolhaNumerica - 1);
                             escolhaValidaFinal = true;
                         } else {
-                            System.out.println("Opção inválida. Escolha um número entre 1 e " + currentChapter.getNumberLastChoices() + ".");
+                            System.out.println("Opção inválida. Escolha um número entre 1 e " + currentChapter.numberLastChoices() + ".");
                         }
                     } catch (NumberFormatException ex) {
                         boolean comandoReconhecido = comandsMenu(playerInput);
