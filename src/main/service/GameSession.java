@@ -1,4 +1,4 @@
-package main.Service;
+package main.service;
 
 import main.model.Flag;
 import main.model.Player;

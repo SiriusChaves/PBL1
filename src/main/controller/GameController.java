@@ -1,6 +1,8 @@
 package main.controller;
 
-import main.Service.GameSession;
+import main.mapper.PlayerMapper;
+import main.model.Player;
+import main.service.GameSession;
 import main.dto.*;
 import main.model.Choice;
 
@@ -29,8 +31,9 @@ public class GameController {
                 gameSession.getStoryService().getAvaliableSceneChoices());
     }
 
-    public PlayerDto loadPlayerData() {
-        return new PlayerDto(gameSession.getPlayer());
+    public PlayerDtoRecord loadPlayerData() {
+        Player player = gameSession.getPlayer();
+        return PlayerMapper.toDto(player);
     }
 
     public List<NpcDtoRecord> loadRelationshipData() {

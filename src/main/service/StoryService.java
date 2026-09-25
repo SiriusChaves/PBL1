@@ -1,4 +1,4 @@
-package main.Service;
+package main.service;
 
 import main.dto.ItemDtoRecord;
 import main.dto.NpcDtoRecord;

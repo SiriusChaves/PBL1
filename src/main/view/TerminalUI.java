@@ -2,7 +2,7 @@ package main.view;
 
 import main.dto.ItemDtoRecord;
 import main.dto.NpcDtoRecord;
-import main.dto.PlayerDto;
+import main.dto.PlayerDtoRecord;
 
 import java.util.List;
 
@@ -26,14 +26,14 @@ public class TerminalUI {
         System.out.println("╚══════════════════════════════════════╩══════════════════╝");
     }
 
-    public static void showStatusPlayer(PlayerDto player) {
+    public static void showStatusPlayer(PlayerDtoRecord player) {
         System.out.println("╔═════════════════════════════════════════════════════════╗");
         System.out.println("║                    STATUS DO JOGADOR                    ║");
         System.out.println("╠═════════════════════════════════════════════════════════╣");
-        System.out.printf("║ OPERADOR:     %-41s ║%n", player.getName());
+        System.out.printf("║ OPERADOR:     %-41s ║%n", player.name());
         System.out.println("╠═════════════════════════════════════════════════════════╣");
-        System.out.printf("║ SANIDADE:     %-41s ║%n", String.format("%3d / 100", player.getSanity()));
-        System.out.printf("║ CONHECIMENTO: %-41s ║%n", String.format("%3d / 100", player.getKnowledge()));
+        System.out.printf("║ SANIDADE:     %-41s ║%n", String.format("%3d / 100", player.sanity()));
+        System.out.printf("║ CONHECIMENTO: %-41s ║%n", String.format("%3d / 100", player.knowledge()));
 
         System.out.println("╚═════════════════════════════════════════════════════════╝");
     }
