@@ -37,7 +37,7 @@ public class GameController {
         return Collections.unmodifiableList(gameSession.getStoryService().loadRelationshipDto());
     }
 
-    public List<ItemDto> loadInventoryData() {
+    public List<ItemDtoRecord> loadInventoryData() {
         return Collections.unmodifiableList(gameSession.getStoryService().loadItemDto());
     }
 

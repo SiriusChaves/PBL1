@@ -5,7 +5,7 @@ import main.model.Item;
 
 public class ItemMapper {
 
-    public ItemDtoRecord toDto(Item item) {
+    public static ItemDtoRecord toDto(Item item) {
         return new ItemDtoRecord(
                 item.getName(),
                 item.getDescription(),

@@ -1,9 +1,9 @@
 package main.Service;
 
-
-import main.dto.ItemDto;
+import main.dto.ItemDtoRecord;
 import main.dto.NpcDtoRecord;
 import main.loader.ChapterLoader;
+import main.mapper.ItemMapper;
 import main.mapper.NpcMapper;
 import main.model.*;
 
@@ -105,24 +105,26 @@ public class StoryService {
 
         List<NpcDtoRecord> relationshipsDto = new ArrayList<>();
         for (Npc npc : relationships) {
+
             NpcDtoRecord npcDtoRecord = NpcMapper.toDto(npc);
+
             relationshipsDto.add(npcDtoRecord);
         }
 
         return relationshipsDto;
     }
 
-    public List<ItemDto> loadItemDto() {
+    public List<ItemDtoRecord> loadItemDto() {
         if (player.getInventory().getItems().isEmpty()) {
-            return Collections.EMPTY_LIST;
+            return Collections.emptyList();
         } else {
             List<Item> items = new ArrayList<>(
                     player.getInventory().getItems().values());
 
-            List<ItemDto> itemsDto = new ArrayList<>();
+            List<ItemDtoRecord> itemsDto = new ArrayList<>();
             for (Item item : items) {
-                itemsDto.add(
-                        new ItemDto(item));
+                ItemDtoRecord itemDtoRecord = ItemMapper.toDto(item);
+                itemsDto.add(itemDtoRecord);
             }
 
             return itemsDto;
