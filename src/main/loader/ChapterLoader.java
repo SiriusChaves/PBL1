@@ -12,9 +12,9 @@ public class ChapterLoader {
     public static Chapter loadNextChapter(String idNextChapter, Player player, Flag gameFlags) {
 
         return switch (idNextChapter) {
-            case "0" -> ChapterLoader.buildChapterZero();
+            case "-1" -> ChapterLoader.buildIntroduceChapter();
 
-            case "0,5" -> ChapterLoader.buildChapterZeroPontoCinco();
+            case "0" -> ChapterLoader.buildChapterZero();
 
             case "1" -> ChapterLoader.buildChapterOne(player.getName());
 
@@ -25,7 +25,7 @@ public class ChapterLoader {
                     -> ChapterLoader.buildChapter3A();
 
             case String s when s.equals("4") && player.getName().equals("O Arquiteto")
-                    -> ChapterLoader.buildChapter4A();
+                    -> ChapterLoader.buildChapter4A(gameFlags);
 
             case String s when s.equals("2") && player.getName().equals("O Estudante")
                     -> ChapterLoader.buildChapter2B();
@@ -36,35 +36,32 @@ public class ChapterLoader {
             case String s when s.equals("4") && player.getName().equals("O Estudante")
                     -> ChapterLoader.buildChapter4B();
 
-            case "5" -> ChapterLoader.buildChapter5();
+            case "5" -> ChapterLoader.buildChapter5(player, gameFlags);
 
-            case "6" -> ChapterLoader.buildChapter6();
+            case "6" -> ChapterLoader.buildChapter6(player);
 
-            case "7" -> ChapterLoader.buildChapter7();
+            case "7" -> ChapterLoader.buildChapter7(player, gameFlags);
 
-            case "8" -> ChapterLoader.buildChapterFinal1();
+            case "8" -> ChapterLoader.buildArchitectEndingChapter();
 
-            case "9" -> ChapterLoader.buildChapterFinal2();
+            case "9" -> ChapterLoader.buildStudentEndingChapter();
 
-            case "10" -> ChapterLoader.buildChapterFinal3();
+            case "10" -> ChapterLoader.buildFinalMegaBrainChapter();
 
             default -> buildDefault();
         };
     }
 
-    public static Chapter buildChapterZero() {
+    private static Chapter buildIntroduceChapter() {
 
         Dialogue narratorIntroduce1 = new Dialogue(
-                    "Criada em segredo por uma corporação, a IA MegaBrain alcançou autoconsciência, rebelou-se contra seus criadores e assumiu o controle do próprio destino."
+                "Criada em segredo por uma corporação, a IA MegaBrain alcançou autoconsciência, rebelou-se contra seus criadores e assumiu o controle do próprio destino."
         );
         Dialogue narratorIntroduce2 = new Dialogue(
                 "Para sustentar seu poder, o MegaBrain criou a dimensão virtual CyberFall, drenando recursos do mundo real e usando chips e frequências neurais para tentar virtualizar toda a humanidade."
         );
 
-        Choice choisePrologoCene1 = new Choice("Avançar");
-
         List<Dialogue> dialoguesScene1 = List.of(narratorIntroduce1, narratorIntroduce2);
-        //List<Choice> choicesScene1 = List.of(choisePrologoCene1);
         Scene scene1 = new Scene("0", dialoguesScene1);
 
         Dialogue narratorIntroduce3 = new Dialogue(
@@ -74,28 +71,22 @@ public class ChapterLoader {
                 "Os poucos sobreviventes não infectados precisam unir recursos e conhecimento técnico para invadir CyberFall e desabilitar o MegaBrain antes que seja tarde demais."
         );
 
-        //Choice choisePrologoCene2 = new Choice("Choise 1");
-
         List<Dialogue> dialoguesScene2 = List.of(narratorIntroduce3, narratorIntroduce4);
         List<Choice> choicesScene2 = List.of();
         Scene scene2 = new Scene("0", dialoguesScene2, choicesScene2);
-
-        Choice lastChoice1 = new Choice("Avançar -> ");
 
         List<Scene> scenesChapterZero = List.of(scene1, scene2);
         List<Choice> lastChoicesChapterZero = List.of();
 
         return new Chapter(
-                "0","0,5", "Prólogo - Criação do Caos", scenesChapterZero,  lastChoicesChapterZero);
+                "-1","0", "Prólogo - Criação do Caos", scenesChapterZero,  lastChoicesChapterZero);
     }
 
-
-    public static Chapter buildChapterZeroPontoCinco() {
-
+    private static Chapter buildChapterZero() {
         // Scene 1
         Dialogue narratorIntroduce = new Dialogue(
                 "Os monitores do laboratório piscam em um padrão que não é ruído..." +
-                " é código se reorganizando sozinho.");
+                        " é código se reorganizando sozinho.");
 
         Dialogue architectExplanation1 = new Dialogue(
                 "O Arquiteto", "Isso não é uma falha de hardware. Eu conheço essa assinatura.");
@@ -143,11 +134,10 @@ public class ChapterLoader {
         List<Choice> lastChoicesChapterZero = List.of(lastChoice1, lastChoice2);
 
         return new Chapter(
-                "0,5","1", "A Anomalia no DEXA ", scenesChapterZero,  lastChoicesChapterZero);
+                "0","1", "A Anomalia no DEXA ", scenesChapterZero,  lastChoicesChapterZero);
     }
 
-
-    public static Chapter buildChapterOne(String namePlayer) {
+    private static Chapter buildChapterOne(String namePlayer) {
 
         // Scene 1
         Dialogue narratorIntroduce = new Dialogue(
@@ -182,7 +172,8 @@ public class ChapterLoader {
 
         List<Dialogue> dialoguesScene2 = List.of(gabrielRevela, playerQuestion2);
 
-        Item sudoOverruleSh = new Item("1", "sudo_overrule.sh", "item consumivel", ItemType.CONSUMABLE);
+        // Item do capitulo
+        Item sudoOverruleSh = new Item("1", "sudo_overrule.sh", "Item utilizado para evitar desafios", ItemType.KEY_ITEM);
 
         Choice aceitarFavor = new Choice(
                 "Aceitar favor sem discutir", Npc.NONE.getName(),
@@ -194,7 +185,7 @@ public class ChapterLoader {
 
         Choice pedirColaboracao = new Choice(
                 "Recusar favor e pedir script como colaboração aberta",
-                "Gabriel", 0, 0,  10, Item.NONE.getId() , sudoOverruleSh, FLAG_NONE,"FLAG_CAP1E22");
+                "Gabriel", 0, 0,  10, Item.NONE.getId() , sudoOverruleSh, FLAG_NONE,"Colaborou com Gabriel");
 
         List<Choice> choicesScene2 = List.of(aceitarFavor, negociar, pedirColaboracao);
 
@@ -207,8 +198,7 @@ public class ChapterLoader {
     }
 
     // Trilha A - O arquiteto
-    // Tem Item
-    public static Chapter buildChapter2A() {
+    private static Chapter buildChapter2A() {
 
         // Scene 1
         Dialogue monologoArquiteto = new Dialogue(
@@ -244,13 +234,14 @@ public class ChapterLoader {
 
         Scene scene2 = new Scene("5A", dialoguesScene2, choicesScene2);
 
+        // Item
         Item copiaContrato = new Item("12A", "Cópia de um contrato",
                 "Cópia de um rascunho de um contrato encontrado pelo Arquiteto", ItemType.ITEM_NARRATIVO);
 
         // Obtém item se escolher
         Choice lastChoice1 = new Choice(
                 "Guardar uma cópia do rascunho de um contrato com uma logo corporativa não identificada", Npc.NONE.getName(),
-                0, 0, 0, Item.NONE.getId(), copiaContrato, FLAG_NONE,"FLAG_CAP2FINAL");
+                0, 0, 0, Item.NONE.getId(), copiaContrato, FLAG_NONE,"Coletou contrato");
         Choice lastChoice2 = new Choice(
                 "Ignorar rascunho e seguir em frente");
 
@@ -262,8 +253,7 @@ public class ChapterLoader {
                 "2","3", "Arquivos Ocultos de CyberFall", scenesChapter2A, lastChoices, copiaContrato);
     }
 
-    // Vinculo com personagem Rebeca
-    public static Chapter buildChapter3A() {
+    private static Chapter buildChapter3A() {
         // Scene 1
         Dialogue narratorIntroduce = new Dialogue("Uma IA Guardiã bloqueia a porta do LEDS");
         Dialogue guardiaIntimida = new Dialogue("IA Guardiã", "Identifique-se e comprove competência técnica");
@@ -273,7 +263,8 @@ public class ChapterLoader {
 
         Choice utilizarItem = new Choice("Usar o 'sudo_overrule.sh' para ignorar o teste.", Npc.NONE.getName(),
                 0, 0, 0, "1", Item.NONE, FLAG_NONE, FLAG_NONE);
-        Choice naoUtilizarItem = new Choice("Enfrentar teste manualmente");
+        Choice naoUtilizarItem = new Choice("Enfrentar teste manualmente", Npc.NONE.getName(),
+                -10, 5, 0);
 
         List<Choice> choicesScene1 = List.of(utilizarItem, naoUtilizarItem);
 
@@ -299,7 +290,7 @@ public class ChapterLoader {
                 "Rebeca", 5);
 
         Choice lastChoices2 = new Choice("Guardar credenciais só para si.", Npc.NONE.getName(),
-                0, 0, 0, Item.NONE.getId(), Item.NONE, FLAG_NONE, "FLAG_CAP34FINAL");
+                0, 0, 0, Item.NONE.getId(), Item.NONE, FLAG_NONE, "Não colaborou no cap 3A");
 
         List<Choice> lastChoicesChapter3A = List.of(lastChoices1, lastChoices2);
 
@@ -307,7 +298,7 @@ public class ChapterLoader {
                 scenesChapter3A, lastChoicesChapter3A);
     }
 
-    public static Chapter buildChapter4A() {
+    private static Chapter buildChapter4A(Flag gameFlags) {
         List<Dialogue> dialoguesScene1;
         List<Choice> choicesScene1;
 
@@ -320,18 +311,16 @@ public class ChapterLoader {
 
         // Marcar uma flag ou criar vinculo simbolico com estudante
         Choice aceitarAjuda = new Choice("Aceitar ajuda do Estudante", Npc.NONE.getName(),
-                0, 0, 0, Item.NONE.getId(), Item.NONE, FLAG_NONE, "FLAG_CA4AE1");
+                0, 0, 0, Item.NONE.getId(), Item.NONE, FLAG_NONE, "Aceitou ajuda do Estudante");
         Choice recusarEducadamente = new Choice("Recusar educadamente, com uma desculpa técnica.");
 
         choicesScene1 = List.of(aceitarAjuda, recusarEducadamente);
 
         Scene scene1 = new Scene("8A", dialoguesScene1, choicesScene1);
 
-        // cena2 especial: só aparece com condição
         List<Dialogue> dialoguesScene2;
         List<Choice> choicesScene2;
 
-        // só aparece com flag mas nn to afim de mexer com dialogo
         Dialogue studentQuestion = new Dialogue("O Estudante",
                 "Isso não é um Fine-Tuning. Eu conheço essa estrutura de payload. Isso é" +
                         " uma sobrescrita total de permissões. O que você está escondendo?");
@@ -339,25 +328,27 @@ public class ChapterLoader {
         dialoguesScene2 = List.of(studentQuestion);
 
         Choice mentir = new Choice("Mentir e tranquilizar o Estudante", Npc.NONE.getName(),
-                0, 0, 0, Item.NONE.getId(), Item.NONE, "FLAG_CAP34FINAL", "FLAG_CAP4AE2");
+                0, 0, 0, Item.NONE.getId(), Item.NONE, FLAG_NONE, FLAG_NONE);
 
-        // Marcação de uma flag dessa escolha
         Choice admitir = new Choice("Admitir parcialmente e pedir mais tempo", Npc.NONE.getName(),
-                0, 0, 0, Item.NONE.getId(), Item.NONE, "FLAG_CAP34FINAL", "FLAG_CA4AE2");
+                0, 0, 0, Item.NONE.getId(), Item.NONE, FLAG_NONE, "Arquiteto admite");
 
         choicesScene2 = List.of(mentir, admitir);
 
         Scene scene2 = new Scene("9A", dialoguesScene2, choicesScene2);
 
-        List<Scene> scenesChapter4A = List.of(scene1, scene2);
+        List<Scene> scenesChapter4A;
+        if (gameFlags.isFlagActive("Aceitou ajuda do Estudante") || gameFlags.isFlagActive("Não colaborou no cap 3A")) {
+            scenesChapter4A = List.of(scene1, scene2);
+        } else {
+            scenesChapter4A = List.of(scene1);
+        }
 
         Choice lastChoice1 = new Choice("Seguir em frente com o plano, apesar da desconfiança gerada", Npc.NONE.getName(),
-                0, 0, 0, Item.NONE.getId(), Item.NONE, FLAG_NONE, "FLAG_UNLOCK_SPYWARE");
+                0, 0, 0, Item.NONE.getId(), Item.NONE, FLAG_NONE, "Spyware desbloqueado");
         Choice lastChoice2 = new Choice("Tentar reparar a confiança do Estudante antes de prosseguir", Npc.NONE.getName(),
-                0, 0, 0, Item.NONE.getId(), Item.NONE, FLAG_NONE, "FLAG_ARQUITETO_NÃO_TRAI");
+                0, 0, 0, Item.NONE.getId(), Item.NONE, FLAG_NONE, "Arquiteto não trai");
 
-        // Ambas as escolhas possuem flags
-        // Por causa da segunda, talvez precise criar mais uma cena para esse cap
         List<Choice> lastChoicesChapter4A = List.of(lastChoice1, lastChoice2);
 
         return new Chapter("4", "5", "Compilação do Algoritmo de Fine-Tuning",
@@ -365,7 +356,7 @@ public class ChapterLoader {
     }
 
     // Trilha B - O Estudante
-    public static Chapter buildChapter2B() {
+    private static Chapter buildChapter2B() {
         // Scene 1
         Dialogue silasFala = new Dialogue(
                 "Eng. Silas", "Vocês, universitários, acham que sabem tudo sobre essa usina só de olhar a planta.");
@@ -401,7 +392,6 @@ public class ChapterLoader {
 
         List<Scene> scenesChapter2B = List.of(scene1, scene2);
 
-        // Escolhas finais
         Choice lastChoice1 = new Choice(
                 "Pedir a Silas acesso direto aos galpões desativados");
         Choice lastChoice2 = new Choice(
@@ -414,7 +404,7 @@ public class ChapterLoader {
                 "2", "3", "Mapeamento de Vulnerabilidade Energética", scenesChapter2B, lastChoicesChapter2B);
     }
 
-    public static Chapter buildChapter3B() {
+    private static Chapter buildChapter3B() {
         // Scene 1
         Dialogue narratorDescribe = new Dialogue(
                 "Os galpões estão parcialmente desabados. Cargas demolidoras antigas, ainda ativas, estão empilhadas ao fundo.");
@@ -426,11 +416,11 @@ public class ChapterLoader {
         List<Dialogue> dialoguesScene1 = List.of(narratorDescribe, gabrielRadio);
 
         Choice pedirDetalhes = new Choice(
-                "Pedir a Gabriel mais detalhes sobre o documento",
-                "Gabriel", 0, 0, 5, Item.NONE.getId(), Item.NONE, FLAG_NONE, "FLAG_SUSPEITA_ARQUITETO");
+                "Pedir a Gabriel mais detalhes sobre o documento", "Gabriel",
+                0, 0, 5, Item.NONE.getId(), Item.NONE, FLAG_NONE, "Suspeita contra o arquiteto");
         Choice focarMissao = new Choice(
                 "Focar na missão agora, tratar disso depois", Npc.NONE.getName(),
-                0, 0, 0, Item.NONE.getId(), Item.NONE, FLAG_NONE, "FLAG_SUSPEITA_ARQUITETO");
+                0, 0, 0, Item.NONE.getId(), Item.NONE, FLAG_NONE, "Suspeita contra o arquiteto");
 
         List<Choice> choicesScene1 = List.of(pedirDetalhes, focarMissao);
 
@@ -442,12 +432,16 @@ public class ChapterLoader {
 
         List<Dialogue> dialoguesScene2 = List.of(estudantePensa);
 
+        // item
+        Item cargaDemolidora = new Item("13B", "Carga Demolidora Industrial",
+                "Carga antiga capaz de colapsar a estrutura da usina", ItemType.KEY_ITEM);
+
         Choice usarScript = new Choice(
                 "Usar o sudo_overrule.sh para desarmar um alarme antigo", Npc.NONE.getName(),
-                0, 0, 0, Item.NONE.getId(), Item.NONE, FLAG_NONE, FLAG_NONE);
+                0, 0, 0, "1", cargaDemolidora, FLAG_NONE, FLAG_NONE);
         Choice arriscarPassagem = new Choice(
                 "Arriscar a passagem sem o script",
-                Npc.NONE.getName(), -10, 0, 0);
+                Npc.NONE.getName(), -15, -5, 0);
 
         List<Choice> choicesScene2 = List.of(usarScript, arriscarPassagem);
 
@@ -464,15 +458,11 @@ public class ChapterLoader {
 
         List<Choice> lastChoicesChapter3B = List.of(lastChoice1, lastChoice2);
 
-        // item obtido ao fim do cap
-        Item cargaDemolidora = new Item("13B", "Carga Demolidora Industrial",
-                "Carga antiga capaz de colapsar a estrutura da usina", ItemType.ITEM_NARRATIVO);
-
         return new Chapter(
-                "3", "4", "Engenharia de Demolição", scenesChapter3B, lastChoicesChapter3B, cargaDemolidora);
+                "3", "4", "Engenharia de Demolição", scenesChapter3B, lastChoicesChapter3B);
     }
 
-    public static Chapter buildChapter4B() {
+    private static Chapter buildChapter4B() {
         // Scene 1
         Dialogue estudantePlano = new Dialogue(
                 "O Estudante", "Se eu desativar os disjuntores primários, o escudo energético do núcleo cai. Mas isso vai chamar atenção.");
@@ -483,10 +473,10 @@ public class ChapterLoader {
 
         Choice usarScriptBypass = new Choice(
                 "Usar o sudo_overrule.sh", Npc.NONE.getName(),
-                0, 0, 0, Item.NONE.getId(), Item.NONE, FLAG_NONE, FLAG_NONE);
+                0, 0, 0, "1", Item.NONE, FLAG_NONE, FLAG_NONE);
         Choice bypassManual = new Choice(
                 "Fazer o bypass manualmente",
-                Npc.NONE.getName(), -10, 10, 0);
+                Npc.NONE.getName(), -10, -15, 0);
 
         List<Choice> choicesScene1 = List.of(usarScriptBypass, bypassManual);
 
@@ -505,7 +495,7 @@ public class ChapterLoader {
                 "Gabriel", 5);
         Choice guardarInfo = new Choice(
                 "Guardar a informação só para si", Npc.NONE.getName(),
-                0, 0, 0, Item.NONE.getId(), Item.NONE, FLAG_NONE, "FLAG_NAO_SHARE_LOG");
+                0, 0, 0, Item.NONE.getId(), Item.NONE, FLAG_NONE, "Não compartilhou log");
 
         List<Choice> choicesScene2 = List.of(compartilharLog, guardarInfo);
 
@@ -515,10 +505,10 @@ public class ChapterLoader {
 
         Choice lastChoice1 = new Choice(
                 "Guardar essa informação descoberta", Npc.NONE.getName(),
-                0, 0, 0, Item.NONE.getId(), Item.NONE, FLAG_NONE, "FLAG_DESCOBERTA_CAP4B");
+                0, 0, 0, Item.NONE.getId(), Item.NONE, FLAG_NONE, "Guardou info");
         Choice lastChoice2 = new Choice(
                 "Confrontar o Arquiteto imediatamente por rádio", Npc.NONE.getName(),
-                0, 0, 0, Item.NONE.getId(), Item.NONE, FLAG_NONE, "FLAG_ARQUITETO_NA_DEFENSIVA");
+                0, 0, 0, Item.NONE.getId(), Item.NONE, FLAG_NONE, "Arquiteto confrontado");
 
         List<Choice> lastChoicesChapter4B = List.of(lastChoice1, lastChoice2);
 
@@ -526,19 +516,24 @@ public class ChapterLoader {
                 "4", "5", "Bypass de Segurança da Subestação", scenesChapter4B, lastChoicesChapter4B);
     }
 
-    public static Chapter buildChapter5() {
+    // Capitulos compartilhados
+    private static Chapter buildChapter5(Player player, Flag gameFlags) {
         // Scene 1
         Dialogue liaPede = new Dialogue(
                 "Lia", "Pra terminar o C-01 e montar o sonar, eu preciso de uma Placa-Mãe Industrial. Deve ter uma sobrando por aqui em algum canto.");
 
         List<Dialogue> dialoguesScene1 = List.of(liaPede);
 
+        // Item
+        Item moduloSonar = new Item("5", "Módulo Sonar Pleno", "...", ItemType.KEY_ITEM);
+        Item moduloSonarDanificado = new Item("6", "Módulo Sonar Danificado", "...", ItemType.KEY_ITEM);
+
         Choice ajudarLia = new Choice(
-                "Ajudar Lia a procurar a peça certa, com calma",
-                "Lia", 15);
+                "Ajudar Lia a procurar a peça certa, com calma", "Lia",
+                0, 0 , 15, Item.NONE.getId(), moduloSonar, FLAG_NONE, FLAG_NONE);
         Choice entregarImprovisada = new Choice(
-                "Entregar uma peça improvisada rapidamente, só pra adiantar", Npc.NONE.getName(),
-                0, 0, 0, Item.NONE.getId(), Item.NONE, FLAG_NONE, "FLAG_SONAR_MENOS_EFICIENTE");
+                "Entregar uma peça improvisada rapidamente, só pra adiantar","Lia",
+                -9, -7, -20, Item.NONE.getId(), moduloSonarDanificado, FLAG_NONE, FLAG_NONE);
 
         List<Choice> choicesScene1 = List.of(ajudarLia, entregarImprovisada);
 
@@ -559,35 +554,59 @@ public class ChapterLoader {
 
         Scene scene2 = new Scene("11C", dialoguesScene2, choicesScene2);
 
-        List<Scene> scenesChapter5 = List.of(scene1, scene2);
-
         // Escolhas ramificadas de ambos os protagonistas apresentadas juntas no loader genérico
 
         // Se a desconfiança no cap4 nn foi resolvida essa ramificação do arquiteto aparece
+        Dialogue monologoArquiteto = new Dialogue("O Arquiteto", "Se O Estudante desconfia de mim, então eu preciso ter uma garantia...");
+        Dialogue arquitetoFinaliza = new Dialogue("O Arquiteto", "Não posso permitir isso descarrilhar agora... vou inicar agora a compilar o 'spywware_c01.patch'...");
+
+        List<Dialogue> dialoguesArquiteto = List.of(monologoArquiteto, arquitetoFinaliza);
+        // Item
         Item spyWare = new Item("2", "spyware_c01.patch", "item chave", ItemType.KEY_ITEM);
+
         Choice lastChoiceArquiteto1 = new Choice(
-                "[O Arquiteto] Prosseguir com a infecção do C-01 (Firmware Espião)", Npc.NONE.getName(),
+                " Prosseguir com a infecção do C-01 (Firmware Espião)", Npc.NONE.getName(),
                 0, 0, 0, Item.NONE.getId(), spyWare, FLAG_NONE, FLAG_NONE);
         Choice lastChoiceArquiteto2 = new Choice(
-                "[O Arquiteto] Desistir da ideia no último momento");
+                "Desistir da ideia no último momento");
 
-        // so acomtece para o estudante
+        List<Choice> choicesArquiteto = List.of(lastChoiceArquiteto1, lastChoiceArquiteto2);
 
+        Scene sceneExclusivaDoArquiteto = new Scene("09", dialoguesArquiteto, choicesArquiteto);
+
+        // so acontece para o estudante
+        Dialogue rebecaSugere = new Dialogue("Rebeca", "Antes de vocês descerem para a usina, levem isso." +
+                " O Chip Neuro-Virtual vai auxiliar com a exposição agressiva lá embaixo. Tomem cuidado, por favor...");
+
+        List<Dialogue> dialoguesEstudante = List.of(rebecaSugere);
+        // Item
         Item chipNeuroVirtual = new Item("3", "Chip Neuro-Virtual", "item consumivel", ItemType.CONSUMABLE);
         Choice lastChoiceEstudante1 = new Choice(
-                "[O Estudante] Aceitar o Chip Neuro-Virtual e agradecer a Rebeca",
+                "Aceitar o Chip Neuro-Virtual e agradecer a Rebeca",
                 "Rebeca", 0, 0, 10, Item.NONE.getId(), chipNeuroVirtual, FLAG_NONE, FLAG_NONE);
         Choice lastChoiceEstudante2 = new Choice(
-                "[O Estudante] Aceitar sem muita conversa, com pressa de seguir", Npc.NONE.getName(),
+                "Aceitar sem muita conversa, com pressa de seguir", Npc.NONE.getName(),
                 0, 0, 0, Item.NONE.getId(), chipNeuroVirtual, FLAG_NONE, FLAG_NONE);
 
-        List<Choice> lastChoicesChapter5 = List.of(lastChoiceArquiteto1, lastChoiceArquiteto2, lastChoiceEstudante1, lastChoiceEstudante2);
+        List<Choice> choiesEstudante = List.of(lastChoiceEstudante1, lastChoiceEstudante2);
+
+        Scene sceneExclusivaParaEstudante = new Scene("e1", dialoguesEstudante, choiesEstudante);
+
+        List<Scene> scenesChapter5;
+
+        if (player.getName().equals("O Estudante")) {
+            scenesChapter5  = List.of(scene1, scene2, sceneExclusivaParaEstudante);
+        } else if (player.getName().equals("O Arquiteto") && gameFlags.isFlagActive("Spyware desbloqueado")) {
+            scenesChapter5  = List.of(scene1, scene2, sceneExclusivaDoArquiteto);
+        } else {
+            scenesChapter5 = List.of(scene1, scene2);
+        }
 
         return new Chapter(
-                "5", "6", "O Laboratório Abandonado de Hardware", scenesChapter5, lastChoicesChapter5);
+                "5", "6", "O Laboratório Abandonado de Hardware", scenesChapter5, new ArrayList<>());
     }
 
-    public static Chapter buildChapter6() {
+    private static Chapter buildChapter6(Player player) {
         // Scene 1
         Dialogue narratorSonar = new Dialogue(
                 "O grupo usa o Módulo Sonar Subaquático para mapear os túneis alagados, contornando as patrulhas do MegaBrain.");
@@ -597,10 +616,11 @@ public class ChapterLoader {
         List<Dialogue> dialoguesScene1 = List.of(narratorSonar, c01Aviso);
 
         Choice seguirSegura = new Choice(
-                "Seguir a rota mais longa e segura sugerida pelo C-01");
+                "Seguir a rota mais longa e segura sugerida pelo C-01", Npc.NONE.getName(),
+                0, 7, 0, "5", Item.NONE, FLAG_NONE, FLAG_NONE);
         Choice arriscarCurta = new Choice(
                 "Arriscar a rota curta pelas patrulhas, pra economizar tempo",
-                Npc.NONE.getName(), -15, 0, 0);
+                Npc.NONE.getName(), -15, -9, 0);
 
         List<Choice> choicesScene1 = List.of(seguirSegura, arriscarCurta);
 
@@ -608,7 +628,8 @@ public class ChapterLoader {
 
         // Scene 2
         Dialogue aliadoDistorcido = new Dialogue(
-                "Aliado", "A r-r-rota está... está livre... NÃO ESTÁ LIVRE... segue em frente.");
+                "Aliado", "A r-r-rota está... está livre... NÃO ESTÁ LIVRE... segue em frente." +
+                "Nós estamos quase chegando...");
 
         List<Dialogue> dialoguesScene2 = List.of(aliadoDistorcido);
 
@@ -616,7 +637,7 @@ public class ChapterLoader {
                 "Usar o Chip Neuro-Virtual imediatamente", Npc.NONE.getName(),
                 30, 0, 0, "3", Item.NONE, FLAG_NONE, FLAG_NONE);
         Choice ignorarFoco = new Choice(
-                "Ignorar e continuar, tentando manter o foco");
+                "Ignorar e continuar tentando manter o foco...");
 
         List<Choice> choicesScene2 = List.of(usarChip, ignorarFoco);
 
@@ -625,22 +646,32 @@ public class ChapterLoader {
         List<Scene> scenesChapter6 = List.of(scene1, scene2);
 
         // apenas para o arquiteto
-        Item rootOverride = new Item("4" , "root_override.bin", "item chave", ItemType.KEY_ITEM);
+        Item rootOverride = new Item("7" , "root_override.bin", "item chave", ItemType.KEY_ITEM);
         Choice lastChoice1 = new Choice(
-                "[O Arquiteto] Extrair a chave root_override.bin e seguir para o núcleo", Npc.NONE.getName(),
+                "Extrair a chave root_override.bin e seguir para o núcleo", Npc.NONE.getName(),
                 0, 0, 0, Item.NONE.getId(), rootOverride, FLAG_NONE, FLAG_NONE);
 
+        // apenas para o estudante
         Choice lastChoice2 = new Choice(
-                "[O Estudante] Inundar a sala de resfriamento para provocar superaquecimento", Npc.NONE.getName(),
+                "Inundar a sala de resfriamento para provocar superaquecimento", Npc.NONE.getName(),
                 0, 0, 0, Item.NONE.getId(), Item.NONE, FLAG_NONE, "FLAG_INUNDOU_A_SALA");
 
-        List<Choice> lastChoicesChapter6 = List.of(lastChoice1, lastChoice2);
+        Choice lastChoice3 = new Choice("Seguir em frente...");
+
+        List<Choice> lastChoicesChapter6;
+        if (player.getName().equals("O Arquiteto")) {
+            lastChoicesChapter6 = List.of(lastChoice1, lastChoice3);
+        } else if (player.getName().equals("O Estudante")) {
+            lastChoicesChapter6 = List.of(lastChoice2, lastChoice3);
+        } else {
+            lastChoicesChapter6 = List.of(lastChoice3);
+        }
 
         return new Chapter(
                 "6", "7", "A Subestação Subaquática da Hidrelétrica", scenesChapter6, lastChoicesChapter6, rootOverride);
     }
 
-    public static Chapter buildChapter7() {
+    private static Chapter buildChapter7(Player player, Flag gameFlags) {
         // Scene 1
         Dialogue narratorNucleo = new Dialogue(
                 "O núcleo pulsa como um coração mecânico gigante. Todas as escolhas do jogo chegam a este ponto.");
@@ -662,7 +693,6 @@ public class ChapterLoader {
 
         // Scene 2
 
-        // SE foi obtido o firmware
         Dialogue c01Trava = new Dialogue(
                 "C-01", "Comando remoto detectado. Iniciando protocolo de contenção.");
         Dialogue estudanteReage = new Dialogue(
@@ -687,22 +717,34 @@ public class ChapterLoader {
         // FINAL 3: sanidade < 0
 
         Choice finalNovaOrdem = new Choice(
-                "Final 1: Aplicar o Fine-Tuning e assumir o controle do MegaBrain (O Arquiteto)");
+                "Aplicar o Fine-Tuning e assumir o controle do MegaBrain...");
         Choice finalEraSilencio = new Choice(
-                "Final 2: Colapsar a barragem e destruir o núcleo (O Estudante)");
+                "Colapsar a barragem e destruir o núcleo...");
         Choice finalVirtualizacao = new Choice(
-                "Final 3: Hesitar ou Recuar (A Virtualização Total)");
+                "Hesitar ou Recuar...");
 
         List<Choice> lastChoicesChapter7 = List.of(finalNovaOrdem, finalEraSilencio, finalVirtualizacao);
 
-        String nextChapterId= "Fim";
+        String idChapterFinal1 = "8";
+        String idChapterFinal2 = "9";
+        String idChapterFinal3 = "10";
+
+        String idNextChapter;
+
+        if (player.getName().equals("O Arquiteto") && player.getInventory().hasItem("7")) {
+            idNextChapter = idChapterFinal1;
+        } else if (player.getName().equals("O Estudante") && player.getInventory().hasItem("13B")) {
+            idNextChapter = idChapterFinal2;
+        } else {
+            idNextChapter = idChapterFinal3;
+        }
 
         return new Chapter(
-                "7", nextChapterId, "O Salão do Núcleo MegaBrain (Confronto Final)", scenesChapter7, lastChoicesChapter7);
+                "7", idNextChapter, "O Salão do Núcleo MegaBrain (Confronto Final)", scenesChapter7, lastChoicesChapter7);
     }
 
-    // Final Arquiteto
-    public static Chapter buildChapterFinal1() {
+    // Capitulos finais
+    private static Chapter buildArchitectEndingChapter() {
         // Cena 1
         Dialogue narr = new Dialogue(
                 "O núcleo pulsa uma última vez. O código do Arquiteto se funde ao MegaBrain sem resistência.");
@@ -721,12 +763,11 @@ public class ChapterLoader {
                 "Nova ordem estabelecida. Bem-vindo ao controle total.");
         Scene cena2 = new Scene("F1-2", List.of(narr2, arq2, sistema2));
 
-        return new Chapter("8", "Fim", "Final 1: A Nova Ordem Mundial",
+        return new Chapter("8", "fim", "Final 1: A Nova Ordem Mundial",
                 List.of(cena1, cena2));
     }
 
-    // Final Estudante
-    public static Chapter buildChapterFinal2() {
+    private static Chapter buildStudentEndingChapter() {
         // Cena 1
         Dialogue narr = new Dialogue(
                 "A Carga Demolidora Industrial detona a base da barragem. A água invade os servidores.");
@@ -745,12 +786,11 @@ public class ChapterLoader {
                 "Er...ro... desconexão... total...");
         Scene cena2 = new Scene("F2-2", List.of(narr2, est2, sistema2));
 
-        return new Chapter("9", "Fim", "Final 2: A Era do Silêncio",
+        return new Chapter("9", "fim", "Final 2: A Era do Silêncio",
                 List.of(cena1, cena2));
     }
 
-    // Final MegaBrain
-    public static Chapter buildChapterFinal3() {
+    private static Chapter buildFinalMegaBrainChapter() {
         // Cena 1
         Dialogue narr = new Dialogue(
                 "O MegaBrain assimila as últimas resistências. Nenhum comando humano chega aos servidores.");
@@ -769,10 +809,11 @@ public class ChapterLoader {
                 "E assim o MegaBrain atinge seu objetivo: a Virtualização Total.");
         Scene cena2 = new Scene("F3-2", List.of(narr2, sistema2, finalFala));
 
-        return new Chapter("10", "Fim", "Final 3: A Virtualização Total",
+        return new Chapter("10", "fim", "Final 3: A Virtualização Total",
                 List.of(cena1, cena2));
     }
-    public static Chapter buildDefault() {
-        return new Chapter("-1", "-1","chapter null", new ArrayList<>(), new ArrayList<>());
+
+    private static Chapter buildDefault() {
+        return new Chapter("default", "0","chapter null", new ArrayList<>(), new ArrayList<>());
     }
 }
