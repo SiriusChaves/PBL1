@@ -52,7 +52,7 @@ public class GameView {
 
     public void runGame() {
         ChapterDto currentChapter;
-        SceneDto currentScene;
+        SceneDtoRecord currentScene;
         String playerInput;
         boolean isRunning = true;
 
@@ -64,25 +64,25 @@ public class GameView {
 
             for (int i = 0; i < numeroDeCenas; i++) {
                 currentScene = gameController.loadCurrentScene();
-                showDialogues(currentScene.getDialogues());
+                showDialogues(currentScene.dialogues());
 
-                if (currentScene.getNumberChoices() > 0) {
+                if (currentScene.numberChoices() > 0) {
 
                     boolean isValidChoiceMade = false;
 
                     while (!isValidChoiceMade) {
-                        showChoices(currentScene.getChoices());
+                        showChoices(currentScene.choices());
                         System.out.println(">>> Informe o número da escolha (ou comandos como 'inventario'): ");
                         playerInput = Leitura.lerString();
 
                         try {
                             int escolhaNumerica = Integer.parseInt(playerInput);
 
-                            if (escolhaNumerica > 0 && escolhaNumerica <= currentScene.getNumberChoices()) {
+                            if (escolhaNumerica > 0 && escolhaNumerica <= currentScene.numberChoices()) {
                                 gameController.applySceneChoiceConsequence(escolhaNumerica - 1);
                                 isValidChoiceMade = true;
                             } else {
-                                System.out.println("Opção inválida. Escolha um numero entre 1 e " + currentScene.getNumberChoices() + ".");
+                                System.out.println("Opção inválida. Escolha um numero entre 1 e " + currentScene.numberChoices() + ".");
                             }
 
                         } catch (NumberFormatException ex) {
@@ -133,7 +133,6 @@ public class GameView {
         }
     }
 
-
     private boolean comandsMenu(String entrada) {
         switch (entrada) {
             case "inventario" -> {
@@ -153,11 +152,13 @@ public class GameView {
             }
         }
     }
-    public void showDialogues(List<String> dialogues) {
+    public void showDialogues(List<DialogueDtoRecord> dialogues) {
         System.out.println("\n╔═════════════════════════════════════════════════════════╗");
 
-        for (String dialogue : dialogues) {
-            System.out.printf("║ %-55s ║%n", dialogue);
+        for (DialogueDtoRecord dialogue : dialogues) {
+            String content = dialogue.speaker() + ": " + dialogue.text();
+
+            System.out.printf("║ %-55s ║%n", content);
         }
 
         System.out.println("╚═════════════════════════════════════════════════════════╝");

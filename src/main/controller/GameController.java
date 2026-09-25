@@ -1,7 +1,11 @@
 package main.controller;
 
+import main.mapper.DialogueMapper;
 import main.mapper.PlayerMapper;
+import main.mapper.SceneMapper;
+import main.model.Dialogue;
 import main.model.Player;
+import main.model.Scene;
 import main.service.GameSession;
 import main.dto.*;
 import main.model.Choice;
@@ -25,10 +29,23 @@ public class GameController {
                 gameSession.getStoryService().getAvailableChapterFinalChoices());
     }
 
-    public SceneDto loadCurrentScene() {
-        return new SceneDto(
-                gameSession.getStoryService().getCurrentScene(),
-                gameSession.getStoryService().getAvaliableSceneChoices());
+    public SceneDtoRecord loadCurrentScene() {
+        List<Choice> avaliableChoices = gameSession.getStoryService().getAvaliableSceneChoices();
+
+        Scene currentScene = gameSession.getStoryService().getCurrentScene();
+        List<Dialogue> dialogues = currentScene.getDialogues();
+
+        List<DialogueDtoRecord> dialoguesDto = new ArrayList<>();
+        for (Dialogue dialogue : dialogues) {
+            DialogueDtoRecord dialogueDto = DialogueMapper.toDto(dialogue);
+            dialoguesDto.add(dialogueDto);
+        }
+
+        return SceneMapper.toDto(
+                currentScene,
+                avaliableChoices,
+                dialoguesDto);
+
     }
 
     public PlayerDtoRecord loadPlayerData() {
@@ -48,22 +65,6 @@ public class GameController {
         if (gameSession.getStoryService().hasNextScene()) {
             gameSession.getStoryService().advanceToNextScene();
         }
-    }
-
-    public List<String> getAvailableSceneChoicesText() {
-        List<String> choiceTexts = new ArrayList<>();
-        for (Choice choice : this.gameSession.getStoryService().getAvaliableSceneChoices()) {
-            choiceTexts.add(choice.getText());
-        }
-        return choiceTexts;
-    }
-
-    public List<String> getAvailableChapterFinalChoicesText() {
-        List<String> choiceTexts = new ArrayList<>();
-        for (Choice choice : this.gameSession.getStoryService().getAvailableChapterFinalChoices()) {
-            choiceTexts.add(choice.getText());
-        }
-        return choiceTexts;
     }
 
     public void applySceneChoiceConsequence(int choiceIndex) {
