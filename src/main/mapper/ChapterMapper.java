@@ -1,6 +1,6 @@
 package main.mapper;
 
-import main.dto.ChapterDtoRecord;
+import main.dto.ChapterDto;
 import main.model.Chapter;
 import main.model.Choice;
 
@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ChapterMapper {
-    public static ChapterDtoRecord toDto(Chapter chapter, List<Choice> avaliableFinalChoices) {
-        return new ChapterDtoRecord(
+    public static ChapterDto toDto(Chapter chapter, List<Choice> avaliableFinalChoices) {
+        return new ChapterDto(
                 chapter.getId(),
                 chapter.getTitle(),
                 chapter.getScenes().size(),

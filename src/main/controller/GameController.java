@@ -17,7 +17,7 @@ public class GameController {
         this.gameSession = new GameSession();
     }
 
-    public ChapterDtoRecord loadCurrentChapter() {
+    public ChapterDto loadCurrentChapter() {
         gameSession.getStoryService().loadCurrentChapter();
 
         return ChapterMapper.toDto(
@@ -32,15 +32,15 @@ public class GameController {
                 gameSession.getStoryService().loadDialogueDto());
     }
 
-    public PlayerDtoRecord loadPlayerData() {
+    public PlayerDto loadPlayerData() {
         return PlayerMapper.toDto(gameSession.getPlayer());
     }
 
-    public List<NpcDtoRecord> loadRelationshipData() {
+    public List<NpcDto> loadRelationshipData() {
         return Collections.unmodifiableList(gameSession.getStoryService().loadRelationshipDto());
     }
 
-    public List<ItemDtoRecord> loadInventoryData() {
+    public List<ItemDto> loadInventoryData() {
         return Collections.unmodifiableList(gameSession.getStoryService().loadItemDto());
     }
 

@@ -51,7 +51,7 @@ public class GameView {
     }
 
     public void runGame() {
-        ChapterDtoRecord currentChapter;
+        ChapterDto currentChapter;
         SceneDtoRecord currentScene;
         String playerInput;
         boolean isRunning = true;
@@ -152,10 +152,10 @@ public class GameView {
             }
         }
     }
-    public void showDialogues(List<DialogueDtoRecord> dialogues) {
+    public void showDialogues(List<DialogueDto> dialogues) {
         System.out.println("\n╔═════════════════════════════════════════════════════════╗");
 
-        for (DialogueDtoRecord dialogue : dialogues) {
+        for (DialogueDto dialogue : dialogues) {
             String content = dialogue.speaker() + ": " + dialogue.text();
 
             System.out.printf("║ %-55s ║%n", content);

@@ -6,4 +6,4 @@ public record SceneDtoRecord(
         int numberDialogues,
         int numberChoices,
         List<String> choices,
-        List<DialogueDtoRecord> dialogues) {}
+        List<DialogueDto> dialogues) {}

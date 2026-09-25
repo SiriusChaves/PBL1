@@ -1,11 +1,11 @@
 package main.mapper;
 
-import main.dto.NpcDtoRecord;
+import main.dto.NpcDto;
 import main.model.Npc;
 
 public class NpcMapper {
-    public static NpcDtoRecord toDto(Npc npc) {
-        return new NpcDtoRecord(
+    public static NpcDto toDto(Npc npc) {
+        return new NpcDto(
                 npc.getName(),
                 npc.getTrustLevel(),
                 npc.getRelationshipTier());

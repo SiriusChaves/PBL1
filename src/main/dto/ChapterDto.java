@@ -2,7 +2,7 @@ package main.dto;
 
 import java.util.List;
 
-public record ChapterDtoRecord(
+public record ChapterDto(
         String id,
         String title,
         int numberScenes,

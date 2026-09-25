@@ -1,8 +1,8 @@
 package main.service;
 
-import main.dto.DialogueDtoRecord;
-import main.dto.ItemDtoRecord;
-import main.dto.NpcDtoRecord;
+import main.dto.DialogueDto;
+import main.dto.ItemDto;
+import main.dto.NpcDto;
 import main.loader.ChapterLoader;
 import main.mapper.DialogueMapper;
 import main.mapper.ItemMapper;
@@ -101,42 +101,42 @@ public class StoryService {
         return currentChapter;
     }
 
-    public List<NpcDtoRecord> loadRelationshipDto() {
+    public List<NpcDto> loadRelationshipDto() {
         List<Npc> relationships = new ArrayList<>(
                 player.getRelationships().values());
 
-        List<NpcDtoRecord> relationshipsDto = new ArrayList<>();
+        List<NpcDto> relationshipsDto = new ArrayList<>();
         for (Npc npc : relationships) {
 
-            NpcDtoRecord npcDtoRecord = NpcMapper.toDto(npc);
+            NpcDto npcDto = NpcMapper.toDto(npc);
 
-            relationshipsDto.add(npcDtoRecord);
+            relationshipsDto.add(npcDto);
         }
 
         return relationshipsDto;
     }
 
-    public List<ItemDtoRecord> loadItemDto() {
+    public List<ItemDto> loadItemDto() {
         if (player.getInventory().getItems().isEmpty()) {
             return Collections.emptyList();
         } else {
             List<Item> items = new ArrayList<>(
                     player.getInventory().getItems().values());
 
-            List<ItemDtoRecord> itemsDto = new ArrayList<>();
+            List<ItemDto> itemsDto = new ArrayList<>();
             for (Item item : items) {
-                ItemDtoRecord itemDtoRecord = ItemMapper.toDto(item);
-                itemsDto.add(itemDtoRecord);
+                ItemDto itemDto = ItemMapper.toDto(item);
+                itemsDto.add(itemDto);
             }
 
             return itemsDto;
         }
     }
 
-    public List<DialogueDtoRecord> loadDialogueDto() {
+    public List<DialogueDto> loadDialogueDto() {
         List<Dialogue> dialoguesScene = currentScene.getDialogues();
 
-        List<DialogueDtoRecord> dialoguesDto = new ArrayList<>();
+        List<DialogueDto> dialoguesDto = new ArrayList<>();
         for (Dialogue dialogue : dialoguesScene) {
             dialoguesDto.add(
                     DialogueMapper.toDto(dialogue));

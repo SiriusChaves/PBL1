@@ -1,13 +1,13 @@
 package main.view;
 
-import main.dto.ItemDtoRecord;
-import main.dto.NpcDtoRecord;
-import main.dto.PlayerDtoRecord;
+import main.dto.ItemDto;
+import main.dto.NpcDto;
+import main.dto.PlayerDto;
 
 import java.util.List;
 
 public class TerminalUI {
-    public static void showInventory(List<ItemDtoRecord> items) {
+    public static void showInventory(List<ItemDto> items) {
         System.out.println("╔═════════════════════════════════════════════════════════╗");
         System.out.println("║                       INVENTÁRIO                        ║");
         System.out.println("╠══════════════════════════════════════╦══════════════════╣");
@@ -17,7 +17,7 @@ public class TerminalUI {
         if (items.isEmpty()) {
             System.out.printf("║ %-55s ║%n", "Seu inventário está vazio...");
         } else {
-            for (ItemDtoRecord item : items) {
+            for (ItemDto item : items) {
 
                 System.out.printf("║ %-36s ║ %-16s ║%n", item.name(), item.itemType());
             }
@@ -26,7 +26,7 @@ public class TerminalUI {
         System.out.println("╚══════════════════════════════════════╩══════════════════╝");
     }
 
-    public static void showStatusPlayer(PlayerDtoRecord player) {
+    public static void showStatusPlayer(PlayerDto player) {
         System.out.println("╔═════════════════════════════════════════════════════════╗");
         System.out.println("║                    STATUS DO JOGADOR                    ║");
         System.out.println("╠═════════════════════════════════════════════════════════╣");
@@ -38,7 +38,7 @@ public class TerminalUI {
         System.out.println("╚═════════════════════════════════════════════════════════╝");
     }
 
-    public static void showStatusRelationships(List<NpcDtoRecord> relationships) {
+    public static void showStatusRelationships(List<NpcDto> relationships) {
         System.out.println("╔═════════════════════════════════════════════════════════╗");
         System.out.println("║               STATUS DOS RELACIONAMENTOS                ║");
         System.out.println("╠══════════════════════════════════════╦══════════════════╣");
@@ -48,7 +48,7 @@ public class TerminalUI {
         if (relationships.isEmpty()) {
             System.out.printf("║ %-55s ║%n", "Nenhum vínculo estabelecido ainda...");
         } else {
-            for (NpcDtoRecord npc : relationships) {
+            for (NpcDto npc : relationships) {
                 System.out.printf("║ %-36s ║ %-16s ║%n", npc.name(), npc.trustLevelTier());
             }
         }
