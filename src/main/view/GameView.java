@@ -2,6 +2,7 @@ package main.view;
 
 import main.controller.GameController;
 import main.dto.*;
+import main.exception.ComandNonExistsException;
 import main.view.utils.Leitura;
 
 import java.util.List;
@@ -86,10 +87,10 @@ public class GameView {
                             }
 
                         } catch (NumberFormatException ex) {
-                            boolean comandoReconhecido = comandsMenu(playerInput);
-                            if (!comandoReconhecido) {
-                                System.out.println("Comando não existente. Digite um número ou um comando válido.");
-                                System.out.println("Para verificar todos os comandos válidos, volte ao menu inicial e leia as instruções.");
+                            try {
+                                comandsMenu(playerInput);
+                            } catch (ComandNonExistsException e) {
+                                System.out.println(e.getMessage());
                             }
                         }
                     }
@@ -116,11 +117,11 @@ public class GameView {
                             System.out.println("Opção inválida. Escolha um número entre 1 e " + currentChapter.numberLastChoices() + ".");
                         }
                     } catch (NumberFormatException ex) {
-                        boolean comandoReconhecido = comandsMenu(playerInput);
-                            if (!comandoReconhecido) {
-                                System.out.println("Comando não existente. Digite um número ou um comando válido.");
-                                System.out.println("Para verificar todos os comandos válidos, volte ao menu inicial e leia as instruções.");
-                            }
+                        try {
+                            comandsMenu(playerInput);
+                        } catch (ComandNonExistsException e){
+                            System.out.println(ex.getMessage());
+                        }
                     }
                 }
             }
@@ -133,25 +134,20 @@ public class GameView {
         }
     }
 
-    private boolean comandsMenu(String entrada) {
+    private void comandsMenu(String entrada) throws ComandNonExistsException {
         switch (entrada) {
-            case "inventario" -> {
+            case "inventario" ->
                 TerminalUI.showInventory(gameController.loadInventoryData());
-                return true;
-            }
-            case "status" -> {
+            case "status" ->
                 TerminalUI.showStatusPlayer(gameController.loadPlayerData());
-                return true;
-            }
-            case "vinculos" -> {
+            case "vinculos" ->
                 TerminalUI.showStatusRelationships(gameController.loadRelationshipData());
-                return true;
-            }
-            default -> {
-                return false;
-            }
+            default ->
+                throw new ComandNonExistsException("Comando não existente. Digite um número ou um comando válido.\n" +
+                        "Para verificar todos os comandos válidos, volte ao menu inicial e leia as instruções.");
         }
     }
+
     public void showDialogues(List<DialogueDto> dialogues) {
         System.out.println("\n╔═════════════════════════════════════════════════════════╗");
 
