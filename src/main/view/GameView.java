@@ -3,7 +3,7 @@ package main.view;
 import main.controller.GameController;
 import main.dto.*;
 import main.exception.ComandNonExistsException;
-import main.view.utils.Leitura;
+import main.view.utils.Reader;
 
 import java.util.List;
 
@@ -14,21 +14,6 @@ public class GameView {
 
     public GameView(GameController gameController) {
         this.gameController = gameController;
-    }
-
-    public Menu startMenu() {
-        System.out.println("╔═════════════════════════════════════════════════════════╗");
-        System.out.println("║                      MENU INICIAL                       ║");
-        System.out.println("╠═════════════════════════════════════════════════════════╣");
-        System.out.printf("║ %-55s ║%n", "[" + INICIAR_PARTIDA.getValor() + "] Iniciar nova partida");
-        System.out.printf("║ %-55s ║%n", "[" + INSTRUCOES.getValor() + "] Instruções");
-        System.out.printf("║ %-55s ║%n", "[" + CREDITOS.getValor() + "] Créditos");
-        System.out.printf("║ %-55s ║%n", "[" + SAIR.getValor() + "] Sair");
-
-        System.out.println("╚═════════════════════════════════════════════════════════╝");
-        System.out.print("Selecione uma opção: ");
-
-        return Menu.parseMenu(Leitura.lerInteiro());
     }
 
     public void start() {
@@ -45,15 +30,29 @@ public class GameView {
                 case INSTRUCOES -> showInstructions();
                 case CREDITOS -> showCredits();
                 case SAIR -> exitGame();
-                default -> System.out.println("escolha invalida");
+                default -> System.out.println("Escolha inválida realizada!");
             }
         } while(menuChoice != SAIR);
-
     }
 
-    public void runGame() {
+    private Menu startMenu() {
+        System.out.println("╔═════════════════════════════════════════════════════════╗");
+        System.out.println("║                      MENU INICIAL                       ║");
+        System.out.println("╠═════════════════════════════════════════════════════════╣");
+        System.out.printf("║ %-55s ║%n", "[" + INICIAR_PARTIDA.getValor() + "] Iniciar nova partida");
+        System.out.printf("║ %-55s ║%n", "[" + INSTRUCOES.getValor() + "] Instruções");
+        System.out.printf("║ %-55s ║%n", "[" + CREDITOS.getValor() + "] Créditos");
+        System.out.printf("║ %-55s ║%n", "[" + SAIR.getValor() + "] Sair");
+
+        System.out.println("╚═════════════════════════════════════════════════════════╝");
+        System.out.print("Selecione uma opção: ");
+
+        return Menu.parseMenu(Reader.readInteger());
+    }
+
+    private void runGame() {
         ChapterDto currentChapter;
-        SceneDtoRecord currentScene;
+        SceneDto currentScene;
         String playerInput;
         boolean isRunning = true;
 
@@ -61,9 +60,9 @@ public class GameView {
             currentChapter = gameController.loadCurrentChapter();
             showTitle(currentChapter.title());
 
-            int numeroDeCenas = currentChapter.numberScenes();
+            int numberScenes = currentChapter.numberScenes();
 
-            for (int i = 0; i < numeroDeCenas; i++) {
+            for (int numberActualScene = 0; numberActualScene < numberScenes; numberActualScene++) {
                 currentScene = gameController.loadCurrentScene();
                 showDialogues(currentScene.dialogues());
 
@@ -74,13 +73,13 @@ public class GameView {
                     while (!isValidChoiceMade) {
                         showChoices(currentScene.choices());
                         System.out.println(">>> Informe o número da escolha (ou comandos como 'inventario'): ");
-                        playerInput = Leitura.lerString();
+                        playerInput = Reader.readString();
 
                         try {
-                            int escolhaNumerica = Integer.parseInt(playerInput);
+                            int indexChoice = Integer.parseInt(playerInput);
 
-                            if (escolhaNumerica > 0 && escolhaNumerica <= currentScene.numberChoices()) {
-                                gameController.applySceneChoiceConsequence(escolhaNumerica - 1);
+                            if (indexChoice > 0 && indexChoice <= currentScene.numberChoices()) {
+                                gameController.applySceneChoiceConsequence(indexChoice - 1);
                                 isValidChoiceMade = true;
                             } else {
                                 System.out.println("Opção inválida. Escolha um numero entre 1 e " + currentScene.numberChoices() + ".");
@@ -95,24 +94,24 @@ public class GameView {
                         }
                     }
                     System.out.println(">>> Pressione ENTER para prosseguir...");
-                    Leitura.lerString();
+                    Reader.readString();
                 }
                 gameController.advanceToNextScene();
             }
 
             if (currentChapter.numberLastChoices() > 0) {
-                boolean escolhaValidaFinal = false;
+                boolean isValidChoiceMade = false;
 
-                while (!escolhaValidaFinal) {
+                while (!isValidChoiceMade) {
                     showChoices(currentChapter.choices());
                     System.out.println(">>> Informe o número da Escolha Final do Capítulo: ");
-                    playerInput = Leitura.lerString();
+                    playerInput = Reader.readString();
 
                     try {
-                        int escolhaNumerica = Integer.parseInt(playerInput);
-                        if (escolhaNumerica > 0 && escolhaNumerica <= currentChapter.numberLastChoices()) {
-                            gameController.applyChapterFinalChoiceConsequence(escolhaNumerica - 1);
-                            escolhaValidaFinal = true;
+                        int indexChoice = Integer.parseInt(playerInput);
+                        if (indexChoice > 0 && indexChoice <= currentChapter.numberLastChoices()) {
+                            gameController.applyChapterFinalChoiceConsequence(indexChoice - 1);
+                            isValidChoiceMade = true;
                         } else {
                             System.out.println("Opção inválida. Escolha um número entre 1 e " + currentChapter.numberLastChoices() + ".");
                         }
@@ -127,7 +126,7 @@ public class GameView {
             }
 
             System.out.println("Continuar jogando? (Digite 1 para encerrar a sessão ou ENTER para prosseguir para o próximo capitulo: ");
-            playerInput = Leitura.lerString();
+            playerInput = Reader.readString();
             if (playerInput.equals("1")) {
                 isRunning = false;
             }
@@ -148,7 +147,7 @@ public class GameView {
         }
     }
 
-    public void showDialogues(List<DialogueDto> dialogues) {
+    private void showDialogues(List<DialogueDto> dialogues) {
         System.out.println("\n╔═════════════════════════════════════════════════════════╗");
 
         for (DialogueDto dialogue : dialogues) {
@@ -160,27 +159,27 @@ public class GameView {
         System.out.println("╚═════════════════════════════════════════════════════════╝");
     }
 
-    public void showChoices(List<String> choices) {
+    private void showChoices(List<String> choices) {
         System.out.println("╔═════════════════════════════════════════════════════════╗");
         System.out.printf("║ %-55s ║%n", " O QUE VOCÊ DECIDE FAZER?");
         System.out.println("╠═════════════════════════════════════════════════════════╣");
 
-        int numeroEscolha = 1;
+        int indexChoice = 1;
         for (String choice : choices) {
-            String linhaEscolha = "  [" + numeroEscolha + "] " + choice;
-            System.out.printf("║ %-55s ║%n", linhaEscolha);
-            numeroEscolha++;
+            String lineChoice = "  [" + indexChoice + "] " + choice;
+            System.out.printf("║ %-55s ║%n", lineChoice);
+            indexChoice++;
         }
         System.out.println("╚═════════════════════════════════════════════════════════╝");
     }
 
-    public void showTitle(String title) {
+    private void showTitle(String title) {
         System.out.println("╔═════════════════════════════════════════════════════════╗");
         System.out.printf("║ %-55s ║%n", title.toUpperCase());
         System.out.println("╚═════════════════════════════════════════════════════════╝");
     }
 
-    public void showInstructions() {
+    private void showInstructions() {
         System.out.println("╔═════════════════════════════════════════════════════════╗");
         System.out.println("║                       INSTRUÇÕES                        ║");
         System.out.println("╠═════════════════════════════════════════════════════════╣");
@@ -217,7 +216,7 @@ public class GameView {
         System.out.println("╚═════════════════════════════════════════════════════════╝");
     }
 
-    public void showCredits() {
+    private void showCredits() {
         System.out.println("╔═════════════════════════════════════════════════════════╗");
         System.out.println("║                        CRÉDITOS                         ║");
         System.out.println("╠═════════════════════════════════════════════════════════╣");
@@ -229,7 +228,7 @@ public class GameView {
         System.out.println("╚═════════════════════════════════════════════════════════╝");
     }
 
-    public void exitGame() {
+    private void exitGame() {
         System.out.println("╔═════════════════════════════════════════════════════════╗");
         System.out.printf("║ %-55s ║%n", "    Encerrando a aplicação...");
         System.out.printf("║ %-55s ║%n", "    Obrigado por jogar!");

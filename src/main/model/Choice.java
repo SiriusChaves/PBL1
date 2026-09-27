@@ -18,12 +18,12 @@ public class Choice {
     private String generatedFlag = FLAG_NONE;
 
     public Choice(String text, String nameTargetNpc, int sanityChange, int knowledgeChange, int trustLevelChange,
-                  String idItemNecessario, Item itemConcedido, String flagNecessaria, String flagGerada) {
+                  String idRequireItem, Item rewardItem, String requireFlag, String generatedFlag) {
         this(text, nameTargetNpc, sanityChange, knowledgeChange, trustLevelChange);
-        this.requireItemId = idItemNecessario;
-        this.rewardItem = itemConcedido;
-        this.requireFlag = flagNecessaria;
-        this.generatedFlag = flagGerada;
+        this.requireItemId = idRequireItem;
+        this.rewardItem = rewardItem;
+        this.requireFlag = requireFlag;
+        this.generatedFlag = generatedFlag;
     }
 
     public Choice(String text, String nameTargetNpc, int sanityChange, int knowledgeChange, int trustLevelChange) {
@@ -71,11 +71,7 @@ public class Choice {
             return false;
         }
 
-        if (requiresFlag() && !gameFlags.isFlagActive(requireFlag)) {
-            return false;
-        }
-
-        return true;
+        return !requiresFlag() || gameFlags.isFlagActive(requireFlag);
     }
 
     public void applyEffects(Player player, Flag gameFlags) {
@@ -97,7 +93,7 @@ public class Choice {
             player.increaseKnowledgeLevel(knowledgeChange);
 
         if (hasRewardItem()) {
-            player.getInventory().addItem(rewardItem);
+            player.storeItemInInventory(rewardItem);
         }
 
         if (generatesFlag()) {

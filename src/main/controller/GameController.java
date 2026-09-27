@@ -25,11 +25,11 @@ public class GameController {
                 gameSession.getStoryService().getAvailableChapterFinalChoices());
     }
 
-    public SceneDtoRecord loadCurrentScene() {
+    public SceneDto loadCurrentScene() {
         return SceneMapper.toDto(
                 gameSession.getStoryService().getCurrentScene(),
-                gameSession.getStoryService().getAvaliableSceneChoices(),
-                gameSession.getStoryService().loadDialogueDto());
+                gameSession.getStoryService().getAvailableSceneChoices(),
+                gameSession.getStoryService().loadDialogueDtoOfCurrentScene());
     }
 
     public PlayerDto loadPlayerData() {
@@ -41,7 +41,7 @@ public class GameController {
     }
 
     public List<ItemDto> loadInventoryData() {
-        return Collections.unmodifiableList(gameSession.getStoryService().loadItemDto());
+        return Collections.unmodifiableList(gameSession.getStoryService().loadItemDtoInInventory());
     }
 
     public void advanceToNextScene() {

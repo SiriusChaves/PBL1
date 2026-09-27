@@ -8,18 +8,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ChapterMapper {
-    public static ChapterDto toDto(Chapter chapter, List<Choice> avaliableFinalChoices) {
+    public static ChapterDto toDto(Chapter chapter, List<Choice> availableFinalChoices) {
         return new ChapterDto(
                 chapter.getId(),
                 chapter.getTitle(),
                 chapter.getScenes().size(),
                 chapter.getFinalChoices().size(),
-                loadChoicesText(avaliableFinalChoices));
+                loadChoicesText(availableFinalChoices));
     }
 
-    private static List<String> loadChoicesText(List<Choice> avaliableFinalChoices) {
+    private static List<String> loadChoicesText(List<Choice> availableFinalChoices) {
         List<String> choicesText = new ArrayList<>();;
-        for (Choice choice : avaliableFinalChoices)
+        for (Choice choice : availableFinalChoices)
             choicesText.add(choice.getText());
 
         return choicesText;

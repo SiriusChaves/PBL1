@@ -26,7 +26,7 @@ public class StoryService {
     public StoryService(Player player, Flag gameFlags) {
         this.player = player;
         this.gameFlags = gameFlags;
-        this.nextChapterId = "0";
+        this.nextChapterId = "-1";
         this.nextSceneIndex = 1;
     }
 
@@ -45,16 +45,16 @@ public class StoryService {
         return nextSceneIndex < currentChapter.getScenes().size();
     }
 
-    public List<Choice> getAvaliableSceneChoices() {
-        List<Choice> avaliableChoices = new ArrayList<>();
+    public List<Choice> getAvailableSceneChoices() {
+        List<Choice> availableChoices = new ArrayList<>();
 
         for (Choice choice : currentScene.getChoices()) {
             if (choice.isAvailable(player, gameFlags)) {
-                avaliableChoices.add(choice);
+                availableChoices.add(choice);
             }
         }
 
-        return avaliableChoices;
+        return availableChoices;
     }
 
     public List<Choice> getAvailableChapterFinalChoices() {
@@ -68,7 +68,7 @@ public class StoryService {
     }
 
     public void applySceneChoiceConsequence(int choiceIndex) {
-        List<Choice> availableChoices = getAvaliableSceneChoices();
+        List<Choice> availableChoices = getAvailableSceneChoices();
         if (choiceIndex >= 0 && choiceIndex < availableChoices.size()) {
             Choice selectedChoice = availableChoices.get(choiceIndex);
             selectedChoice.applyEffects(this.player, this.gameFlags);
@@ -79,12 +79,8 @@ public class StoryService {
         List<Choice> availableChoices = getAvailableChapterFinalChoices();
 
         if (PROLOGUE_ID.equals(this.currentChapter.getId())) {
-            // Baseado na lista filtrada (que no prólogo sempre tem as 2)
-            String chosenName = switch (choiceIndex) {
-                case 0 -> "O Arquiteto";
-                default -> "O Estudante";
-            };
-            this.player.setName(chosenName);
+            String choseName = (choiceIndex == 0) ? "O Arquiteto" : "O Estudante";
+            player.setName(choseName);
         }
 
         if (choiceIndex >= 0 && choiceIndex < availableChoices.size()) {
@@ -93,30 +89,19 @@ public class StoryService {
         }
     }
 
-    public Scene getCurrentScene() {
-        return currentScene;
-    }
-
-    public Chapter getCurrentChapter() {
-        return currentChapter;
-    }
-
     public List<NpcDto> loadRelationshipDto() {
         List<Npc> relationships = new ArrayList<>(
                 player.getRelationships().values());
 
         List<NpcDto> relationshipsDto = new ArrayList<>();
         for (Npc npc : relationships) {
-
-            NpcDto npcDto = NpcMapper.toDto(npc);
-
-            relationshipsDto.add(npcDto);
+            relationshipsDto.add(NpcMapper.toDto(npc));
         }
 
         return relationshipsDto;
     }
 
-    public List<ItemDto> loadItemDto() {
+    public List<ItemDto> loadItemDtoInInventory() {
         if (player.getInventory().getItems().isEmpty()) {
             return Collections.emptyList();
         } else {
@@ -125,23 +110,29 @@ public class StoryService {
 
             List<ItemDto> itemsDto = new ArrayList<>();
             for (Item item : items) {
-                ItemDto itemDto = ItemMapper.toDto(item);
-                itemsDto.add(itemDto);
+                itemsDto.add(ItemMapper.toDto(item));
             }
 
             return itemsDto;
         }
     }
 
-    public List<DialogueDto> loadDialogueDto() {
+    public List<DialogueDto> loadDialogueDtoOfCurrentScene() {
         List<Dialogue> dialoguesScene = currentScene.getDialogues();
 
         List<DialogueDto> dialoguesDto = new ArrayList<>();
         for (Dialogue dialogue : dialoguesScene) {
-            dialoguesDto.add(
-                    DialogueMapper.toDto(dialogue));
+            dialoguesDto.add(DialogueMapper.toDto(dialogue));
         }
 
         return dialoguesDto;
+    }
+
+    public Scene getCurrentScene() {
+        return currentScene;
+    }
+
+    public Chapter getCurrentChapter() {
+        return currentChapter;
     }
 }

@@ -2,10 +2,10 @@ package main.view.utils;
 
 import java.util.Scanner;
 
-public class Leitura {
+public class Reader {
     private static final Scanner SCANNER = new Scanner(System.in);
 
-    public static int lerInteiro() {
+    public static int readInteger() {
         while (true) {
             try {
                 return Integer.parseInt(SCANNER.nextLine());
@@ -15,7 +15,7 @@ public class Leitura {
         }
     }
 
-    public static String lerString() {
+    public static String readString() {
         return SCANNER.nextLine();
     }
 }
