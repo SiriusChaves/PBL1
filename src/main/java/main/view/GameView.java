@@ -1,7 +1,10 @@
 package main.view;
 
 import main.controller.GameController;
-import main.dto.*;
+
+import main.dto.ChapterDto;
+import main.dto.DialogueDto;
+import main.dto.SceneDto;
 import main.exception.ComandNonExistsException;
 import main.view.utils.Reader;
 
