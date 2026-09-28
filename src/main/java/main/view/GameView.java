@@ -88,11 +88,11 @@ public class GameView {
                                 System.out.println("Opção inválida. Escolha um numero entre 1 e " + currentScene.numberChoices() + ".");
                             }
 
-                        } catch (NumberFormatException ex) {
+                        } catch (NumberFormatException numberFormatException) {
                             try {
                                 comandsMenu(playerInput);
-                            } catch (ComandNonExistsException e) {
-                                System.out.println(e.getMessage());
+                            } catch (ComandNonExistsException comandNonExistsException) {
+                                System.out.println(comandNonExistsException.getMessage());
                             }
                         }
                     }
@@ -118,11 +118,11 @@ public class GameView {
                         } else {
                             System.out.println("Opção inválida. Escolha um número entre 1 e " + currentChapter.numberLastChoices() + ".");
                         }
-                    } catch (NumberFormatException ex) {
+                    } catch (NumberFormatException numberFormatException) {
                         try {
                             comandsMenu(playerInput);
-                        } catch (ComandNonExistsException e){
-                            System.out.println(ex.getMessage());
+                        } catch (ComandNonExistsException comandNonExistsException){
+                            System.out.println(comandNonExistsException.getMessage());
                         }
                     }
                 }
