@@ -1,9 +1,12 @@
 package main.dao;
 
-public interface IDao<G> {
-    public void save(G genericObject);
+import java.io.IOException;
 
-    public G searchById(String idObject);
+public interface IDao<T> {
 
-    public void deleteObjectById(String idObject);
+    void save(T genericObject) throws IOException;
+
+    T searchById(String objectId) throws IOException;
+
+    void deleteObjectById(String objectId) throws IOException;
 }
