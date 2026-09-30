@@ -59,7 +59,7 @@ public class Player {
     }
 
     public void decreaseKnowledgeLevel(int value) {
-        knowledge -= value;
+        knowledge -= Math.abs(value);
         if (knowledge < 0)
             knowledge = 0;
     }

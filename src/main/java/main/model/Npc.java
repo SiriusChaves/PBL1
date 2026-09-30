@@ -20,7 +20,7 @@ public class Npc implements Comparable<Npc> {
     }
 
     public void decreaseTrustLevel(int value) {
-        trustLevel -= value;
+        trustLevel -= Math.abs(value);
         if (trustLevel < 0) {trustLevel = 0;}
     }
 
