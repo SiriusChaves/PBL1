@@ -1,11 +1,10 @@
-package main.loader;
+package main.service;
 
 
 import main.dao.ChapterDaoJson;
 import main.model.Chapter;
 
 import java.io.IOException;
-import java.util.List;
 
 public class ChapterToJson {
 
@@ -22,7 +21,7 @@ public class ChapterToJson {
     public static void main(String[] args) {
         ChapterToJson chapterToJson = new ChapterToJson();
 
-        Chapter chapter = ChapterLoader.buildChapter4B();
+        Chapter chapter = ChapterService.buildChapter4B();
 
         chapterToJson.parseChapterToJson(chapter);
 

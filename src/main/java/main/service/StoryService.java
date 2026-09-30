@@ -3,7 +3,6 @@ package main.service;
 import main.dto.DialogueDto;
 import main.dto.ItemDto;
 import main.dto.NpcDto;
-import main.loader.ChapterLoader;
 import main.mapper.DialogueMapper;
 import main.mapper.ItemMapper;
 import main.mapper.NpcMapper;
@@ -31,7 +30,7 @@ public class StoryService {
     }
 
     public void loadCurrentChapter() {
-        currentChapter = ChapterLoader.loadNextChapter(nextChapterId, player, gameFlags);
+        currentChapter = ChapterService.loadNextChapter(nextChapterId, player, gameFlags);
         nextChapterId = currentChapter.getIdNextChapter();
         currentScene = currentChapter.getScenes().getFirst();
         nextSceneIndex = 1;

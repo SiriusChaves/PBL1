@@ -1,6 +1,6 @@
 package main.dao;
 
-import main.loader.ChapterLoader;
+import main.service.ChapterService;
 import main.model.Chapter;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -12,7 +12,7 @@ public class ChapterDaoTest {
     @Test
     public void saveChapterToJsonFileTest() {
         String introduceChapterId = "-1";
-        Chapter chapter = ChapterLoader.loadNextChapter(introduceChapterId, null, null);
+        Chapter chapter = ChapterService.loadNextChapter(introduceChapterId, null, null);
 
         ChapterDaoJson chapterDaoJson = new ChapterDaoJson();
 

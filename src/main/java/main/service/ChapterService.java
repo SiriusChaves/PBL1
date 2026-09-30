@@ -1,4 +1,4 @@
-package main.loader;
+package main.service;
 
 import main.model.*;
 
@@ -7,46 +7,46 @@ import java.util.List;
 
 import static main.model.Flag.FLAG_NONE;
 
-public class ChapterLoader {
+public class ChapterService {
 
     public static Chapter loadNextChapter(String idNextChapter, Player player, Flag gameFlags) {
 
         return switch (idNextChapter) {
-            case "-1" -> ChapterLoader.buildIntroduceChapter();
+            case "-1" -> ChapterService.buildIntroduceChapter();
 
-            case "0" -> ChapterLoader.buildChapterZero();
+            case "0" -> ChapterService.buildChapterZero();
 
-            case "1" -> ChapterLoader.buildChapterOne(player.getName());
+            case "1" -> ChapterService.buildChapterOne(player.getName());
 
             case String s when s.equals("2") && player.getName().equals("O Arquiteto")
-                    -> ChapterLoader.buildChapter2A();
+                    -> ChapterService.buildChapter2A();
 
             case String s when s.equals("3") && player.getName().equals("O Arquiteto")
-                    -> ChapterLoader.buildChapter3A();
+                    -> ChapterService.buildChapter3A();
 
             case String s when s.equals("4") && player.getName().equals("O Arquiteto")
-                    -> ChapterLoader.buildChapter4A(gameFlags);
+                    -> ChapterService.buildChapter4A(gameFlags);
 
             case String s when s.equals("2") && player.getName().equals("O Estudante")
-                    -> ChapterLoader.buildChapter2B();
+                    -> ChapterService.buildChapter2B();
 
             case String s when s.equals("3") && player.getName().equals("O Estudante")
-                    -> ChapterLoader.buildChapter3B();
+                    -> ChapterService.buildChapter3B();
 
             case String s when s.equals("4") && player.getName().equals("O Estudante")
-                    -> ChapterLoader.buildChapter4B();
+                    -> ChapterService.buildChapter4B();
 
-            case "5" -> ChapterLoader.buildChapter5(player, gameFlags);
+            case "5" -> ChapterService.buildChapter5(player, gameFlags);
 
-            case "6" -> ChapterLoader.buildChapter6(player);
+            case "6" -> ChapterService.buildChapter6(player);
 
-            case "7" -> ChapterLoader.buildChapter7(player, gameFlags);
+            case "7" -> ChapterService.buildChapter7(player, gameFlags);
 
-            case "8" -> ChapterLoader.buildArchitectEndingChapter();
+            case "8" -> ChapterService.buildArchitectEndingChapter();
 
-            case "9" -> ChapterLoader.buildStudentEndingChapter();
+            case "9" -> ChapterService.buildStudentEndingChapter();
 
-            case "10" -> ChapterLoader.buildFinalMegaBrainChapter();
+            case "10" -> ChapterService.buildFinalMegaBrainChapter();
 
             default -> buildDefault();
         };
