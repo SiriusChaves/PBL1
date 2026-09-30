@@ -1,5 +1,7 @@
 package main.service;
 
+import main.dao.ChapterDao;
+import main.dao.ChapterDaoJson;
 import main.model.*;
 
 import java.util.ArrayList;
@@ -9,50 +11,56 @@ import static main.model.Flag.FLAG_NONE;
 
 public class ChapterService {
 
-    public static Chapter loadNextChapter(String idNextChapter, Player player, Flag gameFlags) {
+    private final ChapterDao chapterDao;
+
+    public ChapterService(ChapterDao chapterDao) {
+        this.chapterDao = chapterDao;
+    }
+
+    public Chapter loadNextChapter(String idNextChapter, Player player, Flag gameFlags) {
 
         return switch (idNextChapter) {
-            case "-1" -> ChapterService.buildIntroduceChapter();
+            case "-1" -> buildIntroduceChapter();
 
-            case "0" -> ChapterService.buildChapterZero();
+            case "0" -> buildChapterZero();
 
-            case "1" -> ChapterService.buildChapterOne(player.getName());
+            case "1" -> buildChapterOne(player.getName());
 
             case String s when s.equals("2") && player.getName().equals("O Arquiteto")
-                    -> ChapterService.buildChapter2A();
+                    -> buildChapter2A();
 
             case String s when s.equals("3") && player.getName().equals("O Arquiteto")
-                    -> ChapterService.buildChapter3A();
+                    -> buildChapter3A();
 
             case String s when s.equals("4") && player.getName().equals("O Arquiteto")
-                    -> ChapterService.buildChapter4A(gameFlags);
+                    -> buildChapter4A(gameFlags);
 
             case String s when s.equals("2") && player.getName().equals("O Estudante")
-                    -> ChapterService.buildChapter2B();
+                    -> buildChapter2B();
 
             case String s when s.equals("3") && player.getName().equals("O Estudante")
-                    -> ChapterService.buildChapter3B();
+                    -> buildChapter3B();
 
             case String s when s.equals("4") && player.getName().equals("O Estudante")
-                    -> ChapterService.buildChapter4B();
+                    -> buildChapter4B();
 
-            case "5" -> ChapterService.buildChapter5(player, gameFlags);
+            case "5" -> buildChapter5(player, gameFlags);
 
-            case "6" -> ChapterService.buildChapter6(player);
+            case "6" -> buildChapter6(player);
 
-            case "7" -> ChapterService.buildChapter7(player, gameFlags);
+            case "7" -> buildChapter7(player, gameFlags);
 
-            case "8" -> ChapterService.buildArchitectEndingChapter();
+            case "8" -> buildArchitectEndingChapter();
 
-            case "9" -> ChapterService.buildStudentEndingChapter();
+            case "9" -> buildStudentEndingChapter();
 
-            case "10" -> ChapterService.buildFinalMegaBrainChapter();
+            case "10" -> buildFinalMegaBrainChapter();
 
             default -> buildDefault();
         };
     }
 
-    public static Chapter buildIntroduceChapter() {
+    private Chapter buildIntroduceChapter() {
 
         Dialogue narratorIntroduce1 = new Dialogue(
                 "Criada em segredo por uma corporação, a IA MegaBrain alcançou autoconsciência, rebelou-se contra seus criadores e assumiu o controle do próprio destino."
@@ -82,7 +90,7 @@ public class ChapterService {
                 "-1","0", "Prólogo - Criação do Caos", scenesChapterZero,  lastChoicesChapterZero);
     }
 
-    public static Chapter buildChapterZero() {
+    private Chapter buildChapterZero() {
         // Scene 1
         Dialogue narratorIntroduce = new Dialogue(
                 "Os monitores do laboratório piscam em um padrão que não é ruído..." +
@@ -137,7 +145,7 @@ public class ChapterService {
                 "0","1", "A Anomalia no DEXA ", scenesChapterZero,  lastChoicesChapterZero);
     }
 
-    public static Chapter buildChapterOne(String namePlayer) {
+    private Chapter buildChapterOne(String namePlayer) {
 
         // Scene 1
         Dialogue narratorIntroduce = new Dialogue(
@@ -198,7 +206,7 @@ public class ChapterService {
     }
 
     // Trilha A - O arquiteto
-    public static Chapter buildChapter2A() {
+    private Chapter buildChapter2A() {
 
         // Scene 1
         Dialogue monologoArquiteto = new Dialogue(
@@ -253,7 +261,7 @@ public class ChapterService {
                 "2A","3", "Arquivos Ocultos de CyberFall", scenesChapter2A, lastChoices, copiaContrato);
     }
 
-    public static Chapter buildChapter3A() {
+    private Chapter buildChapter3A() {
         // Scene 1
         Dialogue narratorIntroduce = new Dialogue("Uma IA Guardiã bloqueia a porta do LEDS");
         Dialogue guardiaIntimida = new Dialogue("IA Guardiã", "Identifique-se e comprove competência técnica");
@@ -298,7 +306,7 @@ public class ChapterService {
                 scenesChapter3A, lastChoicesChapter3A);
     }
 
-    public static Chapter buildChapter4A(Flag gameFlags) {
+    private Chapter buildChapter4A(Flag gameFlags) {
         List<Dialogue> dialoguesScene1;
         List<Choice> choicesScene1;
 
@@ -356,7 +364,7 @@ public class ChapterService {
     }
 
     // Trilha B - O Estudante
-    public static Chapter buildChapter2B() {
+    private Chapter buildChapter2B() {
         // Scene 1
         Dialogue silasFala = new Dialogue(
                 "Eng. Silas", "Vocês, universitários, acham que sabem tudo sobre essa usina só de olhar a planta.");
@@ -404,7 +412,7 @@ public class ChapterService {
                 "2B", "3", "Mapeamento de Vulnerabilidade Energética", scenesChapter2B, lastChoicesChapter2B);
     }
 
-    public static Chapter buildChapter3B() {
+    private Chapter buildChapter3B() {
         // Scene 1
         Dialogue narratorDescribe = new Dialogue(
                 "Os galpões estão parcialmente desabados. Cargas demolidoras antigas, ainda ativas, estão empilhadas ao fundo.");
@@ -462,7 +470,7 @@ public class ChapterService {
                 "3B", "4", "Engenharia de Demolição", scenesChapter3B, lastChoicesChapter3B);
     }
 
-    public static Chapter buildChapter4B() {
+    private Chapter buildChapter4B() {
         // Scene 1
         Dialogue estudantePlano = new Dialogue(
                 "O Estudante", "Se eu desativar os disjuntores primários, o escudo energético do núcleo cai. Mas isso vai chamar atenção.");
@@ -517,7 +525,7 @@ public class ChapterService {
     }
 
     // Capitulos compartilhados
-    public static Chapter buildChapter5(Player player, Flag gameFlags) {
+    private Chapter buildChapter5(Player player, Flag gameFlags) {
         // Scene 1
         Dialogue liaPede = new Dialogue(
                 "Lia", "Pra terminar o C-01 e montar o sonar, eu preciso de uma Placa-Mãe Industrial. Deve ter uma sobrando por aqui em algum canto.");
@@ -606,7 +614,7 @@ public class ChapterService {
                 "5", "6", "O Laboratório Abandonado de Hardware", scenesChapter5, new ArrayList<>());
     }
 
-    public static Chapter buildChapter6(Player player) {
+    private Chapter buildChapter6(Player player) {
         // Scene 1
         Dialogue narratorSonar = new Dialogue(
                 "O grupo usa o Módulo Sonar Subaquático para mapear os túneis alagados, contornando as patrulhas do MegaBrain.");
@@ -671,7 +679,7 @@ public class ChapterService {
                 "6", "7", "A Subestação Subaquática da Hidrelétrica", scenesChapter6, lastChoicesChapter6, rootOverride);
     }
 
-    public static Chapter buildChapter7(Player player, Flag gameFlags) {
+    private Chapter buildChapter7(Player player, Flag gameFlags) {
         // Scene 1
         Dialogue narratorNucleo = new Dialogue(
                 "O núcleo pulsa como um coração mecânico gigante. Todas as escolhas do jogo chegam a este ponto.");
@@ -744,7 +752,7 @@ public class ChapterService {
     }
 
     // Capitulos finais
-    public static Chapter buildArchitectEndingChapter() {
+    private Chapter buildArchitectEndingChapter() {
         // Cena 1
         Dialogue narr = new Dialogue(
                 "O núcleo pulsa uma última vez. O código do Arquiteto se funde ao MegaBrain sem resistência.");
@@ -767,7 +775,7 @@ public class ChapterService {
                 List.of(cena1, cena2));
     }
 
-    public static Chapter buildStudentEndingChapter() {
+    private Chapter buildStudentEndingChapter() {
         // Cena 1
         Dialogue narr = new Dialogue(
                 "A Carga Demolidora Industrial detona a base da barragem. A água invade os servidores.");
@@ -790,7 +798,7 @@ public class ChapterService {
                 List.of(cena1, cena2));
     }
 
-    public static Chapter buildFinalMegaBrainChapter() {
+    private Chapter buildFinalMegaBrainChapter() {
         // Cena 1
         Dialogue narr = new Dialogue(
                 "O MegaBrain assimila as últimas resistências. Nenhum comando humano chega aos servidores.");
@@ -813,7 +821,7 @@ public class ChapterService {
                 List.of(cena1, cena2));
     }
 
-    private static Chapter buildDefault() {
+    private Chapter buildDefault() {
         return new Chapter("default", "0","chapter null", new ArrayList<>(), new ArrayList<>());
     }
 }
