@@ -12,7 +12,7 @@ public class SceneMapper {
     public static SceneDto toDto(Scene scene, List<Choice> availableChoices, List<DialogueDto> dialogues) {
         return new SceneDto(
                 scene.getDialogues().size(),
-                scene.getChoices().size(),
+                availableChoices.size(),
                 loadChoicesText(availableChoices),
                 dialogues);
     }

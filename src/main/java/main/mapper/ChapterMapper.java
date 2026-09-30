@@ -13,7 +13,7 @@ public class ChapterMapper {
                 chapter.getId(),
                 chapter.getTitle(),
                 chapter.getScenes().size(),
-                chapter.getFinalChoices().size(),
+                availableFinalChoices.size(),
                 loadChoicesText(availableFinalChoices));
     }
 
