@@ -1,0 +1,190 @@
+{
+  "id": "5",
+  "idNextChapter": "6",
+  "title": "O Laboratório Abandonado de Hardware",
+  "scenes": [
+    {
+      "id": "10C",
+      "dialogues": [
+        {
+          "speaker": "Lia",
+          "text": "Pra terminar o C-01 e montar o sonar, eu preciso de uma Placa-Mãe Industrial. Deve ter uma sobrando por aqui em algum canto."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Ajudar Lia a procurar a peça certa, com calma",
+          "nameTargetNpc": "Lia",
+          "sanityChange": 0,
+          "knowledgeChange": 0,
+          "trustLevelChange": 15,
+          "requireItemId": "0",
+          "rewardItem": {
+            "name": "Módulo Sonar Pleno",
+            "description": "...",
+            "type": "KEY_ITEM",
+            "id": "5"
+          },
+          "requireFlag": "NONE",
+          "generatedFlag": "NONE"
+        },
+        {
+          "text": "Entregar uma peça improvisada rapidamente, só pra adiantar",
+          "nameTargetNpc": "Lia",
+          "sanityChange": -9,
+          "knowledgeChange": -7,
+          "trustLevelChange": -20,
+          "requireItemId": "0",
+          "rewardItem": {
+            "name": "Módulo Sonar Danificado",
+            "description": "...",
+            "type": "KEY_ITEM",
+            "id": "6"
+          },
+          "requireFlag": "NONE",
+          "generatedFlag": "NONE"
+        }
+      ]
+    },
+    {
+      "id": "11C",
+      "dialogues": [
+        {
+          "speaker": "Lia",
+          "text": "Pronto. Isso aqui devia funcionar bem considerando que peguei essa unidade largada há meses."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Perguntar a Lia se ela sabe algo sobre o histórico do C-01 antes de ser abandonado",
+          "nameTargetNpc": "sem nome",
+          "sanityChange": 0,
+          "knowledgeChange": 0,
+          "trustLevelChange": 0,
+          "requireItemId": "0",
+          "rewardItem": {
+            "name": "sem nome",
+            "description": "sem descricao",
+            "type": "NONE",
+            "id": "0"
+          },
+          "requireFlag": "NONE",
+          "generatedFlag": "NONE"
+        },
+        {
+          "text": "Seguir direto para a missão específica",
+          "nameTargetNpc": "sem nome",
+          "sanityChange": 0,
+          "knowledgeChange": 0,
+          "trustLevelChange": 0,
+          "requireItemId": "0",
+          "rewardItem": {
+            "name": "sem nome",
+            "description": "sem descricao",
+            "type": "NONE",
+            "id": "0"
+          },
+          "requireFlag": "NONE",
+          "generatedFlag": "NONE"
+        }
+      ]
+    },
+    {
+      "id": "e1",
+      "dialogues": [
+        {
+          "speaker": "Rebeca",
+          "text": "Antes de vocês descerem para a usina, levem isso. O Chip Neuro-Virtual vai auxiliar com a exposição agressiva lá embaixo. Tomem cuidado, por favor..."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Aceitar o Chip Neuro-Virtual e agradecer a Rebeca",
+          "nameTargetNpc": "Rebeca",
+          "sanityChange": 0,
+          "knowledgeChange": 0,
+          "trustLevelChange": 10,
+          "requireItemId": "0",
+          "rewardItem": {
+            "name": "Chip Neuro-Virtual",
+            "description": "item consumivel",
+            "type": "CONSUMABLE",
+            "id": "3"
+          },
+          "requireFlag": "NONE",
+          "generatedFlag": "NONE"
+        },
+        {
+          "text": "Aceitar sem muita conversa, com pressa de seguir",
+          "nameTargetNpc": "sem nome",
+          "sanityChange": 0,
+          "knowledgeChange": 0,
+          "trustLevelChange": 0,
+          "requireItemId": "0",
+          "rewardItem": {
+            "name": "Chip Neuro-Virtual",
+            "description": "item consumivel",
+            "type": "CONSUMABLE",
+            "id": "3"
+          },
+          "requireFlag": "NONE",
+          "generatedFlag": "NONE"
+        }
+      ]
+    },
+    {
+      "id": "09",
+      "dialogues": [
+        {
+          "speaker": "O Arquiteto",
+          "text": "Se O Estudante desconfia de mim, então eu preciso ter uma garantia..."
+        },
+        {
+          "speaker": "O Arquiteto",
+          "text": "Não posso permitir isso descarrilhar agora... vou inicar agora a compilar o \u0027spywware_c01.patch\u0027..."
+        }
+      ],
+      "choices": [
+        {
+          "text": " Prosseguir com a infecção do C-01 (Firmware Espião)",
+          "nameTargetNpc": "sem nome",
+          "sanityChange": 0,
+          "knowledgeChange": 0,
+          "trustLevelChange": 0,
+          "requireItemId": "0",
+          "rewardItem": {
+            "name": "spyware_c01.patch",
+            "description": "item chave",
+            "type": "KEY_ITEM",
+            "id": "2"
+          },
+          "requireFlag": "NONE",
+          "generatedFlag": "NONE"
+        },
+        {
+          "text": "Desistir da ideia no último momento",
+          "nameTargetNpc": "sem nome",
+          "sanityChange": 0,
+          "knowledgeChange": 0,
+          "trustLevelChange": 0,
+          "requireItemId": "0",
+          "rewardItem": {
+            "name": "sem nome",
+            "description": "sem descricao",
+            "type": "NONE",
+            "id": "0"
+          },
+          "requireFlag": "NONE",
+          "generatedFlag": "NONE"
+        }
+      ]
+    }
+  ],
+  "finalChoices": [],
+  "rewardItem": {
+    "name": "sem nome",
+    "description": "sem descricao",
+    "type": "NONE",
+    "id": "0"
+  }
+}

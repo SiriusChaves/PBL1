@@ -1,0 +1,137 @@
+{
+  "id": "4A",
+  "idNextChapter": "5",
+  "title": "Compilação do Algoritmo de Fine-Tuning",
+  "scenes": [
+    {
+      "id": "8A",
+      "dialogues": [
+        {
+          "speaker": "O Arquiteto",
+          "text": "O payload está quase pronto. Só falta a última camada"
+        },
+        {
+          "speaker": "O Estudante",
+          "text": "Deixa eu revisar com você. Duas cabeças evitam erro bobo."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Aceitar ajuda do Estudante",
+          "nameTargetNpc": "sem nome",
+          "sanityChange": 0,
+          "knowledgeChange": 0,
+          "trustLevelChange": 0,
+          "requireItemId": "0",
+          "rewardItem": {
+            "name": "sem nome",
+            "description": "sem descricao",
+            "type": "NONE",
+            "id": "0"
+          },
+          "requireFlag": "NONE",
+          "generatedFlag": "Aceitou ajuda do Estudante"
+        },
+        {
+          "text": "Recusar educadamente, com uma desculpa técnica.",
+          "nameTargetNpc": "sem nome",
+          "sanityChange": 0,
+          "knowledgeChange": 0,
+          "trustLevelChange": 0,
+          "requireItemId": "0",
+          "rewardItem": {
+            "name": "sem nome",
+            "description": "sem descricao",
+            "type": "NONE",
+            "id": "0"
+          },
+          "requireFlag": "NONE",
+          "generatedFlag": "NONE"
+        }
+      ]
+    },
+    {
+      "id": "9A",
+      "dialogues": [
+        {
+          "speaker": "O Estudante",
+          "text": "Isso não é um Fine-Tuning. Eu conheço essa estrutura de payload. Isso é uma sobrescrita total de permissões. O que você está escondendo?"
+        }
+      ],
+      "choices": [
+        {
+          "text": "Mentir e tranquilizar o Estudante",
+          "nameTargetNpc": "sem nome",
+          "sanityChange": 0,
+          "knowledgeChange": 0,
+          "trustLevelChange": 0,
+          "requireItemId": "0",
+          "rewardItem": {
+            "name": "sem nome",
+            "description": "sem descricao",
+            "type": "NONE",
+            "id": "0"
+          },
+          "requireFlag": "NONE",
+          "generatedFlag": "NONE"
+        },
+        {
+          "text": "Admitir parcialmente e pedir mais tempo",
+          "nameTargetNpc": "sem nome",
+          "sanityChange": 0,
+          "knowledgeChange": 0,
+          "trustLevelChange": 0,
+          "requireItemId": "0",
+          "rewardItem": {
+            "name": "sem nome",
+            "description": "sem descricao",
+            "type": "NONE",
+            "id": "0"
+          },
+          "requireFlag": "NONE",
+          "generatedFlag": "Arquiteto admite"
+        }
+      ]
+    }
+  ],
+  "finalChoices": [
+    {
+      "text": "Seguir em frente com o plano, apesar da desconfiança gerada",
+      "nameTargetNpc": "sem nome",
+      "sanityChange": 0,
+      "knowledgeChange": 0,
+      "trustLevelChange": 0,
+      "requireItemId": "0",
+      "rewardItem": {
+        "name": "sem nome",
+        "description": "sem descricao",
+        "type": "NONE",
+        "id": "0"
+      },
+      "requireFlag": "NONE",
+      "generatedFlag": "Spyware desbloqueado"
+    },
+    {
+      "text": "Tentar reparar a confiança do Estudante antes de prosseguir",
+      "nameTargetNpc": "sem nome",
+      "sanityChange": 0,
+      "knowledgeChange": 0,
+      "trustLevelChange": 0,
+      "requireItemId": "0",
+      "rewardItem": {
+        "name": "sem nome",
+        "description": "sem descricao",
+        "type": "NONE",
+        "id": "0"
+      },
+      "requireFlag": "NONE",
+      "generatedFlag": "Arquiteto não trai"
+    }
+  ],
+  "rewardItem": {
+    "name": "sem nome",
+    "description": "sem descricao",
+    "type": "NONE",
+    "id": "0"
+  }
+}

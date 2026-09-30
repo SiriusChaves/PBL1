@@ -1,0 +1,141 @@
+{
+  "id": "4B",
+  "idNextChapter": "5",
+  "title": "Bypass de Segurança da Subestação",
+  "scenes": [
+    {
+      "id": "8B",
+      "dialogues": [
+        {
+          "speaker": "O Estudante",
+          "text": "Se eu desativar os disjuntores primários, o escudo energético do núcleo cai. Mas isso vai chamar atenção."
+        },
+        {
+          "speaker": "Eng. Silas",
+          "text": "Vai. A pergunta é: atenção de quem?"
+        }
+      ],
+      "choices": [
+        {
+          "text": "Usar o sudo_overrule.sh",
+          "nameTargetNpc": "sem nome",
+          "sanityChange": 0,
+          "knowledgeChange": 0,
+          "trustLevelChange": 0,
+          "requireItemId": "1",
+          "rewardItem": {
+            "name": "sem nome",
+            "description": "sem descricao",
+            "type": "NONE",
+            "id": "0"
+          },
+          "requireFlag": "NONE",
+          "generatedFlag": "NONE"
+        },
+        {
+          "text": "Fazer o bypass manualmente",
+          "nameTargetNpc": "sem nome",
+          "sanityChange": -10,
+          "knowledgeChange": -15,
+          "trustLevelChange": 0,
+          "requireItemId": "0",
+          "rewardItem": {
+            "name": "sem nome",
+            "description": "sem descricao",
+            "type": "NONE",
+            "id": "0"
+          },
+          "requireFlag": "NONE",
+          "generatedFlag": "NONE"
+        }
+      ]
+    },
+    {
+      "id": "9B",
+      "dialogues": [
+        {
+          "speaker": "Narrator",
+          "text": "Nos registros da subestação, um log de acesso do Arquiteto aparece, com horário incompatível com o que ele relatou ao grupo."
+        },
+        {
+          "speaker": "O Estudante",
+          "text": "Ele mentiu sobre onde estava. De novo."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Compartilhar o log com Gabriel e Lia agora",
+          "nameTargetNpc": "Gabriel",
+          "sanityChange": 0,
+          "knowledgeChange": 0,
+          "trustLevelChange": 5,
+          "requireItemId": "0",
+          "rewardItem": {
+            "name": "sem nome",
+            "description": "sem descricao",
+            "type": "NONE",
+            "id": "0"
+          },
+          "requireFlag": "NONE",
+          "generatedFlag": "NONE"
+        },
+        {
+          "text": "Guardar a informação só para si",
+          "nameTargetNpc": "sem nome",
+          "sanityChange": 0,
+          "knowledgeChange": 0,
+          "trustLevelChange": 0,
+          "requireItemId": "0",
+          "rewardItem": {
+            "name": "sem nome",
+            "description": "sem descricao",
+            "type": "NONE",
+            "id": "0"
+          },
+          "requireFlag": "NONE",
+          "generatedFlag": "Não compartilhou log"
+        }
+      ]
+    }
+  ],
+  "finalChoices": [
+    {
+      "text": "Guardar essa informação descoberta",
+      "nameTargetNpc": "sem nome",
+      "sanityChange": 0,
+      "knowledgeChange": 0,
+      "trustLevelChange": 0,
+      "requireItemId": "0",
+      "rewardItem": {
+        "name": "sem nome",
+        "description": "sem descricao",
+        "type": "NONE",
+        "id": "0"
+      },
+      "requireFlag": "NONE",
+      "generatedFlag": "Guardou info"
+    },
+    {
+      "text": "Confrontar o Arquiteto imediatamente por rádio",
+      "nameTargetNpc": "sem nome",
+      "sanityChange": 0,
+      "knowledgeChange": 0,
+      "trustLevelChange": 0,
+      "requireItemId": "0",
+      "rewardItem": {
+        "name": "sem nome",
+        "description": "sem descricao",
+        "type": "NONE",
+        "id": "0"
+      },
+      "requireFlag": "NONE",
+      "generatedFlag": "Arquiteto confrontado"
+    }
+  ],
+  "rewardItem": {
+    "name": "sem nome",
+    "description": "sem descricao",
+    "type": "NONE",
+    "id": "0"
+  }
+}

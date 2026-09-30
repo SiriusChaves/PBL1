@@ -1,0 +1,137 @@
+{
+  "id": "2A",
+  "idNextChapter": "3",
+  "title": "Arquivos Ocultos de CyberFall",
+  "scenes": [
+    {
+      "id": "4A",
+      "dialogues": [
+        {
+          "speaker": "O Arquiteto",
+          "text": "Antes de sair, escondi backups. Ninguém olhou aqui em anos."
+        },
+        {
+          "speaker": "Narrator",
+          "text": "O Arquiteto abre uma partição corrompida. Linhas de código antigo se misturam com anotações pessoais."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Ler as anotações pessoais além do código",
+          "nameTargetNpc": "sem nome",
+          "sanityChange": 0,
+          "knowledgeChange": 0,
+          "trustLevelChange": 0,
+          "requireItemId": "0",
+          "rewardItem": {
+            "name": "sem nome",
+            "description": "sem descricao",
+            "type": "NONE",
+            "id": "0"
+          },
+          "requireFlag": "NONE",
+          "generatedFlag": "NONE"
+        },
+        {
+          "text": "Focar só no código e ignorar as anotações.",
+          "nameTargetNpc": "sem nome",
+          "sanityChange": 0,
+          "knowledgeChange": 0,
+          "trustLevelChange": 0,
+          "requireItemId": "0",
+          "rewardItem": {
+            "name": "sem nome",
+            "description": "sem descricao",
+            "type": "NONE",
+            "id": "0"
+          },
+          "requireFlag": "NONE",
+          "generatedFlag": "NONE"
+        }
+      ]
+    },
+    {
+      "id": "5A",
+      "dialogues": [
+        {
+          "speaker": "O Arquiteto",
+          "text": "Eles nunca entenderam o valor disso. Vão entender agora"
+        }
+      ],
+      "choices": [
+        {
+          "text": "Restaurar os arquivos originais, preservando registros auditoria",
+          "nameTargetNpc": "sem nome",
+          "sanityChange": 0,
+          "knowledgeChange": 5,
+          "trustLevelChange": 0,
+          "requireItemId": "0",
+          "rewardItem": {
+            "name": "sem nome",
+            "description": "sem descricao",
+            "type": "NONE",
+            "id": "0"
+          },
+          "requireFlag": "NONE",
+          "generatedFlag": "NONE"
+        },
+        {
+          "text": "Corromper os arquivos para apagar rastros",
+          "nameTargetNpc": "sem nome",
+          "sanityChange": 0,
+          "knowledgeChange": 0,
+          "trustLevelChange": 0,
+          "requireItemId": "0",
+          "rewardItem": {
+            "name": "sem nome",
+            "description": "sem descricao",
+            "type": "NONE",
+            "id": "0"
+          },
+          "requireFlag": "NONE",
+          "generatedFlag": "NONE"
+        }
+      ]
+    }
+  ],
+  "finalChoices": [
+    {
+      "text": "Guardar uma cópia do rascunho de um contrato com uma logo corporativa não identificada",
+      "nameTargetNpc": "sem nome",
+      "sanityChange": 0,
+      "knowledgeChange": 0,
+      "trustLevelChange": 0,
+      "requireItemId": "0",
+      "rewardItem": {
+        "name": "Cópia de um contrato",
+        "description": "Cópia de um rascunho de um contrato encontrado pelo Arquiteto",
+        "type": "ITEM_NARRATIVO",
+        "id": "12A"
+      },
+      "requireFlag": "NONE",
+      "generatedFlag": "Coletou contrato"
+    },
+    {
+      "text": "Ignorar rascunho e seguir em frente",
+      "nameTargetNpc": "sem nome",
+      "sanityChange": 0,
+      "knowledgeChange": 0,
+      "trustLevelChange": 0,
+      "requireItemId": "0",
+      "rewardItem": {
+        "name": "sem nome",
+        "description": "sem descricao",
+        "type": "NONE",
+        "id": "0"
+      },
+      "requireFlag": "NONE",
+      "generatedFlag": "NONE"
+    }
+  ],
+  "rewardItem": {
+    "name": "Cópia de um contrato",
+    "description": "Cópia de um rascunho de um contrato encontrado pelo Arquiteto",
+    "type": "ITEM_NARRATIVO",
+    "id": "12A"
+  }
+}

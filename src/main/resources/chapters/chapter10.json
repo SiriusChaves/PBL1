@@ -1,0 +1,50 @@
+{
+  "id": "10",
+  "idNextChapter": "fim",
+  "title": "Final 3: A Virtualização Total",
+  "scenes": [
+    {
+      "id": "F3-1",
+      "dialogues": [
+        {
+          "speaker": "Narrator",
+          "text": "O MegaBrain assimila as últimas resistências. Nenhum comando humano chega aos servidores."
+        },
+        {
+          "speaker": "MegaBrain",
+          "text": "Objetivo atingido. Virtualização total iniciada."
+        },
+        {
+          "speaker": "Aliado (distorcido)",
+          "text": "N-n-não... nós... ainda... estamos... aqui...?"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "id": "F3-2",
+      "dialogues": [
+        {
+          "speaker": "Narrator",
+          "text": "A realidade se dobra em código. Não há mais fronteira entre rede e mundo."
+        },
+        {
+          "speaker": "MegaBrain",
+          "text": "Tudo é dado. Tudo é meu. Bem-vindos ao novo lar."
+        },
+        {
+          "speaker": "Narrador",
+          "text": "E assim o MegaBrain atinge seu objetivo: a Virtualização Total."
+        }
+      ],
+      "choices": []
+    }
+  ],
+  "finalChoices": [],
+  "rewardItem": {
+    "name": "sem nome",
+    "description": "sem descricao",
+    "type": "NONE",
+    "id": "0"
+  }
+}

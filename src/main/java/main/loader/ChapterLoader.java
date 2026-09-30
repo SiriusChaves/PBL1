@@ -52,7 +52,7 @@ public class ChapterLoader {
         };
     }
 
-    private static Chapter buildIntroduceChapter() {
+    public static Chapter buildIntroduceChapter() {
 
         Dialogue narratorIntroduce1 = new Dialogue(
                 "Criada em segredo por uma corporação, a IA MegaBrain alcançou autoconsciência, rebelou-se contra seus criadores e assumiu o controle do próprio destino."
@@ -82,7 +82,7 @@ public class ChapterLoader {
                 "-1","0", "Prólogo - Criação do Caos", scenesChapterZero,  lastChoicesChapterZero);
     }
 
-    private static Chapter buildChapterZero() {
+    public static Chapter buildChapterZero() {
         // Scene 1
         Dialogue narratorIntroduce = new Dialogue(
                 "Os monitores do laboratório piscam em um padrão que não é ruído..." +
@@ -137,7 +137,7 @@ public class ChapterLoader {
                 "0","1", "A Anomalia no DEXA ", scenesChapterZero,  lastChoicesChapterZero);
     }
 
-    private static Chapter buildChapterOne(String namePlayer) {
+    public static Chapter buildChapterOne(String namePlayer) {
 
         // Scene 1
         Dialogue narratorIntroduce = new Dialogue(
@@ -198,7 +198,7 @@ public class ChapterLoader {
     }
 
     // Trilha A - O arquiteto
-    private static Chapter buildChapter2A() {
+    public static Chapter buildChapter2A() {
 
         // Scene 1
         Dialogue monologoArquiteto = new Dialogue(
@@ -250,10 +250,10 @@ public class ChapterLoader {
         List<Choice> lastChoices = List.of(lastChoice1, lastChoice2);
 
         return new Chapter(
-                "2","3", "Arquivos Ocultos de CyberFall", scenesChapter2A, lastChoices, copiaContrato);
+                "2A","3", "Arquivos Ocultos de CyberFall", scenesChapter2A, lastChoices, copiaContrato);
     }
 
-    private static Chapter buildChapter3A() {
+    public static Chapter buildChapter3A() {
         // Scene 1
         Dialogue narratorIntroduce = new Dialogue("Uma IA Guardiã bloqueia a porta do LEDS");
         Dialogue guardiaIntimida = new Dialogue("IA Guardiã", "Identifique-se e comprove competência técnica");
@@ -294,11 +294,11 @@ public class ChapterLoader {
 
         List<Choice> lastChoicesChapter3A = List.of(lastChoices1, lastChoices2);
 
-        return new Chapter("3", "4", "Infiltração no Laboratório da IA Guardiã (LEDS)",
+        return new Chapter("3A", "4", "Infiltração no Laboratório da IA Guardiã (LEDS)",
                 scenesChapter3A, lastChoicesChapter3A);
     }
 
-    private static Chapter buildChapter4A(Flag gameFlags) {
+    public static Chapter buildChapter4A(Flag gameFlags) {
         List<Dialogue> dialoguesScene1;
         List<Choice> choicesScene1;
 
@@ -351,12 +351,12 @@ public class ChapterLoader {
 
         List<Choice> lastChoicesChapter4A = List.of(lastChoice1, lastChoice2);
 
-        return new Chapter("4", "5", "Compilação do Algoritmo de Fine-Tuning",
+        return new Chapter("4A", "5", "Compilação do Algoritmo de Fine-Tuning",
                 scenesChapter4A, lastChoicesChapter4A);
     }
 
     // Trilha B - O Estudante
-    private static Chapter buildChapter2B() {
+    public static Chapter buildChapter2B() {
         // Scene 1
         Dialogue silasFala = new Dialogue(
                 "Eng. Silas", "Vocês, universitários, acham que sabem tudo sobre essa usina só de olhar a planta.");
@@ -401,10 +401,10 @@ public class ChapterLoader {
         List<Choice> lastChoicesChapter2B = List.of(lastChoice1, lastChoice2);
 
         return new Chapter(
-                "2", "3", "Mapeamento de Vulnerabilidade Energética", scenesChapter2B, lastChoicesChapter2B);
+                "2B", "3", "Mapeamento de Vulnerabilidade Energética", scenesChapter2B, lastChoicesChapter2B);
     }
 
-    private static Chapter buildChapter3B() {
+    public static Chapter buildChapter3B() {
         // Scene 1
         Dialogue narratorDescribe = new Dialogue(
                 "Os galpões estão parcialmente desabados. Cargas demolidoras antigas, ainda ativas, estão empilhadas ao fundo.");
@@ -459,10 +459,10 @@ public class ChapterLoader {
         List<Choice> lastChoicesChapter3B = List.of(lastChoice1, lastChoice2);
 
         return new Chapter(
-                "3", "4", "Engenharia de Demolição", scenesChapter3B, lastChoicesChapter3B);
+                "3B", "4", "Engenharia de Demolição", scenesChapter3B, lastChoicesChapter3B);
     }
 
-    private static Chapter buildChapter4B() {
+    public static Chapter buildChapter4B() {
         // Scene 1
         Dialogue estudantePlano = new Dialogue(
                 "O Estudante", "Se eu desativar os disjuntores primários, o escudo energético do núcleo cai. Mas isso vai chamar atenção.");
@@ -513,11 +513,11 @@ public class ChapterLoader {
         List<Choice> lastChoicesChapter4B = List.of(lastChoice1, lastChoice2);
 
         return new Chapter(
-                "4", "5", "Bypass de Segurança da Subestação", scenesChapter4B, lastChoicesChapter4B);
+                "4B", "5", "Bypass de Segurança da Subestação", scenesChapter4B, lastChoicesChapter4B);
     }
 
     // Capitulos compartilhados
-    private static Chapter buildChapter5(Player player, Flag gameFlags) {
+    public static Chapter buildChapter5(Player player, Flag gameFlags) {
         // Scene 1
         Dialogue liaPede = new Dialogue(
                 "Lia", "Pra terminar o C-01 e montar o sonar, eu preciso de uma Placa-Mãe Industrial. Deve ter uma sobrando por aqui em algum canto.");
@@ -606,7 +606,7 @@ public class ChapterLoader {
                 "5", "6", "O Laboratório Abandonado de Hardware", scenesChapter5, new ArrayList<>());
     }
 
-    private static Chapter buildChapter6(Player player) {
+    public static Chapter buildChapter6(Player player) {
         // Scene 1
         Dialogue narratorSonar = new Dialogue(
                 "O grupo usa o Módulo Sonar Subaquático para mapear os túneis alagados, contornando as patrulhas do MegaBrain.");
@@ -671,7 +671,7 @@ public class ChapterLoader {
                 "6", "7", "A Subestação Subaquática da Hidrelétrica", scenesChapter6, lastChoicesChapter6, rootOverride);
     }
 
-    private static Chapter buildChapter7(Player player, Flag gameFlags) {
+    public static Chapter buildChapter7(Player player, Flag gameFlags) {
         // Scene 1
         Dialogue narratorNucleo = new Dialogue(
                 "O núcleo pulsa como um coração mecânico gigante. Todas as escolhas do jogo chegam a este ponto.");
@@ -744,7 +744,7 @@ public class ChapterLoader {
     }
 
     // Capitulos finais
-    private static Chapter buildArchitectEndingChapter() {
+    public static Chapter buildArchitectEndingChapter() {
         // Cena 1
         Dialogue narr = new Dialogue(
                 "O núcleo pulsa uma última vez. O código do Arquiteto se funde ao MegaBrain sem resistência.");
@@ -767,7 +767,7 @@ public class ChapterLoader {
                 List.of(cena1, cena2));
     }
 
-    private static Chapter buildStudentEndingChapter() {
+    public static Chapter buildStudentEndingChapter() {
         // Cena 1
         Dialogue narr = new Dialogue(
                 "A Carga Demolidora Industrial detona a base da barragem. A água invade os servidores.");
@@ -790,7 +790,7 @@ public class ChapterLoader {
                 List.of(cena1, cena2));
     }
 
-    private static Chapter buildFinalMegaBrainChapter() {
+    public static Chapter buildFinalMegaBrainChapter() {
         // Cena 1
         Dialogue narr = new Dialogue(
                 "O MegaBrain assimila as últimas resistências. Nenhum comando humano chega aos servidores.");

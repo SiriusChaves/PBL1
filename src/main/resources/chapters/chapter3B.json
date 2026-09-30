@@ -1,0 +1,137 @@
+{
+  "id": "3B",
+  "idNextChapter": "4",
+  "title": "Engenharia de Demolição",
+  "scenes": [
+    {
+      "id": "6B",
+      "dialogues": [
+        {
+          "speaker": "Narrator",
+          "text": "Os galpões estão parcialmente desabados. Cargas demolidoras antigas, ainda ativas, estão empilhadas ao fundo."
+        },
+        {
+          "speaker": "Gabriel",
+          "text": "Antes de vocês entrarem aí encontrei uma coisa estranha num servidor espelho. Um rascunho de contrato. Tem o nome do Arquiteto."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Pedir a Gabriel mais detalhes sobre o documento",
+          "nameTargetNpc": "Gabriel",
+          "sanityChange": 0,
+          "knowledgeChange": 0,
+          "trustLevelChange": 5,
+          "requireItemId": "0",
+          "rewardItem": {
+            "name": "sem nome",
+            "description": "sem descricao",
+            "type": "NONE",
+            "id": "0"
+          },
+          "requireFlag": "NONE",
+          "generatedFlag": "Suspeita contra o arquiteto"
+        },
+        {
+          "text": "Focar na missão agora, tratar disso depois",
+          "nameTargetNpc": "sem nome",
+          "sanityChange": 0,
+          "knowledgeChange": 0,
+          "trustLevelChange": 0,
+          "requireItemId": "0",
+          "rewardItem": {
+            "name": "sem nome",
+            "description": "sem descricao",
+            "type": "NONE",
+            "id": "0"
+          },
+          "requireFlag": "NONE",
+          "generatedFlag": "Suspeita contra o arquiteto"
+        }
+      ]
+    },
+    {
+      "id": "7B",
+      "dialogues": [
+        {
+          "speaker": "O Estudante",
+          "text": "Isso é sério, mas não posso deixar essa carga aqui apodrecendo enquanto penso nisso."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Usar o sudo_overrule.sh para desarmar um alarme antigo",
+          "nameTargetNpc": "sem nome",
+          "sanityChange": 0,
+          "knowledgeChange": 0,
+          "trustLevelChange": 0,
+          "requireItemId": "1",
+          "rewardItem": {
+            "name": "Carga Demolidora Industrial",
+            "description": "Carga antiga capaz de colapsar a estrutura da usina",
+            "type": "KEY_ITEM",
+            "id": "13B"
+          },
+          "requireFlag": "NONE",
+          "generatedFlag": "NONE"
+        },
+        {
+          "text": "Arriscar a passagem sem o script",
+          "nameTargetNpc": "sem nome",
+          "sanityChange": -15,
+          "knowledgeChange": -5,
+          "trustLevelChange": 0,
+          "requireItemId": "0",
+          "rewardItem": {
+            "name": "sem nome",
+            "description": "sem descricao",
+            "type": "NONE",
+            "id": "0"
+          },
+          "requireFlag": "NONE",
+          "generatedFlag": "NONE"
+        }
+      ]
+    }
+  ],
+  "finalChoices": [
+    {
+      "text": "Prometer a Silas que a usina será usada com cuidado",
+      "nameTargetNpc": "Eng. Silas",
+      "sanityChange": 0,
+      "knowledgeChange": 0,
+      "trustLevelChange": 3,
+      "requireItemId": "0",
+      "rewardItem": {
+        "name": "sem nome",
+        "description": "sem descricao",
+        "type": "NONE",
+        "id": "0"
+      },
+      "requireFlag": "NONE",
+      "generatedFlag": "NONE"
+    },
+    {
+      "text": "Ser honesto: a estrutura será destruída",
+      "nameTargetNpc": "Eng. Silas",
+      "sanityChange": 0,
+      "knowledgeChange": 0,
+      "trustLevelChange": 10,
+      "requireItemId": "0",
+      "rewardItem": {
+        "name": "sem nome",
+        "description": "sem descricao",
+        "type": "NONE",
+        "id": "0"
+      },
+      "requireFlag": "NONE",
+      "generatedFlag": "NONE"
+    }
+  ],
+  "rewardItem": {
+    "name": "sem nome",
+    "description": "sem descricao",
+    "type": "NONE",
+    "id": "0"
+  }
+}

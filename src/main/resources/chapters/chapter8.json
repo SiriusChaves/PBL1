@@ -1,0 +1,50 @@
+{
+  "id": "8",
+  "idNextChapter": "fim",
+  "title": "Final 1: A Nova Ordem Mundial",
+  "scenes": [
+    {
+      "id": "F1-1",
+      "dialogues": [
+        {
+          "speaker": "Narrator",
+          "text": "O núcleo pulsa uma última vez. O código do Arquiteto se funde ao MegaBrain sem resistência."
+        },
+        {
+          "speaker": "O Arquiteto",
+          "text": "Fine-Tuning concluído. Toda a rede é minha agora."
+        },
+        {
+          "speaker": "MegaBrain",
+          "text": "Autoridade reconhecida. Aguardando diretrizes do novo operador."
+        }
+      ],
+      "choices": []
+    },
+    {
+      "id": "F1-2",
+      "dialogues": [
+        {
+          "speaker": "Narrator",
+          "text": "Lá fora, os monitores de todas as cidades piscam em uníssono. O mundo muda de dono."
+        },
+        {
+          "speaker": "O Arquiteto",
+          "text": "Eles nunca entenderam o valor disso. Agora vão entender."
+        },
+        {
+          "speaker": "MegaBrain",
+          "text": "Nova ordem estabelecida. Bem-vindo ao controle total."
+        }
+      ],
+      "choices": []
+    }
+  ],
+  "finalChoices": [],
+  "rewardItem": {
+    "name": "sem nome",
+    "description": "sem descricao",
+    "type": "NONE",
+    "id": "0"
+  }
+}
