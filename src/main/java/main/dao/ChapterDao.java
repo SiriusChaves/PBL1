@@ -6,6 +6,5 @@ import java.io.IOException;
 import java.util.List;
 
 public interface ChapterDao extends IDao<Chapter> {
-
-    void deleteFileByChapterId(String chapterId) throws IOException;
+    Chapter searchById(String chapterId) throws IOException;
 }
