@@ -5,9 +5,11 @@ import main.controller.GameController;
 import main.dto.ChapterDto;
 import main.dto.DialogueDto;
 import main.dto.SceneDto;
+import main.exception.ChapterNotFoundException;
 import main.exception.ComandNonExistsException;
 import main.view.utils.Reader;
 
+import java.io.IOException;
 import java.util.List;
 
 import static main.view.Menu.*;
@@ -60,7 +62,13 @@ public class GameView {
         boolean isRunning = true;
 
         while (isRunning) {
-            currentChapter = gameController.loadCurrentChapter();
+            try {
+                currentChapter = gameController.loadCurrentChapter();
+            } catch (IOException | ChapterNotFoundException ioException) {
+                System.out.println(ioException.getMessage());
+                return;
+            }
+
             showTitle(currentChapter.title());
 
             int numberScenes = currentChapter.numberScenes();

@@ -1,13 +1,17 @@
 package main.service;
 
 import main.dto.DialogueDto;
+import main.dto.GameStateDto;
 import main.dto.ItemDto;
 import main.dto.NpcDto;
+import main.exception.ChapterNotFoundException;
 import main.mapper.DialogueMapper;
 import main.mapper.ItemMapper;
 import main.mapper.NpcMapper;
+import main.mapper.PlayerMapper;
 import main.model.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -21,16 +25,43 @@ public class StoryService {
     private Scene currentScene;
     private String nextChapterId;
     private int nextSceneIndex;
+    private ChapterService chapterService;
 
-    public StoryService(Player player, Flag gameFlags) {
+    public StoryService(Player player, Flag gameFlags, ChapterService chapterService) {
         this.player = player;
         this.gameFlags = gameFlags;
         this.nextChapterId = "-1";
         this.nextSceneIndex = 1;
+        this.chapterService = chapterService;
     }
 
-    public void loadCurrentChapter() {
-        currentChapter = ChapterService.loadNextChapter(nextChapterId, player, gameFlags);
+    private GameStateDto createGameStateDto() {
+        List<String> itemsId = new ArrayList<>(player.getInventory().getItems().keySet());
+
+        List<String> activeFlags = new ArrayList<>(gameFlags.getActiveFlags());
+
+        return new GameStateDto (
+                PlayerMapper.toDto(player),
+
+                currentChapter == null
+                        ? null
+                        : currentChapter.getId(),
+
+                nextChapterId,
+                currentScene == null
+                        ? null
+                        : currentScene.getId(),
+                itemsId,
+                loadRelationshipDto(),
+                activeFlags
+        );
+    }
+
+    public void loadCurrentChapter() throws IOException, ChapterNotFoundException {
+        GameStateDto gameState = createGameStateDto();
+
+        currentChapter = chapterService.loadNextChapter(gameState);
+
         nextChapterId = currentChapter.getIdNextChapter();
         currentScene = currentChapter.getScenes().getFirst();
         nextSceneIndex = 1;

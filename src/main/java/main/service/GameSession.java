@@ -1,17 +1,20 @@
 package main.service;
 
+import main.dao.ChapterDao;
 import main.model.Flag;
 import main.model.Player;
 
 public class GameSession {
     private Player player;
+    private ChapterService chapterService;
     private StoryService storyService;
-    private Flag gameFlags; // Decisoes relevantes para a historia tomadas pelo jogador
+    private Flag gameFlags;
 
-    public GameSession() {
+    public GameSession(ChapterDao chapterDao) {
         this.player = new Player("O Estudante");
         this.gameFlags = new Flag();
-        this.storyService = new StoryService(this.player, this.gameFlags);
+        this.chapterService = new ChapterService(chapterDao);
+        this.storyService = new StoryService(this.player, this.gameFlags, this.chapterService);
     }
 
     public Player getPlayer() {
