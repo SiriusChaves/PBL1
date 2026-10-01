@@ -3,9 +3,10 @@ package main.dto;
 import java.util.List;
 
 public record GameStateDto(
-        PlayerDto playerDto,
+        PlayerDto player,
         String currentChapterId,
-        int currentSceneIndex,
+        String nextChapterId,
+        String currentSceneId,
         List<String> itemsId,
         List<NpcDto> relationships,
         List<String> activeGameFlags
