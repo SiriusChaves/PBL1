@@ -25,7 +25,7 @@ public class StoryService {
     private Scene currentScene;
     private String nextChapterId;
     private int nextSceneIndex;
-    private ChapterService chapterService;
+    private final ChapterService chapterService;
 
     public StoryService(Player player, Flag gameFlags, ChapterService chapterService) {
         this.player = player;
@@ -35,29 +35,7 @@ public class StoryService {
         this.chapterService = chapterService;
     }
 
-    private GameStateDto createGameStateDto() {
-        List<String> itemsId = new ArrayList<>(player.getInventory().getItems().keySet());
-
-        List<String> activeFlags = new ArrayList<>(gameFlags.getActiveFlags());
-
-        return new GameStateDto (
-                PlayerMapper.toDto(player),
-
-                currentChapter == null
-                        ? null
-                        : currentChapter.getId(),
-
-                nextChapterId,
-                currentScene == null
-                        ? null
-                        : currentScene.getId(),
-                itemsId,
-                loadRelationshipDto(),
-                activeFlags
-        );
-    }
-
-    public void loadCurrentChapter() throws IOException, ChapterNotFoundException {
+    public void loadCurrentChapter() throws ChapterNotFoundException {
         GameStateDto gameState = createGameStateDto();
 
         currentChapter = chapterService.loadNextChapter(gameState);
@@ -156,6 +134,28 @@ public class StoryService {
         }
 
         return dialoguesDto;
+    }
+
+    private GameStateDto createGameStateDto() {
+        List<String> itemsId = new ArrayList<>(player.getInventory().getItems().keySet());
+
+        List<String> activeFlags = new ArrayList<>(gameFlags.getActiveFlags());
+
+        return new GameStateDto (
+                PlayerMapper.toDto(player),
+
+                currentChapter == null
+                        ? null
+                        : currentChapter.getId(),
+
+                nextChapterId,
+                currentScene == null
+                        ? null
+                        : currentScene.getId(),
+                itemsId,
+                loadRelationshipDto(),
+                activeFlags
+        );
     }
 
     public Scene getCurrentScene() {
