@@ -5,16 +5,24 @@ import main.model.Flag;
 import main.model.Player;
 
 public class GameSession {
-    private Player player;
+    private final Player player;
     private ChapterService chapterService;
-    private StoryService storyService;
-    private Flag gameFlags;
+    private final StoryService storyService;
+    private final Flag gameFlags;
 
     public GameSession(ChapterDao chapterDao) {
         this.player = new Player("O Estudante");
         this.gameFlags = new Flag();
         this.chapterService = new ChapterService(chapterDao);
         this.storyService = new StoryService(this.player, this.gameFlags, this.chapterService);
+    }
+
+    public void saveGameSession() {
+        // ... a implementar
+    }
+
+    public void loadSaveGameSession() {
+        // ... a implementar
     }
 
     public Player getPlayer() {

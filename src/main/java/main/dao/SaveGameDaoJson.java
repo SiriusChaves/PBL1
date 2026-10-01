@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import main.dto.SaveGameDto;
 import main.exception.GameNotSaveException;
-import main.exception.SlotGameSessionNotFoundException;
+import main.exception.SlotOfSaveGameNotFoundException;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
@@ -36,20 +36,20 @@ public class SaveGameDaoJson implements SaveGameDao {
     }
 
     @Override
-    public void deleteSaveGame(String slotIndex) throws SlotGameSessionNotFoundException {
+    public void deleteSaveGame(String slotIndex) throws SlotOfSaveGameNotFoundException {
 
         Path path = Path.of("data", "saves", "slot" + slotIndex, "slot" + slotIndex + ".json");
 
        try {
            Files.deleteIfExists(path);
        } catch (IOException ioException) {
-           throw new SlotGameSessionNotFoundException("Não encontrou o slot" + slotIndex + " para deletar");
+           throw new SlotOfSaveGameNotFoundException("Não encontrou o slot" + slotIndex + " para deletar");
        }
     }
 
 
     @Override
-    public SaveGameDto searchBySlotIndex(String slotIndex) throws SlotGameSessionNotFoundException {
+    public SaveGameDto searchBySlotIndex(String slotIndex) throws SlotOfSaveGameNotFoundException {
 
         Path path = Path.of("data", "saves", "slot" + slotIndex, "slot" + slotIndex + ".json");
 
@@ -62,7 +62,7 @@ public class SaveGameDaoJson implements SaveGameDao {
             return gson.fromJson(reader, SaveGameDto.class);
 
         } catch (IOException ioException) {
-            throw new SlotGameSessionNotFoundException("Erro ao buscar o slot" + slotIndex + " para carregamento");
+            throw new SlotOfSaveGameNotFoundException("Erro ao buscar o slot" + slotIndex + " para carregamento");
         }
     }
 }

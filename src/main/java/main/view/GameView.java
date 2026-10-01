@@ -64,8 +64,8 @@ public class GameView {
         while (isRunning) {
             try {
                 currentChapter = gameController.loadCurrentChapter();
-            } catch (IOException | ChapterNotFoundException ioException) {
-                System.out.println(ioException.getMessage());
+            } catch (ChapterNotFoundException chapterNotFoundException) {
+                System.out.println(chapterNotFoundException.getMessage());
                 return;
             }
 

@@ -1,9 +1,7 @@
 package main.exception;
 
-import java.io.IOException;
-
-public class SlotGameSessionNotFoundException extends Exception {
-    public SlotGameSessionNotFoundException(String message, Throwable cause) {
-        super(message, cause);
+public class SlotOfSaveGameNotFoundException extends Exception {
+    public SlotOfSaveGameNotFoundException(String message) {
+        super(message);
     }
 }

@@ -7,10 +7,7 @@ import main.exception.ChapterNotFoundException;
 import main.model.*;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-
-import static main.model.Flag.FLAG_NONE;
 
 public class ChapterService {
 
@@ -20,7 +17,7 @@ public class ChapterService {
         this.chapterDao = chapterDao;
     }
 
-    public Chapter loadNextChapter(GameStateDto gameState) throws IOException, ChapterNotFoundException {
+    public Chapter loadNextChapter(GameStateDto gameState) throws ChapterNotFoundException {
 
         final boolean playerIsArchitect = gameState.player().name().equals("O Arquiteto");
         final boolean playerIsStudent = gameState.player().name().equals("O Estudante");
@@ -61,23 +58,23 @@ public class ChapterService {
         };
     }
 
-    private Chapter buildIntroduceChapter() throws IOException {
+    private Chapter buildIntroduceChapter() throws ChapterNotFoundException {
         try {
             return chapterDao.searchById("-1");
-        } catch (IOException ioException) {
-            throw new IOException("Erro ao carregar capitulo introdutório");
+        } catch (ChapterNotFoundException chapterNotFoundException) {
+            throw new ChapterNotFoundException("Erro ao carregar capitulo introdutório");
         }
     }
 
-    private Chapter buildChapterZero() throws IOException {
+    private Chapter buildChapterZero() throws ChapterNotFoundException {
        try {
            return chapterDao.searchById("0");
-       } catch (IOException ioException) {
-           throw new IOException("Erro ao carregar capitulo 0");
+       } catch (ChapterNotFoundException chapterNotFoundException) {
+           throw new ChapterNotFoundException("Erro ao carregar capitulo 0");
        }
     }
 
-    private Chapter buildChapterOne(String playerName) throws IOException {
+    private Chapter buildChapterOne(String playerName) throws ChapterNotFoundException {
         try {
             Chapter chapterOne = chapterDao.searchById("1");
             Chapter chapterOneModified = new Chapter(chapterOne);
@@ -90,29 +87,29 @@ public class ChapterService {
             }
             return chapterOneModified;
 
-        } catch (IOException ioException) {
-            throw new IOException("Erro ao carregar o capitulo 1");
+        } catch (ChapterNotFoundException chapterNotFoundException) {
+            throw new ChapterNotFoundException("Erro ao carregar o capitulo 1");
         }
     }
 
     // Trilha A - O arquiteto
-    private Chapter buildChapter2A() throws IOException {
+    private Chapter buildChapter2A() throws ChapterNotFoundException {
         try {
             return chapterDao.searchById("2A");
-        } catch (IOException ioException) {
-            throw new IOException("Erro ao carregar capitulo 2A");
+        } catch (ChapterNotFoundException chapterNotFoundException) {
+            throw new ChapterNotFoundException("Erro ao carregar capitulo 2A");
         }
     }
 
-    private Chapter buildChapter3A() throws IOException {
+    private Chapter buildChapter3A() throws ChapterNotFoundException {
         try {
             return chapterDao.searchById("3A");
-        } catch (IOException ioException) {
-            throw new IOException("Erro ao carregar capitulo 3A");
+        } catch (ChapterNotFoundException chapterNotFoundException) {
+            throw new ChapterNotFoundException("Erro ao carregar capitulo 3A");
         }
     }
 
-    private Chapter buildChapter4A(List<String> activeGameFlags) throws IOException {
+    private Chapter buildChapter4A(List<String> activeGameFlags) throws ChapterNotFoundException {
         try {
             Chapter originalChapter = chapterDao.searchById("4A");
             Chapter copyChapter = new Chapter(originalChapter);
@@ -125,38 +122,38 @@ public class ChapterService {
 
             return copyChapter;
 
-        } catch (IOException ioException) {
-            throw new IOException("Erro ao carregar o capitulo 4A");
+        } catch (ChapterNotFoundException chapterNotFoundException) {
+            throw new ChapterNotFoundException("Erro ao carregar o capitulo 4A");
         }
     }
 
     // Trilha B - O Estudante
-    private Chapter buildChapter2B() throws IOException {
+    private Chapter buildChapter2B() throws ChapterNotFoundException {
         try {
             return chapterDao.searchById("2B");
-        } catch (IOException ioException) {
-            throw new IOException("Erro ao carregar capitulo 2B");
+        } catch (ChapterNotFoundException chapterNotFoundException) {
+            throw new ChapterNotFoundException("Erro ao carregar capitulo 2B");
         }
     }
 
-    private Chapter buildChapter3B() throws IOException {
+    private Chapter buildChapter3B() throws ChapterNotFoundException {
         try {
             return chapterDao.searchById("3B");
-        } catch (IOException ioException) {
-            throw new IOException("Erro ao carregar capitulo 3B");
+        } catch (ChapterNotFoundException chapterNotFoundException) {
+            throw new ChapterNotFoundException("Erro ao carregar capitulo 3B");
         }
     }
 
-    private Chapter buildChapter4B() throws IOException {
+    private Chapter buildChapter4B() throws ChapterNotFoundException {
         try {
             return chapterDao.searchById("4B");
-        } catch (IOException ioException) {
-            throw new IOException("Erro ao carregar capitulo 4B");
+        } catch (ChapterNotFoundException chapterNotFoundException) {
+            throw new ChapterNotFoundException("Erro ao carregar capitulo 4B");
         }
     }
 
     // Capitulos compartilhados
-    private Chapter buildChapter5(PlayerDto player, List<String> activeGameFlags) throws IOException {
+    private Chapter buildChapter5(PlayerDto player, List<String> activeGameFlags) throws ChapterNotFoundException {
        try {
            Chapter originalChapter = chapterDao.searchById("5");
 
@@ -173,12 +170,12 @@ public class ChapterService {
 
            return copyChapter;
 
-       } catch (IOException ioException) {
-           throw new IOException("Erro ao carregar o capitulo 5");
+       } catch (ChapterNotFoundException chapterNotFoundExceptionption) {
+           throw new ChapterNotFoundException("Erro ao carregar o capitulo 5");
        }
     }
 
-    private Chapter buildChapter6(PlayerDto player) throws IOException {
+    private Chapter buildChapter6(PlayerDto player) throws ChapterNotFoundException {
         try {
             Chapter originalChapter = chapterDao.searchById("6");
 
@@ -187,7 +184,7 @@ public class ChapterService {
             if (player.name().equals("O Arquiteto")) {
                 copyChapter.getScenes().remove(1);
             } else if (player.name().equals("O Estudante")) {
-                copyChapter.getScenes().remove(0);
+                copyChapter.getScenes().removeFirst();
             } else {
                 copyChapter.getScenes().remove(1);
                 copyChapter.getScenes().remove(0);
@@ -195,12 +192,13 @@ public class ChapterService {
 
             return copyChapter;
 
-        } catch (IOException ioException) {
-            throw new IOException("Erro ao carregar o capitulo 6");
+        } catch (ChapterNotFoundException chapterNotFoundException) {
+            throw new ChapterNotFoundException("Erro ao carregar o capitulo 6");
         }
     }
 
-    private Chapter buildChapter7(PlayerDto player, List<String> activeGameFlags, List<String> items) throws IOException {
+    private Chapter buildChapter7(PlayerDto player, List<String> activeGameFlags, List<String> items)
+            throws ChapterNotFoundException {
         try {
             Chapter originalChapter = chapterDao.searchById("7");
 
@@ -224,33 +222,33 @@ public class ChapterService {
 
             return copyChapter;
 
-        } catch (IOException e) {
-            throw new IOException("Erro ao carregar chapter 7");
+        } catch (ChapterNotFoundException chapterNotFoundException) {
+            throw new ChapterNotFoundException("Erro ao carregar chapter 7");
         }
     }
 
     // Capitulos finais
-    private Chapter buildArchitectEndingChapter() throws IOException {
+    private Chapter buildArchitectEndingChapter() throws ChapterNotFoundException {
         try {
             return chapterDao.searchById("8");
-        } catch (IOException ioException) {
-            throw new IOException("Erro ao carregar capitulo final do arquiteto");
+        } catch (ChapterNotFoundException chapterNotFoundException) {
+            throw new ChapterNotFoundException("Erro ao carregar capitulo final do arquiteto");
         }
     }
 
-    private Chapter buildStudentEndingChapter() throws IOException {
+    private Chapter buildStudentEndingChapter() throws ChapterNotFoundException {
         try {
             return chapterDao.searchById("9");
-        } catch (IOException ioException) {
-            throw new IOException("Erro ao carregar capitulo final do estudante");
+        } catch (ChapterNotFoundException chapterNotFoundException) {
+            throw new ChapterNotFoundException("Erro ao carregar capitulo final do estudante");
         }
     }
 
-    private Chapter buildFinalMegaBrainChapter() throws IOException {
+    private Chapter buildFinalMegaBrainChapter() throws ChapterNotFoundException {
         try {
             return chapterDao.searchById("10");
-        } catch (IOException ioException) {
-            throw new IOException("Erro ao carregar capitulo final mega brain");
+        } catch (ChapterNotFoundException chapterNotFoundException) {
+            throw new ChapterNotFoundException("Erro ao carregar capitulo final mega brain");
         }
     }
 }

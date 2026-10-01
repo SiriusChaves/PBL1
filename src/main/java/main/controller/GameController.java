@@ -1,7 +1,6 @@
 package main.controller;
 
 import main.dao.ChapterDao;
-import main.dao.ChapterDaoJson;
 import main.dto.*;
 import main.exception.ChapterNotFoundException;
 import main.mapper.ChapterMapper;
@@ -9,7 +8,6 @@ import main.mapper.PlayerMapper;
 import main.mapper.SceneMapper;
 import main.service.GameSession;
 
-import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
@@ -27,7 +25,7 @@ public class GameController {
         this.gameSession = new GameSession(chapterDao);
     }
 
-    public ChapterDto loadCurrentChapter() throws IOException, ChapterNotFoundException {
+    public ChapterDto loadCurrentChapter() throws ChapterNotFoundException {
         gameSession.getStoryService().loadCurrentChapter();
 
         return ChapterMapper.toDto(
