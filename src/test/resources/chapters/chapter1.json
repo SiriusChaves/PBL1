@@ -1,0 +1,128 @@
+{
+  "id": "1",
+  "idNextChapter": "2",
+  "title": "Aliança Teia Humana",
+  "scenes": [
+    {
+      "id": "2",
+      "dialogues": [
+        {
+          "speaker": "Narrator",
+          "text": "Uma unidade robótica empoeirada, esquecida num canto do laboratório, pisca uma luz âmbar fraca."
+        },
+        {
+          "speaker": "O Arquiteto",
+          "text": "Isso ainda funciona?"
+        },
+        {
+          "speaker": "Gabriel",
+          "text": "Funcionava. Ninguém mexe neladesde que o projeto foi cancelado."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Reativar C-01 com cautela, checando os logs antes.",
+          "nameTargetNpc": "sem nome",
+          "sanityChange": 0,
+          "knowledgeChange": 5,
+          "trustLevelChange": 0,
+          "requireItemId": "0",
+          "rewardItem": {
+            "name": "sem nome",
+            "description": "sem descricao",
+            "type": "NONE",
+            "id": "0"
+          },
+          "requireFlag": "NONE",
+          "generatedFlag": "NONE"
+        },
+        {
+          "text": "Ligar direto, sem checar nada.",
+          "nameTargetNpc": "sem nome",
+          "sanityChange": 0,
+          "knowledgeChange": 0,
+          "trustLevelChange": 0,
+          "requireItemId": "0",
+          "rewardItem": {
+            "name": "sem nome",
+            "description": "sem descricao",
+            "type": "NONE",
+            "id": "0"
+          },
+          "requireFlag": "NONE",
+          "generatedFlag": "FLAG_CAP1E2"
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "dialogues": [
+        {
+          "speaker": "Gabriel",
+          "text": "Vocês vão precisar de acesso que ninguém aqui tem de forma legal. Eu tenho um script (sudo_overrule.sh). Não pergunta como eu consegui."
+        },
+        {
+          "speaker": "O Arquiteto",
+          "text": "E o que você quer em troca?"
+        }
+      ],
+      "choices": [
+        {
+          "text": "Aceitar favor sem discutir",
+          "nameTargetNpc": "sem nome",
+          "sanityChange": 0,
+          "knowledgeChange": 0,
+          "trustLevelChange": 0,
+          "requireItemId": "0",
+          "rewardItem": {
+            "name": "sudo_overrule.sh",
+            "description": "Item utilizado para evitar desafios",
+            "type": "KEY_ITEM",
+            "id": "1"
+          },
+          "requireFlag": "NONE",
+          "generatedFlag": "NONE"
+        },
+        {
+          "text": "Negociar com transparência , dizendo exatamente pra que vai usar o script",
+          "nameTargetNpc": "Gabriel",
+          "sanityChange": 0,
+          "knowledgeChange": 0,
+          "trustLevelChange": 15,
+          "requireItemId": "0",
+          "rewardItem": {
+            "name": "sudo_overrule.sh",
+            "description": "Item utilizado para evitar desafios",
+            "type": "KEY_ITEM",
+            "id": "1"
+          },
+          "requireFlag": "NONE",
+          "generatedFlag": "NONE"
+        },
+        {
+          "text": "Recusar favor e pedir script como colaboração aberta",
+          "nameTargetNpc": "Gabriel",
+          "sanityChange": 0,
+          "knowledgeChange": 0,
+          "trustLevelChange": 10,
+          "requireItemId": "0",
+          "rewardItem": {
+            "name": "sudo_overrule.sh",
+            "description": "Item utilizado para evitar desafios",
+            "type": "KEY_ITEM",
+            "id": "1"
+          },
+          "requireFlag": "NONE",
+          "generatedFlag": "Colaborou com Gabriel"
+        }
+      ]
+    }
+  ],
+  "finalChoices": [],
+  "rewardItem": {
+    "name": "sem nome",
+    "description": "sem descricao",
+    "type": "NONE",
+    "id": "0"
+  }
+}

@@ -1,0 +1,145 @@
+{
+  "id": "3A",
+  "idNextChapter": "4",
+  "title": "Infiltração no Laboratório da IA Guardiã (LEDS)",
+  "scenes": [
+    {
+      "id": "6A",
+      "dialogues": [
+        {
+          "speaker": "Narrator",
+          "text": "Uma IA Guardiã bloqueia a porta do LEDS"
+        },
+        {
+          "speaker": "IA Guardiã",
+          "text": "Identifique-se e comprove competência técnica"
+        },
+        {
+          "speaker": "O Arquiteto",
+          "text": "Ela não vai aceitar minhas credenciais antigas. Precisamos forçar isso"
+        }
+      ],
+      "choices": [
+        {
+          "text": "Usar o \u0027sudo_overrule.sh\u0027 para ignorar o teste.",
+          "nameTargetNpc": "sem nome",
+          "sanityChange": 0,
+          "knowledgeChange": 0,
+          "trustLevelChange": 0,
+          "requireItemId": "1",
+          "rewardItem": {
+            "name": "sem nome",
+            "description": "sem descricao",
+            "type": "NONE",
+            "id": "0"
+          },
+          "requireFlag": "NONE",
+          "generatedFlag": "NONE"
+        },
+        {
+          "text": "Enfrentar teste manualmente",
+          "nameTargetNpc": "sem nome",
+          "sanityChange": -10,
+          "knowledgeChange": 5,
+          "trustLevelChange": 0,
+          "requireItemId": "0",
+          "rewardItem": {
+            "name": "sem nome",
+            "description": "sem descricao",
+            "type": "NONE",
+            "id": "0"
+          },
+          "requireFlag": "NONE",
+          "generatedFlag": "NONE"
+        }
+      ]
+    },
+    {
+      "id": "7A",
+      "dialogues": [
+        {
+          "speaker": "Narrator",
+          "text": "Portas se abrem. Dentro, terminais com credenciais de nível elevado esperam"
+        },
+        {
+          "speaker": "O Arquiteto",
+          "text": "Isso é mais do que eu esperava encontrar aqui."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Chamar Rebeca por rádio para avisar sobre o achado",
+          "nameTargetNpc": "Rebeca",
+          "sanityChange": 0,
+          "knowledgeChange": 0,
+          "trustLevelChange": 10,
+          "requireItemId": "0",
+          "rewardItem": {
+            "name": "sem nome",
+            "description": "sem descricao",
+            "type": "NONE",
+            "id": "0"
+          },
+          "requireFlag": "NONE",
+          "generatedFlag": "NONE"
+        },
+        {
+          "text": "Não avisar ninguém ainda.",
+          "nameTargetNpc": "sem nome",
+          "sanityChange": 0,
+          "knowledgeChange": 0,
+          "trustLevelChange": 0,
+          "requireItemId": "0",
+          "rewardItem": {
+            "name": "sem nome",
+            "description": "sem descricao",
+            "type": "NONE",
+            "id": "0"
+          },
+          "requireFlag": "NONE",
+          "generatedFlag": "NONE"
+        }
+      ]
+    }
+  ],
+  "finalChoices": [
+    {
+      "text": "Compartilhar as credenciais elevadas com a equipe",
+      "nameTargetNpc": "Rebeca",
+      "sanityChange": 0,
+      "knowledgeChange": 0,
+      "trustLevelChange": 5,
+      "requireItemId": "0",
+      "rewardItem": {
+        "name": "sem nome",
+        "description": "sem descricao",
+        "type": "NONE",
+        "id": "0"
+      },
+      "requireFlag": "NONE",
+      "generatedFlag": "NONE"
+    },
+    {
+      "text": "Guardar credenciais só para si.",
+      "nameTargetNpc": "sem nome",
+      "sanityChange": 0,
+      "knowledgeChange": 0,
+      "trustLevelChange": 0,
+      "requireItemId": "0",
+      "rewardItem": {
+        "name": "sem nome",
+        "description": "sem descricao",
+        "type": "NONE",
+        "id": "0"
+      },
+      "requireFlag": "NONE",
+      "generatedFlag": "Não colaborou no cap 3A"
+    }
+  ],
+  "rewardItem": {
+    "name": "sem nome",
+    "description": "sem descricao",
+    "type": "NONE",
+    "id": "0"
+  }
+}

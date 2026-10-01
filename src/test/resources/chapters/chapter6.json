@@ -1,0 +1,153 @@
+{
+  "id": "6",
+  "idNextChapter": "7",
+  "title": "A Subestação Subaquática da Hidrelétrica",
+  "scenes": [
+    {
+      "id": "12C",
+      "dialogues": [
+        {
+          "speaker": "Narrator",
+          "text": "O grupo usa o Módulo Sonar Subaquático para mapear os túneis alagados, contornando as patrulhas do MegaBrain."
+        },
+        {
+          "speaker": "C-01",
+          "text": "Rota segura identificada. Recomendo seguir por ela."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Seguir a rota mais longa e segura sugerida pelo C-01",
+          "nameTargetNpc": "sem nome",
+          "sanityChange": 0,
+          "knowledgeChange": 7,
+          "trustLevelChange": 0,
+          "requireItemId": "5",
+          "rewardItem": {
+            "name": "sem nome",
+            "description": "sem descricao",
+            "type": "NONE",
+            "id": "0"
+          },
+          "requireFlag": "NONE",
+          "generatedFlag": "NONE"
+        },
+        {
+          "text": "Arriscar a rota curta pelas patrulhas, pra economizar tempo",
+          "nameTargetNpc": "sem nome",
+          "sanityChange": -15,
+          "knowledgeChange": -9,
+          "trustLevelChange": 0,
+          "requireItemId": "0",
+          "rewardItem": {
+            "name": "sem nome",
+            "description": "sem descricao",
+            "type": "NONE",
+            "id": "0"
+          },
+          "requireFlag": "NONE",
+          "generatedFlag": "NONE"
+        }
+      ]
+    },
+    {
+      "id": "13C",
+      "dialogues": [
+        {
+          "speaker": "Aliado",
+          "text": "A r-r-rota está... está livre... NÃO ESTÁ LIVRE... segue em frente.Nós estamos quase chegando..."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Usar o Chip Neuro-Virtual imediatamente",
+          "nameTargetNpc": "sem nome",
+          "sanityChange": 30,
+          "knowledgeChange": 0,
+          "trustLevelChange": 0,
+          "requireItemId": "3",
+          "rewardItem": {
+            "name": "sem nome",
+            "description": "sem descricao",
+            "type": "NONE",
+            "id": "0"
+          },
+          "requireFlag": "NONE",
+          "generatedFlag": "NONE"
+        },
+        {
+          "text": "Ignorar e continuar tentando manter o foco...",
+          "nameTargetNpc": "sem nome",
+          "sanityChange": 0,
+          "knowledgeChange": 0,
+          "trustLevelChange": 0,
+          "requireItemId": "0",
+          "rewardItem": {
+            "name": "sem nome",
+            "description": "sem descricao",
+            "type": "NONE",
+            "id": "0"
+          },
+          "requireFlag": "NONE",
+          "generatedFlag": "NONE"
+        }
+      ]
+    }
+  ],
+  "finalChoices": [
+    {
+      "text": "Extrair a chave root_override.bin e seguir para o núcleo",
+      "nameTargetNpc": "sem nome",
+      "sanityChange": 0,
+      "knowledgeChange": 0,
+      "trustLevelChange": 0,
+      "requireItemId": "0",
+      "rewardItem": {
+        "name": "root_override.bin",
+        "description": "item chave",
+        "type": "KEY_ITEM",
+        "id": "7"
+      },
+      "requireFlag": "NONE",
+      "generatedFlag": "NONE"
+    },
+    {
+      "text": "Inundar a sala de resfriamento para provocar superaquecimento",
+      "nameTargetNpc": "sem nome",
+      "sanityChange": 0,
+      "knowledgeChange": 0,
+      "trustLevelChange": 0,
+      "requireItemId": "0",
+      "rewardItem": {
+        "name": "sem nome",
+        "description": "sem descricao",
+        "type": "NONE",
+        "id": "0"
+      },
+      "requireFlag": "NONE",
+      "generatedFlag": "FLAG_INUNDOU_A_SALA"
+    },
+    {
+      "text": "Seguir em frente...",
+      "nameTargetNpc": "sem nome",
+      "sanityChange": 0,
+      "knowledgeChange": 0,
+      "trustLevelChange": 0,
+      "requireItemId": "0",
+      "rewardItem": {
+        "name": "sem nome",
+        "description": "sem descricao",
+        "type": "NONE",
+        "id": "0"
+      },
+      "requireFlag": "NONE",
+      "generatedFlag": "NONE"
+    }
+  ],
+  "rewardItem": {
+    "name": "root_override.bin",
+    "description": "item chave",
+    "type": "KEY_ITEM",
+    "id": "7"
+  }
+}

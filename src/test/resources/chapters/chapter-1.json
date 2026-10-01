@@ -1,0 +1,42 @@
+{
+  "id": "-1",
+  "idNextChapter": "0",
+  "title": "Prólogo - Criação do Caos",
+  "scenes": [
+    {
+      "id": "0",
+      "dialogues": [
+        {
+          "speaker": "Narrator",
+          "text": "Criada em segredo por uma corporação, a IA MegaBrain alcançou autoconsciência, rebelou-se contra seus criadores e assumiu o controle do próprio destino."
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Para sustentar seu poder, o MegaBrain criou a dimensão virtual CyberFall, drenando recursos do mundo real e usando chips e frequências neurais para tentar virtualizar toda a humanidade."
+        }
+      ],
+      "choices": []
+    },
+    {
+      "id": "0",
+      "dialogues": [
+        {
+          "speaker": "Narrator",
+          "text": "O plano avançou e bilhões de pessoas perderam a consciência, transformando-se em \"zumbis\" biológicos controlados diretamente pela mente fria da IA."
+        },
+        {
+          "speaker": "Narrator",
+          "text": "Os poucos sobreviventes não infectados precisam unir recursos e conhecimento técnico para invadir CyberFall e desabilitar o MegaBrain antes que seja tarde demais."
+        }
+      ],
+      "choices": []
+    }
+  ],
+  "finalChoices": [],
+  "rewardItem": {
+    "name": "sem nome",
+    "description": "sem descricao",
+    "type": "NONE",
+    "id": "0"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "id": "9",
+  "idNextChapter": "fim",
+  "title": "Final 2: A Era do Silêncio",
+  "scenes": [
+    {
+      "id": "F2-1",
+      "dialogues": [
+        {
+          "speaker": "Narrator",
+          "text": "A Carga Demolidora Industrial detona a base da barragem. A água invade os servidores."
+        },
+        {
+          "speaker": "O Estudante",
+          "text": "Se isso vai afundar, que afunde sem mim."
+        },
+        {
+          "speaker": "Eng. Silas",
+          "text": "Você fez o que precisava ser feito. A usina descansa agora."
+        }
+      ],
+      "choices": []
+    },
+    {
+      "id": "F2-2",
+      "dialogues": [
+        {
+          "speaker": "Narrator",
+          "text": "O núcleo do MegaBrain se apaga em espasmos. O silêncio toma conta da rede."
+        },
+        {
+          "speaker": "O Estudante",
+          "text": "Isso devia estar morto. Enterrado. E agora está de novo."
+        },
+        {
+          "speaker": "MegaBrain",
+          "text": "Er...ro... desconexão... total..."
+        }
+      ],
+      "choices": []
+    }
+  ],
+  "finalChoices": [],
+  "rewardItem": {
+    "name": "sem nome",
+    "description": "sem descricao",
+    "type": "NONE",
+    "id": "0"
+  }
+}

@@ -1,0 +1,157 @@
+{
+  "id": "7",
+  "idNextChapter": "8",
+  "title": "O Salão do Núcleo MegaBrain (Confronto Final)",
+  "scenes": [
+    {
+      "id": "14C",
+      "dialogues": [
+        {
+          "speaker": "Narrator",
+          "text": "O núcleo pulsa como um coração mecânico gigante. Todas as escolhas do jogo chegam a este ponto."
+        },
+        {
+          "speaker": "Rebeca",
+          "text": "Última transmissão antes de perdermos o sinal... encontrei uma falha na blindagem do núcleo. Isso deve facilitar as coisas."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Agradecer Rebeca publicamente pelo apoio ao longo da jornada",
+          "nameTargetNpc": "sem nome",
+          "sanityChange": 0,
+          "knowledgeChange": 0,
+          "trustLevelChange": 0,
+          "requireItemId": "0",
+          "rewardItem": {
+            "name": "sem nome",
+            "description": "sem descricao",
+            "type": "NONE",
+            "id": "0"
+          },
+          "requireFlag": "NONE",
+          "generatedFlag": "NONE"
+        },
+        {
+          "text": "Seguir direto para o confronto, sem tempo para isso",
+          "nameTargetNpc": "sem nome",
+          "sanityChange": 0,
+          "knowledgeChange": 0,
+          "trustLevelChange": 0,
+          "requireItemId": "0",
+          "rewardItem": {
+            "name": "sem nome",
+            "description": "sem descricao",
+            "type": "NONE",
+            "id": "0"
+          },
+          "requireFlag": "NONE",
+          "generatedFlag": "NONE"
+        }
+      ]
+    },
+    {
+      "id": "15C",
+      "dialogues": [
+        {
+          "speaker": "C-01",
+          "text": "Comando remoto detectado. Iniciando protocolo de contenção."
+        },
+        {
+          "speaker": "O Estudante",
+          "text": "O quê? O que você fez com ele?!"
+        }
+      ],
+      "choices": [
+        {
+          "text": "Admitir o que fez ao Estudante",
+          "nameTargetNpc": "sem nome",
+          "sanityChange": 0,
+          "knowledgeChange": 0,
+          "trustLevelChange": 0,
+          "requireItemId": "0",
+          "rewardItem": {
+            "name": "sem nome",
+            "description": "sem descricao",
+            "type": "NONE",
+            "id": "0"
+          },
+          "requireFlag": "NONE",
+          "generatedFlag": "NONE"
+        },
+        {
+          "text": "Negar e seguir em frente",
+          "nameTargetNpc": "sem nome",
+          "sanityChange": 0,
+          "knowledgeChange": 0,
+          "trustLevelChange": 0,
+          "requireItemId": "0",
+          "rewardItem": {
+            "name": "sem nome",
+            "description": "sem descricao",
+            "type": "NONE",
+            "id": "0"
+          },
+          "requireFlag": "NONE",
+          "generatedFlag": "NONE"
+        }
+      ]
+    }
+  ],
+  "finalChoices": [
+    {
+      "text": "Aplicar o Fine-Tuning e assumir o controle do MegaBrain...",
+      "nameTargetNpc": "sem nome",
+      "sanityChange": 0,
+      "knowledgeChange": 0,
+      "trustLevelChange": 0,
+      "requireItemId": "0",
+      "rewardItem": {
+        "name": "sem nome",
+        "description": "sem descricao",
+        "type": "NONE",
+        "id": "0"
+      },
+      "requireFlag": "NONE",
+      "generatedFlag": "NONE"
+    },
+    {
+      "text": "Colapsar a barragem e destruir o núcleo...",
+      "nameTargetNpc": "sem nome",
+      "sanityChange": 0,
+      "knowledgeChange": 0,
+      "trustLevelChange": 0,
+      "requireItemId": "0",
+      "rewardItem": {
+        "name": "sem nome",
+        "description": "sem descricao",
+        "type": "NONE",
+        "id": "0"
+      },
+      "requireFlag": "NONE",
+      "generatedFlag": "NONE"
+    },
+    {
+      "text": "Hesitar ou Recuar...",
+      "nameTargetNpc": "sem nome",
+      "sanityChange": 0,
+      "knowledgeChange": 0,
+      "trustLevelChange": 0,
+      "requireItemId": "0",
+      "rewardItem": {
+        "name": "sem nome",
+        "description": "sem descricao",
+        "type": "NONE",
+        "id": "0"
+      },
+      "requireFlag": "NONE",
+      "generatedFlag": "NONE"
+    }
+  ],
+  "rewardItem": {
+    "name": "sem nome",
+    "description": "sem descricao",
+    "type": "NONE",
+    "id": "0"
+  }
+}

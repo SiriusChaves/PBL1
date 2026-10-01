@@ -1,0 +1,137 @@
+{
+  "id": "2B",
+  "idNextChapter": "3",
+  "title": "Mapeamento de Vulnerabilidade Energética",
+  "scenes": [
+    {
+      "id": "4B",
+      "dialogues": [
+        {
+          "speaker": "Eng. Silas",
+          "text": "Vocês, universitários, acham que sabem tudo sobre essa usina só de olhar a planta."
+        },
+        {
+          "speaker": "O Estudante",
+          "text": "Não sei tudo. É por isso que estou aqui perguntando."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Mostrar respeito pela experiência de Silas, pedindo pra ele explicar o funcionamento das comportas",
+          "nameTargetNpc": "Eng. Silas",
+          "sanityChange": 0,
+          "knowledgeChange": 0,
+          "trustLevelChange": 15,
+          "requireItemId": "0",
+          "rewardItem": {
+            "name": "sem nome",
+            "description": "sem descricao",
+            "type": "NONE",
+            "id": "0"
+          },
+          "requireFlag": "NONE",
+          "generatedFlag": "NONE"
+        },
+        {
+          "text": "Insistir em pressa, pulando direto pro que interessa",
+          "nameTargetNpc": "sem nome",
+          "sanityChange": 0,
+          "knowledgeChange": 0,
+          "trustLevelChange": 0,
+          "requireItemId": "0",
+          "rewardItem": {
+            "name": "sem nome",
+            "description": "sem descricao",
+            "type": "NONE",
+            "id": "0"
+          },
+          "requireFlag": "NONE",
+          "generatedFlag": "NONE"
+        }
+      ]
+    },
+    {
+      "id": "5B",
+      "dialogues": [
+        {
+          "speaker": "Eng. Silas",
+          "text": "Essa represa alimenta algo submerso. Não é só energia pra cidade nunca foi."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Perguntar desde quando ele sabe disso",
+          "nameTargetNpc": "sem nome",
+          "sanityChange": 0,
+          "knowledgeChange": 0,
+          "trustLevelChange": 0,
+          "requireItemId": "0",
+          "rewardItem": {
+            "name": "sem nome",
+            "description": "sem descricao",
+            "type": "NONE",
+            "id": "0"
+          },
+          "requireFlag": "NONE",
+          "generatedFlag": "NONE"
+        },
+        {
+          "text": "Ignorar e focar no mapa de vulnerabilidades",
+          "nameTargetNpc": "sem nome",
+          "sanityChange": 0,
+          "knowledgeChange": 0,
+          "trustLevelChange": 0,
+          "requireItemId": "0",
+          "rewardItem": {
+            "name": "sem nome",
+            "description": "sem descricao",
+            "type": "NONE",
+            "id": "0"
+          },
+          "requireFlag": "NONE",
+          "generatedFlag": "NONE"
+        }
+      ]
+    }
+  ],
+  "finalChoices": [
+    {
+      "text": "Pedir a Silas acesso direto aos galpões desativados",
+      "nameTargetNpc": "sem nome",
+      "sanityChange": 0,
+      "knowledgeChange": 0,
+      "trustLevelChange": 0,
+      "requireItemId": "0",
+      "rewardItem": {
+        "name": "sem nome",
+        "description": "sem descricao",
+        "type": "NONE",
+        "id": "0"
+      },
+      "requireFlag": "NONE",
+      "generatedFlag": "NONE"
+    },
+    {
+      "text": "Investigar por conta própria, sem envolver Silas ainda",
+      "nameTargetNpc": "Eng. Silas",
+      "sanityChange": 0,
+      "knowledgeChange": 0,
+      "trustLevelChange": -10,
+      "requireItemId": "0",
+      "rewardItem": {
+        "name": "sem nome",
+        "description": "sem descricao",
+        "type": "NONE",
+        "id": "0"
+      },
+      "requireFlag": "NONE",
+      "generatedFlag": "NONE"
+    }
+  ],
+  "rewardItem": {
+    "name": "sem nome",
+    "description": "sem descricao",
+    "type": "NONE",
+    "id": "0"
+  }
+}

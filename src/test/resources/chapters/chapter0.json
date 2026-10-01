@@ -1,0 +1,120 @@
+{
+  "id": "0",
+  "idNextChapter": "1",
+  "title": "A Anomalia no DEXA ",
+  "scenes": [
+    {
+      "id": "0",
+      "dialogues": [
+        {
+          "speaker": "Narrator",
+          "text": "Os monitores do laboratório piscam em um padrão que não é ruído... é código se reorganizando sozinho."
+        },
+        {
+          "speaker": "O Arquiteto",
+          "text": "Isso não é uma falha de hardware. Eu conheço essa assinatura."
+        },
+        {
+          "speaker": "O Estudante",
+          "text": "Você reconhece? Como assim, \u0027reconhece\u0027..."
+        },
+        {
+          "speaker": "O Arquiteto",
+          "text": "Digamos que eu ajudei a construir a coisa que está do outro lado disso."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Perguntar ao Arquiteto o que ele quis dizer.",
+          "nameTargetNpc": "sem nome",
+          "sanityChange": 0,
+          "knowledgeChange": 5,
+          "trustLevelChange": 0,
+          "requireItemId": "0",
+          "rewardItem": {
+            "name": "sem nome",
+            "description": "sem descricao",
+            "type": "NONE",
+            "id": "0"
+          },
+          "requireFlag": "NONE",
+          "generatedFlag": "NONE"
+        },
+        {
+          "text": "Focar no problema imediato: conter a anomalia",
+          "nameTargetNpc": "sem nome",
+          "sanityChange": 0,
+          "knowledgeChange": 0,
+          "trustLevelChange": 0,
+          "requireItemId": "0",
+          "rewardItem": {
+            "name": "sem nome",
+            "description": "sem descricao",
+            "type": "NONE",
+            "id": "0"
+          },
+          "requireFlag": "NONE",
+          "generatedFlag": "NONE"
+        }
+      ]
+    },
+    {
+      "id": "1",
+      "dialogues": [
+        {
+          "speaker": "O Estudante",
+          "text": "Isso devia estar morto. Enterrado. Por que voltou agora?"
+        },
+        {
+          "speaker": "O Arquiteto",
+          "text": "Talvez porque finalmente alguém tem os meios de fazer isso direito."
+        },
+        {
+          "speaker": "O Estudante",
+          "text": "Ou de fazer tudo errado de novo."
+        }
+      ],
+      "choices": []
+    }
+  ],
+  "finalChoices": [
+    {
+      "text": "Apoiar a visão do Arquiteto: controlar o MegaBrain",
+      "nameTargetNpc": "sem nome",
+      "sanityChange": 0,
+      "knowledgeChange": 0,
+      "trustLevelChange": 0,
+      "requireItemId": "0",
+      "rewardItem": {
+        "name": "sem nome",
+        "description": "sem descricao",
+        "type": "NONE",
+        "id": "0"
+      },
+      "requireFlag": "NONE",
+      "generatedFlag": "NONE"
+    },
+    {
+      "text": "Apoiar a visão do Estudante: destruir o MegaBrain",
+      "nameTargetNpc": "sem nome",
+      "sanityChange": 0,
+      "knowledgeChange": 0,
+      "trustLevelChange": 0,
+      "requireItemId": "0",
+      "rewardItem": {
+        "name": "sem nome",
+        "description": "sem descricao",
+        "type": "NONE",
+        "id": "0"
+      },
+      "requireFlag": "NONE",
+      "generatedFlag": "NONE"
+    }
+  ],
+  "rewardItem": {
+    "name": "sem nome",
+    "description": "sem descricao",
+    "type": "NONE",
+    "id": "0"
+  }
+}
