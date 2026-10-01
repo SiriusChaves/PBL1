@@ -1,7 +1,7 @@
 package main.model;
 
 public class Dialogue {
-    private final String speaker;
+    private String speaker;
     private final String text;
 
     public Dialogue(String speaker, String text) {
@@ -20,5 +20,9 @@ public class Dialogue {
 
     public String getText() {
         return text;
+    }
+
+    public void setSpeaker(String speaker) {
+        this.speaker = speaker;
     }
 }

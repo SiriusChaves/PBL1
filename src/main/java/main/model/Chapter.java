@@ -6,11 +6,20 @@ import java.util.List;
 
 public class Chapter {
     private final String id;
-    private final String idNextChapter;
+    private String idNextChapter;
     private final String title;
     private final List<Scene> scenes;
     private final List<Choice> finalChoices;
     private final Item rewardItem;
+
+    public Chapter(Chapter chapter) {
+        this.id = chapter.getId();
+        this.idNextChapter = chapter.getIdNextChapter();
+        this.title = chapter.getTitle();
+        this.scenes = new ArrayList<>(chapter.getScenes());
+        this.finalChoices = new ArrayList<>(chapter.getFinalChoices());
+        this.rewardItem = chapter.getRewardItem();
+    }
 
     public Chapter(String id, String idNextChapter, String title, List<Scene> scenes, List<Choice> lastChoices, Item reward) {
         this.id = id;
@@ -57,9 +66,17 @@ public class Chapter {
         return idNextChapter;
     }
     public List<Choice> getFinalChoices() {
-        return Collections.unmodifiableList(finalChoices);
+        return finalChoices;
     }
     public List<Scene> getScenes() {
-        return Collections.unmodifiableList(scenes);
+        return scenes;
+    }
+
+    public Item getRewardItem() {
+        return rewardItem;
+    }
+
+    public void setIdNextChapter(String id) {
+        this.idNextChapter = id;
     }
 }
