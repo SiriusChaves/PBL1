@@ -80,4 +80,21 @@ public class SaveGameDaoJsonTest {
 
         assertTrue(Files.exists(pathSlot1));
     }
+    @Test
+    public void createAndDeleteSlotOfSave() {
+        Path pathSlot3 = Path.of("data", "saves", "slot3", "slot3.json");
+
+        SaveGameDaoJson saveGameDaoJson = new SaveGameDaoJson();
+
+        saveGameDaoJson.createSlotOfSave("3");
+
+        assertTrue(Files.exists(pathSlot3));
+
+        try {
+            saveGameDaoJson.delete("3");
+        } catch (SlotOfSaveGameNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        assertTrue(Files.notExists(pathSlot3));
+    }
 }
