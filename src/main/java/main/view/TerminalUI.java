@@ -1,25 +1,25 @@
 package main.view;
 
-import main.dto.ItemDto;
+import main.dto.ItemViewDto;
 import main.dto.NpcDto;
 import main.dto.PlayerDto;
 
 import java.util.List;
 
 public class TerminalUI {
-    public static void showInventory(List<ItemDto> items) {
+    public static void showInventory(List<ItemViewDto> items) {
         System.out.println("╔═════════════════════════════════════════════════════════╗");
         System.out.println("║                       INVENTÁRIO                        ║");
         System.out.println("╠══════════════════════════════════════╦══════════════════╣");
-        System.out.println("║ NOME DO ITEM                         ║ TIPO             ║");
+        System.out.println("║ NOME DO ITEM                         ║ DESCRIÇÃO            ║");
         System.out.println("╠══════════════════════════════════════╬══════════════════╣");
 
         if (items.isEmpty()) {
             System.out.printf("║ %-55s ║%n", "Seu inventário está vazio...");
         } else {
-            for (ItemDto item : items) {
+            for (ItemViewDto item : items) {
 
-                System.out.printf("║ %-36s ║ %-16s ║%n", item.name(), item.itemType());
+                System.out.printf("║ %-36s ║ %-16s ║%n", item.name(), item.description());
             }
         }
 

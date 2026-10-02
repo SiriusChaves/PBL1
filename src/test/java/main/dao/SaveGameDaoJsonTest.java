@@ -38,23 +38,23 @@ public class SaveGameDaoJsonTest {
 
         try {
 
-            saveGameDaoJson.saveGame(saveGameDto, "1");
+            saveGameDaoJson.save(saveGameDto, "1");
 
         } catch (GameNotSaveException gameNotSaveException) {
-            assertThrows(GameNotSaveException.class, () -> saveGameDaoJson.saveGame(saveGameDto, "7"));
+            assertThrows(GameNotSaveException.class, () -> saveGameDaoJson.save(saveGameDto, "7"));
         }
 
         assertTrue(Files.exists(Path.of("data", "saves", "slot1", "slot1.json")));
 
         try {
-            SaveGameDto saveGameSlot1 =  saveGameDaoJson.searchBySlotIndex("1");
+            SaveGameDto saveGameSlot1 =  saveGameDaoJson.findBySlot("1");
 
             assertEquals("2A", saveGameSlot1.gameStateDto().currentChapterId());
         } catch (SlotOfSaveGameNotFoundException slotOfSaveGameNotFoundException) {}
 
 
         try {
-            saveGameDaoJson.deleteSaveGame("1");
+            saveGameDaoJson.delete("1");
         } catch (SlotOfSaveGameNotFoundException slotOfSaveGameNotFoundException) {}
 
         assertTrue(Files.notExists(Path.of("data", "saves", "slot1", "slot1.json")));

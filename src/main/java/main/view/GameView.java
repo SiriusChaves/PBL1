@@ -60,6 +60,13 @@ public class GameView {
         return Menu.parseMenu(ConsoleInputReader.readInteger());
     }
 
+    private void loadGameMenu () {
+        System.out.println("MENU DE CARREGAMENTO DE SAVE");
+        System.out.println("1 - Continuar ultima partida");
+        System.out.println("2 - Iniciar nova partida");
+        System.out.println("3 - Carregar partida");
+    }
+
     private void runGame(String slotIndex) {
         ChapterDto currentChapter;
         SceneDto currentScene;
@@ -155,8 +162,8 @@ public class GameView {
         }
     }
 
-    private void comandsMenu(String entrada) throws ComandNonExistsException {
-        switch (entrada) {
+    private void comandsMenu(String userInput) throws ComandNonExistsException {
+        switch (userInput) {
             case "inventario" ->
                 TerminalUI.showInventory(gameController.loadInventoryData());
             case "status" ->

@@ -6,7 +6,6 @@ import main.dto.PlayerDto;
 import main.exception.ChapterNotFoundException;
 import main.model.*;
 
-import java.io.IOException;
 import java.util.List;
 
 public class ChapterService {
@@ -60,7 +59,7 @@ public class ChapterService {
 
     private Chapter buildIntroduceChapter() throws ChapterNotFoundException {
         try {
-            return chapterDao.searchById("-1");
+            return chapterDao.findByID("-1");
         } catch (ChapterNotFoundException chapterNotFoundException) {
             throw new ChapterNotFoundException("Erro ao carregar capitulo introdutório");
         }
@@ -68,7 +67,7 @@ public class ChapterService {
 
     private Chapter buildChapterZero() throws ChapterNotFoundException {
        try {
-           return chapterDao.searchById("0");
+           return chapterDao.findByID("0");
        } catch (ChapterNotFoundException chapterNotFoundException) {
            throw new ChapterNotFoundException("Erro ao carregar capitulo 0");
        }
@@ -76,7 +75,7 @@ public class ChapterService {
 
     private Chapter buildChapterOne(String playerName) throws ChapterNotFoundException {
         try {
-            Chapter chapterOne = chapterDao.searchById("1");
+            Chapter chapterOne = chapterDao.findByID("1");
             Chapter chapterOneModified = new Chapter(chapterOne);
 
             for (Scene scene : chapterOneModified.getScenes()) {
@@ -95,7 +94,7 @@ public class ChapterService {
     // Trilha A - O arquiteto
     private Chapter buildChapter2A() throws ChapterNotFoundException {
         try {
-            return chapterDao.searchById("2A");
+            return chapterDao.findByID("2A");
         } catch (ChapterNotFoundException chapterNotFoundException) {
             throw new ChapterNotFoundException("Erro ao carregar capitulo 2A");
         }
@@ -103,7 +102,7 @@ public class ChapterService {
 
     private Chapter buildChapter3A() throws ChapterNotFoundException {
         try {
-            return chapterDao.searchById("3A");
+            return chapterDao.findByID("3A");
         } catch (ChapterNotFoundException chapterNotFoundException) {
             throw new ChapterNotFoundException("Erro ao carregar capitulo 3A");
         }
@@ -111,7 +110,7 @@ public class ChapterService {
 
     private Chapter buildChapter4A(List<String> activeGameFlags) throws ChapterNotFoundException {
         try {
-            Chapter originalChapter = chapterDao.searchById("4A");
+            Chapter originalChapter = chapterDao.findByID("4A");
             Chapter copyChapter = new Chapter(originalChapter);
 
             String requireFlag1 = "Aceitou ajuda do Estudante";
@@ -130,7 +129,7 @@ public class ChapterService {
     // Trilha B - O Estudante
     private Chapter buildChapter2B() throws ChapterNotFoundException {
         try {
-            return chapterDao.searchById("2B");
+            return chapterDao.findByID("2B");
         } catch (ChapterNotFoundException chapterNotFoundException) {
             throw new ChapterNotFoundException("Erro ao carregar capitulo 2B");
         }
@@ -138,7 +137,7 @@ public class ChapterService {
 
     private Chapter buildChapter3B() throws ChapterNotFoundException {
         try {
-            return chapterDao.searchById("3B");
+            return chapterDao.findByID("3B");
         } catch (ChapterNotFoundException chapterNotFoundException) {
             throw new ChapterNotFoundException("Erro ao carregar capitulo 3B");
         }
@@ -146,7 +145,7 @@ public class ChapterService {
 
     private Chapter buildChapter4B() throws ChapterNotFoundException {
         try {
-            return chapterDao.searchById("4B");
+            return chapterDao.findByID("4B");
         } catch (ChapterNotFoundException chapterNotFoundException) {
             throw new ChapterNotFoundException("Erro ao carregar capitulo 4B");
         }
@@ -155,7 +154,7 @@ public class ChapterService {
     // Capitulos compartilhados
     private Chapter buildChapter5(PlayerDto player, List<String> activeGameFlags) throws ChapterNotFoundException {
        try {
-           Chapter originalChapter = chapterDao.searchById("5");
+           Chapter originalChapter = chapterDao.findByID("5");
 
            Chapter copyChapter = new Chapter(originalChapter);
 
@@ -177,7 +176,7 @@ public class ChapterService {
 
     private Chapter buildChapter6(PlayerDto player) throws ChapterNotFoundException {
         try {
-            Chapter originalChapter = chapterDao.searchById("6");
+            Chapter originalChapter = chapterDao.findByID("6");
 
             Chapter copyChapter = new Chapter(originalChapter);
 
@@ -200,7 +199,7 @@ public class ChapterService {
     private Chapter buildChapter7(PlayerDto player, List<String> activeGameFlags, List<String> items)
             throws ChapterNotFoundException {
         try {
-            Chapter originalChapter = chapterDao.searchById("7");
+            Chapter originalChapter = chapterDao.findByID("7");
 
             Chapter copyChapter = new Chapter(originalChapter);
 
@@ -230,7 +229,7 @@ public class ChapterService {
     // Capitulos finais
     private Chapter buildArchitectEndingChapter() throws ChapterNotFoundException {
         try {
-            return chapterDao.searchById("8");
+            return chapterDao.findByID("8");
         } catch (ChapterNotFoundException chapterNotFoundException) {
             throw new ChapterNotFoundException("Erro ao carregar capitulo final do arquiteto");
         }
@@ -238,7 +237,7 @@ public class ChapterService {
 
     private Chapter buildStudentEndingChapter() throws ChapterNotFoundException {
         try {
-            return chapterDao.searchById("9");
+            return chapterDao.findByID("9");
         } catch (ChapterNotFoundException chapterNotFoundException) {
             throw new ChapterNotFoundException("Erro ao carregar capitulo final do estudante");
         }
@@ -246,7 +245,7 @@ public class ChapterService {
 
     private Chapter buildFinalMegaBrainChapter() throws ChapterNotFoundException {
         try {
-            return chapterDao.searchById("10");
+            return chapterDao.findByID("10");
         } catch (ChapterNotFoundException chapterNotFoundException) {
             throw new ChapterNotFoundException("Erro ao carregar capitulo final mega brain");
         }

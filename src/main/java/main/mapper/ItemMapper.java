@@ -1,14 +1,13 @@
 package main.mapper;
 
-import main.dto.ItemDto;
+import main.dto.ItemViewDto;
 import main.model.Item;
 
 public class ItemMapper {
 
-    public static ItemDto toDto(Item item) {
-        return new ItemDto(
+    public static ItemViewDto toDto(Item item) {
+        return new ItemViewDto(
                 item.getName(),
-                item.getDescription(),
-                item.getItemType().name());
+                item.getDescription());
     }
 }

@@ -10,7 +10,6 @@ import main.mapper.NpcMapper;
 import main.mapper.PlayerMapper;
 import main.model.*;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -47,7 +46,7 @@ public class StoryService {
                 currentChapter.getTitle(),
                 gameStateDto);
 
-        saveGameDao.saveGame(saveGameDto, slotIndex);
+        saveGameDao.save(saveGameDto, slotIndex);
     }
 
     public void loadCurrentChapter() throws ChapterNotFoundException {
@@ -124,14 +123,14 @@ public class StoryService {
         return relationshipsDto;
     }
 
-    public List<ItemDto> loadItemDtoInInventory() {
+    public List<ItemViewDto> loadItemDtoInInventory() {
         if (player.getInventory().getItems().isEmpty()) {
             return Collections.emptyList();
         } else {
             List<Item> items = new ArrayList<>(
                     player.getInventory().getItems().values());
 
-            List<ItemDto> itemsDto = new ArrayList<>();
+            List<ItemViewDto> itemsDto = new ArrayList<>();
             for (Item item : items) {
                 itemsDto.add(ItemMapper.toDto(item));
             }
