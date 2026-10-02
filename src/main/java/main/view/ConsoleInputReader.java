@@ -1,6 +1,4 @@
-package main.view.utils;
-
-import main.view.TerminalUI;
+package main.view;
 
 import java.util.Scanner;
 

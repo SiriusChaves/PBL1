@@ -41,4 +41,8 @@ public class GameSession {
     public Flag getGameFlags() {
         return gameFlags;
     }
+
+    public String getSlotIndex() {
+        return slotIndex;
+    }
 }

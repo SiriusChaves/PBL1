@@ -18,7 +18,11 @@ public class SaveService {
         this.itemDao = itemDao;
     }
 
-    public void createNewGame(String slotIndex) throws SaveSlotsFullException {
+    public void saveGame(SavePersistenceDto saveDto, String slotIndex) {
+        saveGameDao.save(saveDto, slotIndex);
+    }
+
+    public void createNewSlotOfGameSession(String slotIndex) throws SaveSlotsFullException {
         if (saveGameDao.findAllSlots()) {
             throw new SaveSlotsFullException("Todos os saves estão preenchidos!");
         } else {

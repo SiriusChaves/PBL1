@@ -6,7 +6,8 @@ import main.dto.ChapterDto;
 import main.dto.SceneDto;
 import main.exception.ChapterNotFoundException;
 import main.exception.ComandNonExistsException;
-import main.view.utils.ConsoleInputReader;
+import main.exception.FileOfSaveNotCreateException;
+import main.exception.SaveSlotsFullException;
 
 import static main.view.MainMenuOption.*;
 import static main.view.SaveMenuOption.*;
@@ -32,6 +33,7 @@ public class GameView {
                 case EXIT -> exitGame();
                 default -> showText("Escolha inválida realizada!");
             }
+
         } while(mainMenuOption != EXIT);
     }
 
@@ -43,11 +45,13 @@ public class GameView {
             saveMenuOption = showSaveMenu();
 
             switch (saveMenuOption) {
-                case CONTINUE -> continueLastGame();
-                case CREATE_NEW_SAVE -> createNewGame();
-                case LOAD_EXISTING_SAVE -> loadExistingGame();
+                case CONTINUE -> continueLastGame(); // Ainda nn implementada
+                case CREATE_NEW_SAVE -> createNewGame(); // Implementado sem sobrescrita de save
+                case LOAD_EXISTING_SAVE -> loadExistingGame(); // Ainda nn
+                case DELETE_SAVE -> deleteGameSession();
                 default -> showText("Opção invalida escolhida");
             }
+
         } while (saveMenuOption != BACK_TO_MAIN_MENU);
     }
 
@@ -70,7 +74,9 @@ public class GameView {
             int numberScenes = currentChapter.numberScenes();
 
             for (int numberActualScene = 0; numberActualScene < numberScenes; numberActualScene++) {
+
                 currentScene = gameController.loadCurrentScene();
+
                 showDialogues(currentScene.dialogues());
 
                 if (currentScene.numberChoices() > 0) {
@@ -78,6 +84,7 @@ public class GameView {
                     boolean isValidChoiceMade = false;
 
                     while (!isValidChoiceMade) {
+
                         showChoices(currentScene.choices());
                         showText(">>> Informe o número da escolha (ou comandos como 'inventario'): ");
                         playerInput = ConsoleInputReader.readString();
@@ -107,9 +114,11 @@ public class GameView {
             }
 
             if (currentChapter.numberLastChoices() > 0) {
+
                 boolean isValidChoiceMade = false;
 
                 while (!isValidChoiceMade) {
+
                     showChoices(currentChapter.choices());
                     showText(">>> Informe o número da Escolha Final do Capítulo: ");
                     playerInput = ConsoleInputReader.readString();
@@ -135,17 +144,19 @@ public class GameView {
             showText("Continuar jogando? (Digite 1 para encerrar a sessão ou ENTER para prosseguir para o próximo capitulo: ");
             playerInput = ConsoleInputReader.readString();
             if (playerInput.equals("1")) isRunning = false;
+
+            gameController.saveGame();
         }
     }
 
     private void comandsMenu(String userInput) throws ComandNonExistsException {
         switch (userInput) {
             case "inventario" ->
-                TerminalUI.showInventory(gameController.loadInventoryData());
+                showInventory(gameController.loadInventoryData());
             case "status" ->
-                TerminalUI.showStatusPlayer(gameController.loadPlayerData());
+                showStatusPlayer(gameController.loadPlayerData());
             case "vinculos" ->
-                TerminalUI.showStatusRelationships(gameController.loadRelationshipData());
+                showStatusRelationships(gameController.loadRelationshipData());
             default ->
                 throw new ComandNonExistsException("Comando não existente. Digite um número ou um comando válido.\n" +
                         "Para verificar todos os comandos válidos, volte ao menu inicial e leia as instruções.");
@@ -160,7 +171,37 @@ public class GameView {
 
     }
 
-    private void createNewGame() {
+    private void deleteGameSession() {
+        showText("Informe o número do save que você deseja apagar");
 
+        String numberSlot =  Integer.toString(ConsoleInputReader.readInteger());
+
+        gameController.deleteGameSession(numberSlot);
+    }
+
+    private void createNewGame() {
+        boolean creatingNewGame = true;
+         while (creatingNewGame) {
+             try {
+                 showText("Selecione o número do slot que você deseja para criar um novo jogo");
+
+                 String numberSlot =  Integer.toString(ConsoleInputReader.readInteger());
+
+                 gameController.createNewSlotOfGameSession(numberSlot);
+
+                 showText("Slot" + numberSlot + " inicializado com sucesso!");
+                 showText("Você já pode iniciar o jogo por meio dele");
+
+                 showText("Digite 1 para inicializar outro slot:");
+                 if (!ConsoleInputReader.readString().equals("1"))
+                     creatingNewGame = false;
+             } catch (FileOfSaveNotCreateException fileOfSaveNotCreateException) {
+                 showText(fileOfSaveNotCreateException.getMessage());
+
+             } catch (SaveSlotsFullException saveSlotsFullException) {
+                 creatingNewGame = false;
+                 showText(saveSlotsFullException.getMessage());
+             }
+         }
     }
 }

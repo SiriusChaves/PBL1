@@ -28,8 +28,20 @@ public class GameController {
         this.saveService = new SaveService(saveGameDao, itemDao);
     }
 
+    public void deleteGameSession(String slotIndex) {
+        saveService.deleteSlotSave(slotIndex);
+    }
+    public void saveGame() {
+        saveService.saveGame(
+                gameSession.getDataOfSaveGame(), gameSession.getSlotIndex());
+    }
+
     public void startNewGame(String playerName, String slotIndex) {
         this.gameSession = new GameSession(chapterDao, playerName, slotIndex);
+    }
+
+    public void createNewSlotOfGameSession(String slotIndex) {
+        saveService.createNewSlotOfGameSession(slotIndex);
     }
 
     public SavePersistenceDto getDataSAave(String slotIndex) {
