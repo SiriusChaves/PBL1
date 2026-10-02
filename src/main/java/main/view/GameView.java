@@ -3,16 +3,15 @@ package main.view;
 import main.controller.GameController;
 
 import main.dto.ChapterDto;
-import main.dto.DialogueDto;
 import main.dto.SceneDto;
 import main.exception.ChapterNotFoundException;
 import main.exception.ComandNonExistsException;
 import main.exception.GameNotSaveException;
 import main.view.utils.ConsoleInputReader;
 
-import java.util.List;
-
-import static main.view.Menu.*;
+import static main.view.MainMenuOption.*;
+import static main.view.SaveMenuOption.*;
+import static main.view.TerminalUI.*;
 
 public class GameView {
     private final GameController gameController;
@@ -22,49 +21,34 @@ public class GameView {
     }
 
     public void start() {
-        Menu menuChoice;
+        MainMenuOption mainMenuOption;
 
         do {
-            menuChoice = startMenu();
+            mainMenuOption = showStartMenu();
 
-            switch (menuChoice) {
-                case INICIAR_PARTIDA -> {
-                    System.out.println("Informe o seu nickname: ");
-                    String playerName = ConsoleInputReader.readString();
-
-                    System.out.println("Informe o número do slot que você deseja salvar: ");
-                    String slotIndex = ConsoleInputReader.readString();
-                    gameController.startNewGame(playerName);
-                    runGame(slotIndex);
-                }
-                case INSTRUCOES -> showInstructions();
-                case CREDITOS -> showCredits();
-                case SAIR -> exitGame();
-                default -> System.out.println("Escolha inválida realizada!");
+            switch (mainMenuOption) {
+                case START_GAME -> startGame();
+                case INSTRUCTIONS -> showInstructions();
+                case CREDITS -> showCredits();
+                case EXIT -> exitGame();
+                default -> showText("Escolha inválida realizada!");
             }
-        } while(menuChoice != SAIR);
+        } while(mainMenuOption != EXIT);
     }
 
-    private Menu startMenu() {
-        System.out.println("╔═════════════════════════════════════════════════════════╗");
-        System.out.println("║                      MENU INICIAL                       ║");
-        System.out.println("╠═════════════════════════════════════════════════════════╣");
-        System.out.printf("║ %-55s ║%n", "[" + INICIAR_PARTIDA.getValor() + "] Iniciar nova partida");
-        System.out.printf("║ %-55s ║%n", "[" + INSTRUCOES.getValor() + "] Instruções");
-        System.out.printf("║ %-55s ║%n", "[" + CREDITOS.getValor() + "] Créditos");
-        System.out.printf("║ %-55s ║%n", "[" + SAIR.getValor() + "] Sair");
+    private void startGame() {
+        SaveMenuOption saveMenuOption;
 
-        System.out.println("╚═════════════════════════════════════════════════════════╝");
-        System.out.print("Selecione uma opção: ");
+        do {
+            saveMenuOption = showSaveMenu();
 
-        return Menu.parseMenu(ConsoleInputReader.readInteger());
-    }
-
-    private void loadGameMenu () {
-        System.out.println("MENU DE CARREGAMENTO DE SAVE");
-        System.out.println("1 - Continuar ultima partida");
-        System.out.println("2 - Iniciar nova partida");
-        System.out.println("3 - Carregar partida");
+            switch (saveMenuOption) {
+                case CONTINUE -> continueLastGame();
+                case CREATE_NEW_SAVE -> createNewGame();
+                case LOAD_EXISTING_SAVE -> loadExistingGame();
+                default -> showText("Opção invalida escolhida");
+            }
+        } while (saveMenuOption != BACK_TO_MAIN_MENU);
     }
 
     private void runGame(String slotIndex) {
@@ -77,7 +61,7 @@ public class GameView {
             try {
                 currentChapter = gameController.loadCurrentChapter();
             } catch (ChapterNotFoundException chapterNotFoundException) {
-                System.out.println(chapterNotFoundException.getMessage());
+               showText(chapterNotFoundException.getMessage());
                 return;
             }
 
@@ -95,7 +79,7 @@ public class GameView {
 
                     while (!isValidChoiceMade) {
                         showChoices(currentScene.choices());
-                        System.out.println(">>> Informe o número da escolha (ou comandos como 'inventario'): ");
+                        showText(">>> Informe o número da escolha (ou comandos como 'inventario'): ");
                         playerInput = ConsoleInputReader.readString();
 
                         try {
@@ -105,18 +89,18 @@ public class GameView {
                                 gameController.applySceneChoiceConsequence(indexChoice - 1);
                                 isValidChoiceMade = true;
                             } else {
-                                System.out.println("Opção inválida. Escolha um numero entre 1 e " + currentScene.numberChoices() + ".");
+                                showText("Opção inválida. Escolha um numero entre 1 e " + currentScene.numberChoices() + ".");
                             }
 
                         } catch (NumberFormatException numberFormatException) {
                             try {
                                 comandsMenu(playerInput);
                             } catch (ComandNonExistsException comandNonExistsException) {
-                                System.out.println(comandNonExistsException.getMessage());
+                                showText(comandNonExistsException.getMessage());
                             }
                         }
                     }
-                    System.out.println(">>> Pressione ENTER para prosseguir...");
+                    showText(">>> Pressione ENTER para prosseguir...");
                     ConsoleInputReader.readString();
                 }
                 gameController.advanceToNextScene();
@@ -127,7 +111,7 @@ public class GameView {
 
                 while (!isValidChoiceMade) {
                     showChoices(currentChapter.choices());
-                    System.out.println(">>> Informe o número da Escolha Final do Capítulo: ");
+                    showText(">>> Informe o número da Escolha Final do Capítulo: ");
                     playerInput = ConsoleInputReader.readString();
 
                     try {
@@ -136,19 +120,19 @@ public class GameView {
                             gameController.applyChapterFinalChoiceConsequence(indexChoice - 1);
                             isValidChoiceMade = true;
                         } else {
-                            System.out.println("Opção inválida. Escolha um número entre 1 e " + currentChapter.numberLastChoices() + ".");
+                            showText("Opção inválida. Escolha um número entre 1 e " + currentChapter.numberLastChoices() + ".");
                         }
                     } catch (NumberFormatException numberFormatException) {
                         try {
                             comandsMenu(playerInput);
                         } catch (ComandNonExistsException comandNonExistsException){
-                            System.out.println(comandNonExistsException.getMessage());
+                            showText(comandNonExistsException.getMessage());
                         }
                     }
                 }
             }
 
-            System.out.println("Continuar jogando? (Digite 1 para encerrar a sessão ou ENTER para prosseguir para o próximo capitulo: ");
+            showText("Continuar jogando? (Digite 1 para encerrar a sessão ou ENTER para prosseguir para o próximo capitulo: ");
             playerInput = ConsoleInputReader.readString();
             if (playerInput.equals("1")) {
                 isRunning = false;
@@ -156,7 +140,7 @@ public class GameView {
                 try {
                     gameController.saveGame(slotIndex);
                 } catch (GameNotSaveException gameNotSaveException) {
-                    System.out.printf(gameNotSaveException.getMessage());
+                    showText(gameNotSaveException.getMessage());
                 }
             }
         }
@@ -176,92 +160,15 @@ public class GameView {
         }
     }
 
-    private void showDialogues(List<DialogueDto> dialogues) {
-        System.out.println("\n╔═════════════════════════════════════════════════════════╗");
+    private void continueLastGame() {
 
-        for (DialogueDto dialogue : dialogues) {
-            String content = dialogue.speaker() + ": " + dialogue.text();
-
-            System.out.printf("║ %-55s ║%n", content);
-        }
-
-        System.out.println("╚═════════════════════════════════════════════════════════╝");
     }
 
-    private void showChoices(List<String> choices) {
-        System.out.println("╔═════════════════════════════════════════════════════════╗");
-        System.out.printf("║ %-55s ║%n", " O QUE VOCÊ DECIDE FAZER?");
-        System.out.println("╠═════════════════════════════════════════════════════════╣");
+    private void loadExistingGame() {
 
-        int indexChoice = 1;
-        for (String choice : choices) {
-            String lineChoice = "  [" + indexChoice + "] " + choice;
-            System.out.printf("║ %-55s ║%n", lineChoice);
-            indexChoice++;
-        }
-        System.out.println("╚═════════════════════════════════════════════════════════╝");
     }
 
-    private void showTitle(String title) {
-        System.out.println("╔═════════════════════════════════════════════════════════╗");
-        System.out.printf("║ %-55s ║%n", title.toUpperCase());
-        System.out.println("╚═════════════════════════════════════════════════════════╝");
+    private void createNewGame() {
+
     }
-
-    private void showInstructions() {
-        System.out.println("╔═════════════════════════════════════════════════════════╗");
-        System.out.println("║                       INSTRUÇÕES                        ║");
-        System.out.println("╠═════════════════════════════════════════════════════════╣");
-
-        System.out.printf("║ %-55s ║%n", "Bem-vindo ao Mundo de CyberFall.");
-        System.out.printf("║ %-55s ║%n", "Suas escolhas moldam o destino do seu personagem.");
-        System.out.printf("║ %-55s ║%n", "");
-
-        System.out.printf("║ %-55s ║%n", "ATRIBUTOS E REGRAS:");
-        System.out.printf("║ %-55s ║%n", "- SANIDADE: É a sua saúde mental. Chegar a zero");
-        System.out.printf("║ %-55s ║%n", "  significa Game Over. Pense bem antes de agir.");
-        System.out.printf("║ %-55s ║%n", "- CONHECIMENTO: Ajuda a desvendar segredos e pode");
-        System.out.printf("║ %-55s ║%n", "  liberar caminhos e opções ocultas no futuro.");
-        System.out.printf("║ %-55s ║%n", "- VÍNCULOS: Suas ações agradam ou irritam os NPCs.");
-        System.out.printf("║ %-55s ║%n", "  Ter aliados pode salvar sua vida nos momentos finais.");
-        System.out.printf("║ %-55s ║%n", "");
-
-        System.out.printf("║ %-55s ║%n", "COMO JOGAR:");
-        System.out.printf("║ %-55s ║%n", "Durante a narrativa, opções numeradas aparecerão.");
-        System.out.printf("║ %-55s ║%n", "Digite apenas o NÚMERO correspondente (ex: 1, 2, 3)");
-        System.out.printf("║ %-55s ║%n", "e aperte ENTER para confirmar sua decisão.");
-        System.out.printf("║ %-55s ║%n", "");
-
-        System.out.printf("║ %-55s ║%n", "COMANDOS ESPECIAIS (A QUALQUER MOMENTO):");
-        System.out.printf("║ %-55s ║%n", "Sempre que o jogo pedir uma escolha, você pode");
-        System.out.printf("║ %-55s ║%n", "digitar as seguintes palavras em vez de um número:");
-        System.out.printf("║ %-55s ║%n", " > 'status'     - Verifica seus atributos atuais.");
-        System.out.printf("║ %-55s ║%n", " > 'inventario' - Mostra os itens que você carrega.");
-        System.out.printf("║ %-55s ║%n", " > 'vinculos'   - Exibe a situação com os NPCs.");
-        System.out.printf("║ %-55s ║%n", "");
-        System.out.printf("║ %-55s ║%n", "Pressione ENTER nas pausas para continuar lendo.");
-        System.out.printf("║ %-55s ║%n", "Tenha um bom jogo..");
-
-        System.out.println("╚═════════════════════════════════════════════════════════╝");
-    }
-
-    private void showCredits() {
-        System.out.println("╔═════════════════════════════════════════════════════════╗");
-        System.out.println("║                        CRÉDITOS                         ║");
-        System.out.println("╠═════════════════════════════════════════════════════════╣");
-        System.out.printf("║ %-55s ║%n", "Desenvolvimento e Programação:");
-        System.out.printf("║ %-55s ║%n", " - Sirius e Rodrigo");
-        System.out.printf("║ %-55s ║%n", "");
-        System.out.printf("║ %-55s ║%n", "Roteiro e Game Design:");
-        System.out.printf("║ %-55s ║%n", " - Sirius e Rodrigo");
-        System.out.println("╚═════════════════════════════════════════════════════════╝");
-    }
-
-    private void exitGame() {
-        System.out.println("╔═════════════════════════════════════════════════════════╗");
-        System.out.printf("║ %-55s ║%n", "    Encerrando a aplicação...");
-        System.out.printf("║ %-55s ║%n", "    Obrigado por jogar!");
-        System.out.println("╚═════════════════════════════════════════════════════════╝");
-    }
-
 }
