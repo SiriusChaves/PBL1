@@ -4,8 +4,9 @@ public enum SaveMenuOption {
     CONTINUE(1),
     CREATE_NEW_SAVE(2),
     LOAD_EXISTING_SAVE(3),
-    BACK_TO_MAIN_MENU(4),
-    DEFAULT(5);
+    DELETE_SAVE(4),
+    BACK_TO_MAIN_MENU(5),
+    DEFAULT(6);
 
     private final int value;
 
@@ -18,6 +19,8 @@ public enum SaveMenuOption {
             case 1 -> CONTINUE;
             case 2 -> CREATE_NEW_SAVE;
             case 3 -> LOAD_EXISTING_SAVE;
+            case 4 -> DELETE_SAVE;
+            case 5 -> BACK_TO_MAIN_MENU;
             default -> DEFAULT;
         };
     }
