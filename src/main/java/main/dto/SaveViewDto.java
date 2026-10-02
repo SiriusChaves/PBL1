@@ -1,6 +1,6 @@
 package main.dto;
 
-public record SaveGameViewDto(
+public record SaveViewDto(
         String playerName,
         String dateSave,
         String currentChapterName

@@ -1,19 +1,19 @@
 package main.service;
 
 import main.dao.ItemDao;
-import main.dao.SaveGameDao;
-import main.dto.SaveGamePersistenceDto;
+import main.dao.SaveDao;
+import main.dto.SavePersistenceDto;
 import main.exception.SaveSlotsFullException;
-import main.exception.SlotOfSaveGameNotFoundException;
+import main.exception.SlotOfSaveNotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SaveGameService {
-    private SaveGameDao saveGameDao;
+public class SaveService {
+    private SaveDao saveGameDao;
     private ItemDao itemDao;
 
-    public SaveGameService(SaveGameDao saveGameDao, ItemDao itemDao) {
+    public SaveService(SaveDao saveGameDao, ItemDao itemDao) {
         this.saveGameDao = saveGameDao;
         this.itemDao = itemDao;
     }
@@ -26,12 +26,12 @@ public class SaveGameService {
         }
     }
 
-    public void deleteSlotSave(String slotIndex) throws SlotOfSaveGameNotFoundException {
+    public void deleteSlotSave(String slotIndex) throws SlotOfSaveNotFoundException {
         saveGameDao.delete(slotIndex);
     }
 
-    public List<SaveGamePersistenceDto> getDataOfAllSaves() {
-        List<SaveGamePersistenceDto> savesOfGameSession = new ArrayList<>();
+    public List<SavePersistenceDto> getDataOfAllSaves() {
+        List<SavePersistenceDto> savesOfGameSession = new ArrayList<>();
         List<String> indexOfAllSlots = List.of("1", "2", "3");
 
         for (String index : indexOfAllSlots)

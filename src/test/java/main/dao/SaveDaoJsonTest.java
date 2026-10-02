@@ -3,9 +3,9 @@ package main.dao;
 import main.dto.GameStateDto;
 import main.dto.NpcDto;
 import main.dto.PlayerDto;
-import main.dto.SaveGamePersistenceDto;
+import main.dto.SavePersistenceDto;
 import main.exception.GameNotSaveException;
-import main.exception.SlotOfSaveGameNotFoundException;
+import main.exception.SlotOfSaveNotFoundException;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -15,11 +15,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class SaveGameDaoJsonTest {
+public class SaveDaoJsonTest {
 
     @Test
     public void saveGameDaoJsonFlowTest() {
-        SaveGamePersistenceDto saveGamePersistenceDto = new SaveGamePersistenceDto(
+        SavePersistenceDto savePersistenceDto = new SavePersistenceDto(
                 "Rodrigo",
                 "01-10-2026",
                 "Arquivos Ocultos de CyberFall",
@@ -34,49 +34,49 @@ public class SaveGameDaoJsonTest {
                                 new NpcDto("Becca", 100, "ALIADO PLENO")),
                         List.of("flagTest01", "flagTest02")));
 
-        SaveGameDaoJson saveGameDaoJson = new SaveGameDaoJson();
+        SaveDaoJson saveDaoJson = new SaveDaoJson();
 
         try {
 
-            saveGameDaoJson.save(saveGamePersistenceDto, "1");
+            saveDaoJson.save(savePersistenceDto, "1");
 
         } catch (GameNotSaveException gameNotSaveException) {
-            assertThrows(GameNotSaveException.class, () -> saveGameDaoJson.save(saveGamePersistenceDto, "7"));
+            assertThrows(GameNotSaveException.class, () -> saveDaoJson.save(savePersistenceDto, "7"));
         }
 
         assertTrue(Files.exists(Path.of("data", "saves", "slot1", "slot1.json")));
 
         try {
-            SaveGamePersistenceDto saveGameSlot1 =  saveGameDaoJson.findBySlot("1");
+            SavePersistenceDto saveGameSlot1 =  saveDaoJson.findBySlot("1");
 
             assertEquals("2A", saveGameSlot1.gameStateDto().currentChapterId());
-        } catch (SlotOfSaveGameNotFoundException slotOfSaveGameNotFoundException) {}
+        } catch (SlotOfSaveNotFoundException slotOfSaveNotFoundException) {}
 
 
         try {
-            saveGameDaoJson.delete("1");
-        } catch (SlotOfSaveGameNotFoundException slotOfSaveGameNotFoundException) {}
+            saveDaoJson.delete("1");
+        } catch (SlotOfSaveNotFoundException slotOfSaveNotFoundException) {}
 
         assertTrue(Files.notExists(Path.of("data", "saves", "slot1", "slot1.json")));
     }
 
     @Test
     public void findSlotsOfSaveGameTest() {
-        SaveGameDaoJson saveGameDaoJson = new SaveGameDaoJson();
+        SaveDaoJson saveDaoJson = new SaveDaoJson();
 
-        assertTrue(saveGameDaoJson.exists("2"));
+        assertTrue(saveDaoJson.exists("2"));
 
-        assertFalse(saveGameDaoJson.findAllSlots());
+        assertFalse(saveDaoJson.findAllSlots());
     }
 
     @Test
     public void createSlotOfSaveTest() {
-        SaveGameDaoJson saveGameDaoJson = new SaveGameDaoJson();
+        SaveDaoJson saveDaoJson = new SaveDaoJson();
         Path pathSlot1 = Path.of("data", "saves", "slot1","slot1.json");
 
         assertFalse(Files.exists(pathSlot1));
 
-        saveGameDaoJson.createSlotOfSave("1");
+        saveDaoJson.createSlotOfSave("1");
 
         assertTrue(Files.exists(pathSlot1));
     }
@@ -84,15 +84,15 @@ public class SaveGameDaoJsonTest {
     public void createAndDeleteSlotOfSave() {
         Path pathSlot3 = Path.of("data", "saves", "slot3", "slot3.json");
 
-        SaveGameDaoJson saveGameDaoJson = new SaveGameDaoJson();
+        SaveDaoJson saveDaoJson = new SaveDaoJson();
 
-        saveGameDaoJson.createSlotOfSave("3");
+        saveDaoJson.createSlotOfSave("3");
 
         assertTrue(Files.exists(pathSlot3));
 
         try {
-            saveGameDaoJson.delete("3");
-        } catch (SlotOfSaveGameNotFoundException e) {
+            saveDaoJson.delete("3");
+        } catch (SlotOfSaveNotFoundException e) {
             throw new RuntimeException(e);
         }
         assertTrue(Files.notExists(pathSlot3));

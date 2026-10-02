@@ -1,11 +1,8 @@
 package main.view;
 
-import jdk.swing.interop.SwingInterOpUtils;
 import main.dto.*;
 import main.view.utils.ConsoleInputReader;
-import org.w3c.dom.Text;
 
-import java.security.PublicKey;
 import java.util.List;
 
 import static main.view.MainMenuOption.*;
@@ -19,18 +16,18 @@ public class TerminalUI {
         System.out.println(text);
     }
 
-     public static void showSlotsSaves(List<SaveGameViewDto> saves) {
+     public static void showSlotsSaves(List<SaveViewDto> saves) {
 
          System.out.println("SAVES ATUAIS");
         int numberSave = 1;
-        for (SaveGameViewDto saveGameViewDto : saves) {
+        for (SaveViewDto saveViewDto : saves) {
 
             System.out.println("Save do Slot" + numberSave + ":");
 
-            if (saveGameViewDto != null) {
-                System.out.println("Nome do protagonista: " + saveGameViewDto.playerName());
-                System.out.println("Capitulo atual: " + saveGameViewDto.currentChapterName());
-                System.out.println("Data do save: " + saveGameViewDto.dateSave());
+            if (saveViewDto != null) {
+                System.out.println("Nome do protagonista: " + saveViewDto.playerName());
+                System.out.println("Capitulo atual: " + saveViewDto.currentChapterName());
+                System.out.println("Data do save: " + saveViewDto.dateSave());
             } else {
                 System.out.println("save vazio");
             }

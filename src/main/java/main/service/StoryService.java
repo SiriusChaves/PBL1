@@ -31,11 +31,11 @@ public class StoryService {
         this.chapterService = chapterService;
     }
 
-    public SaveGamePersistenceDto loadDataOfSaveGame(String personName, String slotIndex) {
+    public SavePersistenceDto loadDataOfSaveGame(String personName, String slotIndex) {
 
         GameStateDto gameStateDto = createGameStateDto();
 
-        return new SaveGamePersistenceDto(
+        return new SavePersistenceDto(
                 personName,
                 "data-hora-exemplo",
                 currentChapter.getTitle(),

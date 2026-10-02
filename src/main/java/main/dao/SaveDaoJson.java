@@ -2,10 +2,10 @@ package main.dao;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import main.dto.SaveGamePersistenceDto;
+import main.dto.SavePersistenceDto;
 import main.exception.FileOfSaveNotCreateException;
 import main.exception.GameNotSaveException;
-import main.exception.SlotOfSaveGameNotFoundException;
+import main.exception.SlotOfSaveNotFoundException;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
@@ -13,7 +13,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 
-public class SaveGameDaoJson implements SaveGameDao {
+public class SaveDaoJson implements SaveDao {
     @Override
     public void createSlotOfSave(String slotIndex) throws FileOfSaveNotCreateException {
         Path path = Path.of("data", "saves", "slot" + slotIndex, "slot" + slotIndex + ".json");
@@ -27,7 +27,7 @@ public class SaveGameDaoJson implements SaveGameDao {
     }
 
     @Override
-    public void save(SaveGamePersistenceDto saveGamePersistenceDto, String slotIndex) throws GameNotSaveException {
+    public void save(SavePersistenceDto savePersistenceDto, String slotIndex) throws GameNotSaveException {
 
         Path path = Path.of("data", "saves", "slot" + slotIndex, "slot" + slotIndex + ".json");
 
@@ -41,7 +41,7 @@ public class SaveGameDaoJson implements SaveGameDao {
                 StandardOpenOption.TRUNCATE_EXISTING,
                 StandardOpenOption.WRITE)) {
 
-            gson.toJson(saveGamePersistenceDto, writer);
+            gson.toJson(savePersistenceDto, writer);
 
         } catch (IOException ioException) {
             throw new GameNotSaveException("Erro ao salvar o jogo no slot" + slotIndex);
@@ -49,20 +49,23 @@ public class SaveGameDaoJson implements SaveGameDao {
     }
 
     @Override
-    public void delete(String slotIndex) throws SlotOfSaveGameNotFoundException {
+    public void delete(String slotIndex) throws SlotOfSaveNotFoundException {
 
         Path path = Path.of("data", "saves", "slot" + slotIndex, "slot" + slotIndex + ".json");
 
        try {
            Files.deleteIfExists(path);
        } catch (IOException ioException) {
-           throw new SlotOfSaveGameNotFoundException("Não encontrou o slot" + slotIndex + " para deletar");
+           throw new SlotOfSaveNotFoundException("Não encontrou o slot" + slotIndex + " para deletar");
        }
     }
 
 
     @Override
-    public SaveGamePersistenceDto findBySlot(String slotIndex) throws SlotOfSaveGameNotFoundException {
+    public SavePersistenceDto findBySlot(String slotIndex) throws SlotOfSaveNotFoundException {
+        if (!exists(slotIndex)) {
+            return null;
+        }
 
         Path path = Path.of("data", "saves", "slot" + slotIndex, "slot" + slotIndex + ".json");
 
@@ -72,10 +75,10 @@ public class SaveGameDaoJson implements SaveGameDao {
 
         try (Reader reader = Files.newBufferedReader(path)) {
 
-            return gson.fromJson(reader, SaveGamePersistenceDto.class);
+            return gson.fromJson(reader, SavePersistenceDto.class);
 
         } catch (IOException ioException) {
-            throw new SlotOfSaveGameNotFoundException("Erro ao buscar o slot" + slotIndex + " para carregamento");
+            throw new SlotOfSaveNotFoundException("Erro ao buscar o slot" + slotIndex + " para carregamento");
         }
     }
 

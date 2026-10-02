@@ -1,7 +1,7 @@
 package main.service;
 
 import main.dao.ChapterDao;
-import main.dto.SaveGamePersistenceDto;
+import main.dto.SavePersistenceDto;
 import main.model.Flag;
 import main.model.Player;
 
@@ -22,7 +22,7 @@ public class GameSession {
         this.slotIndex = slotIndex;
     }
 
-    public SaveGamePersistenceDto getDataOfSaveGame()  {
+    public SavePersistenceDto getDataOfSaveGame()  {
         return storyService.loadDataOfSaveGame(personName, slotIndex);
     }
 

@@ -2,14 +2,14 @@ package main.controller;
 
 import main.dao.ChapterDao;
 import main.dao.ItemDao;
-import main.dao.SaveGameDao;
+import main.dao.SaveDao;
 import main.dto.*;
 import main.exception.ChapterNotFoundException;
 import main.mapper.ChapterMapper;
 import main.mapper.PlayerMapper;
 import main.mapper.SceneMapper;
 import main.service.GameSession;
-import main.service.SaveGameService;
+import main.service.SaveService;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,37 +18,42 @@ import java.util.List;
 public class GameController {
 
     private GameSession gameSession;
-    private SaveGameService saveGameService;
+    private SaveService saveService;
     private final ChapterDao chapterDao;
-    private final SaveGameDao saveGameDao;
+    private final SaveDao saveGameDao;
 
-    public GameController(ChapterDao chapterDao, SaveGameDao saveGameDao, ItemDao itemDao) {
+    public GameController(ChapterDao chapterDao, SaveDao saveGameDao, ItemDao itemDao) {
         this.chapterDao = chapterDao;
         this.saveGameDao = saveGameDao;
-        this.saveGameService = new SaveGameService(saveGameDao, itemDao);
+        this.saveService = new SaveService(saveGameDao, itemDao);
     }
 
     public void startNewGame(String playerName, String slotIndex) {
         this.gameSession = new GameSession(chapterDao, playerName, slotIndex);
     }
 
-    public SaveGamePersistenceDto getDataSAave(String slotIndex) {
+    public SavePersistenceDto getDataSAave(String slotIndex) {
         return gameSession.getDataOfSaveGame();
     }
 
-    public List<SaveGameViewDto> getDataOfAllSaves() {
-        List<SaveGamePersistenceDto> saveGamePersistenceDtos = saveGameService.getDataOfAllSaves();
+    public List<SaveViewDto> getDataOfAllSaves() {
+        List<SavePersistenceDto> savePersistenceDtos = saveService.getDataOfAllSaves();
 
-        List<SaveGameViewDto> saveGameViewDtos = new ArrayList<>();
+        List<SaveViewDto> saveViewDtos = new ArrayList<>();
 
-        for (SaveGamePersistenceDto saveGamePersistenceDto : saveGamePersistenceDtos) {
-            saveGameViewDtos.add(new SaveGameViewDto(
-                    saveGamePersistenceDto.playerName(),
-                    saveGamePersistenceDto.dataHora(),
-                    saveGamePersistenceDto.lastChapterName()));
+        for (SavePersistenceDto savePersistenceDto : savePersistenceDtos) {
+            if (savePersistenceDto != null)  {
+                saveViewDtos.add(new SaveViewDto(
+                        savePersistenceDto.playerName(),
+                        savePersistenceDto.dataHora(),
+                        savePersistenceDto.lastChapterName()));
+            } else {
+                saveViewDtos.add(null);
+            }
+
         }
 
-        return saveGameViewDtos;
+        return saveViewDtos;
     }
 
     public ChapterDto loadCurrentChapter() throws ChapterNotFoundException {
