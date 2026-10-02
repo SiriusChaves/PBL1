@@ -1,5 +1,7 @@
 package main.view.utils;
 
+import main.view.TerminalUI;
+
 import java.util.Scanner;
 
 public class ConsoleInputReader {
@@ -9,8 +11,8 @@ public class ConsoleInputReader {
         while (true) {
             try {
                 return Integer.parseInt(SCANNER.nextLine());
-            } catch (NumberFormatException ex) {
-                System.out.println("Valor inválido digitado! Digite apenas números inteiros.");
+            } catch (NumberFormatException numberFormatException) {
+                TerminalUI.showText("Valor inválido digitado! Digite apenas números inteiros.");
             }
         }
     }
