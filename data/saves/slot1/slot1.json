@@ -1,0 +1,46 @@
+{
+  "playerName": "Rodrigo",
+  "data_hora": "data-hora-exemplo",
+  "lastChapterName": "Compilação do Algoritmo de Fine-Tuning",
+  "gameStateDto": {
+    "player": {
+      "name": "O Arquiteto",
+      "sanity": 40,
+      "knowledge": 65
+    },
+    "currentChapterId": "4A",
+    "nextChapterId": "5",
+    "currentSceneId": "9A",
+    "itemsId": [
+      "12A",
+      "1"
+    ],
+    "relationships": [
+      {
+        "name": "Eng. Silas",
+        "trustLevel": 50,
+        "trustLevelTier": "NEUTRO"
+      },
+      {
+        "name": "Lia",
+        "trustLevel": 50,
+        "trustLevelTier": "NEUTRO"
+      },
+      {
+        "name": "Gabriel",
+        "trustLevel": 65,
+        "trustLevelTier": "ALIADO PLENO"
+      },
+      {
+        "name": "Rebeca",
+        "trustLevel": 60,
+        "trustLevelTier": "ALIADO PLENO"
+      }
+    ],
+    "activeGameFlags": [
+      "Não colaborou no cap 3A",
+      "Coletou contrato",
+      "Spyware desbloqueado"
+    ]
+  }
+}

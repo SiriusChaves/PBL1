@@ -1,8 +1,10 @@
 package main.controller;
 
 import main.dao.ChapterDao;
+import main.dao.SaveGameDao;
 import main.dto.*;
 import main.exception.ChapterNotFoundException;
+import main.exception.GameNotSaveException;
 import main.mapper.ChapterMapper;
 import main.mapper.PlayerMapper;
 import main.mapper.SceneMapper;
@@ -15,14 +17,19 @@ public class GameController {
 
     private GameSession gameSession;
     private final ChapterDao chapterDao;
+    private final SaveGameDao saveGameDao;
 
-    public GameController(ChapterDao chapterDao) {
+    public GameController(ChapterDao chapterDao, SaveGameDao saveGameDao) {
         this.chapterDao = chapterDao;
+        this.saveGameDao = saveGameDao;
     }
 
-    public void startNewGame() {
+    public void startNewGame(String playerName) {
+        this.gameSession = new GameSession(chapterDao, saveGameDao, playerName);
+    }
 
-        this.gameSession = new GameSession(chapterDao);
+    public void saveGame(String slotIndex) throws GameNotSaveException {
+        gameSession.saveGameSession(slotIndex);
     }
 
     public ChapterDto loadCurrentChapter() throws ChapterNotFoundException {

@@ -7,9 +7,9 @@ import main.dto.DialogueDto;
 import main.dto.SceneDto;
 import main.exception.ChapterNotFoundException;
 import main.exception.ComandNonExistsException;
-import main.view.utils.Reader;
+import main.exception.GameNotSaveException;
+import main.view.utils.ConsoleInputReader;
 
-import java.io.IOException;
 import java.util.List;
 
 import static main.view.Menu.*;
@@ -29,8 +29,13 @@ public class GameView {
 
             switch (menuChoice) {
                 case INICIAR_PARTIDA -> {
-                    gameController.startNewGame();
-                    runGame();
+                    System.out.println("Informe o seu nickname: ");
+                    String playerName = ConsoleInputReader.readString();
+
+                    System.out.println("Informe o número do slot que você deseja salvar: ");
+                    String slotIndex = ConsoleInputReader.readString();
+                    gameController.startNewGame(playerName);
+                    runGame(slotIndex);
                 }
                 case INSTRUCOES -> showInstructions();
                 case CREDITOS -> showCredits();
@@ -52,10 +57,10 @@ public class GameView {
         System.out.println("╚═════════════════════════════════════════════════════════╝");
         System.out.print("Selecione uma opção: ");
 
-        return Menu.parseMenu(Reader.readInteger());
+        return Menu.parseMenu(ConsoleInputReader.readInteger());
     }
 
-    private void runGame() {
+    private void runGame(String slotIndex) {
         ChapterDto currentChapter;
         SceneDto currentScene;
         String playerInput;
@@ -84,7 +89,7 @@ public class GameView {
                     while (!isValidChoiceMade) {
                         showChoices(currentScene.choices());
                         System.out.println(">>> Informe o número da escolha (ou comandos como 'inventario'): ");
-                        playerInput = Reader.readString();
+                        playerInput = ConsoleInputReader.readString();
 
                         try {
                             int indexChoice = Integer.parseInt(playerInput);
@@ -105,7 +110,7 @@ public class GameView {
                         }
                     }
                     System.out.println(">>> Pressione ENTER para prosseguir...");
-                    Reader.readString();
+                    ConsoleInputReader.readString();
                 }
                 gameController.advanceToNextScene();
             }
@@ -116,7 +121,7 @@ public class GameView {
                 while (!isValidChoiceMade) {
                     showChoices(currentChapter.choices());
                     System.out.println(">>> Informe o número da Escolha Final do Capítulo: ");
-                    playerInput = Reader.readString();
+                    playerInput = ConsoleInputReader.readString();
 
                     try {
                         int indexChoice = Integer.parseInt(playerInput);
@@ -137,9 +142,15 @@ public class GameView {
             }
 
             System.out.println("Continuar jogando? (Digite 1 para encerrar a sessão ou ENTER para prosseguir para o próximo capitulo: ");
-            playerInput = Reader.readString();
+            playerInput = ConsoleInputReader.readString();
             if (playerInput.equals("1")) {
                 isRunning = false;
+            } else {
+                try {
+                    gameController.saveGame(slotIndex);
+                } catch (GameNotSaveException gameNotSaveException) {
+                    System.out.printf(gameNotSaveException.getMessage());
+                }
             }
         }
     }
