@@ -68,4 +68,16 @@ public class SaveGameDaoJsonTest {
 
         assertFalse(saveGameDaoJson.findAllSlots());
     }
+
+    @Test
+    public void createSlotOfSaveTest() {
+        SaveGameDaoJson saveGameDaoJson = new SaveGameDaoJson();
+        Path pathSlot1 = Path.of("data", "saves", "slot1","slot1.json");
+
+        assertFalse(Files.exists(pathSlot1));
+
+        saveGameDaoJson.createSlotOfSave("1");
+
+        assertTrue(Files.exists(pathSlot1));
+    }
 }
