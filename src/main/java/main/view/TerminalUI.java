@@ -1,9 +1,7 @@
 package main.view;
 
-import main.dto.DialogueDto;
-import main.dto.ItemViewDto;
-import main.dto.NpcDto;
-import main.dto.PlayerDto;
+import jdk.swing.interop.SwingInterOpUtils;
+import main.dto.*;
 import main.view.utils.ConsoleInputReader;
 import org.w3c.dom.Text;
 
@@ -20,6 +18,26 @@ public class TerminalUI {
     public static void showText(String text) {
         System.out.println(text);
     }
+
+     public static void showSlotsSaves(List<SaveGameViewDto> saves) {
+
+         System.out.println("SAVES ATUAIS");
+        int numberSave = 1;
+        for (SaveGameViewDto saveGameViewDto : saves) {
+
+            System.out.println("Save do Slot" + numberSave + ":");
+
+            if (saveGameViewDto != null) {
+                System.out.println("Nome do protagonista: " + saveGameViewDto.playerName());
+                System.out.println("Capitulo atual: " + saveGameViewDto.currentChapterName());
+                System.out.println("Data do save: " + saveGameViewDto.dateSave());
+            } else {
+                System.out.println("save vazio");
+            }
+
+            System.out.println("-------------------------------------------------");
+        }
+     }
 
     public static void showInventory(List<ItemViewDto> items) {
         System.out.println("╔═════════════════════════════════════════════════════════╗");
