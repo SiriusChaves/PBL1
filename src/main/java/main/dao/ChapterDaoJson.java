@@ -14,7 +14,7 @@ public class ChapterDaoJson implements ChapterDao {
     public ChapterDaoJson() {}
 
     @Override
-    public Chapter searchById(String idChapter) throws ChapterNotFoundException {
+    public Chapter findByID(String idChapter) throws ChapterNotFoundException {
         Path path = Path.of("src", "main", "resources", "chapters", "chapter" + idChapter + ".json");
 
         Gson gson = new Gson();
