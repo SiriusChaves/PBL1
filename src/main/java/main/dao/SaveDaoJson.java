@@ -19,10 +19,15 @@ public class SaveDaoJson implements SaveDao {
         Path path = Path.of("data", "saves", "slot" + slotIndex, "slot" + slotIndex + ".json");
 
         try {
+            if (Files.exists(path)) {
+                throw new FileOfSaveNotCreateException(
+                        "O save com slot de número " + slotIndex + " já existe");
+            }
+
             Files.createFile(path);
         } catch (IOException ioException) {
             throw new FileOfSaveNotCreateException(
-                    "Não foi possivel criar o arquivo de save para o slot" + slotIndex);
+                    "Não existe save válido com número de slot igual a" + slotIndex);
         }
     }
 
