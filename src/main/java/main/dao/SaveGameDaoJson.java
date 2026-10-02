@@ -14,7 +14,7 @@ import java.nio.file.StandardOpenOption;
 
 public class SaveGameDaoJson implements SaveGameDao {
     @Override
-    public void saveGame(SaveGameDto saveGameDto, String slotIndex) throws GameNotSaveException {
+    public void save(SaveGameDto saveGameDto, String slotIndex) throws GameNotSaveException {
 
         Path path = Path.of("data", "saves", "slot" + slotIndex, "slot" + slotIndex + ".json");
 
@@ -36,7 +36,7 @@ public class SaveGameDaoJson implements SaveGameDao {
     }
 
     @Override
-    public void deleteSaveGame(String slotIndex) throws SlotOfSaveGameNotFoundException {
+    public void delete(String slotIndex) throws SlotOfSaveGameNotFoundException {
 
         Path path = Path.of("data", "saves", "slot" + slotIndex, "slot" + slotIndex + ".json");
 
@@ -49,7 +49,7 @@ public class SaveGameDaoJson implements SaveGameDao {
 
 
     @Override
-    public SaveGameDto searchBySlotIndex(String slotIndex) throws SlotOfSaveGameNotFoundException {
+    public SaveGameDto findBySlot(String slotIndex) throws SlotOfSaveGameNotFoundException {
 
         Path path = Path.of("data", "saves", "slot" + slotIndex, "slot" + slotIndex + ".json");
 
@@ -64,5 +64,20 @@ public class SaveGameDaoJson implements SaveGameDao {
         } catch (IOException ioException) {
             throw new SlotOfSaveGameNotFoundException("Erro ao buscar o slot" + slotIndex + " para carregamento");
         }
+    }
+
+    @Override
+    public boolean exists(String slotIndex) {
+        Path path = Path.of("data", "saves", "slot" + slotIndex, "slot" + slotIndex + ".json");
+            return (Files.exists(path));
+    }
+
+    @Override
+    public boolean findAllSlots() {
+        Path pathSlot1 = Path.of("data", "saves", "slot1", "slot1.json");
+        Path pathSlot2 = Path.of("data", "saves", "slot2", "slot2.json");
+        Path pathSlot3 = Path.of("data", "saves", "slot3", "slot3.json");
+
+        return Files.exists(pathSlot1) && Files.exists(pathSlot2) && Files.exists(pathSlot3);
     }
 }

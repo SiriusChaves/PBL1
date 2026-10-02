@@ -5,7 +5,9 @@ import main.exception.GameNotSaveException;
 import main.exception.SlotOfSaveGameNotFoundException;
 
 public interface SaveGameDao {
-    void saveGame(SaveGameDto saveGameDto, String slotIndex) throws GameNotSaveException;
-    void deleteSaveGame(String slotIndex) throws SlotOfSaveGameNotFoundException;
-    SaveGameDto searchBySlotIndex(String slotIndex) throws SlotOfSaveGameNotFoundException;
+    void save(SaveGameDto saveGameDto, String slotIndex) throws GameNotSaveException;
+    void delete(String slotIndex) throws SlotOfSaveGameNotFoundException;
+    SaveGameDto findBySlot(String slotIndex) throws SlotOfSaveGameNotFoundException;
+    boolean exists(String slotIndex);
+    boolean findAllSlots();
 }
