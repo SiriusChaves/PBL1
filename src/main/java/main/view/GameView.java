@@ -145,7 +145,7 @@ public class GameView {
             playerInput = ConsoleInputReader.readString();
             if (playerInput.equals("1")) isRunning = false;
 
-            gameController.saveGame();
+            gameController.saveGame(); // salva o jogo automaticamente ao fim de cada capitulo
         }
     }
 
@@ -169,6 +169,15 @@ public class GameView {
 
     private void loadExistingGame() {
 
+        showText("Informe o slot que voce deseja jogar: ");
+        String numberSlot = Integer.toString(ConsoleInputReader.readInteger());
+
+        showText("Informe seu nickname:");
+        String personName = ConsoleInputReader.readString();
+
+        gameController.startNewGame(personName, numberSlot);
+
+        runGame(numberSlot);
     }
 
     private void deleteGameSession() {
