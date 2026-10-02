@@ -5,7 +5,6 @@ import com.google.gson.GsonBuilder;
 import main.dto.SaveGameDto;
 import main.exception.FileOfSaveNotCreateException;
 import main.exception.GameNotSaveException;
-import main.exception.SaveSlotsFullException;
 import main.exception.SlotOfSaveGameNotFoundException;
 import java.io.IOException;
 import java.io.Reader;
