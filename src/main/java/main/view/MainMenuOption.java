@@ -23,4 +23,7 @@ public enum MainMenuOption {
         };
     }
 
+    public int getValue() {
+        return valor;
+    }
 }
