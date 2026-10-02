@@ -2,7 +2,7 @@ package main.dao;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import main.dto.SaveGameDto;
+import main.dto.SaveGamePersistenceDto;
 import main.exception.FileOfSaveNotCreateException;
 import main.exception.GameNotSaveException;
 import main.exception.SlotOfSaveGameNotFoundException;
@@ -27,7 +27,7 @@ public class SaveGameDaoJson implements SaveGameDao {
     }
 
     @Override
-    public void save(SaveGameDto saveGameDto, String slotIndex) throws GameNotSaveException {
+    public void save(SaveGamePersistenceDto saveGamePersistenceDto, String slotIndex) throws GameNotSaveException {
 
         Path path = Path.of("data", "saves", "slot" + slotIndex, "slot" + slotIndex + ".json");
 
@@ -41,7 +41,7 @@ public class SaveGameDaoJson implements SaveGameDao {
                 StandardOpenOption.TRUNCATE_EXISTING,
                 StandardOpenOption.WRITE)) {
 
-            gson.toJson(saveGameDto, writer);
+            gson.toJson(saveGamePersistenceDto, writer);
 
         } catch (IOException ioException) {
             throw new GameNotSaveException("Erro ao salvar o jogo no slot" + slotIndex);
@@ -62,7 +62,7 @@ public class SaveGameDaoJson implements SaveGameDao {
 
 
     @Override
-    public SaveGameDto findBySlot(String slotIndex) throws SlotOfSaveGameNotFoundException {
+    public SaveGamePersistenceDto findBySlot(String slotIndex) throws SlotOfSaveGameNotFoundException {
 
         Path path = Path.of("data", "saves", "slot" + slotIndex, "slot" + slotIndex + ".json");
 
@@ -72,7 +72,7 @@ public class SaveGameDaoJson implements SaveGameDao {
 
         try (Reader reader = Files.newBufferedReader(path)) {
 
-            return gson.fromJson(reader, SaveGameDto.class);
+            return gson.fromJson(reader, SaveGamePersistenceDto.class);
 
         } catch (IOException ioException) {
             throw new SlotOfSaveGameNotFoundException("Erro ao buscar o slot" + slotIndex + " para carregamento");

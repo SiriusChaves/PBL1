@@ -3,7 +3,7 @@ package main.dao;
 import main.dto.GameStateDto;
 import main.dto.NpcDto;
 import main.dto.PlayerDto;
-import main.dto.SaveGameDto;
+import main.dto.SaveGamePersistenceDto;
 import main.exception.GameNotSaveException;
 import main.exception.SlotOfSaveGameNotFoundException;
 
@@ -19,7 +19,7 @@ public class SaveGameDaoJsonTest {
 
     @Test
     public void saveGameDaoJsonFlowTest() {
-        SaveGameDto saveGameDto = new SaveGameDto(
+        SaveGamePersistenceDto saveGamePersistenceDto = new SaveGamePersistenceDto(
                 "Rodrigo",
                 "01-10-2026",
                 "Arquivos Ocultos de CyberFall",
@@ -38,16 +38,16 @@ public class SaveGameDaoJsonTest {
 
         try {
 
-            saveGameDaoJson.save(saveGameDto, "1");
+            saveGameDaoJson.save(saveGamePersistenceDto, "1");
 
         } catch (GameNotSaveException gameNotSaveException) {
-            assertThrows(GameNotSaveException.class, () -> saveGameDaoJson.save(saveGameDto, "7"));
+            assertThrows(GameNotSaveException.class, () -> saveGameDaoJson.save(saveGamePersistenceDto, "7"));
         }
 
         assertTrue(Files.exists(Path.of("data", "saves", "slot1", "slot1.json")));
 
         try {
-            SaveGameDto saveGameSlot1 =  saveGameDaoJson.findBySlot("1");
+            SaveGamePersistenceDto saveGameSlot1 =  saveGameDaoJson.findBySlot("1");
 
             assertEquals("2A", saveGameSlot1.gameStateDto().currentChapterId());
         } catch (SlotOfSaveGameNotFoundException slotOfSaveGameNotFoundException) {}

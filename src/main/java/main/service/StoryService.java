@@ -1,9 +1,7 @@
 package main.service;
 
-import main.dao.SaveGameDao;
 import main.dto.*;
 import main.exception.ChapterNotFoundException;
-import main.exception.GameNotSaveException;
 import main.mapper.DialogueMapper;
 import main.mapper.ItemMapper;
 import main.mapper.NpcMapper;
@@ -24,29 +22,24 @@ public class StoryService {
     private String nextChapterId;
     private int nextSceneIndex;
     private final ChapterService chapterService;
-    private final SaveGameDao saveGameDao;
 
-    public StoryService(Player player, Flag gameFlags, ChapterService chapterService, SaveGameDao saveGameDao) {
+    public StoryService(Player player, Flag gameFlags, ChapterService chapterService) {
         this.player = player;
         this.gameFlags = gameFlags;
         this.nextChapterId = "-1";
         this.nextSceneIndex = 1;
         this.chapterService = chapterService;
-        this.saveGameDao = saveGameDao;
     }
 
-    // playerName nesse caso se refere a pessoa real q está jogando
-    public void saveGame(String playerName, String slotIndex) throws GameNotSaveException {
+    public SaveGamePersistenceDto loadDataOfSaveGame(String personName, String slotIndex) {
 
         GameStateDto gameStateDto = createGameStateDto();
 
-        SaveGameDto saveGameDto = new SaveGameDto(
-                playerName,
+        return new SaveGamePersistenceDto(
+                personName,
                 "data-hora-exemplo",
                 currentChapter.getTitle(),
                 gameStateDto);
-
-        saveGameDao.save(saveGameDto, slotIndex);
     }
 
     public void loadCurrentChapter() throws ChapterNotFoundException {

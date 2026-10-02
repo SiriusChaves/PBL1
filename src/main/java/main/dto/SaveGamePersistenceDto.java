@@ -1,6 +1,6 @@
 package main.dto;
 
-public record SaveGameDto (
+public record SaveGamePersistenceDto(
         String playerName,
         String dataHora, // will be replaced with LocalDateTime class
         String lastChapterName,

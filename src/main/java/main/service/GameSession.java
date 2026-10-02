@@ -1,8 +1,7 @@
 package main.service;
 
 import main.dao.ChapterDao;
-import main.dao.SaveGameDao;
-import main.exception.GameNotSaveException;
+import main.dto.SaveGamePersistenceDto;
 import main.model.Flag;
 import main.model.Player;
 
@@ -11,18 +10,20 @@ public class GameSession {
     private ChapterService chapterService;
     private final StoryService storyService;
     private final Flag gameFlags;
-    private String playerName; // nome da pessoa q está jogando
+    private final String personName;
+    private final String slotIndex;
 
-    public GameSession(ChapterDao chapterDao, SaveGameDao saveGameDao, String playerName) {
-        this.playerName = playerName;
+    public GameSession(ChapterDao chapterDao, String personName, String slotIndex) {
+        this.personName = personName;
         this.player = new Player("O Estudante");
         this.gameFlags = new Flag();
         this.chapterService = new ChapterService(chapterDao);
-        this.storyService = new StoryService(this.player, this.gameFlags, this.chapterService, saveGameDao);
+        this.storyService = new StoryService(this.player, this.gameFlags, this.chapterService);
+        this.slotIndex = slotIndex;
     }
 
-    public void saveGameSession(String slotIndex) throws GameNotSaveException {
-        storyService.saveGame(playerName, slotIndex);
+    public SaveGamePersistenceDto getDataOfSaveGame()  {
+        return storyService.loadDataOfSaveGame(personName, slotIndex);
     }
 
     public void loadSaveGameSession() {

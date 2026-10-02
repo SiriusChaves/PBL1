@@ -6,7 +6,6 @@ import main.dto.ChapterDto;
 import main.dto.SceneDto;
 import main.exception.ChapterNotFoundException;
 import main.exception.ComandNonExistsException;
-import main.exception.GameNotSaveException;
 import main.view.utils.ConsoleInputReader;
 
 import static main.view.MainMenuOption.*;
@@ -40,6 +39,7 @@ public class GameView {
         SaveMenuOption saveMenuOption;
 
         do {
+            showSlotsSaves(gameController.getDataOfAllSaves());
             saveMenuOption = showSaveMenu();
 
             switch (saveMenuOption) {
@@ -134,15 +134,7 @@ public class GameView {
 
             showText("Continuar jogando? (Digite 1 para encerrar a sessão ou ENTER para prosseguir para o próximo capitulo: ");
             playerInput = ConsoleInputReader.readString();
-            if (playerInput.equals("1")) {
-                isRunning = false;
-            } else {
-                try {
-                    gameController.saveGame(slotIndex);
-                } catch (GameNotSaveException gameNotSaveException) {
-                    showText(gameNotSaveException.getMessage());
-                }
-            }
+            if (playerInput.equals("1")) isRunning = false;
         }
     }
 
