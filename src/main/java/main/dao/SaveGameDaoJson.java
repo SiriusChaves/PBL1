@@ -17,7 +17,7 @@ import java.nio.file.StandardOpenOption;
 public class SaveGameDaoJson implements SaveGameDao {
     @Override
     public void createSlotOfSave(String slotIndex) throws FileOfSaveNotCreateException {
-        Path path = Path.of("data", "saves", "slot" + slotIndex + ".json");
+        Path path = Path.of("data", "saves", "slot" + slotIndex, "slot" + slotIndex + ".json");
 
         try {
             Files.createFile(path);
