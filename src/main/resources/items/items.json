@@ -1,0 +1,50 @@
+[
+  {
+    "name": "sudo_overrule.sh",
+    "description": "Item utilizado para evitar desafios",
+    "type": "KEY_ITEM",
+    "id": "1"
+  },
+  {
+    "name": "Cópia de um contrato",
+    "description": "Cópia de um rascunho de um contrato encontrado pelo Arquiteto",
+    "type": "ITEM_NARRATIVO",
+    "id": "12A"
+  },
+  {
+    "name": "Carga Demolidora Industrial",
+    "description": "Carga antiga capaz de colapsar a estrutura da usina",
+    "type": "KEY_ITEM",
+    "id": "13B"
+  },
+  {
+    "name": "Módulo Sonar Pleno",
+    "description": "...",
+    "type": "KEY_ITEM",
+    "id": "5"
+  },
+  {
+    "name": "Módulo Sonar Danificado",
+    "description": "...",
+    "type": "KEY_ITEM",
+    "id": "6"
+  },
+  {
+    "name": "Chip Neuro-Virtual",
+    "description": "item consumivel",
+    "type": "CONSUMABLE",
+    "id": "3"
+  },
+  {
+    "name": "spyware_c01.patch",
+    "description": "item chave",
+    "type": "KEY_ITEM",
+    "id": "2"
+  },
+  {
+    "name": "root_override.bin",
+    "description": "item chave",
+    "type": "KEY_ITEM",
+    "id": "7"
+  }
+]
