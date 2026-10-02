@@ -2,7 +2,7 @@ package main.view.utils;
 
 import java.util.Scanner;
 
-public class Reader {
+public class ConsoleInputReader {
     private static final Scanner SCANNER = new Scanner(System.in);
 
     public static int readInteger() {
