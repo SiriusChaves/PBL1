@@ -1,7 +1,6 @@
 package main.view;
 
 import main.dto.*;
-import main.view.utils.ConsoleInputReader;
 
 import java.util.List;
 
@@ -33,6 +32,8 @@ public class TerminalUI {
             }
 
             System.out.println("-------------------------------------------------");
+
+            numberSave++;
         }
      }
 
@@ -190,8 +191,9 @@ public class TerminalUI {
     public static SaveMenuOption showSaveMenu() {
         System.out.println("MENU DE CARREGAMENTO DE SAVE");
         System.out.printf("%s %n", "[" + CONTINUE.getValue() + "] Continuar ultima partida");
-        System.out.printf("%s %n", "[" + LOAD_EXISTING_SAVE.getValue() + "] Carregar save existente");
         System.out.printf("%s %n", "[" + CREATE_NEW_SAVE.getValue() + "] Criar novo save");
+        System.out.printf("%s %n", "[" + LOAD_EXISTING_SAVE.getValue() + "] Carregar save existente");
+        System.out.printf("%s %n", "[" + DELETE_SAVE.getValue() + "] Deletar save existente");
         System.out.printf("%s %n", "[" + BACK_TO_MAIN_MENU.getValue() + "] Voltar para o menu principal");
 
         System.out.print("Selecione uma opção: ");
