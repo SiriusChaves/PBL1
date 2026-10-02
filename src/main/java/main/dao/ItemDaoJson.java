@@ -12,7 +12,7 @@ import java.nio.file.Path;
 
 public class ItemDaoJson implements ItemDao {
     @Override
-    public ItemPersistenceDto[] findById(String itemId) throws ItemNotFoundException {
+    public ItemPersistenceDto[] loadItems() throws ItemNotFoundException {
         Path path = Path.of("src", "main", "resources", "items", "items.json");
 
         Gson gson = new GsonBuilder()
