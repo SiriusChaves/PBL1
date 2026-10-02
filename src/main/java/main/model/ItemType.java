@@ -16,6 +16,17 @@ public enum ItemType {
         this.description = description;
     }
 
+    public static ItemType toItemType(String itemTypeString) {
+        return switch (itemTypeString) {
+            case "KEY_ITEM" -> KEY_ITEM;
+            case "CONSUMABLE" -> CONSUMABLE;
+            case "UPGRADE" -> UPGRADE;
+            case "ITEM_NARRATIVO" -> ITEM_NARRATIVO;
+            case "NONE" -> NONE;
+            default -> throw new IllegalArgumentException("Unexpected value: " + itemTypeString);
+        };
+    }
+
     public int getValue() {
         return value;
     }
