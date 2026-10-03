@@ -10,4 +10,10 @@ public class NpcMapper {
                 npc.getTrustLevel(),
                 npc.getRelationshipTier());
     }
+
+    public static Npc toEntity(NpcDto npcDto) {
+        return new Npc(
+                npcDto.name(),
+                npcDto.trustLevel());
+    }
 }
