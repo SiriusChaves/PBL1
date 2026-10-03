@@ -10,6 +10,7 @@ public interface SaveDao {
     void save(SavePersistenceDto savePersistenceDto, String slotIndex) throws GameNotSaveException;
     void delete(String slotIndex) throws SlotOfSaveNotFoundException;
     SavePersistenceDto findBySlot(String slotIndex) throws SlotOfSaveNotFoundException;
-    boolean exists(String slotIndex);
+    boolean saveFileExists(String slotIndex);
     boolean findAllSlots();
+    boolean hasSaveData(String slotIndex);
 }

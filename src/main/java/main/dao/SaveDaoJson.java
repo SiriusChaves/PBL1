@@ -12,6 +12,7 @@ import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
+import java.util.TreeMap;
 
 public class SaveDaoJson implements SaveDao {
     @Override
@@ -68,7 +69,7 @@ public class SaveDaoJson implements SaveDao {
 
     @Override
     public SavePersistenceDto findBySlot(String slotIndex) throws SlotOfSaveNotFoundException {
-        if (!exists(slotIndex)) {
+        if (!saveFileExists(slotIndex)) {
             return null;
         }
 
@@ -88,7 +89,7 @@ public class SaveDaoJson implements SaveDao {
     }
 
     @Override
-    public boolean exists(String slotIndex) {
+    public boolean saveFileExists(String slotIndex) {
         Path path = Path.of("data", "saves", "slot" + slotIndex, "slot" + slotIndex + ".json");
             return (Files.exists(path));
     }
@@ -101,4 +102,20 @@ public class SaveDaoJson implements SaveDao {
 
         return Files.exists(pathSlot1) && Files.exists(pathSlot2) && Files.exists(pathSlot3);
     }
+
+    @Override
+    public boolean hasSaveData(String slotIndex) {
+        if (!saveFileExists(slotIndex)) {
+            return false;
+        } else {
+            try {
+                Path path = Path.of("data", "saves", "slot" + slotIndex, "slot" + slotIndex + ".json");
+                return Files.size(path) == 0;
+            } catch (IOException ioException) {
+                throw new RuntimeException("Erro ao tentar verificar o tamanho do path do slot " + slotIndex);
+            }
+
+        }
+    }
+
 }
