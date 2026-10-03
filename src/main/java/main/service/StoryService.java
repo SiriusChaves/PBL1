@@ -31,6 +31,14 @@ public class StoryService {
         this.chapterService = chapterService;
     }
 
+    public StoryService(Player player, Flag gameFlags, ChapterService chapterService, String nextChapterId) {
+        this.player = player;
+        this.gameFlags = gameFlags;
+        this.nextChapterId = nextChapterId;
+        this.nextSceneIndex = 1;
+        this.chapterService = chapterService;
+    }
+
     public SavePersistenceDto loadDataOfSaveGame(String personName, String slotIndex) {
 
         GameStateDto gameStateDto = createGameStateDto();

@@ -175,7 +175,7 @@ public class GameView {
         showText("Informe seu nickname:");
         String personName = ConsoleInputReader.readString();
 
-        gameController.startNewGame(personName, numberSlot);
+        gameController.startGameSession(personName, numberSlot);
 
         runGame(numberSlot);
     }

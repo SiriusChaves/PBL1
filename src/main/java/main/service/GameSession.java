@@ -6,12 +6,12 @@ import main.model.Flag;
 import main.model.Player;
 
 public class GameSession {
-    private final Player player;
+    private Player player;
     private ChapterService chapterService;
-    private final StoryService storyService;
-    private final Flag gameFlags;
-    private final String personName;
-    private final String slotIndex;
+    private StoryService storyService;
+    private Flag gameFlags;
+    private String personName;
+    private String slotIndex;
 
     public GameSession(ChapterDao chapterDao, String personName, String slotIndex) {
         this.personName = personName;
@@ -19,6 +19,16 @@ public class GameSession {
         this.gameFlags = new Flag();
         this.chapterService = new ChapterService(chapterDao);
         this.storyService = new StoryService(this.player, this.gameFlags, this.chapterService);
+        this.slotIndex = slotIndex;
+    }
+
+    public GameSession(Player player, Flag gameFlags, ChapterDao chapterDao, String personName,
+                       String slotIndex, ChapterService chapterService, StoryService storyService) {
+        this.personName = personName;
+        this.player = player;
+        this.gameFlags = gameFlags;
+        this.chapterService = chapterService;
+        this.storyService = storyService;
         this.slotIndex = slotIndex;
     }
 
@@ -44,5 +54,9 @@ public class GameSession {
 
     public String getSlotIndex() {
         return slotIndex;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
     }
 }

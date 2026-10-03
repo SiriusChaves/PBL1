@@ -20,12 +20,10 @@ public class GameController {
     private GameSession gameSession;
     private SaveService saveService;
     private final ChapterDao chapterDao;
-    private final SaveDao saveGameDao;
 
-    public GameController(ChapterDao chapterDao, SaveDao saveGameDao, ItemDao itemDao) {
+    public GameController(ChapterDao chapterDao, SaveDao saveDao, ItemDao itemDao) {
         this.chapterDao = chapterDao;
-        this.saveGameDao = saveGameDao;
-        this.saveService = new SaveService(saveGameDao, itemDao);
+        this.saveService = new SaveService(saveDao, itemDao);
     }
 
     public void deleteGameSession(String slotIndex) {
@@ -36,15 +34,19 @@ public class GameController {
                 gameSession.getDataOfSaveGame(), gameSession.getSlotIndex());
     }
 
-    public void startNewGame(String playerName, String slotIndex) {
-        this.gameSession = new GameSession(chapterDao, playerName, slotIndex);
+    public void startGameSession(String playerName, String slotIndex) {
+        if (saveService.hasSaveDataAndSaveExists(slotIndex)) {
+            this.gameSession = new GameSession(chapterDao, playerName, slotIndex);
+        } else {
+            this.gameSession = saveService.restoreGameSessionFromPersistence(chapterDao, slotIndex);
+        }
     }
 
     public void createNewSlotOfGameSession(String slotIndex) {
         saveService.createNewSlotOfGameSession(slotIndex);
     }
 
-    public SavePersistenceDto getDataSAave(String slotIndex) {
+    public SavePersistenceDto getDataSave(String slotIndex) {
         return gameSession.getDataOfSaveGame();
     }
 

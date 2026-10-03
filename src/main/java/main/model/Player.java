@@ -8,7 +8,7 @@ public class Player {
     private String name;
     private int sanity;
     private int knowledge;
-    private final Map<String, Npc> relationships = new HashMap<>();
+    private Map<String, Npc> relationships = new HashMap<>();
     private final Inventory inventory;
 
     public Player(String name) {
@@ -17,6 +17,14 @@ public class Player {
         this.knowledge = 50;
         this.inventory = new Inventory();
         initializeNpcRelationships();
+    }
+
+    public Player(String name, int sanity, int knowledge, Map<String, Npc> relationships) {
+        this.name = name;
+        this.sanity = sanity;
+        this.knowledge = knowledge;
+        this.inventory = new Inventory();
+        this.relationships = relationships;
     }
 
     private void initializeNpcRelationships() {
@@ -73,14 +81,13 @@ public class Player {
     public String getName() {
         return name;
     }
-    public void setName(String name) {
-        this.name = name;
-    }
     public Inventory getInventory() {
         return inventory;
     }
-
     public Map<String, Npc> getRelationships() {
         return Collections.unmodifiableMap(relationships);
+    }
+    public void setName(String name) {
+        this.name = name;
     }
 }

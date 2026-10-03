@@ -14,6 +14,11 @@ public class Npc implements Comparable<Npc> {
         this.trustLevel = 50;
     }
 
+    public Npc(String name, int trustLevel) {
+        this.name = name;
+        this.trustLevel = trustLevel;
+    }
+
     public void increaseTrustLevel(int value) {
         trustLevel += value;
         if (trustLevel > 100) {trustLevel = 100;}
