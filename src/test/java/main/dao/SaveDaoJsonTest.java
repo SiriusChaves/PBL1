@@ -7,6 +7,7 @@ import main.dto.SavePersistenceDto;
 import main.exception.GameNotSaveException;
 import main.exception.SlotOfSaveNotFoundException;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
@@ -64,7 +65,7 @@ public class SaveDaoJsonTest {
     public void findSlotsOfSaveGameTest() {
         SaveDaoJson saveDaoJson = new SaveDaoJson();
 
-        assertTrue(saveDaoJson.exists("2"));
+        assertTrue(saveDaoJson.saveFileExists("2"));
 
         assertFalse(saveDaoJson.findAllSlots());
     }
@@ -97,4 +98,30 @@ public class SaveDaoJsonTest {
         }
         assertTrue(Files.notExists(pathSlot3));
     }
+
+    public void hasSaveDataInSlotOfSave() {
+
+        Path pathSlot1 = Path.of("data", "saves", "slot1", "slot1.json");
+        String slotVazioIndex = "1";
+
+        try {
+            Files.deleteIfExists(pathSlot1);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        SaveDao saveDao = new SaveDaoJson();
+
+        saveDao.createSlotOfSave(slotVazioIndex);
+
+        assertTrue(Files.exists(pathSlot1));
+
+        assertTrue(saveDao.saveFileExists(slotVazioIndex));
+
+        assertFalse(saveDao.hasSaveData(slotVazioIndex));
+
+        String slotWithData = "3";
+        assertTrue(saveDao.hasSaveData(slotWithData));
+    }
+
 }
