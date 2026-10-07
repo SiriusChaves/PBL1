@@ -65,11 +65,16 @@ public class SaveService {
         // Carregando Itens
 
         ItemPersistenceDto[] items =  itemDao.loadItems();
+        List<String> itemIdOfPlayer = gameState.itemsId();
 
         for (ItemPersistenceDto itemDto : items) {
-            Item item = ItemMapper.toEntity(itemDto);
 
-            player.storeItemInInventory(item);
+            if (itemIdOfPlayer.contains(itemDto.id())) {
+
+                Item item = ItemMapper.toEntity(itemDto);
+
+                player.storeItemInInventory(item);
+            }
         }
 
         // Criando GameSession
