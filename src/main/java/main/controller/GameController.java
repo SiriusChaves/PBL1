@@ -35,11 +35,11 @@ public class GameController {
                 gameSession.getDataOfSaveGame(), gameSession.getSlotIndex());
     }
 
-    public void startGameSession(String playerName, String slotIndex) {
+    public void startGameSession(String slotIndex) {
         if (saveService.hasSaveDataAndSaveExists(slotIndex)) {
             this.gameSession = saveService.restoreGameSessionFromPersistence(chapterDao, slotIndex);
         } else {
-            this.gameSession = new GameSession(chapterDao, playerName, slotIndex);
+            this.gameSession = new GameSession(chapterDao, slotIndex);
         }
     }
 

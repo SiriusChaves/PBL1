@@ -10,11 +10,9 @@ public class GameSession {
     private ChapterService chapterService;
     private StoryService storyService;
     private Flag gameFlags;
-    private String personName;
     private String slotIndex;
 
-    public GameSession(ChapterDao chapterDao, String personName, String slotIndex) {
-        this.personName = personName;
+    public GameSession(ChapterDao chapterDao, String slotIndex) {
         this.player = new Player("O Estudante");
         this.gameFlags = new Flag();
         this.chapterService = new ChapterService(chapterDao);
@@ -22,9 +20,7 @@ public class GameSession {
         this.slotIndex = slotIndex;
     }
 
-    public GameSession(Player player, Flag gameFlags, ChapterDao chapterDao, String personName,
-                       String slotIndex, ChapterService chapterService, StoryService storyService) {
-        this.personName = personName;
+    public GameSession(Player player, Flag gameFlags, String slotIndex, ChapterService chapterService, StoryService storyService) {
         this.player = player;
         this.gameFlags = gameFlags;
         this.chapterService = chapterService;
@@ -33,7 +29,7 @@ public class GameSession {
     }
 
     public SavePersistenceDto getDataOfSaveGame()  {
-        return storyService.loadDataOfSaveGame(personName, slotIndex);
+        return storyService.loadDataOfSave(slotIndex);
     }
 
     public void loadSaveGameSession() {

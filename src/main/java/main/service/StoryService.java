@@ -39,12 +39,12 @@ public class StoryService {
         this.chapterService = chapterService;
     }
 
-    public SavePersistenceDto loadDataOfSaveGame(String personName, String slotIndex) {
+    public SavePersistenceDto loadDataOfSave(String slotIndex) {
 
         GameStateDto gameStateDto = createGameStateDto();
 
         return new SavePersistenceDto(
-                personName,
+                player.getName(),
                 "data-hora-exemplo",
                 currentChapter.getTitle(),
                 gameStateDto);

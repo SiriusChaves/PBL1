@@ -45,9 +45,9 @@ public class GameView {
             saveMenuOption = showSaveMenu();
 
             switch (saveMenuOption) {
-                case CONTINUE -> continueLastGame(); // Ainda nn implementada
-                case CREATE_NEW_SAVE -> createNewGame(); // Implementado sem sobrescrita de save
-                case LOAD_EXISTING_SAVE -> loadExistingGame(); // Ainda nn
+                case CONTINUE -> continueLastGame();
+                case CREATE_NEW_SAVE -> createNewGame();
+                case LOAD_EXISTING_SAVE -> loadExistingGame();
                 case DELETE_SAVE -> deleteGameSession();
                 default -> showText("Opção invalida escolhida");
             }
@@ -55,7 +55,7 @@ public class GameView {
         } while (saveMenuOption != BACK_TO_MAIN_MENU);
     }
 
-    private void runGame(String slotIndex) {
+    private void runGame() {
         ChapterDto currentChapter;
         SceneDto currentScene;
         String playerInput;
@@ -104,10 +104,10 @@ public class GameView {
                         } catch (NumberFormatException numberFormatException) {
                             try {
 
-                                if (playerInput.equals("sair"))
-                                    isRunning = false;
-
-                                comandsMenu(playerInput);
+                                if (playerInput.equalsIgnoreCase("sair"))
+                                    return;
+                                else
+                                    comandsMenu(playerInput);
                             } catch (ComandNonExistsException comandNonExistsException) {
                                 showText(comandNonExistsException.getMessage());
                             }
@@ -141,10 +141,10 @@ public class GameView {
                     } catch (NumberFormatException numberFormatException) {
                         try {
 
-                            if (playerInput.equals("sair"))
-                                isRunning = false;
-
-                            comandsMenu(playerInput);
+                            if (playerInput.equalsIgnoreCase("sair"))
+                                return;
+                            else
+                                comandsMenu(playerInput);
                         } catch (ComandNonExistsException comandNonExistsException){
                             showText(comandNonExistsException.getMessage());
                         }
@@ -185,12 +185,9 @@ public class GameView {
         showText("Informe o slot que voce deseja jogar: ");
         String numberSlot = Integer.toString(ConsoleInputReader.readInteger());
 
-        showText("Informe seu nickname:");
-        String personName = ConsoleInputReader.readString();
+        gameController.startGameSession(numberSlot);
 
-        gameController.startGameSession(personName, numberSlot);
-
-        runGame(numberSlot);
+        runGame();
     }
 
     private void deleteGameSession() {

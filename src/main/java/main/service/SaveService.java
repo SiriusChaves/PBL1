@@ -81,8 +81,6 @@ public class SaveService {
         return new GameSession(
                 player,
                 gameFlag,
-                chapterDao,
-                saveDto.playerName(),
                 slotIndex,
                 chapterService,
                 storyService);
