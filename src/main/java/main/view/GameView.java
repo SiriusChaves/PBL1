@@ -69,6 +69,8 @@ public class GameView {
                 return;
             }
 
+            saveGame();
+
             showTitle(currentChapter.title());
 
             int numberScenes = currentChapter.numberScenes();
@@ -101,13 +103,18 @@ public class GameView {
 
                         } catch (NumberFormatException numberFormatException) {
                             try {
+
+                                if (playerInput.equals("sair"))
+                                    isRunning = false;
+
                                 comandsMenu(playerInput);
                             } catch (ComandNonExistsException comandNonExistsException) {
                                 showText(comandNonExistsException.getMessage());
                             }
                         }
                     }
-                    showText(">>> Pressione ENTER para prosseguir...");
+
+                    showText(">>> Pressione ENTER para prosseguir para a próxima cena: ");
                     ConsoleInputReader.readString();
                 }
                 gameController.advanceToNextScene();
@@ -133,6 +140,10 @@ public class GameView {
                         }
                     } catch (NumberFormatException numberFormatException) {
                         try {
+
+                            if (playerInput.equals("sair"))
+                                isRunning = false;
+
                             comandsMenu(playerInput);
                         } catch (ComandNonExistsException comandNonExistsException){
                             showText(comandNonExistsException.getMessage());
@@ -141,11 +152,8 @@ public class GameView {
                 }
             }
 
-            showText("Continuar jogando? (Digite 1 para encerrar a sessão ou ENTER para prosseguir para o próximo capitulo: ");
-            playerInput = ConsoleInputReader.readString();
-            if (playerInput.equals("1")) isRunning = false;
-
-            gameController.saveGame(); // salva o jogo automaticamente ao fim de cada capitulo
+            showText(">>> Pressione ENTER para prosseguir para o próximo capitulo: ");
+            ConsoleInputReader.readString();
         }
     }
 
@@ -157,10 +165,15 @@ public class GameView {
                 showStatusPlayer(gameController.loadPlayerData());
             case "vinculos" ->
                 showStatusRelationships(gameController.loadRelationshipData());
+            case "salvar" -> saveGame();
             default ->
                 throw new ComandNonExistsException("Comando não existente. Digite um número ou um comando válido.\n" +
                         "Para verificar todos os comandos válidos, volte ao menu inicial e leia as instruções.");
         }
+    }
+
+    private void saveGame() {
+        gameController.saveGame();
     }
 
     private void continueLastGame() {
