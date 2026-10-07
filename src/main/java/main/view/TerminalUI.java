@@ -15,189 +15,684 @@ public class TerminalUI {
         System.out.println(text);
     }
 
-     public static void showSlotsSaves(List<SaveViewDto> saves) {
+    public static void showSlotsSaves(List<SaveViewDto> saves) {
 
-         System.out.println("SAVES ATUAIS");
+        System.out.println("╔═════════════════════════════════════════════════════════╗");
+        System.out.println("║                     SAVES ATUAIS                        ║");
+        System.out.println("╠═════════════════════════════════════════════════════════╣");
+
         int numberSave = 1;
-        for (SaveViewDto saveViewDto : saves) {
 
-            System.out.println("Save do Slot" + numberSave + ":");
+        for (SaveViewDto save : saves) {
 
-            if (saveViewDto != null) {
-                System.out.println("Nome do protagonista: " + saveViewDto.playerName());
-                System.out.println("Capitulo atual: " + saveViewDto.currentChapterName());
-                System.out.println("Data do save: " + saveViewDto.dateSave());
+            if (save == null) {
+
+                System.out.printf(
+                        "║ %-55s ║%n",
+                        "SLOT " + numberSave + " - VAZIO"
+                );
+
             } else {
-                System.out.println("save vazio");
+
+                System.out.printf(
+                        "║ %-55s ║%n",
+                        "SLOT " + numberSave + " - OCUPADO"
+                );
+
+                System.out.printf(
+                        "║ %-55s ║%n",
+                        "Nome do protagonista: " + save.playerName()
+                );
+
+                String chapterText =
+                        "Capítulo atual: " + save.currentChapterName();
+
+                String[] words = chapterText.split(" ");
+                String line = "";
+
+                for (String word : words) {
+
+                    if ((line + word).length() > 55) {
+
+                        System.out.printf(
+                                "║ %-55s ║%n",
+                                line
+                        );
+
+                        line = "";
+                    }
+
+                    line += word + " ";
+                }
+
+                if (!line.isEmpty()) {
+                    System.out.printf(
+                            "║ %-55s ║%n",
+                            line
+                    );
+                }
+
+                System.out.printf(
+                        "║ %-55s ║%n",
+                        "Data do save: " + save.dateSave()
+                );
             }
 
-            System.out.println("-------------------------------------------------");
+            if (numberSave < saves.size()) {
+                System.out.println(
+                        "╠═════════════════════════════════════════════════════════╣"
+                );
+            }
 
             numberSave++;
         }
-     }
+
+        System.out.println(
+                "╚═════════════════════════════════════════════════════════╝"
+        );
+    }
 
     public static void showInventory(List<ItemViewDto> items) {
-        System.out.println("╔═════════════════════════════════════════════════════════╗");
-        System.out.println("║                       INVENTÁRIO                        ║");
-        System.out.println("╠══════════════════════════════════════╦══════════════════╣");
-        System.out.println("║ NOME DO ITEM                         ║ DESCRIÇÃO            ║");
-        System.out.println("╠══════════════════════════════════════╬══════════════════╣");
+
+        System.out.println(
+                "╔═════════════════════════════════════════════════════════╗"
+        );
+
+        System.out.println(
+                "║                       INVENTÁRIO                        ║"
+        );
+
+        System.out.println(
+                "╠═════════════════════════════════════════════════════════╣"
+        );
 
         if (items.isEmpty()) {
-            System.out.printf("║ %-55s ║%n", "Seu inventário está vazio...");
+
+            System.out.printf(
+                    "║ %-55s ║%n",
+                    "Seu inventário está vazio..."
+            );
+
         } else {
+
+            int index = 1;
+
             for (ItemViewDto item : items) {
 
-                System.out.printf("║ %-36s ║ %-16s ║%n", item.name(), item.description());
+                System.out.printf(
+                        "║ %-55s ║%n",
+                        "[" + index + "] " + item.name()
+                );
+
+                String text =
+                        "Descrição: " + item.description();
+
+                String[] words = text.split(" ");
+                String line = "";
+
+                for (String word : words) {
+
+                    if ((line + word).length() > 55) {
+
+                        System.out.printf(
+                                "║ %-55s ║%n",
+                                line
+                        );
+
+                        line = "";
+                    }
+
+                    line += word + " ";
+                }
+
+                if (!line.isEmpty()) {
+                    System.out.printf(
+                            "║ %-55s ║%n",
+                            line
+                    );
+                }
+
+                if (index < items.size()) {
+                    System.out.println(
+                            "╠═════════════════════════════════════════════════════════╣"
+                    );
+                }
+
+                index++;
             }
         }
 
-        System.out.println("╚══════════════════════════════════════╩══════════════════╝");
+        System.out.println(
+                "╚═════════════════════════════════════════════════════════╝"
+        );
     }
 
     public static void showStatusPlayer(PlayerDto player) {
-        System.out.println("╔═════════════════════════════════════════════════════════╗");
-        System.out.println("║                    STATUS DO JOGADOR                    ║");
-        System.out.println("╠═════════════════════════════════════════════════════════╣");
-        System.out.printf("║ OPERADOR:     %-41s ║%n", player.name());
-        System.out.println("╠═════════════════════════════════════════════════════════╣");
-        System.out.printf("║ SANIDADE:     %-41s ║%n", String.format("%3d / 100", player.sanity()));
-        System.out.printf("║ CONHECIMENTO: %-41s ║%n", String.format("%3d / 100", player.knowledge()));
 
-        System.out.println("╚═════════════════════════════════════════════════════════╝");
+        System.out.println(
+                "╔═════════════════════════════════════════════════════════╗"
+        );
+
+        System.out.println(
+                "║                    STATUS DO JOGADOR                    ║"
+        );
+
+        System.out.println(
+                "╠═════════════════════════════════════════════════════════╣"
+        );
+
+        System.out.printf(
+                "║ OPERADOR:     %-41s ║%n",
+                player.name()
+        );
+
+        System.out.println(
+                "╠═════════════════════════════════════════════════════════╣"
+        );
+
+        System.out.printf(
+                "║ SANIDADE:     %-41s ║%n",
+                String.format("%3d / 100", player.sanity())
+        );
+
+        System.out.printf(
+                "║ CONHECIMENTO: %-41s ║%n",
+                String.format("%3d / 100", player.knowledge())
+        );
+
+        System.out.println(
+                "╚═════════════════════════════════════════════════════════╝"
+        );
     }
 
     public static void showStatusRelationships(List<NpcDto> relationships) {
-        System.out.println("╔═════════════════════════════════════════════════════════╗");
-        System.out.println("║               STATUS DOS RELACIONAMENTOS                ║");
-        System.out.println("╠══════════════════════════════════════╦══════════════════╣");
-        System.out.println("║ NOME DO ALIADO                       ║ STATUS           ║");
-        System.out.println("╠══════════════════════════════════════╬══════════════════╣");
+
+        System.out.println(
+                "╔═════════════════════════════════════════════════════════╗"
+        );
+
+        System.out.println(
+                "║               STATUS DOS RELACIONAMENTOS                ║"
+        );
+
+        System.out.println(
+                "╠═════════════════════════════════════════════════════════╣"
+        );
 
         if (relationships.isEmpty()) {
-            System.out.printf("║ %-55s ║%n", "Nenhum vínculo estabelecido ainda...");
+
+            System.out.printf(
+                    "║ %-55s ║%n",
+                    "Nenhum vínculo estabelecido ainda..."
+            );
+
         } else {
+
+            int index = 1;
+
             for (NpcDto npc : relationships) {
-                System.out.printf("║ %-36s ║ %-16s ║%n", npc.name(), npc.trustLevelTier());
+
+                System.out.printf(
+                        "║ %-55s ║%n",
+                        npc.name()
+                );
+
+                System.out.printf(
+                        "║ %-55s ║%n",
+                        "Status: " + npc.trustLevelTier()
+                );
+
+                if (index < relationships.size()) {
+
+                    System.out.println(
+                            "╠═════════════════════════════════════════════════════════╣"
+                    );
+                }
+
+                index++;
             }
         }
-        System.out.println("╚══════════════════════════════════════╩══════════════════╝");
+
+        System.out.println(
+                "╚═════════════════════════════════════════════════════════╝"
+        );
     }
 
     public static void showDialogues(List<DialogueDto> dialogues) {
-        System.out.println("\n╔═════════════════════════════════════════════════════════╗");
 
-        for (DialogueDto dialogue : dialogues) {
-            String content = dialogue.speaker() + ": " + dialogue.text();
+        System.out.println(
+                "\n╔═════════════════════════════════════════════════════════╗"
+        );
 
-            System.out.printf("║ %-55s ║%n", content);
+        for (int i = 0; i < dialogues.size(); i++) {
+
+            DialogueDto dialogue = dialogues.get(i);
+
+            System.out.printf(
+                    "║ %-55s ║%n",
+                    dialogue.speaker().toUpperCase()
+            );
+
+            String[] words = dialogue.text().split(" ");
+            String line = "";
+
+            for (String word : words) {
+
+                if ((line + word).length() > 55) {
+
+                    System.out.printf(
+                            "║ %-55s ║%n",
+                            line
+                    );
+
+                    line = "";
+                }
+
+                line += word + " ";
+            }
+
+            if (!line.isEmpty()) {
+                System.out.printf(
+                        "║ %-55s ║%n",
+                        line
+                );
+            }
+
+            if (i < dialogues.size() - 1) {
+                System.out.println(
+                        "╠═════════════════════════════════════════════════════════╣"
+                );
+            }
         }
 
-        System.out.println("╚═════════════════════════════════════════════════════════╝");
+        System.out.println(
+                "╚═════════════════════════════════════════════════════════╝"
+        );
     }
 
     public static void showChoices(List<String> choices) {
-        System.out.println("╔═════════════════════════════════════════════════════════╗");
-        System.out.printf("║ %-55s ║%n", " O QUE VOCÊ DECIDE FAZER?");
-        System.out.println("╠═════════════════════════════════════════════════════════╣");
+
+        System.out.println(
+                "╔═════════════════════════════════════════════════════════╗"
+        );
+
+        System.out.printf(
+                "║ %-55s ║%n",
+                "O QUE VOCÊ DECIDE FAZER?"
+        );
+
+        System.out.println(
+                "╠═════════════════════════════════════════════════════════╣"
+        );
 
         int indexChoice = 1;
+
         for (String choice : choices) {
-            String lineChoice = "  [" + indexChoice + "] " + choice;
-            System.out.printf("║ %-55s ║%n", lineChoice);
+
+            String text =
+                    "[" + indexChoice + "] " + choice;
+
+            String[] words = text.split(" ");
+            String line = "";
+
+            for (String word : words) {
+
+                if ((line + word).length() > 55) {
+
+                    System.out.printf(
+                            "║ %-55s ║%n",
+                            line
+                    );
+
+                    line = "";
+                }
+
+                line += word + " ";
+            }
+
+            if (!line.isEmpty()) {
+                System.out.printf(
+                        "║ %-55s ║%n",
+                        line
+                );
+            }
+
+            if (indexChoice < choices.size()) {
+                System.out.printf(
+                        "║ %-55s ║%n",
+                        ""
+                );
+            }
+
             indexChoice++;
         }
-        System.out.println("╚═════════════════════════════════════════════════════════╝");
+
+        System.out.println(
+                "╚═════════════════════════════════════════════════════════╝"
+        );
     }
 
     public static void showTitle(String title) {
-        System.out.println("╔═════════════════════════════════════════════════════════╗");
-        System.out.printf("║ %-55s ║%n", title.toUpperCase());
-        System.out.println("╚═════════════════════════════════════════════════════════╝");
+
+        System.out.println(
+                "╔═════════════════════════════════════════════════════════╗"
+        );
+
+        String titleUpper = title.toUpperCase();
+
+        String[] words = titleUpper.split(" ");
+        String line = "";
+
+        for (String word : words) {
+
+            if ((line + word).length() > 55) {
+
+                System.out.printf(
+                        "║ %-55s ║%n",
+                        line
+                );
+
+                line = "";
+            }
+
+            line += word + " ";
+        }
+
+        if (!line.isEmpty()) {
+            System.out.printf(
+                    "║ %-55s ║%n",
+                    line
+            );
+        }
+
+        System.out.println(
+                "╚═════════════════════════════════════════════════════════╝"
+        );
     }
 
     public static void showInstructions() {
-        System.out.println("╔═════════════════════════════════════════════════════════╗");
-        System.out.println("║                       INSTRUÇÕES                        ║");
-        System.out.println("╠═════════════════════════════════════════════════════════╣");
 
-        System.out.printf("║ %-55s ║%n", "Bem-vindo ao Mundo de CyberFall.");
-        System.out.printf("║ %-55s ║%n", "Suas escolhas moldam o destino do seu personagem.");
+        System.out.println(
+                "╔═════════════════════════════════════════════════════════╗"
+        );
+
+        System.out.println(
+                "║                       INSTRUÇÕES                        ║"
+        );
+
+        System.out.println(
+                "╠═════════════════════════════════════════════════════════╣"
+        );
+
+        System.out.printf(
+                "║ %-55s ║%n",
+                "Bem-vindo ao Mundo de CyberFall."
+        );
+
+        System.out.printf(
+                "║ %-55s ║%n",
+                "Suas escolhas moldam o destino do seu personagem."
+        );
+
         System.out.printf("║ %-55s ║%n", "");
 
-        System.out.printf("║ %-55s ║%n", "ATRIBUTOS E REGRAS:");
-        System.out.printf("║ %-55s ║%n", "- SANIDADE: É a sua saúde mental. Chegar a zero");
-        System.out.printf("║ %-55s ║%n", "  significa Game Over. Pense bem antes de agir.");
-        System.out.printf("║ %-55s ║%n", "- CONHECIMENTO: Ajuda a desvendar segredos e pode");
-        System.out.printf("║ %-55s ║%n", "  liberar caminhos e opções ocultas no futuro.");
-        System.out.printf("║ %-55s ║%n", "- VÍNCULOS: Suas ações agradam ou irritam os NPCs.");
-        System.out.printf("║ %-55s ║%n", "  Ter aliados pode salvar sua vida nos momentos finais.");
+        System.out.printf(
+                "║ %-55s ║%n",
+                "ATRIBUTOS E REGRAS:"
+        );
+
+        System.out.printf(
+                "║ %-55s ║%n",
+                "- SANIDADE: É a sua saúde mental. Chegar a zero"
+        );
+
+        System.out.printf(
+                "║ %-55s ║%n",
+                "  significa Game Over. Pense bem antes de agir."
+        );
+
+        System.out.printf(
+                "║ %-55s ║%n",
+                "- CONHECIMENTO: Ajuda a desvendar segredos e pode"
+        );
+
+        System.out.printf(
+                "║ %-55s ║%n",
+                "  liberar caminhos e opções ocultas no futuro."
+        );
+
+        System.out.printf(
+                "║ %-55s ║%n",
+                "- VÍNCULOS: Suas ações agradam ou irritam os NPCs."
+        );
+
+        System.out.printf(
+                "║ %-55s ║%n",
+                "  Ter aliados pode ajudar nos momentos finais."
+        );
+
         System.out.printf("║ %-55s ║%n", "");
 
-        System.out.printf("║ %-55s ║%n", "COMO JOGAR:");
-        System.out.printf("║ %-55s ║%n", "Durante a narrativa, opções numeradas aparecerão.");
-        System.out.printf("║ %-55s ║%n", "Digite apenas o NÚMERO correspondente (ex: 1, 2, 3)");
-        System.out.printf("║ %-55s ║%n", "e aperte ENTER para confirmar sua decisão.");
+        System.out.printf(
+                "║ %-55s ║%n",
+                "COMO JOGAR:"
+        );
+
+        System.out.printf(
+                "║ %-55s ║%n",
+                "Durante a narrativa, opções numeradas aparecerão."
+        );
+
+        System.out.printf(
+                "║ %-55s ║%n",
+                "Digite o número correspondente à escolha."
+        );
+
+        System.out.printf(
+                "║ %-55s ║%n",
+                "Pressione ENTER para confirmar."
+        );
+
         System.out.printf("║ %-55s ║%n", "");
 
-        System.out.printf("║ %-55s ║%n", "COMANDOS ESPECIAIS (A QUALQUER MOMENTO):");
-        System.out.printf("║ %-55s ║%n", "Sempre que o jogo pedir uma escolha, você pode");
-        System.out.printf("║ %-55s ║%n", "digitar as seguintes palavras em vez de um número:");
-        System.out.printf("║ %-55s ║%n", " > 'status'     - Verifica seus atributos atuais.");
-        System.out.printf("║ %-55s ║%n", " > 'inventario' - Mostra os itens que você carrega.");
-        System.out.printf("║ %-55s ║%n", " > 'vinculos'   - Exibe a situação com os NPCs.");
-        System.out.printf("║ %-55s ║%n", "");
-        System.out.printf("║ %-55s ║%n", "Pressione ENTER nas pausas para continuar lendo.");
-        System.out.printf("║ %-55s ║%n", "Tenha um bom jogo..");
+        System.out.printf(
+                "║ %-55s ║%n",
+                "COMANDOS ESPECIAIS:"
+        );
 
-        System.out.println("╚═════════════════════════════════════════════════════════╝");
+        System.out.printf(
+                "║ %-55s ║%n",
+                " > 'status'     - Ver seus atributos."
+        );
+
+        System.out.printf(
+                "║ %-55s ║%n",
+                " > 'inventario' - Ver seus itens."
+        );
+
+        System.out.printf(
+                "║ %-55s ║%n",
+                " > 'vinculos'   - Ver relações com NPCs."
+        );
+
+        System.out.printf("║ %-55s ║%n", "");
+
+        System.out.printf(
+                "║ %-55s ║%n",
+                "Pressione ENTER nas pausas para continuar."
+        );
+
+        System.out.printf(
+                "║ %-55s ║%n",
+                "Tenha um bom jogo!"
+        );
+
+        System.out.println(
+                "╚═════════════════════════════════════════════════════════╝"
+        );
     }
+
 
     public static void showCredits() {
-        System.out.println("╔═════════════════════════════════════════════════════════╗");
-        System.out.println("║                        CRÉDITOS                         ║");
-        System.out.println("╠═════════════════════════════════════════════════════════╣");
-        System.out.printf("║ %-55s ║%n", "Desenvolvimento e Programação:");
-        System.out.printf("║ %-55s ║%n", " - Sirius e Rodrigo");
+
+        System.out.println(
+                "╔═════════════════════════════════════════════════════════╗"
+        );
+
+        System.out.println(
+                "║                        CRÉDITOS                         ║"
+        );
+
+        System.out.println(
+                "╠═════════════════════════════════════════════════════════╣"
+        );
+
+        System.out.printf(
+                "║ %-55s ║%n",
+                "Desenvolvimento e Programação:"
+        );
+
+        System.out.printf(
+                "║ %-55s ║%n",
+                " - Sirius e Rodrigo"
+        );
+
         System.out.printf("║ %-55s ║%n", "");
-        System.out.printf("║ %-55s ║%n", "Roteiro e Game Design:");
-        System.out.printf("║ %-55s ║%n", " - Sirius e Rodrigo");
-        System.out.println("╚═════════════════════════════════════════════════════════╝");
+
+        System.out.printf(
+                "║ %-55s ║%n",
+                "Roteiro e Game Design:"
+        );
+
+        System.out.printf(
+                "║ %-55s ║%n",
+                " - Sirius e Rodrigo"
+        );
+
+        System.out.println(
+                "╚═════════════════════════════════════════════════════════╝"
+        );
     }
 
+
     public static void exitGame() {
-        System.out.println("╔═════════════════════════════════════════════════════════╗");
-        System.out.printf("║ %-55s ║%n", "    Encerrando a aplicação...");
-        System.out.printf("║ %-55s ║%n", "    Obrigado por jogar!");
-        System.out.println("╚═════════════════════════════════════════════════════════╝");
+
+        System.out.println(
+                "╔═════════════════════════════════════════════════════════╗"
+        );
+
+        System.out.printf(
+                "║ %-55s ║%n",
+                "Encerrando a aplicação..."
+        );
+
+        System.out.printf(
+                "║ %-55s ║%n",
+                "Obrigado por jogar!"
+        );
+
+        System.out.println(
+                "╚═════════════════════════════════════════════════════════╝"
+        );
     }
 
     public static MainMenuOption showStartMenu() {
-        System.out.println("╔═════════════════════════════════════════════════════════╗");
-        System.out.println("║                      MENU INICIAL                       ║");
-        System.out.println("╠═════════════════════════════════════════════════════════╣");
-        System.out.printf("║ %-55s ║%n", "[" + START_GAME.getValue() + "] Iniciar nova partida");
-        System.out.printf("║ %-55s ║%n", "[" + INSTRUCTIONS.getValue() + "] Instruções");
-        System.out.printf("║ %-55s ║%n", "[" + CREDITS.getValue() + "] Créditos");
-        System.out.printf("║ %-55s ║%n", "[" + EXIT.getValue() + "] Sair");
 
-        System.out.println("╚═════════════════════════════════════════════════════════╝");
+        System.out.println(
+                "╔═════════════════════════════════════════════════════════╗"
+        );
+
+        System.out.println(
+                "║                      MENU INICIAL                       ║"
+        );
+
+        System.out.println(
+                "╠═════════════════════════════════════════════════════════╣"
+        );
+
+        System.out.printf(
+                "║ %-55s ║%n",
+                "[" + START_GAME.getValue() + "] Iniciar partida"
+        );
+
+        System.out.printf(
+                "║ %-55s ║%n",
+                "[" + INSTRUCTIONS.getValue() + "] Instruções"
+        );
+
+        System.out.printf(
+                "║ %-55s ║%n",
+                "[" + CREDITS.getValue() + "] Créditos"
+        );
+
+        System.out.printf(
+                "║ %-55s ║%n",
+                "[" + EXIT.getValue() + "] Sair"
+        );
+
+        System.out.println(
+                "╚═════════════════════════════════════════════════════════╝"
+        );
+
         System.out.print("Selecione uma opção: ");
 
-        return MainMenuOption.toMainMenuOption(ConsoleInputReader.readInteger());
+        return MainMenuOption.toMainMenuOption(
+                ConsoleInputReader.readInteger()
+        );
     }
 
     public static SaveMenuOption showSaveMenu() {
-        System.out.println("MENU DE CARREGAMENTO DE SAVE");
-        System.out.printf("%s %n", "[" + CONTINUE.getValue() + "] Continuar ultima partida");
-        System.out.printf("%s %n", "[" + CREATE_NEW_SAVE.getValue() + "] Criar novo save");
-        System.out.printf("%s %n", "[" + LOAD_EXISTING_SAVE.getValue() + "] Carregar save existente");
-        System.out.printf("%s %n", "[" + DELETE_SAVE.getValue() + "] Deletar save existente");
-        System.out.printf("%s %n", "[" + BACK_TO_MAIN_MENU.getValue() + "] Voltar para o menu principal");
+
+        System.out.println(
+                "╔═════════════════════════════════════════════════════════╗"
+        );
+
+        System.out.println(
+                "║                      MENU DE SAVES                      ║"
+        );
+
+        System.out.println(
+                "╠═════════════════════════════════════════════════════════╣"
+        );
+
+        System.out.printf(
+                "║ %-55s ║%n",
+                "[" + CONTINUE.getValue() +
+                        "] Continuar última partida"
+        );
+
+        System.out.printf(
+                "║ %-55s ║%n",
+                "[" + CREATE_NEW_SAVE.getValue() +
+                        "] Criar nova partida"
+        );
+
+        System.out.printf(
+                "║ %-55s ║%n",
+                "[" + LOAD_EXISTING_SAVE.getValue() +
+                        "] Carregar partida existente"
+        );
+
+        System.out.printf(
+                "║ %-55s ║%n",
+                "[" + DELETE_SAVE.getValue() +
+                        "] Excluir save"
+        );
+
+        System.out.printf(
+                "║ %-55s ║%n",
+                "[" + BACK_TO_MAIN_MENU.getValue() +
+                        "] Voltar ao menu principal"
+        );
+
+        System.out.println(
+                "╚═════════════════════════════════════════════════════════╝"
+        );
 
         System.out.print("Selecione uma opção: ");
 
-        return SaveMenuOption.toSaveMenuOption(ConsoleInputReader.readInteger());
+        return SaveMenuOption.toSaveMenuOption(
+                ConsoleInputReader.readInteger()
+        );
     }
 }
