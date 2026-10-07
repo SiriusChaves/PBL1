@@ -35,16 +35,20 @@ public class GameController {
                 gameSession.getDataOfSaveGame(), gameSession.getSlotIndex());
     }
 
+    public boolean hasSaveDataAndSaveExists(String slotIndex) {
+        return saveService.hasSaveDataAndSaveExists(slotIndex);
+    }
+
     public void startGameSession(String slotIndex) {
-        if (saveService.hasSaveDataAndSaveExists(slotIndex)) {
+        if (hasSaveDataAndSaveExists(slotIndex)) {
             this.gameSession = saveService.restoreGameSessionFromPersistence(chapterDao, slotIndex);
         } else {
             this.gameSession = new GameSession(chapterDao, slotIndex);
         }
     }
 
-    public void createNewSlotOfGameSession(String slotIndex) {
-        saveService.createNewSlotOfGameSession(slotIndex);
+    public void createNewSlotOfGameSession(String slotIndex, boolean overrideSave) {
+        saveService.createNewSlotOfGameSession(slotIndex, overrideSave);
     }
 
     public SavePersistenceDto getDataSave(String slotIndex) {

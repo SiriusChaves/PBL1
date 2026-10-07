@@ -199,21 +199,39 @@ public class GameView {
     }
 
     private void createNewGame() {
+
         boolean creatingNewGame = true;
+
          while (creatingNewGame) {
+
              try {
                  showText("Selecione o número do slot que você deseja para criar um novo jogo");
 
                  String numberSlot =  Integer.toString(ConsoleInputReader.readInteger());
 
-                 gameController.createNewSlotOfGameSession(numberSlot);
+                 if (gameController.hasSaveDataAndSaveExists(numberSlot)) {
+
+                     showText("O save já possui dados carregados.");
+                     showText("Digite 1 se você deseja sobrescrever o save:");
+
+                     if (ConsoleInputReader.readString().equals("1")) {
+                         gameController.createNewSlotOfGameSession(numberSlot, true);
+
+                     } else {
+
+                         return;
+                     }
+
+                 } else {
+
+                     gameController.createNewSlotOfGameSession(numberSlot, false);
+                 }
 
                  showText("Slot" + numberSlot + " inicializado com sucesso!");
                  showText("Você já pode iniciar o jogo por meio dele");
 
-                 showText("Digite 1 para inicializar outro slot:");
-                 if (!ConsoleInputReader.readString().equals("1"))
-                     creatingNewGame = false;
+                 creatingNewGame = false;
+
              } catch (FileOfSaveNotCreateException fileOfSaveNotCreateException) {
                  showText(fileOfSaveNotCreateException.getMessage());
 
