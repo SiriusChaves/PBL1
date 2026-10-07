@@ -15,6 +15,7 @@ import java.nio.file.StandardOpenOption;
 import java.util.TreeMap;
 
 public class SaveDaoJson implements SaveDao {
+
     @Override
     public void createSlotOfSave(String slotIndex) throws FileOfSaveNotCreateException {
         Path path = Path.of("data", "saves", "slot" + slotIndex, "slot" + slotIndex + ".json");
@@ -26,6 +27,7 @@ public class SaveDaoJson implements SaveDao {
             }
 
             Files.createFile(path);
+
         } catch (IOException ioException) {
             throw new FileOfSaveNotCreateException(
                     "Não existe save válido com número de slot igual a" + slotIndex);
@@ -110,11 +112,10 @@ public class SaveDaoJson implements SaveDao {
         } else {
             try {
                 Path path = Path.of("data", "saves", "slot" + slotIndex, "slot" + slotIndex + ".json");
-                return Files.size(path) == 0;
+                return Files.size(path) > 0;
             } catch (IOException ioException) {
                 throw new RuntimeException("Erro ao tentar verificar o tamanho do path do slot " + slotIndex);
             }
-
         }
     }
 

@@ -29,6 +29,7 @@ public class GameController {
     public void deleteGameSession(String slotIndex) {
         saveService.deleteSlotSave(slotIndex);
     }
+
     public void saveGame() {
         saveService.saveGame(
                 gameSession.getDataOfSaveGame(), gameSession.getSlotIndex());
@@ -36,9 +37,9 @@ public class GameController {
 
     public void startGameSession(String playerName, String slotIndex) {
         if (saveService.hasSaveDataAndSaveExists(slotIndex)) {
-            this.gameSession = new GameSession(chapterDao, playerName, slotIndex);
-        } else {
             this.gameSession = saveService.restoreGameSessionFromPersistence(chapterDao, slotIndex);
+        } else {
+            this.gameSession = new GameSession(chapterDao, playerName, slotIndex);
         }
     }
 
@@ -60,13 +61,13 @@ public class GameController {
                 saveViewDtos.add(new SaveViewDto(
                         savePersistenceDto.playerName(),
                         savePersistenceDto.dataHora(),
-                        savePersistenceDto.lastChapterName()));
+                        savePersistenceDto.lastChapterName())
+                );
             } else {
                 saveViewDtos.add(null);
             }
 
         }
-
         return saveViewDtos;
     }
 
@@ -75,14 +76,16 @@ public class GameController {
 
         return ChapterMapper.toDto(
                 gameSession.getStoryService().getCurrentChapter(),
-                gameSession.getStoryService().getAvailableChapterFinalChoices());
+                gameSession.getStoryService().getAvailableChapterFinalChoices()
+        );
     }
 
     public SceneDto loadCurrentScene() {
         return SceneMapper.toDto(
                 gameSession.getStoryService().getCurrentScene(),
                 gameSession.getStoryService().getAvailableSceneChoices(),
-                gameSession.getStoryService().loadDialogueDtoOfCurrentScene());
+                gameSession.getStoryService().loadDialogueDtoOfCurrentScene()
+        );
     }
 
     public PlayerDto loadPlayerData() {
