@@ -1,6 +1,7 @@
 package main.service;
 
 import main.dao.ChapterDao;
+import main.dto.GameStateDto;
 import main.dto.SavePersistenceDto;
 import main.model.Flag;
 import main.model.Player;
@@ -30,6 +31,10 @@ public class GameSession {
 
     public SavePersistenceDto getDataOfSaveGame()  {
         return storyService.loadDataOfSave(slotIndex);
+    }
+
+    public GameStateDto getGameState() {
+        return storyService.createGameStateDto();
     }
 
     public void loadSaveGameSession() {

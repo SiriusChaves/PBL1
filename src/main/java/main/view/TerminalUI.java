@@ -15,6 +15,90 @@ public class TerminalUI {
         System.out.println(text);
     }
 
+    public static void showAchievements(List<AchievementDto> achievements) {
+
+        System.out.println(
+                "╔═════════════════════════════════════════════════════════╗"
+        );
+
+        System.out.println(
+                "║                  GALERIA DE CONQUISTAS                  ║"
+        );
+
+        System.out.println(
+                "╠═════════════════════════════════════════════════════════╣"
+        );
+
+        if (achievements.isEmpty()) {
+
+            System.out.printf(
+                    "║ %-55s ║%n",
+                    "Nenhuma conquista foi desbloqueada."
+            );
+
+            System.out.println(
+                    "╚═════════════════════════════════════════════════════════╝"
+            );
+
+            return;
+        }
+
+        for (int i = 0; i < achievements.size(); i++) {
+
+            AchievementDto achievement = achievements.get(i);
+
+            if (achievement == null) {
+
+                System.out.printf(
+                        "║ %-55s ║%n",
+                        "[" + (i + 1) + "] ?"
+                );
+
+            } else {
+
+                System.out.printf(
+                        "║ %-55s ║%n",
+                        "[" + (i + 1) + "] " + achievement.name()
+                );
+
+                String[] words = achievement.description().split(" ");
+                String line = "";
+
+                for (String word : words) {
+
+                    if ((line + word).length() > 54) {
+
+                        System.out.printf(
+                                "║ %-55s ║%n",
+                                line
+                        );
+
+                        line = "";
+                    }
+
+                    line += word + " ";
+                }
+
+                if (!line.isEmpty()) {
+                    System.out.printf(
+                            "║ %-55s ║%n",
+                            line
+                    );
+                }
+            }
+
+            if (i < achievements.size() - 1) {
+                System.out.println(
+                        "╠═════════════════════════════════════════════════════════╣"
+                );
+            }
+        }
+
+        System.out.println(
+                "╚═════════════════════════════════════════════════════════╝"
+        );
+    }
+
     public static void showSlotsSaves(List<SaveViewDto> saves) {
 
         System.out.println("╔═════════════════════════════════════════════════════════╗");
@@ -532,7 +616,6 @@ public class TerminalUI {
         );
     }
 
-
     public static void showCredits() {
 
         System.out.println(
@@ -573,7 +656,6 @@ public class TerminalUI {
                 "╚═════════════════════════════════════════════════════════╝"
         );
     }
-
 
     public static void exitGame() {
 
@@ -623,6 +705,10 @@ public class TerminalUI {
         System.out.printf(
                 "║ %-55s ║%n",
                 "[" + CREDITS.getValue() + "] Créditos"
+        );
+        System.out.printf(
+                "║ %-55s ║%n",
+                "[" + ACHIEVEMENTS.getValue() + "] Galeria de conquistas"
         );
 
         System.out.printf(

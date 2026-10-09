@@ -96,15 +96,20 @@ public class SaveService {
     }
 
     public void createNewSlotOfGameSession(String slotIndex, boolean overrideSave) throws SaveSlotsFullException {
+
         if (overrideSave) {
+
             deleteSlotSave(slotIndex);
+
             saveDao.createSlotOfSave(slotIndex);
         }
 
-
         if (saveDao.findAllSlots()) {
+
             throw new SaveSlotsFullException("Todos os saves estão preenchidos!");
+
         } else {
+
             saveDao.createSlotOfSave(slotIndex);
         }
     }
@@ -114,7 +119,9 @@ public class SaveService {
     }
 
     public List<SavePersistenceDto> getDataOfAllSaves() {
+
         List<SavePersistenceDto> savesOfGameSession = new ArrayList<>();
+
         List<String> indexOfAllSlots = List.of("1", "2", "3");
 
         for (String index : indexOfAllSlots)

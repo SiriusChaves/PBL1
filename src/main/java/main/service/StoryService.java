@@ -58,6 +58,8 @@ public class StoryService {
         nextChapterId = currentChapter.getIdNextChapter();
         currentScene = currentChapter.getScenes().getFirst();
         nextSceneIndex = 1;
+
+
     }
 
     public void advanceToNextScene() {
@@ -151,7 +153,7 @@ public class StoryService {
         return dialoguesDto;
     }
 
-    private GameStateDto createGameStateDto() {
+    public GameStateDto createGameStateDto() {
         List<String> itemsId = new ArrayList<>(player.getInventory().getItems().keySet());
 
         List<String> activeFlags = new ArrayList<>(gameFlags.getActiveFlags());

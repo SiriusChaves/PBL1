@@ -30,6 +30,7 @@ public class GameView {
                 case START_GAME -> startGame();
                 case INSTRUCTIONS -> showInstructions();
                 case CREDITS -> showCredits();
+                case ACHIEVEMENTS -> showAchievements(gameController.loadAchievements());
                 case EXIT -> exitGame();
                 default -> showText("Escolha inválida realizada!");
             }
@@ -64,6 +65,7 @@ public class GameView {
         while (isRunning) {
             try {
                 currentChapter = gameController.loadCurrentChapter();
+
             } catch (ChapterNotFoundException chapterNotFoundException) {
                showText(chapterNotFoundException.getMessage());
                 return;
@@ -233,9 +235,11 @@ public class GameView {
                  creatingNewGame = false;
 
              } catch (FileOfSaveNotCreateException fileOfSaveNotCreateException) {
+
                  showText(fileOfSaveNotCreateException.getMessage());
 
              } catch (SaveSlotsFullException saveSlotsFullException) {
+
                  creatingNewGame = false;
                  showText(saveSlotsFullException.getMessage());
              }

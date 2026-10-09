@@ -1,5 +1,6 @@
 package main.controller;
 
+import main.dao.AchievementDao;
 import main.dao.ChapterDao;
 import main.dao.ItemDao;
 import main.dao.SaveDao;
@@ -8,6 +9,8 @@ import main.exception.ChapterNotFoundException;
 import main.mapper.ChapterMapper;
 import main.mapper.PlayerMapper;
 import main.mapper.SceneMapper;
+import main.model.Achievement;
+import main.service.AchievementService;
 import main.service.GameSession;
 import main.service.SaveService;
 
@@ -20,10 +23,20 @@ public class GameController {
     private GameSession gameSession;
     private SaveService saveService;
     private final ChapterDao chapterDao;
+    private AchievementService achievementService;
 
-    public GameController(ChapterDao chapterDao, SaveDao saveDao, ItemDao itemDao) {
+    public GameController(ChapterDao chapterDao, SaveDao saveDao, ItemDao itemDao, AchievementDao achievementDao) {
         this.chapterDao = chapterDao;
         this.saveService = new SaveService(saveDao, itemDao);
+        this.achievementService = new AchievementService(achievementDao);
+    }
+
+    public List<AchievementDto> loadAchievements() {
+        return achievementService.loadAchievementsDto();
+    }
+
+    public boolean isFinalChapter() {
+        return gameSession.getStoryService().getCurrentChapter().getIdNextChapter().equalsIgnoreCase("fim");
     }
 
     public void deleteGameSession(String slotIndex) {
@@ -31,8 +44,11 @@ public class GameController {
     }
 
     public void saveGame() {
+
         saveService.saveGame(
-                gameSession.getDataOfSaveGame(), gameSession.getSlotIndex());
+                gameSession.getDataOfSaveGame(),
+                gameSession.getSlotIndex()
+        );
     }
 
     public boolean hasSaveDataAndSaveExists(String slotIndex) {
@@ -40,9 +56,13 @@ public class GameController {
     }
 
     public void startGameSession(String slotIndex) {
+
         if (hasSaveDataAndSaveExists(slotIndex)) {
+
             this.gameSession = saveService.restoreGameSessionFromPersistence(chapterDao, slotIndex);
+
         } else {
+
             this.gameSession = new GameSession(chapterDao, slotIndex);
         }
     }
@@ -56,6 +76,7 @@ public class GameController {
     }
 
     public List<SaveViewDto> getDataOfAllSaves() {
+
         List<SavePersistenceDto> savePersistenceDtos = saveService.getDataOfAllSaves();
 
         List<SaveViewDto> saveViewDtos = new ArrayList<>();
@@ -77,6 +98,8 @@ public class GameController {
 
     public ChapterDto loadCurrentChapter() throws ChapterNotFoundException {
         gameSession.getStoryService().loadCurrentChapter();
+
+        achievementService.saveUnlockedAchievements(gameSession.getGameState());
 
         return ChapterMapper.toDto(
                 gameSession.getStoryService().getCurrentChapter(),
