@@ -71,25 +71,18 @@ public class StoryService {
     }
 
     public List<Choice> getAvailableSceneChoices() {
-        List<Choice> availableChoices = new ArrayList<>();
 
-        for (Choice choice : currentScene.getChoices()) {
-            if (choice.isAvailable(player, gameFlags)) {
-                availableChoices.add(choice);
-            }
-        }
+        return currentScene.getChoices().stream()
+                .filter(choice -> choice.isAvailable(player, gameFlags))
+                .toList();
 
-        return availableChoices;
     }
 
     public List<Choice> getAvailableChapterFinalChoices() {
-        List<Choice> availableChoices = new ArrayList<>();
-        for (Choice choice : this.currentChapter.getFinalChoices()) {
-            if (choice.isAvailable(this.player, this.gameFlags)) {
-                availableChoices.add(choice);
-            }
-        }
-        return availableChoices;
+
+        return currentChapter.getFinalChoices().stream()
+                .filter(choice -> choice.isAvailable(player, gameFlags))
+                .toList();
     }
 
     public void applySceneChoiceConsequence(int choiceIndex) {
@@ -115,42 +108,30 @@ public class StoryService {
     }
 
     public List<NpcDto> loadRelationshipDto() {
-        List<Npc> relationships = new ArrayList<>(
-                player.getRelationships().values());
 
-        List<NpcDto> relationshipsDto = new ArrayList<>();
-        for (Npc npc : relationships) {
-            relationshipsDto.add(NpcMapper.toDto(npc));
-        }
-
-        return relationshipsDto;
+        return player.getRelationships().values().stream()
+                .map(NpcMapper::toDto)
+                .toList();
     }
 
     public List<ItemViewDto> loadItemDtoInInventory() {
-        if (player.getInventory().getItems().isEmpty()) {
+
+        List<Item> items = (List<Item>) player.getInventory().getItems().values();
+
+        if (items.isEmpty())
             return Collections.emptyList();
-        } else {
-            List<Item> items = new ArrayList<>(
-                    player.getInventory().getItems().values());
+        else
+            return items.stream()
+                    .map(ItemMapper::toDto)
+                    .toList();
 
-            List<ItemViewDto> itemsDto = new ArrayList<>();
-            for (Item item : items) {
-                itemsDto.add(ItemMapper.toDto(item));
-            }
-
-            return itemsDto;
-        }
     }
 
     public List<DialogueDto> loadDialogueDtoOfCurrentScene() {
-        List<Dialogue> dialoguesScene = currentScene.getDialogues();
 
-        List<DialogueDto> dialoguesDto = new ArrayList<>();
-        for (Dialogue dialogue : dialoguesScene) {
-            dialoguesDto.add(DialogueMapper.toDto(dialogue));
-        }
-
-        return dialoguesDto;
+        return currentScene.getDialogues().stream()
+                .map(DialogueMapper::toDto)
+                .toList();
     }
 
     public GameStateDto createGameStateDto() {

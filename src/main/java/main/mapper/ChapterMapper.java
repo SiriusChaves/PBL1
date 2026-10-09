@@ -18,10 +18,10 @@ public class ChapterMapper {
     }
 
     private static List<String> loadChoicesText(List<Choice> availableFinalChoices) {
-        List<String> choicesText = new ArrayList<>();;
-        for (Choice choice : availableFinalChoices)
-            choicesText.add(choice.getText());
 
-        return choicesText;
+       return availableFinalChoices.stream()
+                .map(Choice::getText)
+                .toList();
+
     }
 }

@@ -18,10 +18,10 @@ public class SceneMapper {
     }
 
     private static List<String> loadChoicesText(List<Choice> availableChoices) {
-        List<String> choicesText = new ArrayList<>();
-        for (Choice choice : availableChoices) {
-            choicesText.add(choice.getText());
-        }
-        return choicesText;
+
+        return availableChoices.stream()
+                .map(Choice::getText)
+                .toList();
+
     }
 }
