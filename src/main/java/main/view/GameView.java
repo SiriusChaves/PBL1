@@ -154,6 +154,12 @@ public class GameView {
                 }
             }
 
+            if (gameController.isFinalChapter()) {
+
+                showEndingScreen();
+                return;
+            }
+
             showText(">>> Pressione ENTER para prosseguir para o próximo capitulo: ");
             ConsoleInputReader.readString();
         }

@@ -15,6 +15,30 @@ public class TerminalUI {
         System.out.println(text);
     }
 
+    public static void showEndingScreen() {
+
+        System.out.println(
+                "╔═════════════════════════════════════════════════════════╗"
+        );
+
+        System.out.println(
+                "║                    FIM DA JORNADA                       ║"
+        );
+
+        System.out.println(
+                "╠═════════════════════════════════════════════════════════╣"
+        );
+
+        System.out.printf(
+                "║ %-55s ║%n",
+                "Você concluiu um dos finais de MegaBrain."
+        );
+
+        System.out.println(
+                "╚═════════════════════════════════════════════════════════╝"
+        );
+    }
+
     public static void showAchievements(List<AchievementDto> achievements) {
 
         System.out.println(
