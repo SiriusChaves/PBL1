@@ -17,36 +17,11 @@ public class Choice {
     private String requireFlag = FLAG_NONE;
     private String generatedFlag = FLAG_NONE;
 
-    public Choice(String text, String nameTargetNpc, int sanityChange, int knowledgeChange, int trustLevelChange,
-                  String idRequireItem, Item rewardItem, String requireFlag, String generatedFlag) {
-        this(text, nameTargetNpc, sanityChange, knowledgeChange, trustLevelChange);
-        this.requireItemId = idRequireItem;
-        this.rewardItem = rewardItem;
-        this.requireFlag = requireFlag;
-        this.generatedFlag = generatedFlag;
-    }
-
     public Choice(String text, String nameTargetNpc, int sanityChange, int knowledgeChange, int trustLevelChange) {
         this.text = text;
         this.nameTargetNpc = nameTargetNpc;
         this.sanityChange = sanityChange;
         this.knowledgeChange = knowledgeChange;
-        this.trustLevelChange = trustLevelChange;
-    }
-
-    public Choice(String text) {
-        this.text = text;
-        this.nameTargetNpc = Npc.NONE.getName();
-        this.sanityChange = 0;
-        this.knowledgeChange = 0;
-        this.trustLevelChange = 0;
-    }
-
-    public Choice(String text, String nameTargetNpc, int trustLevelChange) {
-        this.text = text;
-        this.nameTargetNpc = nameTargetNpc;
-        this.sanityChange = 0;
-        this.knowledgeChange = 0;
         this.trustLevelChange = trustLevelChange;
     }
 
