@@ -8,6 +8,8 @@ import main.exception.ChapterNotFoundException;
 import main.exception.ComandNonExistsException;
 import main.exception.FileOfSaveNotCreateException;
 import main.exception.SaveSlotsFullException;
+import main.model.Preference;
+import main.model.UserProfile;
 
 import static main.view.MainMenuOption.*;
 import static main.view.SaveMenuOption.*;
@@ -30,6 +32,7 @@ public class GameView {
                 case START_GAME -> startGame();
                 case INSTRUCTIONS -> showInstructions();
                 case CREDITS -> showCredits();
+                case PREFERENCES -> updatePreference();
                 case ACHIEVEMENTS -> showAchievements(gameController.loadAchievements());
                 case EXIT -> exitGame();
                 default -> showText("Escolha inválida realizada!");
@@ -57,6 +60,9 @@ public class GameView {
     }
 
     private void runGame() {
+
+        UserProfile profile = gameController.loadUserProfile();
+
         ChapterDto currentChapter;
         SceneDto currentScene;
         String playerInput;
@@ -71,7 +77,8 @@ public class GameView {
                 return;
             }
 
-            saveGame();
+            if (profile.hasPreference(Preference.AUTOSAVE))
+                saveGame();
 
             showTitle(currentChapter.title());
 
@@ -180,20 +187,47 @@ public class GameView {
         }
     }
 
+    private void updatePreference() {
+
+        UserProfile profile = gameController.loadUserProfile();
+
+        Preference preference = showPreferenceMenu(profile.getPreferences());
+
+        switch (preference) {
+            case AUTOSAVE -> gameController.togglePreference(Preference.AUTOSAVE);
+            case DEFAULT -> showText("Preferência inválida");
+        }
+    }
+
     private void saveGame() {
         gameController.saveGame();
     }
 
     private void continueLastGame() {
+        UserProfile profile = gameController.loadUserProfile();
 
+        String lastPlayedSlot = profile.getLastPlayedSlotId();
+
+        if (lastPlayedSlot.equals("-1") || !gameController.hasSaveDataAndSaveExists(lastPlayedSlot)) {
+
+            showText("Você não tem um jogo para continuar");
+
+        } else {
+
+            gameController.startGameSession(lastPlayedSlot);
+
+            runGame();
+        }
     }
 
     private void loadExistingGame() {
 
         showText("Informe o slot que voce deseja jogar: ");
-        String numberSlot = Integer.toString(ConsoleInputReader.readInteger());
+        String slotIndex = Integer.toString(ConsoleInputReader.readInteger());
 
-        gameController.startGameSession(numberSlot);
+        gameController.startGameSession(slotIndex);
+
+        gameController.updateLastPlayedSlot(slotIndex);
 
         runGame();
     }
@@ -201,9 +235,15 @@ public class GameView {
     private void deleteGameSession() {
         showText("Informe o número do save que você deseja apagar");
 
-        String numberSlot =  Integer.toString(ConsoleInputReader.readInteger());
+        String slotIndex =  Integer.toString(ConsoleInputReader.readInteger());
 
-        gameController.deleteGameSession(numberSlot);
+        UserProfile profile = gameController.loadUserProfile();
+        String lastPlayedSlot = profile.getLastPlayedSlotId();
+
+        if (slotIndex.equals(lastPlayedSlot))
+            gameController.updateLastPlayedSlot("-1");
+
+        gameController.deleteGameSession(slotIndex);
     }
 
     private void createNewGame() {
@@ -231,7 +271,6 @@ public class GameView {
                      }
 
                  } else {
-
                      gameController.createNewSlotOfGameSession(numberSlot, false);
                  }
 
@@ -240,14 +279,10 @@ public class GameView {
 
                  creatingNewGame = false;
 
-             } catch (FileOfSaveNotCreateException fileOfSaveNotCreateException) {
+             } catch (FileOfSaveNotCreateException | SaveSlotsFullException saveException) {
 
-                 showText(fileOfSaveNotCreateException.getMessage());
-
-             } catch (SaveSlotsFullException saveSlotsFullException) {
-
-                 creatingNewGame = false;
-                 showText(saveSlotsFullException.getMessage());
+                 showText(saveException.getMessage());
+                 return;
              }
          }
     }

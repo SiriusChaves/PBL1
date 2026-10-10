@@ -1,7 +1,9 @@
 package main.view;
 
 import main.dto.*;
+import main.model.Preference;
 
+import java.util.EnumSet;
 import java.util.List;
 
 import static main.view.MainMenuOption.*;
@@ -753,6 +755,43 @@ public class TerminalUI {
         System.out.print("Selecione uma opção: ");
 
         return MainMenuOption.toMainMenuOption(
+                ConsoleInputReader.readInteger()
+        );
+    }
+
+    public static Preference showPreferenceMenu(EnumSet<Preference> preferences) {
+
+        System.out.println(
+                "╔═════════════════════════════════════════════════════════╗"
+        );
+
+        System.out.println(
+                "║                  MENU DE PREFERÊNCIAS                   ║"
+        );
+
+        System.out.println(
+                "╠═════════════════════════════════════════════════════════╣"
+        );
+
+        String autosaveStatus =
+                preferences.contains(Preference.AUTOSAVE)
+                        ? "ATIVO"
+                        : "INATIVO";
+
+        System.out.printf(
+                "║ %-43s %-10s ║%n",
+                "[" + Preference.AUTOSAVE.getValue() + "] "
+                        + Preference.AUTOSAVE.getDescription(),
+                autosaveStatus
+        );
+
+        System.out.println(
+                "╚═════════════════════════════════════════════════════════╝"
+        );
+
+        System.out.print("Selecione uma opção: ");
+
+        return Preference.toPreference(
                 ConsoleInputReader.readInteger()
         );
     }

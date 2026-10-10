@@ -25,9 +25,7 @@ public class UserProfileService {
         saveProfile(profile);
     }
 
-    public void togglePreference(int value) {
-        Preference preference = Preference.toPreference(value);
-
+    public void togglePreference(Preference preference) {
         UserProfile profile = loadUserProfile();
 
         if (profile.hasPreference(preference)) {

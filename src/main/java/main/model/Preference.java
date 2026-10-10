@@ -12,14 +12,19 @@ public enum Preference {
         this.description = description;
     }
 
-    String getDescription() {
-        return description;
-    }
 
     public static Preference toPreference(int value) {
         return switch (value) {
             case 1 -> AUTOSAVE;
             default -> DEFAULT;
         };
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Integer getValue() {
+        return value;
     }
 }

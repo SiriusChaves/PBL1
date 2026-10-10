@@ -6,6 +6,7 @@ import main.exception.ChapterNotFoundException;
 import main.mapper.ChapterMapper;
 import main.mapper.PlayerMapper;
 import main.mapper.SceneMapper;
+import main.model.Preference;
 import main.model.UserProfile;
 import main.service.AchievementService;
 import main.service.GameSession;
@@ -36,8 +37,8 @@ public class GameController {
         return userProfileService.loadUserProfile();
     }
 
-    public void togglePreference(int option) {
-        userProfileService.togglePreference(option);
+    public void togglePreference(Preference preference) {
+        userProfileService.togglePreference(preference);
     }
 
     public void updateLastPlayedSlot(String slotIndex) {
