@@ -1,18 +1,16 @@
 package main.controller;
 
-import main.dao.AchievementDao;
-import main.dao.ChapterDao;
-import main.dao.ItemDao;
-import main.dao.SaveDao;
+import main.dao.*;
 import main.dto.*;
 import main.exception.ChapterNotFoundException;
 import main.mapper.ChapterMapper;
 import main.mapper.PlayerMapper;
 import main.mapper.SceneMapper;
-import main.model.Achievement;
+import main.model.UserProfile;
 import main.service.AchievementService;
 import main.service.GameSession;
 import main.service.SaveService;
+import main.service.UserProfileService;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -24,11 +22,26 @@ public class GameController {
     private SaveService saveService;
     private final ChapterDao chapterDao;
     private AchievementService achievementService;
+    private UserProfileService userProfileService;
 
-    public GameController(ChapterDao chapterDao, SaveDao saveDao, ItemDao itemDao, AchievementDao achievementDao) {
+    public GameController(ChapterDao chapterDao, SaveDao saveDao,
+                          ItemDao itemDao, AchievementDao achievementDao, UserProfileDao profileDao) {
         this.chapterDao = chapterDao;
         this.saveService = new SaveService(saveDao, itemDao);
         this.achievementService = new AchievementService(achievementDao);
+        this.userProfileService = new UserProfileService(profileDao);
+    }
+
+    public UserProfile loadUserProfile() {
+        return userProfileService.loadUserProfile();
+    }
+
+    public void togglePreference(int option) {
+        userProfileService.togglePreference(option);
+    }
+
+    public void updateLastPlayedSlot(String slotIndex) {
+        userProfileService.setLastPlayedSlotId(slotIndex);
     }
 
     public List<AchievementDto> loadAchievements() {
@@ -36,7 +49,10 @@ public class GameController {
     }
 
     public boolean isFinalChapter() {
-        return gameSession.getStoryService().getCurrentChapter().getIdNextChapter().equalsIgnoreCase("fim");
+
+
+        return gameSession.getStoryService().getCurrentChapter()
+                .getIdNextChapter().equalsIgnoreCase("fim");
     }
 
     public void deleteGameSession(String slotIndex) {
@@ -82,13 +98,18 @@ public class GameController {
         List<SaveViewDto> saveViewDtos = new ArrayList<>();
 
         for (SavePersistenceDto savePersistenceDto : savePersistenceDtos) {
+
             if (savePersistenceDto != null)  {
+
                 saveViewDtos.add(new SaveViewDto(
                         savePersistenceDto.playerName(),
                         savePersistenceDto.dataHora(),
-                        savePersistenceDto.lastChapterName())
+                        savePersistenceDto.lastChapterName()
+                        )
                 );
+
             } else {
+
                 saveViewDtos.add(null);
             }
 

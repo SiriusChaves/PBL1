@@ -1,10 +1,7 @@
 package main;
 
 import main.controller.GameController;
-import main.dao.AchievementDaoJson;
-import main.dao.ChapterDaoJson;
-import main.dao.ItemDaoJson;
-import main.dao.SaveDaoJson;
+import main.dao.*;
 import main.view.GameView;
 
 public class Main {
@@ -15,7 +12,8 @@ public class Main {
                 new ChapterDaoJson(),
                 new SaveDaoJson(),
                 new ItemDaoJson(),
-                new AchievementDaoJson()
+                new AchievementDaoJson(),
+                new UserProfileDaoJson()
         );
 
         GameView gameView = new GameView(gameController);

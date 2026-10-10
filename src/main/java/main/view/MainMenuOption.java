@@ -4,9 +4,10 @@ public enum MainMenuOption {
     START_GAME(1),
     INSTRUCTIONS(2),
     CREDITS(3),
-    ACHIEVEMENTS(4),
-    EXIT(5),
-    DEFAULT(6);
+    PREFERENCES(4),
+    ACHIEVEMENTS(5),
+    EXIT(6),
+    DEFAULT(7);
 
     private final int valor;
 
@@ -19,8 +20,9 @@ public enum MainMenuOption {
           case 1 -> START_GAME;
           case 2 -> INSTRUCTIONS;
           case 3 -> CREDITS;
-          case 4 -> ACHIEVEMENTS;
-          case 5 -> EXIT;
+          case 4 -> PREFERENCES;
+          case 5 -> ACHIEVEMENTS;
+          case 6 -> EXIT;
           default -> DEFAULT;
         };
     }

@@ -730,6 +730,12 @@ public class TerminalUI {
                 "║ %-55s ║%n",
                 "[" + CREDITS.getValue() + "] Créditos"
         );
+
+        System.out.printf(
+                "║ %-55s ║%n",
+                "[" + PREFERENCES.getValue() + "] Preferências do Usuário"
+        );
+
         System.out.printf(
                 "║ %-55s ║%n",
                 "[" + ACHIEVEMENTS.getValue() + "] Galeria de conquistas"
