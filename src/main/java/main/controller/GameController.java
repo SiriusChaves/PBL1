@@ -63,7 +63,7 @@ public class GameController {
     public void saveGame() {
 
         saveService.saveGame(
-                gameSession.getDataOfSaveGame(),
+                gameSession.loadDataOfSave(),
                 gameSession.getSlotIndex()
         );
     }
@@ -89,7 +89,7 @@ public class GameController {
     }
 
     public SavePersistenceDto getDataSave(String slotIndex) {
-        return gameSession.getDataOfSaveGame();
+        return gameSession.loadDataOfSave();
     }
 
     public List<SaveViewDto> getDataOfAllSaves() {
@@ -119,7 +119,8 @@ public class GameController {
     }
 
     public ChapterDto loadCurrentChapter() throws ChapterNotFoundException {
-        gameSession.getStoryService().loadCurrentChapter();
+        gameSession.getStoryService()
+                .loadCurrentChapter(gameSession.getGameState());
 
         achievementService.saveUnlockedAchievements(gameSession.getGameState());
 

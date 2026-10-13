@@ -8,6 +8,7 @@ import main.mapper.NpcMapper;
 import main.mapper.PlayerMapper;
 import main.model.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -39,27 +40,13 @@ public class StoryService {
         this.chapterService = chapterService;
     }
 
-    public SavePersistenceDto loadDataOfSave(String slotIndex) {
-
-        GameStateDto gameStateDto = createGameStateDto();
-
-        return new SavePersistenceDto(
-                player.getName(),
-                "data-hora-exemplo",
-                currentChapter.getTitle(),
-                gameStateDto);
-    }
-
-    public void loadCurrentChapter() throws ChapterNotFoundException {
-        GameStateDto gameState = createGameStateDto();
+    public void loadCurrentChapter(GameStateDto gameState) throws ChapterNotFoundException {
 
         currentChapter = chapterService.loadNextChapter(gameState);
 
         nextChapterId = currentChapter.getIdNextChapter();
         currentScene = currentChapter.getScenes().getFirst();
         nextSceneIndex = 1;
-
-
     }
 
     public void advanceToNextScene() {
@@ -116,7 +103,7 @@ public class StoryService {
 
     public List<ItemViewDto> loadItemDtoInInventory() {
 
-        List<Item> items = (List<Item>) player.getInventory().getItems().values();
+        List<Item> items = new ArrayList<>(player.getInventory().getItems().values());
 
         if (items.isEmpty())
             return Collections.emptyList();
@@ -134,33 +121,15 @@ public class StoryService {
                 .toList();
     }
 
-    public GameStateDto createGameStateDto() {
-        List<String> itemsId = new ArrayList<>(player.getInventory().getItems().keySet());
-
-        List<String> activeFlags = new ArrayList<>(gameFlags.getActiveFlags());
-
-        return new GameStateDto (
-                PlayerMapper.toDto(player),
-
-                currentChapter == null
-                        ? null
-                        : currentChapter.getId(),
-
-                nextChapterId,
-                currentScene == null
-                        ? null
-                        : currentScene.getId(),
-                itemsId,
-                loadRelationshipDto(),
-                activeFlags
-        );
-    }
-
     public Scene getCurrentScene() {
         return currentScene;
     }
 
     public Chapter getCurrentChapter() {
         return currentChapter;
+    }
+
+    public String getNextChapterId() {
+        return nextChapterId;
     }
 }

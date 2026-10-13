@@ -3,15 +3,20 @@ package main.service;
 import main.dao.ChapterDao;
 import main.dto.GameStateDto;
 import main.dto.SavePersistenceDto;
+import main.mapper.PlayerMapper;
 import main.model.Flag;
 import main.model.Player;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 public class GameSession {
     private Player player;
-    private ChapterService chapterService;
-    private StoryService storyService;
-    private Flag gameFlags;
-    private String slotIndex;
+    private final ChapterService chapterService;
+    private final StoryService storyService;
+    private final Flag gameFlags;
+    private final String slotIndex;
 
     public GameSession(ChapterDao chapterDao, String slotIndex) {
         this.player = new Player("O Estudante");
@@ -29,16 +34,40 @@ public class GameSession {
         this.slotIndex = slotIndex;
     }
 
-    public SavePersistenceDto getDataOfSaveGame()  {
-        return storyService.loadDataOfSave(slotIndex);
+    public SavePersistenceDto loadDataOfSave() {
+
+        return new SavePersistenceDto(
+                player.getName(),
+                LocalDateTime.now().toString(),
+                storyService.getCurrentChapter().getTitle(),
+                getGameState());
     }
 
     public GameStateDto getGameState() {
-        return storyService.createGameStateDto();
-    }
+        List<String> itemsId = new ArrayList<>(
 
-    public void loadSaveGameSession() {
-        // ... a implementar
+                player.getInventory().getItems().keySet()
+        );
+
+        List<String> activeFlags = new ArrayList<>(gameFlags.getActiveFlags());
+
+        return new GameStateDto (
+                PlayerMapper.toDto(player),
+
+                storyService.getCurrentChapter() == null
+                        ? null
+                        : storyService.getCurrentChapter().getId(),
+
+                storyService.getNextChapterId(),
+
+                storyService.getCurrentScene() == null
+                        ? null
+                        : storyService.getCurrentScene().getId(),
+
+                itemsId,
+                storyService.loadRelationshipDto(),
+                activeFlags
+        );
     }
 
     public Player getPlayer() {
