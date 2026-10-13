@@ -9,5 +9,6 @@ public record GameStateDto(
         String currentSceneId,
         List<String> itemsId,
         List<NpcDto> relationships,
-        List<String> activeGameFlags
+        List<String> activeGameFlags,
+        boolean isFinalChapter
 ) {}

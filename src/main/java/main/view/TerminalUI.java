@@ -143,11 +143,20 @@ public class TerminalUI {
                 );
 
             } else {
+                if (save.isGameCompleted()) {
 
-                System.out.printf(
-                        "║ %-55s ║%n",
-                        "SLOT " + numberSave + " - OCUPADO"
-                );
+                    System.out.printf(
+                            "║ %-55s ║%n",
+                            "SLOT " + numberSave + " - CONCLUÍDO"
+                    );
+                } else {
+
+                    System.out.printf(
+                            "║ %-55s ║%n",
+                            "SLOT " + numberSave + " - OCUPADO"
+                    );
+                }
+
 
                 System.out.printf(
                         "║ %-55s ║%n",

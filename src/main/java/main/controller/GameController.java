@@ -105,7 +105,8 @@ public class GameController {
                 saveViewDtos.add(new SaveViewDto(
                         savePersistenceDto.playerName(),
                         savePersistenceDto.dataHora(),
-                        savePersistenceDto.lastChapterName()
+                        savePersistenceDto.lastChapterName(),
+                        savePersistenceDto.gameStateDto().isFinalChapter()
                         )
                 );
 

@@ -66,7 +66,8 @@ public class GameSession {
 
                 itemsId,
                 storyService.loadRelationshipDto(),
-                activeFlags
+                activeFlags,
+                storyService.isFinalChapter()
         );
     }
 

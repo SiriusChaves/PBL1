@@ -49,27 +49,16 @@ public class StoryService {
         nextSceneIndex = 1;
     }
 
+    public boolean isFinalChapter() {
+        return currentChapter.getIdNextChapter().equalsIgnoreCase("fim");
+    }
+
     public void advanceToNextScene() {
         currentScene = currentChapter.getScenes().get(nextSceneIndex++);
     }
 
     public boolean hasNextScene() {
         return nextSceneIndex < currentChapter.getScenes().size();
-    }
-
-    public List<Choice> getAvailableSceneChoices() {
-
-        return currentScene.getChoices().stream()
-                .filter(choice -> choice.isAvailable(player, gameFlags))
-                .toList();
-
-    }
-
-    public List<Choice> getAvailableChapterFinalChoices() {
-
-        return currentChapter.getFinalChoices().stream()
-                .filter(choice -> choice.isAvailable(player, gameFlags))
-                .toList();
     }
 
     public void applySceneChoiceConsequence(int choiceIndex) {
@@ -92,6 +81,21 @@ public class StoryService {
             Choice selectedChoice = availableChoices.get(choiceIndex);
             selectedChoice.applyEffects(this.player, this.gameFlags);
         }
+    }
+
+    public List<Choice> getAvailableSceneChoices() {
+
+        return currentScene.getChoices().stream()
+                .filter(choice -> choice.isAvailable(player, gameFlags))
+                .toList();
+
+    }
+
+    public List<Choice> getAvailableChapterFinalChoices() {
+
+        return currentChapter.getFinalChoices().stream()
+                .filter(choice -> choice.isAvailable(player, gameFlags))
+                .toList();
     }
 
     public List<NpcDto> loadRelationshipDto() {

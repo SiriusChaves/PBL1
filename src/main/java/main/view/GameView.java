@@ -173,14 +173,17 @@ public class GameView {
     }
 
     private void comandsMenu(String userInput) throws ComandNonExistsException {
+
         switch (userInput) {
-            case "inventario" ->
-                showInventory(gameController.loadInventoryData());
-            case "status" ->
-                showStatusPlayer(gameController.loadPlayerData());
-            case "vinculos" ->
-                showStatusRelationships(gameController.loadRelationshipData());
+
+            case "inventario" -> showInventory(gameController.loadInventoryData());
+
+            case "status" -> showStatusPlayer(gameController.loadPlayerData());
+
+            case "vinculos" -> showStatusRelationships(gameController.loadRelationshipData());
+
             case "salvar" -> saveGame();
+
             default ->
                 throw new ComandNonExistsException("Comando não existente. Digite um número ou um comando válido.\n" +
                         "Para verificar todos os comandos válidos, volte ao menu inicial e leia as instruções.");
