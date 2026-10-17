@@ -69,22 +69,22 @@ public class GameView {
         boolean isRunning = true;
 
         while (isRunning) {
+
             try {
+
                 currentChapter = gameController.loadCurrentChapter();
 
             } catch (ChapterNotFoundException chapterNotFoundException) {
+
                showText(chapterNotFoundException.getMessage());
                 return;
             }
 
-            if (profile.hasPreference(Preference.AUTOSAVE))
-                saveGame();
+            if (profile.hasPreference(Preference.AUTOSAVE)) saveGame();
 
             showTitle(currentChapter.title());
 
-            int numberScenes = currentChapter.numberScenes();
-
-            for (int numberActualScene = 0; numberActualScene < numberScenes; numberActualScene++) {
+            while (true) {
 
                 currentScene = gameController.loadCurrentScene();
 
@@ -97,35 +97,62 @@ public class GameView {
                     while (!isValidChoiceMade) {
 
                         showChoices(currentScene.choices());
-                        showText(">>> Informe o número da escolha (ou comandos como 'inventario'): ");
+
+                        showText(
+                                ">>> Informe o número da escolha "
+                                + "(ou comandos como 'inventario'): "
+                        );
+
                         playerInput = ConsoleInputReader.readString();
 
                         try {
+
                             int indexChoice = Integer.parseInt(playerInput);
 
                             if (indexChoice > 0 && indexChoice <= currentScene.numberChoices()) {
-                                gameController.applySceneChoiceConsequence(indexChoice - 1);
+
+                                gameController.applySceneChoiceConsequence(
+                                        indexChoice - 1
+                                );
+
                                 isValidChoiceMade = true;
+
                             } else {
-                                showText("Opção inválida. Escolha um numero entre 1 e " + currentScene.numberChoices() + ".");
+
+                                showText(
+                                        "Opção inválida. Escolha um numero entre 1 e "
+                                                + currentScene.numberChoices()
+                                                + "."
+                                );
                             }
 
                         } catch (NumberFormatException numberFormatException) {
+
                             try {
 
                                 if (playerInput.equalsIgnoreCase("sair"))
                                     return;
-                                else
-                                    comandsMenu(playerInput);
+
+                                executeCommand(playerInput);
+
                             } catch (ComandNonExistsException comandNonExistsException) {
+
                                 showText(comandNonExistsException.getMessage());
                             }
                         }
                     }
 
-                    showText(">>> Pressione ENTER para prosseguir para a próxima cena: ");
+                    showText(
+                            ">>> Pressione ENTER para prosseguir "
+                            + "para a próxima cena: "
+                    );
+
                     ConsoleInputReader.readString();
                 }
+
+                if (!gameController.hasNextScene())
+                    break;
+
                 gameController.advanceToNextScene();
             }
 
@@ -136,24 +163,39 @@ public class GameView {
                 while (!isValidChoiceMade) {
 
                     showChoices(currentChapter.choices());
-                    showText(">>> Informe o número da Escolha Final do Capítulo: ");
+
+                    showText(
+                            ">>> Informe o número da Escolha Final do Capítulo: "
+                    );
+
                     playerInput = ConsoleInputReader.readString();
 
                     try {
+
                         int indexChoice = Integer.parseInt(playerInput);
+
                         if (indexChoice > 0 && indexChoice <= currentChapter.numberLastChoices()) {
+
                             gameController.applyChapterFinalChoiceConsequence(indexChoice - 1);
                             isValidChoiceMade = true;
                         } else {
-                            showText("Opção inválida. Escolha um número entre 1 e " + currentChapter.numberLastChoices() + ".");
+
+                            showText(
+                                    "Opção inválida. Escolha um número entre 1 e "
+                                            + currentChapter.numberLastChoices()
+                                            + "."
+                            );
                         }
+
                     } catch (NumberFormatException numberFormatException) {
+
                         try {
 
                             if (playerInput.equalsIgnoreCase("sair"))
                                 return;
-                            else
-                                comandsMenu(playerInput);
+
+                            executeCommand(playerInput);
+
                         } catch (ComandNonExistsException comandNonExistsException){
                             showText(comandNonExistsException.getMessage());
                         }
@@ -167,12 +209,16 @@ public class GameView {
                 return;
             }
 
-            showText(">>> Pressione ENTER para prosseguir para o próximo capitulo: ");
+            showText(
+                    ">>> Pressione ENTER para prosseguir"
+                    + " para o próximo capitulo: "
+            );
+
             ConsoleInputReader.readString();
         }
     }
 
-    private void comandsMenu(String userInput) throws ComandNonExistsException {
+    private void executeCommand(String userInput) throws ComandNonExistsException {
 
         switch (userInput) {
 
@@ -185,8 +231,11 @@ public class GameView {
             case "salvar" -> saveGame();
 
             default ->
-                throw new ComandNonExistsException("Comando não existente. Digite um número ou um comando válido.\n" +
-                        "Para verificar todos os comandos válidos, volte ao menu inicial e leia as instruções.");
+                throw new ComandNonExistsException(
+                        "Comando não existente. Digite um número ou um comando válido.\n"
+                        + "Para verificar todos os comandos válidos, volte ao menu inicial "
+                        + "e leia as instruções."
+                );
         }
     }
 

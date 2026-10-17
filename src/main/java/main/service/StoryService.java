@@ -5,10 +5,8 @@ import main.exception.ChapterNotFoundException;
 import main.mapper.DialogueMapper;
 import main.mapper.ItemMapper;
 import main.mapper.NpcMapper;
-import main.mapper.PlayerMapper;
 import main.model.*;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -21,44 +19,64 @@ public class StoryService {
     private Chapter currentChapter;
     private Scene currentScene;
     private String nextChapterId;
-    private int nextSceneIndex;
+    private int currentSceneIndex;
     private final ChapterService chapterService;
 
     public StoryService(Player player, Flag gameFlags, ChapterService chapterService) {
         this.player = player;
         this.gameFlags = gameFlags;
         this.nextChapterId = "-1";
-        this.nextSceneIndex = 1;
+        this.currentSceneIndex = 0;
         this.chapterService = chapterService;
     }
 
-    public StoryService(Player player, Flag gameFlags, ChapterService chapterService, String nextChapterId) {
+    public StoryService(Player player, Flag gameFlags, ChapterService chapterService, String nextChapterId, Integer currentSceneIndex) {
         this.player = player;
         this.gameFlags = gameFlags;
         this.nextChapterId = nextChapterId;
-        this.nextSceneIndex = 1;
+
+        this.currentSceneIndex =
+                currentSceneIndex == null
+                        ? 0
+                        : currentSceneIndex;
+
         this.chapterService = chapterService;
     }
 
-    public void loadCurrentChapter(GameStateDto gameState) throws ChapterNotFoundException {
+    public void loadCurrentChapter(GameStateDto gameState)
+            throws ChapterNotFoundException {
+
+        if (currentChapter != null)
+            currentSceneIndex = 0;
 
         currentChapter = chapterService.loadNextChapter(gameState);
 
         nextChapterId = currentChapter.getIdNextChapter();
-        currentScene = currentChapter.getScenes().getFirst();
-        nextSceneIndex = 1;
-    }
 
-    public boolean isFinalChapter() {
-        return currentChapter.getIdNextChapter().equalsIgnoreCase("fim");
+        currentScene = currentChapter
+                .getScenes()
+                .get(currentSceneIndex);
     }
 
     public void advanceToNextScene() {
-        currentScene = currentChapter.getScenes().get(nextSceneIndex++);
+
+        if (!hasNextScene())
+            return;
+
+        currentSceneIndex++;
+
+        currentScene = currentChapter
+                .getScenes()
+                .get(currentSceneIndex);
     }
 
     public boolean hasNextScene() {
-        return nextSceneIndex < currentChapter.getScenes().size();
+
+        return currentSceneIndex + 1 < currentChapter.getScenes().size();
+    }
+
+    public boolean isFinalChapter() {
+        return currentChapter != null && currentChapter.getIdNextChapter().equalsIgnoreCase("fim");
     }
 
     public void applySceneChoiceConsequence(int choiceIndex) {
@@ -135,5 +153,9 @@ public class StoryService {
 
     public String getNextChapterId() {
         return nextChapterId;
+    }
+
+    public Integer getCurrentSceneIndex() {
+        return currentSceneIndex;
     }
 }

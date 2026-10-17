@@ -15,7 +15,9 @@ public enum SaveMenuOption {
     }
 
     public static SaveMenuOption toSaveMenuOption(int value) {
+
         return switch (value) {
+
             case 1 -> CONTINUE;
             case 2 -> CREATE_NEW_SAVE;
             case 3 -> LOAD_EXISTING_SAVE;

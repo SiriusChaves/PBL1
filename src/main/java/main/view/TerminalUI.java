@@ -143,6 +143,7 @@ public class TerminalUI {
                 );
 
             } else {
+
                 if (save.isGameCompleted()) {
 
                     System.out.printf(

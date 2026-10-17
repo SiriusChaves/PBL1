@@ -81,7 +81,13 @@ public class SaveService {
 
         ChapterService chapterService = new ChapterService(chapterDao);
 
-        StoryService storyService = new StoryService(player, gameFlag, chapterService, gameState.currentChapterId());
+        StoryService storyService = new StoryService(
+                player,
+                gameFlag,
+                chapterService,
+                gameState.currentChapterId(),
+                gameState.currentSceneIndex()
+        );
 
         return new GameSession(
                 player,

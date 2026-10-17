@@ -49,10 +49,18 @@ public class GameController {
         return achievementService.loadAchievementsDto();
     }
 
+    public boolean hasNextScene() {
+
+        return gameSession
+                .getStoryService()
+                .hasNextScene();
+    }
+
     public boolean isFinalChapter() {
 
-
-        return gameSession.getStoryService().getCurrentChapter()
+        return gameSession
+                .getStoryService()
+                .getCurrentChapter()
                 .getIdNextChapter().equalsIgnoreCase("fim");
     }
 
@@ -152,15 +160,18 @@ public class GameController {
     }
 
     public void advanceToNextScene() {
-        if (gameSession.getStoryService().hasNextScene())
+
+        if (hasNextScene())
             gameSession.getStoryService().advanceToNextScene();
     }
 
     public void applySceneChoiceConsequence(int choiceIndex) {
+
         gameSession.getStoryService().applySceneChoiceConsequence(choiceIndex);
     }
 
     public void applyChapterFinalChoiceConsequence(int choiceIndex) {
+
         gameSession.getStoryService().applyChapterFinalChoiceConsequence(choiceIndex);
     }
 }
