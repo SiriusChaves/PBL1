@@ -1,10 +1,9 @@
 package main.mapper;
 
 import main.dto.ChapterDto;
-import main.model.Chapter;
-import main.model.Choice;
+import main.model.story.Chapter;
+import main.model.story.Choice;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ChapterMapper {

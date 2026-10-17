@@ -2,10 +2,9 @@ package main.mapper;
 
 import main.dto.DialogueDto;
 import main.dto.SceneDto;
-import main.model.Choice;
-import main.model.Scene;
+import main.model.story.Choice;
+import main.model.story.Scene;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SceneMapper {

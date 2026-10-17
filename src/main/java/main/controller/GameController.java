@@ -1,17 +1,18 @@
 package main.controller;
 
-import main.dao.*;
 import main.dto.*;
 import main.exception.ChapterNotFoundException;
 import main.mapper.ChapterMapper;
 import main.mapper.PlayerMapper;
 import main.mapper.SceneMapper;
-import main.model.Preference;
-import main.model.UserProfile;
-import main.service.AchievementService;
-import main.service.GameSession;
-import main.service.SaveService;
-import main.service.UserProfileService;
+import main.model.profile.Preference;
+import main.model.profile.UserProfile;
+import main.persistence.dao.*;
+import main.persistence.dto.SavePersistenceDto;
+import main.service.achievement.AchievementService;
+import main.service.game.GameSession;
+import main.service.save.SaveService;
+import main.service.profile.UserProfileService;
 
 import java.util.ArrayList;
 import java.util.Collections;

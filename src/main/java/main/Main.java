@@ -1,7 +1,7 @@
 package main;
 
 import main.controller.GameController;
-import main.dao.*;
+import main.persistence.json.*;
 import main.view.GameView;
 
 public class Main {

@@ -1,7 +1,7 @@
 package main.mapper;
 
 import main.dto.DialogueDto;
-import main.model.Dialogue;
+import main.model.story.Dialogue;
 
 public class DialogueMapper {
     public static DialogueDto toDto(Dialogue dialogue) {

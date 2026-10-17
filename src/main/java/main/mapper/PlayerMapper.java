@@ -1,7 +1,7 @@
 package main.mapper;
 
 import main.dto.PlayerDto;
-import main.model.Player;
+import main.model.player.Player;
 
 public class PlayerMapper {
     public static PlayerDto toDto(Player player) {

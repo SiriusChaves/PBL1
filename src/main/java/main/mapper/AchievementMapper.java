@@ -1,7 +1,7 @@
 package main.mapper;
 
 import main.dto.AchievementDto;
-import main.model.Achievement;
+import main.model.achievement.Achievement;
 
 public class AchievementMapper {
     public static AchievementDto toDto(Achievement achievement) {

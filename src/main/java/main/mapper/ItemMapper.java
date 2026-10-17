@@ -1,9 +1,9 @@
 package main.mapper;
 
-import main.dto.ItemPersistenceDto;
+import main.persistence.dto.ItemPersistenceDto;
 import main.dto.ItemViewDto;
-import main.model.Item;
-import main.model.ItemType;
+import main.model.player.Item;
+import main.model.player.ItemType;
 
 public class ItemMapper {
 

@@ -1,7 +1,7 @@
 package main.mapper;
 
 import main.dto.NpcDto;
-import main.model.Npc;
+import main.model.npc.Npc;
 
 public class NpcMapper {
     public static NpcDto toDto(Npc npc) {

@@ -8,12 +8,15 @@ import main.exception.ChapterNotFoundException;
 import main.exception.ComandNonExistsException;
 import main.exception.FileOfSaveNotCreateException;
 import main.exception.SaveSlotsFullException;
-import main.model.Preference;
-import main.model.UserProfile;
+import main.model.profile.Preference;
+import main.model.profile.UserProfile;
+import main.view.menu.MainMenuOption;
+import main.view.menu.SaveMenuOption;
+import main.view.terminal.ConsoleInputReader;
 
-import static main.view.MainMenuOption.*;
-import static main.view.SaveMenuOption.*;
-import static main.view.TerminalUI.*;
+import static main.view.menu.MainMenuOption.*;
+import static main.view.menu.SaveMenuOption.*;
+import static main.view.terminal.TerminalUI.*;
 
 public class GameView {
     private final GameController gameController;
