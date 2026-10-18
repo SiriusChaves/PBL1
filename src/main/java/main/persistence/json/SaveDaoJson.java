@@ -17,6 +17,11 @@ import java.nio.file.StandardOpenOption;
 
 public class SaveDaoJson implements SaveDao {
 
+    private static final Gson GSON =
+            new GsonBuilder()
+                    .setPrettyPrinting()
+                    .create();
+
     @Override
     public void createSlotOfSave(String slotIndex) throws FileOfSaveNotCreateException {
 
@@ -55,13 +60,9 @@ public class SaveDaoJson implements SaveDao {
                 "slot" + slotIndex + ".json"
         );
 
-        Gson gson = new GsonBuilder()
-                .setPrettyPrinting()
-                .create();
-
         try (Writer writer = Files.newBufferedWriter(path)) {
 
-            gson.toJson(savePersistenceDto, writer);
+            GSON.toJson(savePersistenceDto, writer);
 
         } catch (IOException ioException) {
 
@@ -106,13 +107,9 @@ public class SaveDaoJson implements SaveDao {
                 "slot" + slotIndex + ".json"
         );
 
-        Gson gson = new GsonBuilder()
-                .setPrettyPrinting()
-                .create();
-
         try (Reader reader = Files.newBufferedReader(path)) {
 
-            return gson.fromJson(reader, SavePersistenceDto.class);
+            return GSON.fromJson(reader, SavePersistenceDto.class);
 
         } catch (IOException ioException) {
 

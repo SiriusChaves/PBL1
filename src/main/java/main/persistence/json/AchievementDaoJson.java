@@ -15,6 +15,11 @@ import java.nio.file.Path;
 
 public class AchievementDaoJson implements AchievementDao {
 
+    private static final Gson GSON =
+            new GsonBuilder()
+                    .setPrettyPrinting()
+                    .create();
+
     @Override
     public AchievementDto[] loadAchievements() throws AchievementsNotLoadException {
 
@@ -22,13 +27,9 @@ public class AchievementDaoJson implements AchievementDao {
                 "data", "achievements", "achievements.json"
         );
 
-        Gson gson = new GsonBuilder()
-                .setPrettyPrinting()
-                .create();
-
         try (Reader reader = Files.newBufferedReader(path)) {
 
-            return gson.fromJson(reader, AchievementDto[].class);
+            return GSON.fromJson(reader, AchievementDto[].class);
 
         } catch (IOException ioException) {
 
@@ -45,13 +46,9 @@ public class AchievementDaoJson implements AchievementDao {
                 "data", "achievements", "achievements.json"
         );
 
-        Gson gson = new GsonBuilder()
-                .setPrettyPrinting()
-                .create();
-
         try (Writer writer = Files.newBufferedWriter(path)) {
 
-            gson.toJson(achievements, writer);
+            GSON.toJson(achievements, writer);
 
         } catch (Exception exception) {
 

@@ -14,6 +14,11 @@ import java.nio.file.Path;
 
 public class UserProfileDaoJson implements UserProfileDao {
 
+    private static final Gson GSON =
+            new GsonBuilder()
+                    .setPrettyPrinting()
+                    .create();
+
     @Override
     public void save(UserProfile userProfile) throws UserProfileErrorException {
 
@@ -21,13 +26,9 @@ public class UserProfileDaoJson implements UserProfileDao {
                 "data", "profile", "profile.json"
         );
 
-        Gson gson = new GsonBuilder()
-                .setPrettyPrinting()
-                .create();
-
         try (Writer writer = Files.newBufferedWriter(path)) {
 
-            gson.toJson(userProfile, writer);
+            GSON.toJson(userProfile, writer);
 
         } catch (IOException ioException) {
 
@@ -44,11 +45,9 @@ public class UserProfileDaoJson implements UserProfileDao {
                 "data", "profile", "profile.json"
         );
 
-        Gson gson = new Gson();
-
         try (Reader reader = Files.newBufferedReader(path)) {
 
-            return gson.fromJson(reader, UserProfile.class);
+            return GSON.fromJson(reader, UserProfile.class);
 
         } catch (IOException ioException) {
 
