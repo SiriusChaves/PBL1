@@ -39,7 +39,7 @@ public class SaveDaoJson implements SaveDao {
         } catch (IOException ioException) {
 
             throw new FileOfSaveNotCreateException(
-                    "Não existe save válido com número de slot igual a" + slotIndex
+                    "Não existe save válido com número de slot igual a " + slotIndex
             );
         }
     }

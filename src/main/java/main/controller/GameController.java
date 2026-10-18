@@ -62,7 +62,7 @@ public class GameController {
                 .hasNextScene();
     }
 
-    public boolean isFinalChapter() {
+    public boolean isGameCompleted() {
 
         return gameSession
                 .getStoryService()
@@ -121,7 +121,7 @@ public class GameController {
                         savePersistenceDto.playerName(),
                         savePersistenceDto.dataHora(),
                         savePersistenceDto.lastChapterName(),
-                        savePersistenceDto.gameStateDto().isFinalChapter()
+                        savePersistenceDto.gameStateDto().gameCompleted()
                         )
                 );
 
@@ -183,10 +183,14 @@ public class GameController {
     public void applySceneChoiceConsequence(int choiceIndex) {
 
         gameSession.getStoryService().applySceneChoiceConsequence(choiceIndex);
+
+        achievementService.saveUnlockedAchievements(gameSession.getGameState());
     }
 
     public void applyChapterFinalChoiceConsequence(int choiceIndex) {
 
         gameSession.getStoryService().applyChapterFinalChoiceConsequence(choiceIndex);
+
+        achievementService.saveUnlockedAchievements(gameSession.getGameState());
     }
 }

@@ -211,9 +211,10 @@ public class GameView {
                 }
             }
 
-            if (gameController.isFinalChapter()) {
+            if (gameController.isGameCompleted()) {
 
                 showEndingScreen();
+                saveGame();
                 return;
             }
 
@@ -285,33 +286,75 @@ public class GameView {
 
     private void loadExistingGame() {
 
-        showText("Informe o slot que voce deseja jogar: ");
+        while (true) {
 
-        String slotIndex = Integer.toString(ConsoleInputReader.readInteger());
+            showText("Informe o slot que voce deseja jogar: ");
 
-        gameController.startGameSession(slotIndex);
+            String slotIndex = Integer.toString(ConsoleInputReader.readInteger());
 
-        gameController.updateLastPlayedSlot(slotIndex);
+            if (!isValidSlotIndex(Integer.parseInt(slotIndex))) {
 
-        runGame();
+                showText(
+                        "Número de slot inválido! Existem apenas slots"
+                                + " com index 1, 2 ou 3!"
+                );
+
+            } else {
+
+                gameController.startGameSession(slotIndex);
+
+                gameController.updateLastPlayedSlot(slotIndex);
+
+                runGame();
+                return;
+            }
+        }
+    }
+
+    private boolean isValidSlotIndex(Integer slotIndex) {
+        return slotIndex >= 1 && slotIndex <= 3;
     }
 
     private void deleteGameSession() {
 
-        showText("Informe o número do save que você deseja apagar");
+        while (true) {
 
-        String slotIndex =  Integer.toString(ConsoleInputReader.readInteger());
+            showText("Informe o número do save que você deseja apagar");
 
-        UserProfile profile = gameController.loadUserProfile();
+            String slotIndex =  Integer.toString(ConsoleInputReader.readInteger());
 
-        String lastPlayedSlot = profile.getLastPlayedSlotId();
+            if (!isValidSlotIndex(Integer.parseInt(slotIndex))) {
 
-        if (slotIndex.equals(lastPlayedSlot)) {
+                showText(
+                        "Número de slot inválido! Existem apenas slots"
+                                + " com index 1, 2 ou 3!"
+                );
+            } else {
 
-            gameController.updateLastPlayedSlot("-1");
+                showText(
+                        "Você deseja realmente excluir PERMANENTEMENTE"
+                                + " o save do slot " + slotIndex + "?\n"
+                                + ">>> Digite 1 para cancelar ou"
+                                + " ENTER para prosseguir com a exclusão"
+                );
+
+                if (ConsoleInputReader.readString().equals("1")) {
+
+                    showText("Cancelando exclusão do save " + slotIndex + ".");
+                    return;
+                }
+
+                UserProfile profile = gameController.loadUserProfile();
+
+                if (slotIndex.equals(profile.getLastPlayedSlotId()))
+                    gameController.updateLastPlayedSlot("-1");
+
+                gameController.deleteGameSession(slotIndex);
+
+                showText("Save " + slotIndex + "deletado com sucesso!");
+                return;
+            }
         }
-
-        gameController.deleteGameSession(slotIndex);
     }
 
     private void createNewGame() {
@@ -321,6 +364,7 @@ public class GameView {
          while (creatingNewGame) {
 
              try {
+
                  showText(
                          "Selecione o número do slot que você "
                           + "deseja para criar um novo jogo"
@@ -329,34 +373,51 @@ public class GameView {
                  String numberSlot =
                          Integer.toString(ConsoleInputReader.readInteger());
 
-                 if (gameController.hasSaveDataAndSaveExists(numberSlot)) {
+                 if (!isValidSlotIndex(Integer.parseInt(numberSlot))) {
 
-                     showText("O save já possui dados carregados.");
+                     showText(
+                             "Número de slot inválido! Existem apenas slots"
+                                     + " com index 1, 2 ou 3!"
+                     );
+                 } else {
 
-                     showText("Digite 1 se você deseja sobrescrever o save:");
+                     if (gameController.hasSaveDataAndSaveExists(numberSlot)) {
 
-                     if (ConsoleInputReader.readString().equals("1")) {
+                         showText("O save já possui dados carregados.");
 
-                         gameController.createNewSlotOfGameSession(numberSlot, true);
+                         showText(
+                                 "Digite 1 se você deseja sobrescrever o save"
+                                         + " ou pressione ENTER para cancelar."
+                         );
+
+                         if (!ConsoleInputReader.readString().equals("1")) {
+                             showText("Cancelando sobrescrita de save!");
+                             return;
+
+                         } else {
+
+                             showText("Save " + numberSlot + "sobrescrito!");
+
+                             gameController.createNewSlotOfGameSession(numberSlot, true);
+                             return;
+                         }
 
                      } else {
 
-                         return;
+                         gameController.createNewSlotOfGameSession(numberSlot, false);
                      }
 
-                 } else {
+                     showText(
+                             "Slot" + numberSlot
+                                     + " inicializado com sucesso!"
+                     );
 
-                     gameController.createNewSlotOfGameSession(numberSlot, false);
+                     showText("Você já pode iniciar o jogo por meio dele");
+
+                     creatingNewGame = false;
                  }
 
-                 showText(
-                         "Slot" + numberSlot
-                         + " inicializado com sucesso!"
-                 );
 
-                 showText("Você já pode iniciar o jogo por meio dele");
-
-                 creatingNewGame = false;
 
              } catch (FileOfSaveNotCreateException | SaveSlotsFullException saveException) {
 

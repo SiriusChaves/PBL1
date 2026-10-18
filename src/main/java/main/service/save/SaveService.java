@@ -111,12 +111,14 @@ public class SaveService {
             deleteSlotSave(slotIndex);
 
             saveDao.createSlotOfSave(slotIndex);
+
+            return;
         }
 
         if (saveDao.findAllSlots()) {
 
             throw new SaveSlotsFullException(
-                    "Todos os saves estão preenchidos!"
+                    "Todos os saves já existem!"
             );
 
         } else {
