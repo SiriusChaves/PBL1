@@ -63,6 +63,17 @@ public class GameController {
     }
 
     public boolean isGameCompleted() {
+        return gameSession.isGameCompleted();
+    }
+
+    public void setGameIsCompleted() {
+
+        gameSession.setGameIsCompleted();
+
+        achievementService.saveUnlockedAchievements(gameSession.getGameState());
+    }
+
+    public boolean isFinalChapter() {
 
         return gameSession
                 .getStoryService()
@@ -109,29 +120,31 @@ public class GameController {
 
     public List<SaveViewDto> getDataOfAllSaves() {
 
-        List<SavePersistenceDto> savesPersistenceDto = saveService.getDataOfAllSaves();
+        List<SavePersistenceDto> savePersistenceDtoList = saveService.getDataOfAllSaves();
 
-        List<SaveViewDto> savesViewDto = new ArrayList<>();
+        List<SaveViewDto> saveViewDtoList = new ArrayList<>();
 
-        for (SavePersistenceDto savePersistenceDto : savesPersistenceDto) {
+        for (var save : savePersistenceDtoList) {
 
-            if (savePersistenceDto != null)  {
+            if (save != null)  {
 
-                savesViewDto.add(new SaveViewDto(
-                        savePersistenceDto.playerName(),
-                        savePersistenceDto.dataHora(),
-                        savePersistenceDto.lastChapterName(),
-                        savePersistenceDto.gameStateDto().gameCompleted()
+                saveViewDtoList.add(
+
+                        new SaveViewDto(
+                            save.playerName(),
+                            save.dataHora(),
+                            save.lastChapterName(),
+                            save.gameStateDto().isGameCompleted()
                         )
                 );
 
             } else {
 
-                savesViewDto.add(null);
+                saveViewDtoList.add(null);
             }
 
         }
-        return savesViewDto;
+        return saveViewDtoList;
     }
 
     public ChapterDto loadCurrentChapter()

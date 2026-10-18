@@ -62,21 +62,24 @@ public class AchievementService {
                 "1",
                 "FINAL 3: A ASCENSÃO DO MEGA BRAIN",
                 "Você concluiu o Final 3: o MegaBrain virtualizou todo o mundo",
-                gameState -> gameState.currentChapterId().equals("10")
+                gameState -> gameState.isGameCompleted() &&
+                        gameState.currentChapterId().equals("10")
         );
 
         Achievement unlockedFinal2 = new Achievement(
                 "2",
                 "FINAL 2: A ERA DO SILÊNCIO",
                 "Você concluiu a campanha do Estudante  e impediu os avanços do MegaBrain",
-                gameState -> gameState.currentChapterId().equals("9")
+                gameState -> gameState.isGameCompleted() &&
+                        gameState.currentChapterId().equals("9")
         );
 
         Achievement unlockedFinal1 = new Achievement(
                 "3",
                 "FINAL 1: A NOVA ORDEM MONDIAL",
                 "Você concluiu a campanha do Arquiteto e estabeleceu uma nova Ordem Mundial movida pelo MegaBrain",
-                gameState -> gameState.currentChapterId().equals("8")
+                gameState -> gameState.isGameCompleted() &&
+                        gameState.currentChapterId().equals("8")
         );
 
         Achievement failedMission = new Achievement(

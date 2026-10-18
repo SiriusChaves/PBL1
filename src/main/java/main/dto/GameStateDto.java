@@ -10,6 +10,6 @@ public record GameStateDto(
         List<String> itemsId,
         List<NpcDto> relationships,
         List<String> activeGameFlags,
-        boolean gameCompleted,
+        boolean isGameCompleted,
         Integer currentSceneIndex
 ) {}

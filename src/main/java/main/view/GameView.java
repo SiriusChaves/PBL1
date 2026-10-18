@@ -186,6 +186,14 @@ public class GameView {
 
                             gameController.applyChapterFinalChoiceConsequence(indexChoice - 1);
                             isValidChoiceMade = true;
+
+                            showText(
+                                    ">>> Pressione ENTER para prosseguir"
+                                            + " para o próximo capitulo: "
+                            );
+
+                            ConsoleInputReader.readString();
+
                         } else {
 
                             showText(
@@ -211,19 +219,17 @@ public class GameView {
                 }
             }
 
-            if (gameController.isGameCompleted()) {
+
+            if (gameController.isFinalChapter()) {
 
                 showEndingScreen();
+                gameController.setGameIsCompleted();
+
                 saveGame();
                 return;
             }
 
-            showText(
-                    ">>> Pressione ENTER para prosseguir"
-                    + " para o próximo capitulo: "
-            );
 
-            ConsoleInputReader.readString();
         }
     }
 

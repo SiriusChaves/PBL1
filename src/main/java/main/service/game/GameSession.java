@@ -19,6 +19,7 @@ public class GameSession {
     private final StoryService storyService;
     private final Flag gameFlags;
     private final String slotIndex;
+    private boolean gameCompleted = false;
 
     public GameSession(ChapterDao chapterDao, String slotIndex) {
         this.player = new Player("O Estudante");
@@ -33,13 +34,15 @@ public class GameSession {
             Flag gameFlags,
             String slotIndex,
             ChapterService chapterService,
-            StoryService storyService
+            StoryService storyService,
+            boolean gameCompleted
     ) {
         this.player = player;
         this.gameFlags = gameFlags;
         this.chapterService = chapterService;
         this.storyService = storyService;
         this.slotIndex = slotIndex;
+        this.gameCompleted = gameCompleted;
     }
 
     public SavePersistenceDto loadDataOfSave() {
@@ -79,7 +82,7 @@ public class GameSession {
                 itemsId,
                 storyService.loadRelationshipDto(),
                 activeFlags,
-                storyService.isFinalChapter(),
+                isGameCompleted(),
                 storyService.getCurrentSceneIndex()
         );
     }
@@ -102,5 +105,13 @@ public class GameSession {
 
     public void setPlayer(Player player) {
         this.player = player;
+    }
+
+    public boolean isGameCompleted() {
+        return gameCompleted;
+    }
+
+    public void setGameIsCompleted() {
+        this.gameCompleted = true;
     }
 }

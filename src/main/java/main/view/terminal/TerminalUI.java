@@ -37,6 +37,10 @@ public class TerminalUI {
                 "║ %-55s ║%n",
                 "Você concluiu um dos finais de MegaBrain."
         );
+        System.out.printf(
+                "║ %-55s ║%n",
+                "Existe um total de 3 finais, continue explorando."
+        );
 
         System.out.println(
                 "╚═════════════════════════════════════════════════════════╝"

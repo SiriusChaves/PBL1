@@ -95,7 +95,8 @@ public class SaveService {
                 gameFlag,
                 slotIndex,
                 chapterService,
-                storyService
+                storyService,
+                gameState.isGameCompleted()
         );
     }
 
