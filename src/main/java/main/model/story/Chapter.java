@@ -25,15 +25,19 @@ public class Chapter {
     public String getTitle() {
         return title;
     }
+
     public String getId() {
         return id;
     }
+
     public String getIdNextChapter() {
         return idNextChapter;
     }
+
     public List<Choice> getFinalChoices() {
         return finalChoices;
     }
+
     public List<Scene> getScenes() {
         return scenes;
     }

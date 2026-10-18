@@ -5,6 +5,7 @@ import main.model.npc.Npc;
 
 public class NpcMapper {
     public static NpcDto toDto(Npc npc) {
+
         return new NpcDto(
                 npc.getName(),
                 npc.getTrustLevel(),
@@ -12,6 +13,7 @@ public class NpcMapper {
     }
 
     public static Npc toEntity(NpcDto npcDto) {
+
         return new Npc(
                 npcDto.name(),
                 npcDto.trustLevel());

@@ -31,6 +31,7 @@ public class UserProfileService {
         if (profile.hasPreference(preference)) {
 
             profile.disablePreference(preference);
+
         } else {
 
             profile.enablePreference(preference);

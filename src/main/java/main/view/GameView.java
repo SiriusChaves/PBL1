@@ -32,6 +32,7 @@ public class GameView {
             mainMenuOption = showStartMenu();
 
             switch (mainMenuOption) {
+
                 case START_GAME -> startGame();
                 case INSTRUCTIONS -> showInstructions();
                 case CREDITS -> showCredits();
@@ -45,13 +46,17 @@ public class GameView {
     }
 
     private void startGame() {
+
         SaveMenuOption saveMenuOption;
 
         do {
+
             showSlotsSaves(gameController.getDataOfAllSaves());
+
             saveMenuOption = showSaveMenu();
 
             switch (saveMenuOption) {
+
                 case CONTINUE -> continueLastGame();
                 case CREATE_NEW_SAVE -> createNewGame();
                 case LOAD_EXISTING_SAVE -> loadExistingGame();
@@ -249,7 +254,9 @@ public class GameView {
         Preference preference = showPreferenceMenu(profile.getPreferences());
 
         switch (preference) {
+
             case AUTOSAVE -> gameController.togglePreference(Preference.AUTOSAVE);
+
             case DEFAULT -> showText("Preferência inválida");
         }
     }
@@ -259,6 +266,7 @@ public class GameView {
     }
 
     private void continueLastGame() {
+
         UserProfile profile = gameController.loadUserProfile();
 
         String lastPlayedSlot = profile.getLastPlayedSlotId();
@@ -278,6 +286,7 @@ public class GameView {
     private void loadExistingGame() {
 
         showText("Informe o slot que voce deseja jogar: ");
+
         String slotIndex = Integer.toString(ConsoleInputReader.readInteger());
 
         gameController.startGameSession(slotIndex);
@@ -288,15 +297,19 @@ public class GameView {
     }
 
     private void deleteGameSession() {
+
         showText("Informe o número do save que você deseja apagar");
 
         String slotIndex =  Integer.toString(ConsoleInputReader.readInteger());
 
         UserProfile profile = gameController.loadUserProfile();
+
         String lastPlayedSlot = profile.getLastPlayedSlotId();
 
-        if (slotIndex.equals(lastPlayedSlot))
+        if (slotIndex.equals(lastPlayedSlot)) {
+
             gameController.updateLastPlayedSlot("-1");
+        }
 
         gameController.deleteGameSession(slotIndex);
     }
@@ -308,16 +321,22 @@ public class GameView {
          while (creatingNewGame) {
 
              try {
-                 showText("Selecione o número do slot que você deseja para criar um novo jogo");
+                 showText(
+                         "Selecione o número do slot que você "
+                          + "deseja para criar um novo jogo"
+                 );
 
-                 String numberSlot =  Integer.toString(ConsoleInputReader.readInteger());
+                 String numberSlot =
+                         Integer.toString(ConsoleInputReader.readInteger());
 
                  if (gameController.hasSaveDataAndSaveExists(numberSlot)) {
 
                      showText("O save já possui dados carregados.");
+
                      showText("Digite 1 se você deseja sobrescrever o save:");
 
                      if (ConsoleInputReader.readString().equals("1")) {
+
                          gameController.createNewSlotOfGameSession(numberSlot, true);
 
                      } else {
@@ -326,10 +345,15 @@ public class GameView {
                      }
 
                  } else {
+
                      gameController.createNewSlotOfGameSession(numberSlot, false);
                  }
 
-                 showText("Slot" + numberSlot + " inicializado com sucesso!");
+                 showText(
+                         "Slot" + numberSlot
+                         + " inicializado com sucesso!"
+                 );
+
                  showText("Você já pode iniciar o jogo por meio dele");
 
                  creatingNewGame = false;

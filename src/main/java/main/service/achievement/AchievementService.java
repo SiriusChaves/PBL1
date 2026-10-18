@@ -34,11 +34,14 @@ public class AchievementService {
 
         AchievementDto[] achievementsFromSave = achievementDao.loadAchievements();
 
-        if (achievementsFromSave != null)
+        if (achievementsFromSave != null) {
+
             return Arrays.stream(achievementsFromSave).toList();
 
-        else
+        } else {
+
             return Collections.emptyList();
+        }
     }
 
     private List<Achievement> loadAchievements() {

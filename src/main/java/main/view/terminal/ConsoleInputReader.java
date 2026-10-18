@@ -6,11 +6,19 @@ public class ConsoleInputReader {
     private static final Scanner SCANNER = new Scanner(System.in);
 
     public static int readInteger() {
+
         while (true) {
+
             try {
+
                 return Integer.parseInt(SCANNER.nextLine());
+
             } catch (NumberFormatException numberFormatException) {
-                TerminalUI.showText("Valor inválido digitado! Digite apenas números inteiros.");
+
+                TerminalUI.showText(
+                        "Valor inválido digitado! "
+                        + "Digite apenas números inteiros."
+                );
             }
         }
     }

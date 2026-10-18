@@ -29,21 +29,28 @@ public class Npc implements Comparable<Npc> {
         if (trustLevel < 0) {trustLevel = 0;}
     }
 
+    public String getRelationshipTier() {
+
+        if (trustLevel <= 24) {
+
+            return "EM SUSPEITA";
+
+        } else if (trustLevel <= 59) {
+
+            return "NEUTRO";
+
+        } else {
+
+            return "ALIADO PLENO";
+        }
+    }
+
     public String getName() {
         return name;
     }
+
     public int getTrustLevel() {
         return trustLevel;
-    }
-
-    public String getRelationshipTier() {
-        if (trustLevel <= 24) {
-            return "EM SUSPEITA";
-        } else if (trustLevel <= 59) {
-            return "NEUTRO";
-        } else {
-            return "ALIADO PLENO";
-        }
     }
 
     @Override

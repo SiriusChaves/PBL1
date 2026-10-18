@@ -35,7 +35,13 @@ public class StoryService {
         this.chapterService = chapterService;
     }
 
-    public StoryService(Player player, Flag gameFlags, ChapterService chapterService, String nextChapterId, Integer currentSceneIndex) {
+    public StoryService(
+            Player player,
+            Flag gameFlags,
+            ChapterService chapterService,
+            String nextChapterId,
+            Integer currentSceneIndex
+    ) {
         this.player = player;
         this.gameFlags = gameFlags;
         this.nextChapterId = nextChapterId;
@@ -85,23 +91,31 @@ public class StoryService {
     }
 
     public void applySceneChoiceConsequence(int choiceIndex) {
+
         List<Choice> availableChoices = getAvailableSceneChoices();
+
         if (choiceIndex >= 0 && choiceIndex < availableChoices.size()) {
+
             Choice selectedChoice = availableChoices.get(choiceIndex);
+
             selectedChoice.applyEffects(this.player, this.gameFlags);
         }
     }
 
     public void applyChapterFinalChoiceConsequence(int choiceIndex) {
+
         List<Choice> availableChoices = getAvailableChapterFinalChoices();
 
         if (PROLOGUE_ID.equals(this.currentChapter.getId())) {
+
             String choseName = (choiceIndex == 0) ? "O Arquiteto" : "O Estudante";
             player.setName(choseName);
         }
 
         if (choiceIndex >= 0 && choiceIndex < availableChoices.size()) {
+
             Choice selectedChoice = availableChoices.get(choiceIndex);
+
             selectedChoice.applyEffects(this.player, this.gameFlags);
         }
     }
@@ -111,7 +125,6 @@ public class StoryService {
         return currentScene.getChoices().stream()
                 .filter(choice -> choice.isAvailable(player, gameFlags))
                 .toList();
-
     }
 
     public List<Choice> getAvailableChapterFinalChoices() {
@@ -130,15 +143,22 @@ public class StoryService {
 
     public List<ItemViewDto> loadItemDtoInInventory() {
 
-        List<Item> items = new ArrayList<>(player.getInventory().getItems().values());
+        List<Item> items = new ArrayList<>(
+                player.getInventory()
+                        .getItems()
+                        .values()
+        );
 
-        if (items.isEmpty())
+        if (items.isEmpty()) {
+
             return Collections.emptyList();
-        else
+
+        } else {
+
             return items.stream()
                     .map(ItemMapper::toDto)
                     .toList();
-
+        }
     }
 
     public List<DialogueDto> loadDialogueDtoOfCurrentScene() {

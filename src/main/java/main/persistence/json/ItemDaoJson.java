@@ -14,7 +14,10 @@ import java.nio.file.Path;
 public class ItemDaoJson implements ItemDao {
     @Override
     public ItemPersistenceDto[] loadItems() throws ItemNotFoundException {
-        Path path = Path.of("src", "main", "resources", "items", "items.json");
+
+        Path path = Path.of(
+                "src", "main", "resources", "items", "items.json"
+        );
 
         Gson gson = new GsonBuilder()
                 .setPrettyPrinting()
@@ -25,7 +28,10 @@ public class ItemDaoJson implements ItemDao {
             return gson.fromJson(reader, ItemPersistenceDto[].class);
 
         } catch (IOException ioException) {
-                throw new ItemNotFoundException("Erro ao carregar um item do arquivo de items.json");
+
+                throw new ItemNotFoundException(
+                        "Erro ao carregar um item do arquivo de items.json"
+                );
         }
     }
 }

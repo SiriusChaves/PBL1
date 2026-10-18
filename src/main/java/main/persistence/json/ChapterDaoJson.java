@@ -16,7 +16,14 @@ public class ChapterDaoJson implements ChapterDao {
 
     @Override
     public Chapter findByID(String idChapter) throws ChapterNotFoundException {
-        Path path = Path.of("src", "main", "resources", "chapters", "chapter" + idChapter + ".json");
+
+        Path path = Path.of(
+                "src",
+                "main",
+                "resources",
+                "chapters",
+                "chapter" + idChapter + ".json"
+        );
 
         Gson gson = new Gson();
 
@@ -25,7 +32,10 @@ public class ChapterDaoJson implements ChapterDao {
              return gson.fromJson(reader, Chapter.class);
 
         } catch (IOException ioException) {
-            throw new ChapterNotFoundException("Erro ao carregar capitulo ou capitulo inexistente");
+
+            throw new ChapterNotFoundException(
+                    "Erro ao carregar capitulo ou capitulo inexistente"
+            );
         }
     }
 }

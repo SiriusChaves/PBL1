@@ -45,15 +45,17 @@ public class Choice {
     }
 
     public boolean isAvailable(Player player, Flag gameFlags) {
-        if (requiresItem() && !player.getInventory().hasItem(requireItemId)) {
+
+        if (requiresItem() && !player.getInventory().hasItem(requireItemId))
             return false;
-        }
 
         return !requiresFlag() || gameFlags.isFlagActive(requireFlag);
     }
 
     public void applyEffects(Player player, Flag gameFlags) {
+
         if (trustLevelChange != 0) {
+
             if (trustLevelChange < 0)
                 player.decreaseNpcTrustLevel(nameTargetNpc, trustLevelChange);
             else
@@ -85,9 +87,11 @@ public class Choice {
     public String getText() {
         return text;
     }
+
     public String getRequireFlag() {
         return requireFlag;
     }
+
     public String getRequireItemId() {
         return requireItemId;
     }

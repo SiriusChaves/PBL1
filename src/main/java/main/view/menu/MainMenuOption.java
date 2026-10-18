@@ -16,6 +16,7 @@ public enum MainMenuOption {
     }
 
     public static MainMenuOption toMainMenuOption(int valor) {
+
         return switch (valor) {
           case 1 -> START_GAME;
           case 2 -> INSTRUCTIONS;

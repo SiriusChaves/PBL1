@@ -17,7 +17,9 @@ public class UserProfileDaoJson implements UserProfileDao {
     @Override
     public void save(UserProfile userProfile) throws UserProfileErrorException {
 
-        Path path = Path.of("data", "profile", "profile.json");
+        Path path = Path.of(
+                "data", "profile", "profile.json"
+        );
 
         Gson gson = new GsonBuilder()
                 .setPrettyPrinting()
@@ -29,13 +31,18 @@ public class UserProfileDaoJson implements UserProfileDao {
 
         } catch (IOException ioException) {
 
-            throw new UserProfileErrorException("Erro ao salvar o UserProfile no json");
+            throw new UserProfileErrorException(
+                    "Erro ao salvar o UserProfile no json"
+            );
         }
     }
 
     @Override
     public UserProfile loadUserProfile() throws UserProfileErrorException {
-        Path path = Path.of("data", "profile", "profile.json");
+
+        Path path = Path.of(
+                "data", "profile", "profile.json"
+        );
 
         Gson gson = new Gson();
 
@@ -45,7 +52,9 @@ public class UserProfileDaoJson implements UserProfileDao {
 
         } catch (IOException ioException) {
 
-            throw new UserProfileErrorException("Erro ao carregar usuário do Json");
+            throw new UserProfileErrorException(
+                    "Erro ao carregar usuário do Json"
+            );
         }
     }
 }

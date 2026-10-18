@@ -8,12 +8,14 @@ import main.model.player.ItemType;
 public class ItemMapper {
 
     public static ItemViewDto toDto(Item item) {
+
         return new ItemViewDto(
                 item.getName(),
                 item.getDescription());
     }
 
     public static Item toEntity(ItemPersistenceDto itemPersistenceDto) {
+
         return new Item(
                 itemPersistenceDto.id(),
                 itemPersistenceDto.name(),

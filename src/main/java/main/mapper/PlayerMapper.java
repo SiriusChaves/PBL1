@@ -5,6 +5,7 @@ import main.model.player.Player;
 
 public class PlayerMapper {
     public static PlayerDto toDto(Player player) {
+
         return new PlayerDto(
                 player.getName(),
                 player.getSanity(),

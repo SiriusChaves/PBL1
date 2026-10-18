@@ -28,7 +28,13 @@ public class GameSession {
         this.slotIndex = slotIndex;
     }
 
-    public GameSession(Player player, Flag gameFlags, String slotIndex, ChapterService chapterService, StoryService storyService) {
+    public GameSession(
+            Player player,
+            Flag gameFlags,
+            String slotIndex,
+            ChapterService chapterService,
+            StoryService storyService
+    ) {
         this.player = player;
         this.gameFlags = gameFlags;
         this.chapterService = chapterService;
@@ -42,18 +48,22 @@ public class GameSession {
                 player.getName(),
                 LocalDateTime.now().toString(),
                 storyService.getCurrentChapter().getTitle(),
-                getGameState());
+                getGameState()
+        );
     }
 
     public GameStateDto getGameState() {
-        List<String> itemsId = new ArrayList<>(
 
-                player.getInventory().getItems().keySet()
+        List<String> itemsId = new ArrayList<>(
+                player.getInventory()
+                        .getItems()
+                        .keySet()
         );
 
         List<String> activeFlags = new ArrayList<>(gameFlags.getActiveFlags());
 
         return new GameStateDto (
+
                 PlayerMapper.toDto(player),
 
                 storyService.getCurrentChapter() == null

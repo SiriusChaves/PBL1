@@ -26,8 +26,13 @@ public class GameController {
     private AchievementService achievementService;
     private UserProfileService userProfileService;
 
-    public GameController(ChapterDao chapterDao, SaveDao saveDao,
-                          ItemDao itemDao, AchievementDao achievementDao, UserProfileDao profileDao) {
+    public GameController(
+            ChapterDao chapterDao,
+            SaveDao saveDao,
+            ItemDao itemDao,
+            AchievementDao achievementDao,
+            UserProfileDao profileDao
+    ) {
         this.chapterDao = chapterDao;
         this.saveService = new SaveService(saveDao, itemDao);
         this.achievementService = new AchievementService(achievementDao);
@@ -85,7 +90,8 @@ public class GameController {
 
         if (hasSaveDataAndSaveExists(slotIndex)) {
 
-            this.gameSession = saveService.restoreGameSessionFromPersistence(chapterDao, slotIndex);
+            this.gameSession =
+                    saveService.restoreGameSessionFromPersistence(chapterDao, slotIndex);
 
         } else {
 
@@ -103,15 +109,15 @@ public class GameController {
 
     public List<SaveViewDto> getDataOfAllSaves() {
 
-        List<SavePersistenceDto> savePersistenceDtos = saveService.getDataOfAllSaves();
+        List<SavePersistenceDto> savesPersistenceDto = saveService.getDataOfAllSaves();
 
-        List<SaveViewDto> saveViewDtos = new ArrayList<>();
+        List<SaveViewDto> savesViewDto = new ArrayList<>();
 
-        for (SavePersistenceDto savePersistenceDto : savePersistenceDtos) {
+        for (SavePersistenceDto savePersistenceDto : savesPersistenceDto) {
 
             if (savePersistenceDto != null)  {
 
-                saveViewDtos.add(new SaveViewDto(
+                savesViewDto.add(new SaveViewDto(
                         savePersistenceDto.playerName(),
                         savePersistenceDto.dataHora(),
                         savePersistenceDto.lastChapterName(),
@@ -121,14 +127,16 @@ public class GameController {
 
             } else {
 
-                saveViewDtos.add(null);
+                savesViewDto.add(null);
             }
 
         }
-        return saveViewDtos;
+        return savesViewDto;
     }
 
-    public ChapterDto loadCurrentChapter() throws ChapterNotFoundException {
+    public ChapterDto loadCurrentChapter()
+            throws ChapterNotFoundException {
+
         gameSession.getStoryService()
                 .loadCurrentChapter(gameSession.getGameState());
 
@@ -153,11 +161,17 @@ public class GameController {
     }
 
     public List<NpcDto> loadRelationshipData() {
-        return Collections.unmodifiableList(gameSession.getStoryService().loadRelationshipDto());
+
+        return Collections.unmodifiableList(
+                gameSession.getStoryService().loadRelationshipDto()
+        );
     }
 
     public List<ItemViewDto> loadInventoryData() {
-        return Collections.unmodifiableList(gameSession.getStoryService().loadItemDtoInInventory());
+
+        return Collections.unmodifiableList(
+                gameSession.getStoryService().loadItemDtoInInventory()
+        );
     }
 
     public void advanceToNextScene() {

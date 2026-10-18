@@ -8,6 +8,7 @@ import java.util.List;
 
 public class ChapterMapper {
     public static ChapterDto toDto(Chapter chapter, List<Choice> availableFinalChoices) {
+
         return new ChapterDto(
                 chapter.getId(),
                 chapter.getTitle(),

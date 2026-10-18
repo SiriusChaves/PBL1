@@ -33,17 +33,17 @@ public class SaveService {
     }
 
     public boolean hasSaveDataAndSaveExists(String slotIndex) {
-        return saveDao.saveFileExists(slotIndex) && saveDao.hasSaveData(slotIndex);
+
+        return saveDao.saveFileExists(slotIndex)
+                && saveDao.hasSaveData(slotIndex);
     }
 
     public GameSession restoreGameSessionFromPersistence(ChapterDao chapterDao, String slotIndex) {
 
-        // Carregando dados persistidos
         SavePersistenceDto saveDto =  saveDao.findBySlot(slotIndex);
 
         GameStateDto gameState = saveDto.gameStateDto();
 
-        // Carregando player
         Map<String, Npc> relationshipsOfPlayer = new HashMap<>();
         for (NpcDto npcDto : gameState.relationships()) {
 
@@ -58,18 +58,16 @@ public class SaveService {
                 playerDto.name(),
                 playerDto.sanity(),
                 playerDto.knowledge(),
-                relationshipsOfPlayer);
-
-        // Carregando GameFlagsActive
+                relationshipsOfPlayer
+        );
 
         Flag gameFlag = new Flag();
-        for (String flag : gameState.activeGameFlags()) {
+        for (String flag : gameState.activeGameFlags())
             gameFlag.addFlag(flag);
-        }
 
-        // Carregando Itens
 
         ItemPersistenceDto[] items =  itemDao.loadItems();
+
         List<String> itemIdOfPlayer = gameState.itemsId();
 
         for (ItemPersistenceDto itemDto : items) {
@@ -81,8 +79,6 @@ public class SaveService {
                 player.storeItemInInventory(item);
             }
         }
-
-        // Criando GameSession
 
         ChapterService chapterService = new ChapterService(chapterDao);
 
@@ -99,14 +95,16 @@ public class SaveService {
                 gameFlag,
                 slotIndex,
                 chapterService,
-                storyService);
+                storyService
+        );
     }
 
     public void saveGame(SavePersistenceDto saveDto, String slotIndex) {
         saveDao.save(saveDto, slotIndex);
     }
 
-    public void createNewSlotOfGameSession(String slotIndex, boolean overrideSave) throws SaveSlotsFullException {
+    public void createNewSlotOfGameSession(String slotIndex, boolean overrideSave)
+            throws SaveSlotsFullException {
 
         if (overrideSave) {
 
@@ -117,7 +115,9 @@ public class SaveService {
 
         if (saveDao.findAllSlots()) {
 
-            throw new SaveSlotsFullException("Todos os saves estão preenchidos!");
+            throw new SaveSlotsFullException(
+                    "Todos os saves estão preenchidos!"
+            );
 
         } else {
 
@@ -139,6 +139,5 @@ public class SaveService {
             savesOfGameSession.add(saveDao.findBySlot(index));
 
         return savesOfGameSession;
-
     }
 }

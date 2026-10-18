@@ -30,6 +30,7 @@ public class Player {
     }
 
     private void initializeNpcRelationships() {
+
         this.relationships.put("Rebeca", new Npc("Rebeca"));
         this.relationships.put("Gabriel", new Npc("Gabriel"));
         this.relationships.put("Eng. Silas", new Npc("Eng. Silas"));
@@ -77,18 +78,23 @@ public class Player {
     public int getSanity() {
         return sanity;
     }
+
     public int getKnowledge() {
         return knowledge;
     }
+
     public String getName() {
         return name;
     }
+
     public Inventory getInventory() {
         return inventory;
     }
+
     public Map<String, Npc> getRelationships() {
         return Collections.unmodifiableMap(relationships);
     }
+
     public void setName(String name) {
         this.name = name;
     }

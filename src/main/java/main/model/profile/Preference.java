@@ -14,6 +14,7 @@ public enum Preference {
 
 
     public static Preference toPreference(int value) {
+
         return switch (value) {
             case 1 -> AUTOSAVE;
             default -> DEFAULT;

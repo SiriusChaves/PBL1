@@ -18,7 +18,9 @@ public class AchievementDaoJson implements AchievementDao {
     @Override
     public AchievementDto[] loadAchievements() throws AchievementsNotLoadException {
 
-        Path path = Path.of("data", "achievements", "achievements.json");
+        Path path = Path.of(
+                "data", "achievements", "achievements.json"
+        );
 
         Gson gson = new GsonBuilder()
                 .setPrettyPrinting()
@@ -30,14 +32,18 @@ public class AchievementDaoJson implements AchievementDao {
 
         } catch (IOException ioException) {
 
-            throw new AchievementsNotLoadException("Não foi possível carregar as conquitas do jogo");
+            throw new AchievementsNotLoadException(
+                    "Não foi possível carregar as conquitas do jogo"
+            );
         }
     }
 
     @Override
     public void save(AchievementDto[] achievements) throws AchievementsNotSaveException {
 
-        Path path = Path.of("data", "achievements", "achievements.json");
+        Path path = Path.of(
+                "data", "achievements", "achievements.json"
+        );
 
         Gson gson = new GsonBuilder()
                 .setPrettyPrinting()
@@ -49,7 +55,9 @@ public class AchievementDaoJson implements AchievementDao {
 
         } catch (Exception exception) {
 
-            throw new AchievementsNotSaveException("Não foi possivel salvar as conquistas do usuário");
+            throw new AchievementsNotSaveException(
+                    "Não foi possivel salvar as conquistas do usuário"
+            );
         }
     }
 
