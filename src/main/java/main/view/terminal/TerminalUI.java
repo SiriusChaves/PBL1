@@ -968,13 +968,13 @@ public class TerminalUI {
 
         System.out.printf(
                 "║ %-55s ║%n",
-                "[" + CREATE_NEW_SAVE.getValue() +
+                "[" + NEW_GAME.getValue() +
                         "] Criar nova partida"
         );
 
         System.out.printf(
                 "║ %-55s ║%n",
-                "[" + LOAD_EXISTING_SAVE.getValue() +
+                "[" + LOAD_GAME.getValue() +
                         "] Carregar partida existente"
         );
 

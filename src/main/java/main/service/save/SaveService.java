@@ -1,10 +1,11 @@
 package main.service.save;
 
+import main.exception.FileOfSaveNotCreateException;
 import main.persistence.dao.ChapterDao;
 import main.persistence.dao.ItemDao;
 import main.persistence.dao.SaveDao;
 import main.dto.*;
-import main.exception.SaveSlotsFullException;
+
 import main.exception.SlotOfSaveNotFoundException;
 import main.mapper.ItemMapper;
 import main.mapper.NpcMapper;
@@ -104,8 +105,8 @@ public class SaveService {
         saveDao.save(saveDto, slotIndex);
     }
 
-    public void createNewSlotOfGameSession(String slotIndex, boolean overrideSave)
-            throws SaveSlotsFullException {
+    public void prepareSaveSlot(String slotIndex, boolean overrideSave)
+            throws FileOfSaveNotCreateException {
 
         if (overrideSave) {
 
@@ -116,15 +117,17 @@ public class SaveService {
             return;
         }
 
-        if (saveDao.findAllSlots()) {
-
-            throw new SaveSlotsFullException(
-                    "Todos os saves já existem!"
+        if (saveDao.hasSaveData(slotIndex)) {
+            throw new FileOfSaveNotCreateException(
+                    "O slot " + slotIndex
+                    + " já possui uma partida salva."
             );
+        }
 
-        } else {
+        if (!saveDao.saveFileExists(slotIndex)) {
 
             saveDao.createSlotOfSave(slotIndex);
+
         }
     }
 

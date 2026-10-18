@@ -2,8 +2,8 @@ package main.view.menu;
 
 public enum SaveMenuOption {
     CONTINUE(1),
-    CREATE_NEW_SAVE(2),
-    LOAD_EXISTING_SAVE(3),
+    NEW_GAME(2),
+    LOAD_GAME(3),
     DELETE_SAVE(4),
     BACK_TO_MAIN_MENU(5),
     DEFAULT(6);
@@ -19,8 +19,8 @@ public enum SaveMenuOption {
         return switch (value) {
 
             case 1 -> CONTINUE;
-            case 2 -> CREATE_NEW_SAVE;
-            case 3 -> LOAD_EXISTING_SAVE;
+            case 2 -> NEW_GAME;
+            case 3 -> LOAD_GAME;
             case 4 -> DELETE_SAVE;
             case 5 -> BACK_TO_MAIN_MENU;
             default -> DEFAULT;

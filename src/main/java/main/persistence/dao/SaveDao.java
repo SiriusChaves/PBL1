@@ -17,7 +17,5 @@ public interface SaveDao {
 
     boolean saveFileExists(String slotIndex);
 
-    boolean findAllSlots();
-
     boolean hasSaveData(String slotIndex);
 }

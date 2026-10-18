@@ -136,16 +136,6 @@ public class SaveDaoJson implements SaveDao {
     }
 
     @Override
-    public boolean findAllSlots() {
-
-        Path pathSlot1 = Path.of("data", "saves", "slot1", "slot1.json");
-        Path pathSlot2 = Path.of("data", "saves", "slot2", "slot2.json");
-        Path pathSlot3 = Path.of("data", "saves", "slot3", "slot3.json");
-
-        return Files.exists(pathSlot1) && Files.exists(pathSlot2) && Files.exists(pathSlot3);
-    }
-
-    @Override
     public boolean hasSaveData(String slotIndex) {
 
         if (!saveFileExists(slotIndex)) {

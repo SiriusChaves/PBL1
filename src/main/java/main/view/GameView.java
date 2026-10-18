@@ -7,7 +7,6 @@ import main.dto.SceneDto;
 import main.exception.ChapterNotFoundException;
 import main.exception.ComandNonExistsException;
 import main.exception.FileOfSaveNotCreateException;
-import main.exception.SaveSlotsFullException;
 import main.model.profile.Preference;
 import main.model.profile.UserProfile;
 import main.view.menu.MainMenuOption;
@@ -58,8 +57,8 @@ public class GameView {
             switch (saveMenuOption) {
 
                 case CONTINUE -> continueLastGame();
-                case CREATE_NEW_SAVE -> createNewGame();
-                case LOAD_EXISTING_SAVE -> loadExistingGame();
+                case NEW_GAME -> createNewGame();
+                case LOAD_GAME -> loadExistingGame();
                 case DELETE_SAVE -> deleteGameSession();
                 default -> showText("Opção invalida escolhida");
             }
@@ -312,7 +311,7 @@ public class GameView {
 
         } else {
 
-            gameController.startGameSession(lastPlayedSlot);
+            gameController.loadGame(lastPlayedSlot);
 
             runGame();
         }
@@ -335,7 +334,13 @@ public class GameView {
 
             } else {
 
-                gameController.startGameSession(slotIndex);
+                if (!gameController.hasSaveDataAndSaveExists(slotIndex)) {
+
+                    showText("Não existe partida salva nesse slot.");
+                    return;
+                }
+
+                gameController.loadGame(slotIndex);
 
                 gameController.updateLastPlayedSlot(slotIndex);
 
@@ -393,9 +398,7 @@ public class GameView {
 
     private void createNewGame() {
 
-        boolean creatingNewGame = true;
-
-         while (creatingNewGame) {
+         while (true) {
 
              try {
 
@@ -432,28 +435,35 @@ public class GameView {
 
                              showText("Save " + numberSlot + "sobrescrito!");
 
-                             gameController.createNewSlotOfGameSession(numberSlot, true);
+                             gameController.prepareSaveSlot(numberSlot, true);
+
+                             gameController.startNewGame(numberSlot);
+
+                             gameController.updateLastPlayedSlot(numberSlot);
+
+                             runGame();
+
                              return;
                          }
 
                      } else {
 
-                         gameController.createNewSlotOfGameSession(numberSlot, false);
+                         gameController.prepareSaveSlot(
+                                 numberSlot,
+                                 false
+                         );
+
+                         gameController.startNewGame(numberSlot);
+
+                         gameController.updateLastPlayedSlot(numberSlot);
+
+                         runGame();
+
+                         return;
                      }
-
-                     showText(
-                             "Slot" + numberSlot
-                                     + " inicializado com sucesso!"
-                     );
-
-                     showText("Você já pode iniciar o jogo por meio dele");
-
-                     creatingNewGame = false;
                  }
 
-
-
-             } catch (FileOfSaveNotCreateException | SaveSlotsFullException saveException) {
+             } catch (FileOfSaveNotCreateException saveException) {
 
                  showText(saveException.getMessage());
                  return;

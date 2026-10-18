@@ -101,21 +101,24 @@ public class GameController {
         return saveService.hasSaveDataAndSaveExists(slotIndex);
     }
 
-    public void startGameSession(String slotIndex) {
-
-        if (hasSaveDataAndSaveExists(slotIndex)) {
-
-            this.gameSession =
-                    saveService.restoreGameSessionFromPersistence(chapterDao, slotIndex);
-
-        } else {
-
-            this.gameSession = new GameSession(chapterDao, slotIndex);
-        }
+    public void loadGame(String slotIndex) {
+        this.gameSession =
+                saveService.restoreGameSessionFromPersistence(
+                        chapterDao,
+                        slotIndex
+                );
     }
 
-    public void createNewSlotOfGameSession(String slotIndex, boolean overrideSave) {
-        saveService.createNewSlotOfGameSession(slotIndex, overrideSave);
+    public void startNewGame(String slotIndex) {
+
+        this.gameSession = new GameSession(
+                chapterDao,
+                slotIndex
+        );
+    }
+
+    public void prepareSaveSlot(String slotIndex, boolean overrideSave) {
+        saveService.prepareSaveSlot(slotIndex, overrideSave);
     }
 
     public SavePersistenceDto getDataSave(String slotIndex) {
