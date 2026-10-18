@@ -19,7 +19,7 @@
         {
           "text": "Mostrar respeito pela experiência de Silas, pedindo pra ele explicar o funcionamento das comportas",
           "nameTargetNpc": "Eng. Silas",
-          "sanityChange": 0,
+          "sanityChange": 5,
           "knowledgeChange": 0,
           "trustLevelChange": 15,
           "requireItemId": "0",
@@ -35,7 +35,7 @@
         {
           "text": "Insistir em pressa, pulando direto pro que interessa",
           "nameTargetNpc": "sem nome",
-          "sanityChange": 0,
+          "sanityChange": -10,
           "knowledgeChange": 0,
           "trustLevelChange": 0,
           "requireItemId": "0",

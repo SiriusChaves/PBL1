@@ -39,7 +39,7 @@
         {
           "text": "Enfrentar teste manualmente",
           "nameTargetNpc": "sem nome",
-          "sanityChange": -10,
+          "sanityChange": -15,
           "knowledgeChange": 5,
           "trustLevelChange": 0,
           "requireItemId": "0",

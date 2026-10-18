@@ -19,7 +19,7 @@
         {
           "text": "Ler as anotações pessoais além do código",
           "nameTargetNpc": "sem nome",
-          "sanityChange": 0,
+          "sanityChange": -10,
           "knowledgeChange": 0,
           "trustLevelChange": 0,
           "requireItemId": "0",
@@ -35,7 +35,7 @@
         {
           "text": "Focar só no código e ignorar as anotações.",
           "nameTargetNpc": "sem nome",
-          "sanityChange": 0,
+          "sanityChange": 5,
           "knowledgeChange": 0,
           "trustLevelChange": 0,
           "requireItemId": "0",
@@ -78,7 +78,7 @@
         {
           "text": "Corromper os arquivos para apagar rastros",
           "nameTargetNpc": "sem nome",
-          "sanityChange": 0,
+          "sanityChange": -5,
           "knowledgeChange": 0,
           "trustLevelChange": 0,
           "requireItemId": "0",

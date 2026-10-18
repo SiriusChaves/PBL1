@@ -35,7 +35,7 @@
         {
           "text": "Recusar educadamente, com uma desculpa técnica.",
           "nameTargetNpc": "sem nome",
-          "sanityChange": 0,
+          "sanityChange": -5,
           "knowledgeChange": 0,
           "trustLevelChange": 0,
           "requireItemId": "0",
@@ -62,7 +62,7 @@
         {
           "text": "Mentir e tranquilizar o Estudante",
           "nameTargetNpc": "sem nome",
-          "sanityChange": 0,
+          "sanityChange": -10,
           "knowledgeChange": 0,
           "trustLevelChange": 0,
           "requireItemId": "0",
@@ -78,7 +78,7 @@
         {
           "text": "Admitir parcialmente e pedir mais tempo",
           "nameTargetNpc": "sem nome",
-          "sanityChange": 0,
+          "sanityChange": 5,
           "knowledgeChange": 0,
           "trustLevelChange": 0,
           "requireItemId": "0",
@@ -98,7 +98,7 @@
     {
       "text": "Seguir em frente com o plano, apesar da desconfiança gerada",
       "nameTargetNpc": "sem nome",
-      "sanityChange": 0,
+      "sanityChange": -5,
       "knowledgeChange": 0,
       "trustLevelChange": 0,
       "requireItemId": "0",
@@ -114,7 +114,7 @@
     {
       "text": "Tentar reparar a confiança do Estudante antes de prosseguir",
       "nameTargetNpc": "sem nome",
-      "sanityChange": 0,
+      "sanityChange": 10,
       "knowledgeChange": 0,
       "trustLevelChange": 0,
       "requireItemId": "0",

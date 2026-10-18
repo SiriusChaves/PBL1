@@ -23,7 +23,7 @@
         {
           "text": "Reativar C-01 com cautela, checando os logs antes.",
           "nameTargetNpc": "sem nome",
-          "sanityChange": 0,
+          "sanityChange": 5,
           "knowledgeChange": 5,
           "trustLevelChange": 0,
           "requireItemId": "0",
@@ -39,7 +39,7 @@
         {
           "text": "Ligar direto, sem checar nada.",
           "nameTargetNpc": "sem nome",
-          "sanityChange": 0,
+          "sanityChange": -5,
           "knowledgeChange": 0,
           "trustLevelChange": 0,
           "requireItemId": "0",

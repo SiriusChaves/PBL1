@@ -19,8 +19,8 @@
         {
           "text": "Seguir a rota mais longa e segura sugerida pelo C-01",
           "nameTargetNpc": "sem nome",
-          "sanityChange": 0,
-          "knowledgeChange": 7,
+          "sanityChange": 5,
+          "knowledgeChange": 5,
           "trustLevelChange": 0,
           "requireItemId": "5",
           "rewardItem": {
@@ -35,8 +35,8 @@
         {
           "text": "Arriscar a rota curta pelas patrulhas, pra economizar tempo",
           "nameTargetNpc": "sem nome",
-          "sanityChange": -15,
-          "knowledgeChange": -9,
+          "sanityChange": -20,
+          "knowledgeChange": -10,
           "trustLevelChange": 0,
           "requireItemId": "0",
           "rewardItem": {
@@ -62,7 +62,7 @@
         {
           "text": "Usar o Chip Neuro-Virtual imediatamente",
           "nameTargetNpc": "sem nome",
-          "sanityChange": 30,
+          "sanityChange": 25,
           "knowledgeChange": 0,
           "trustLevelChange": 0,
           "requireItemId": "3",
@@ -78,7 +78,7 @@
         {
           "text": "Ignorar e continuar tentando manter o foco...",
           "nameTargetNpc": "sem nome",
-          "sanityChange": 0,
+          "sanityChange": -10,
           "knowledgeChange": 0,
           "trustLevelChange": 0,
           "requireItemId": "0",

@@ -78,7 +78,7 @@
         {
           "text": "Arriscar a passagem sem o script",
           "nameTargetNpc": "sem nome",
-          "sanityChange": -15,
+          "sanityChange": -20,
           "knowledgeChange": -5,
           "trustLevelChange": 0,
           "requireItemId": "0",

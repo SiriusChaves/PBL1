@@ -35,7 +35,7 @@
         {
           "text": "Fazer o bypass manualmente",
           "nameTargetNpc": "sem nome",
-          "sanityChange": -10,
+          "sanityChange": -15,
           "knowledgeChange": -15,
           "trustLevelChange": 0,
           "requireItemId": "0",

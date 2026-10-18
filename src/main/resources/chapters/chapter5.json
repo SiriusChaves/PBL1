@@ -15,7 +15,7 @@
         {
           "text": "Ajudar Lia a procurar a peça certa, com calma",
           "nameTargetNpc": "Lia",
-          "sanityChange": 0,
+          "sanityChange": 5,
           "knowledgeChange": 0,
           "trustLevelChange": 15,
           "requireItemId": "0",
@@ -31,8 +31,8 @@
         {
           "text": "Entregar uma peça improvisada rapidamente, só pra adiantar",
           "nameTargetNpc": "Lia",
-          "sanityChange": -9,
-          "knowledgeChange": -7,
+          "sanityChange": -10,
+          "knowledgeChange": -5,
           "trustLevelChange": -20,
           "requireItemId": "0",
           "rewardItem": {
@@ -148,7 +148,7 @@
         {
           "text": " Prosseguir com a infecção do C-01 (Firmware Espião)",
           "nameTargetNpc": "sem nome",
-          "sanityChange": 0,
+          "sanityChange": -10,
           "knowledgeChange": 0,
           "trustLevelChange": 0,
           "requireItemId": "0",
@@ -164,7 +164,7 @@
         {
           "text": "Desistir da ideia no último momento",
           "nameTargetNpc": "sem nome",
-          "sanityChange": 0,
+          "sanityChange": 5,
           "knowledgeChange": 0,
           "trustLevelChange": 0,
           "requireItemId": "0",
