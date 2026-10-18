@@ -828,11 +828,35 @@ public class TerminalUI {
                         ? "ATIVO"
                         : "INATIVO";
 
+        String showCommandHudStatus =
+                preferences.contains(Preference.SHOW_COMMAND_HUD)
+                        ? "ATIVO"
+                        : "INATIVO";
+
+        String showStatusPlayerStatus =
+                preferences.contains(Preference.SHOW_PLAYER_HUD)
+                        ? "ATIVO "
+                        : "INATIVO";
+
         System.out.printf(
                 "║ %-43s %-10s ║%n",
                 "[" + Preference.AUTOSAVE.getValue() + "] "
                         + Preference.AUTOSAVE.getDescription(),
                 autosaveStatus
+        );
+
+        System.out.printf(
+                "║ %-43s %-10s ║%n",
+                "[" + Preference.SHOW_COMMAND_HUD.getValue() + "] "
+                        + Preference.SHOW_COMMAND_HUD.getDescription(),
+                showCommandHudStatus
+        );
+
+        System.out.printf(
+                "║ %-43s %-10s ║%n",
+                "[" + Preference.SHOW_PLAYER_HUD.getValue() + "] "
+                        + Preference.SHOW_PLAYER_HUD.getDescription(),
+                showStatusPlayerStatus
         );
 
         System.out.println(
@@ -843,6 +867,82 @@ public class TerminalUI {
 
         return Preference.toPreference(
                 ConsoleInputReader.readInteger()
+        );
+    }
+
+    public static void showCommandsHud() {
+
+        System.out.println(
+                "┌─────────────────────────────────────────────────────────┐"
+        );
+
+        System.out.println(
+                "│                    COMANDOS RÁPIDOS                     │"
+        );
+
+        System.out.println(
+                "├─────────────────────────────────────────────────────────┤"
+        );
+
+        System.out.printf(
+                "│ %-17s │ %-17s │ %-17s │%n",
+                "status",
+                "inventario",
+                "vinculos"
+        );
+
+        System.out.printf(
+                "│ %-17s │ %-17s │ %-17s │%n",
+                "salvar",
+                "sair",
+                ""
+        );
+
+        System.out.println(
+                "└─────────────────────────────────────────────────────────┘"
+        );
+    }
+
+    public static void showPlayerHud(PlayerDto player) {
+
+        int sanityBlocks = player.sanity() / 10;
+        int knowledgeBlocks = player.knowledge() / 10;
+
+        String sanityBar = "";
+        String knowledgeBar = "";
+
+        for (int i = 0; i < 10; i++) {
+
+            if (i < sanityBlocks) {
+                sanityBar += "■";
+            } else {
+                sanityBar += "□";
+            }
+
+            if (i < knowledgeBlocks) {
+                knowledgeBar += "■";
+            } else {
+                knowledgeBar += "□";
+            }
+        }
+
+        System.out.println(
+                "┌─────────────────────────────────────────────────────────┐"
+        );
+
+        System.out.printf(
+                "│ %-55s │%n",
+                player.name()
+        );
+
+        System.out.printf(
+                "│ %-27s │ %-27s │%n",
+                "SAN " + sanityBar + " " + player.sanity() + "/100",
+                "TEC " + knowledgeBar + " " + player.knowledge() + "/100"
+        );
+
+        System.out.println(
+                "└─────────────────────────────────────────────────────────┘"
         );
     }
 

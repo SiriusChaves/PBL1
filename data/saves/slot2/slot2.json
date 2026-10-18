@@ -1,0 +1,41 @@
+{
+  "playerName": "O Estudante",
+  "dataHora": "2026-10-18T16:47:52.246381177",
+  "lastChapterName": "A Anomalia no DEXA ",
+  "gameStateDto": {
+    "player": {
+      "name": "O Estudante",
+      "sanity": 50,
+      "knowledge": 50
+    },
+    "currentChapterId": "0",
+    "nextChapterId": "1",
+    "currentSceneId": "0",
+    "itemsId": [],
+    "relationships": [
+      {
+        "name": "Eng. Silas",
+        "trustLevel": 50,
+        "trustLevelTier": "NEUTRO"
+      },
+      {
+        "name": "Lia",
+        "trustLevel": 50,
+        "trustLevelTier": "NEUTRO"
+      },
+      {
+        "name": "Gabriel",
+        "trustLevel": 50,
+        "trustLevelTier": "NEUTRO"
+      },
+      {
+        "name": "Rebeca",
+        "trustLevel": 50,
+        "trustLevelTier": "NEUTRO"
+      }
+    ],
+    "activeGameFlags": [],
+    "isGameCompleted": false,
+    "currentSceneIndex": 0
+  }
+}

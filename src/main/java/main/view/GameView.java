@@ -13,7 +13,6 @@ import main.model.profile.UserProfile;
 import main.view.menu.MainMenuOption;
 import main.view.menu.SaveMenuOption;
 import main.view.terminal.ConsoleInputReader;
-import main.view.terminal.TerminalUI;
 
 import static main.view.menu.MainMenuOption.*;
 import static main.view.menu.SaveMenuOption.*;
@@ -95,6 +94,11 @@ public class GameView {
 
             while (true) {
 
+                if (profile.hasPreference(Preference.SHOW_PLAYER_HUD)) {
+
+                    showPlayerHud(gameController.loadPlayerData());
+                }
+
                 currentScene = gameController.loadCurrentScene();
 
                 showDialogues(currentScene.dialogues());
@@ -104,6 +108,11 @@ public class GameView {
                     boolean isValidChoiceMade = false;
 
                     while (!isValidChoiceMade) {
+
+                        if (profile.hasPreference(Preference.SHOW_COMMAND_HUD)) {
+
+                            showCommandsHud();
+                        }
 
                         showChoices(currentScene.choices());
 
@@ -145,7 +154,7 @@ public class GameView {
                                 if (playerInput.equalsIgnoreCase("sair"))
                                     return;
 
-                                executeCommand(playerInput);
+                                executeCommand(playerInput.toLowerCase());
 
                             } catch (ComandNonExistsException comandNonExistsException) {
 
@@ -173,6 +182,11 @@ public class GameView {
                 boolean isValidChoiceMade = false;
 
                 while (!isValidChoiceMade) {
+
+                    if (profile.hasPreference(Preference.SHOW_COMMAND_HUD)) {
+
+                        showCommandsHud();
+                    }
 
                     showChoices(currentChapter.choices());
 
@@ -220,7 +234,7 @@ public class GameView {
                             if (playerInput.equalsIgnoreCase("sair"))
                                 return;
 
-                            executeCommand(playerInput);
+                            executeCommand(playerInput.toLowerCase());
 
                         } catch (ComandNonExistsException comandNonExistsException){
                             showText(comandNonExistsException.getMessage());
@@ -273,6 +287,10 @@ public class GameView {
         switch (preference) {
 
             case AUTOSAVE -> gameController.togglePreference(Preference.AUTOSAVE);
+
+            case SHOW_COMMAND_HUD -> gameController.togglePreference(Preference.SHOW_COMMAND_HUD);
+
+            case SHOW_PLAYER_HUD -> gameController.togglePreference(Preference.SHOW_PLAYER_HUD);
 
             case DEFAULT -> showText("Preferência inválida");
         }
