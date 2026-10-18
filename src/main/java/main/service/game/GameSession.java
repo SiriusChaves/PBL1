@@ -45,6 +45,10 @@ public class GameSession {
         this.gameCompleted = gameCompleted;
     }
 
+    public boolean isGameOver() {
+        return player.getSanity() <= 0;
+    }
+
     public SavePersistenceDto loadDataOfSave() {
 
         return new SavePersistenceDto(

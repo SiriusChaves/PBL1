@@ -66,6 +66,10 @@ public class GameController {
         return gameSession.isGameCompleted();
     }
 
+    public boolean isGameOver() {
+        return gameSession.isGameOver();
+    }
+
     public void setGameIsCompleted() {
 
         gameSession.setGameIsCompleted();

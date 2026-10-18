@@ -13,6 +13,7 @@ import main.model.profile.UserProfile;
 import main.view.menu.MainMenuOption;
 import main.view.menu.SaveMenuOption;
 import main.view.terminal.ConsoleInputReader;
+import main.view.terminal.TerminalUI;
 
 import static main.view.menu.MainMenuOption.*;
 import static main.view.menu.SaveMenuOption.*;
@@ -119,9 +120,12 @@ public class GameView {
 
                             if (indexChoice > 0 && indexChoice <= currentScene.numberChoices()) {
 
-                                gameController.applySceneChoiceConsequence(
-                                        indexChoice - 1
-                                );
+                                gameController.applySceneChoiceConsequence(indexChoice - 1);
+
+                                if (gameController.isGameOver()) {
+                                    showGameOverScreen();
+                                    return;
+                                }
 
                                 isValidChoiceMade = true;
 
@@ -185,6 +189,12 @@ public class GameView {
                         if (indexChoice > 0 && indexChoice <= currentChapter.numberLastChoices()) {
 
                             gameController.applyChapterFinalChoiceConsequence(indexChoice - 1);
+
+                            if (gameController.isGameOver()) {
+                                showGameOverScreen();
+                                return;
+                            }
+
                             isValidChoiceMade = true;
 
                             showText(

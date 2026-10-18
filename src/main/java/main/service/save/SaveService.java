@@ -66,11 +66,11 @@ public class SaveService {
             gameFlag.addFlag(flag);
 
 
-        ItemPersistenceDto[] items =  itemDao.loadItems();
+        ItemPersistenceDto[] itemPersistenceDtoArray =  itemDao.loadItems();
 
         List<String> itemIdOfPlayer = gameState.itemsId();
 
-        for (ItemPersistenceDto itemDto : items) {
+        for (var itemDto : itemPersistenceDtoArray) {
 
             if (itemIdOfPlayer.contains(itemDto.id())) {
 

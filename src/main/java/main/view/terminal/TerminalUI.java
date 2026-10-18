@@ -19,6 +19,40 @@ public class TerminalUI {
         System.out.println(text);
     }
 
+    public static void showGameOverScreen() {
+
+        System.out.println(
+                "╔═════════════════════════════════════════════════════════╗"
+        );
+
+        System.out.println(
+                "║                        GAME OVER                        ║"
+        );
+
+        System.out.println(
+                "╠═════════════════════════════════════════════════════════╣"
+        );
+
+        System.out.printf(
+                "║ %-55s ║%n",
+                "Sua sanidade chegou a 0."
+        );
+
+        System.out.printf(
+                "║ %-55s ║%n",
+                "A influência do MegaBrain foi longe demais."
+        );
+
+        System.out.printf(
+                "║ %-55s ║%n",
+                "Sua jornada chegou ao fim."
+        );
+
+        System.out.println(
+                "╚═════════════════════════════════════════════════════════╝"
+        );
+    }
+
     public static void showEndingScreen() {
 
         System.out.println(
