@@ -360,7 +360,7 @@ public class GameView {
 
             showText("Informe o número do save que você deseja apagar");
 
-            String slotIndex =  Integer.toString(ConsoleInputReader.readInteger());
+            String slotIndex = Integer.toString(ConsoleInputReader.readInteger());
 
             if (!isValidSlotIndex(Integer.parseInt(slotIndex))) {
 
@@ -369,6 +369,14 @@ public class GameView {
                                 + " com index 1, 2 ou 3!"
                 );
             } else {
+
+                if (!gameController.hasSaveDataAndSaveExists(slotIndex)) {
+
+                    showText(
+                            "O slot não possui dados salvos para exclusão!"
+                    );
+                }
+
 
                 showText(
                         "Você deseja realmente excluir PERMANENTEMENTE"
