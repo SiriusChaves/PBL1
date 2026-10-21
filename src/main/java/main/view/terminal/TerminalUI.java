@@ -675,6 +675,17 @@ public class TerminalUI {
                 " > 'vinculos'   - Ver relações com NPCs."
         );
 
+        System.out.printf(
+                "║ %-55s ║%n",
+                " > 'salvar'   - Salvar o jogo agora."
+        );
+
+        System.out.printf(
+                "║ %-55s ║%n",
+                " > 'sair'   - Retorna ao menu principal."
+        );
+
+
         System.out.printf("║ %-55s ║%n", "");
 
         System.out.printf(
