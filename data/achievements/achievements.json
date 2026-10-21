@@ -1,1 +1,10 @@
-[]
+[
+  {
+    "name": "!!!GAME OVER!!!",
+    "description": "Você chegou a 0 de sanidade mental e falhou na sua missão"
+  },
+  {
+    "name": "FINAL 1: A NOVA ORDEM MONDIAL",
+    "description": "Você concluiu a campanha do Arquiteto e estabeleceu uma nova Ordem Mundial movida pelo MegaBrain"
+  }
+]

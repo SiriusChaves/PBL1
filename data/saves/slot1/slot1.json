@@ -1,16 +1,16 @@
 {
   "playerName": "O Estudante",
-  "dataHora": "2026-10-20T21:50:33.333696807",
-  "lastChapterName": "A Anomalia no DEXA ",
+  "dataHora": "2026-10-20T22:12:21.594945947",
+  "lastChapterName": "Aliança Teia Humana",
   "gameStateDto": {
     "player": {
       "name": "O Estudante",
       "sanity": 50,
       "knowledge": 50
     },
-    "currentChapterId": "0",
-    "nextChapterId": "1",
-    "currentSceneId": "0",
+    "currentChapterId": "1",
+    "nextChapterId": "2",
+    "currentSceneId": "2",
     "itemsId": [],
     "relationships": [
       {

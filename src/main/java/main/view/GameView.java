@@ -375,6 +375,8 @@ public class GameView {
                     showText(
                             "O slot não possui dados salvos para exclusão!"
                     );
+
+                    return;
                 }
 
 

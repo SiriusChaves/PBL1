@@ -685,7 +685,6 @@ public class TerminalUI {
                 " > 'sair'   - Retorna ao menu principal."
         );
 
-
         System.out.printf("║ %-55s ║%n", "");
 
         System.out.printf(
