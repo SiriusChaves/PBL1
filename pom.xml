@@ -12,9 +12,8 @@
 
     <properties>
         <maven.compiler.release>21</maven.compiler.release>
-        <project.build.sourceEncoding>
-            UTF-8
-        </project.build.sourceEncoding>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <javafx.version>21.0.08</javafx.version>
     </properties>
 
     <dependencies>
@@ -32,6 +31,20 @@
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.14.0</version>
+        </dependency>
+
+        <!-- Componentes Visuais do JavaFX -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>21</version>
+        </dependency>
+
+        <!-- Suporte ao FXML e FXMLLoader -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>21</version>
         </dependency>
 
     </dependencies>
@@ -52,6 +65,18 @@
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-surefire-plugin</artifactId>
             <version>3.2.5</version>
+        </plugin>
+
+        <!-- Plugin para executar a aplicação JavaFX -->
+        <plugin>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-maven-plugin</artifactId>
+            <version>0.0.8</version>
+            <configuration>
+                <mainClass>
+                    main.view.javafx.MegaBrainApplication
+                </mainClass>
+            </configuration>
         </plugin>
 
     </plugins>
