@@ -7,27 +7,16 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import main.view.javafx.manager.SceneManager;
+
+import java.util.Objects;
 
 public class MegaBrainApplication extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        Label label = new Label("MEGABRAIN");
-        Button button = new Button("mega click");
-
-        button.setOnAction(event -> {
-            new Alert(Alert.AlertType.INFORMATION, "Megabrain com UI")
-                    .showAndWait();
-        });
-
-        VBox vBox = new VBox();
-        vBox.getChildren().add(label);
-        vBox.getChildren().add(button);
-
-        Scene scene = new Scene(vBox, 900, 900);
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("MegaBrainApllication");
-        primaryStage.show();
+        SceneManager sceneManager = new SceneManager(primaryStage);
+        sceneManager.showMainMenu();
     }
 
     public static void main(String[] args) {
