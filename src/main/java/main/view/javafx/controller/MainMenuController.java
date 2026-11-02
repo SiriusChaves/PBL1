@@ -5,8 +5,11 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import main.view.javafx.manager.SceneManager;
 
-public class MainMenuController {
+public class MainMenuController implements SceneController {
+
+    private SceneManager sceneManager;
 
     @FXML
     private Button achievementsButton;
@@ -25,6 +28,11 @@ public class MainMenuController {
 
     @FXML
     private Button startGameButton;
+
+    @Override
+    public void setSceneManager(SceneManager sceneManager) {
+        this.sceneManager = sceneManager;
+    }
 
     @FXML
     void handleExit(ActionEvent event) {
@@ -49,7 +57,7 @@ public class MainMenuController {
 
     @FXML
     void handleShowPreferences(ActionEvent event) {
-
+        sceneManager.showPreferences();
     }
 
     @FXML

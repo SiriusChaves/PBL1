@@ -4,8 +4,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
+import main.view.javafx.manager.SceneManager;
 
-public class PreferenceScreenController {
+public class PreferenceScreenController implements SceneController{
+
+    private SceneManager sceneManager;
 
     @FXML
     private ToggleButton autosaveButton;
@@ -19,9 +22,14 @@ public class PreferenceScreenController {
     @FXML
     private ToggleButton playerStatusButton;
 
+    @Override
+    public void setSceneManager(SceneManager sceneManager) {
+        this.sceneManager = sceneManager;
+    }
+
     @FXML
     void handleBackToMainMenu(ActionEvent event) {
-
+        sceneManager.showMainMenu();
     }
 
     @FXML
