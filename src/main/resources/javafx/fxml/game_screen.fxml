@@ -14,7 +14,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.view.javafx.controller.GameScreenController">
    <top>
       <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
@@ -24,7 +24,7 @@
                </font>
             </Label>
             <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-            <Label text="Capitulo XX - Titulo">
+            <Label fx:id="chapterActual" text="Capitulo XX - Titulo">
                <font>
                   <Font size="35.0" />
                </font>
@@ -40,7 +40,7 @@
          <children>
             <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="106.0" prefWidth="1326.0">
                <content>
-                  <Label alignment="TOP_LEFT" maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" text="lorem um texto muito doido de exemplo para simular a narrativa do megabrain sdaallalalaaaaaaaaaaaaaaaaaa" wrapText="true">
+                  <Label fx:id="storyTextLabel" alignment="TOP_LEFT" maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" text="lorem um texto muito doido de exemplo para simular a narrativa do megabrain sdaallalalaaaaaaaaaaaaaaaaaa" wrapText="true">
                      <font>
                         <Font size="38.0" />
                      </font>
@@ -51,12 +51,12 @@
                <content>
                   <VBox alignment="CENTER" maxWidth="1.7976931348623157E308" spacing="12.0">
                      <children>
-                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="exemplo de escolha 3" wrapText="true">
+                        <Button fx:id="choice1Button" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="exemplo de escolha 3" wrapText="true">
                            <font>
                               <Font size="26.0" />
                            </font>
                         </Button>
-                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="exemplo de escolha 1" wrapText="true">
+                        <Button fx:id="choice2Button" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="exemplo de escolha 1" wrapText="true">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -64,7 +64,7 @@
                               <Font size="26.0" />
                            </font>
                         </Button>
-                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="exemplo de escolha 2" wrapText="true">
+                        <Button fx:id="choice3Button" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="exemplo de escolha 2" wrapText="true">
                            <font>
                               <Font size="26.0" />
                            </font>
@@ -81,7 +81,7 @@
          <children>
             <VBox maxWidth="1.7976931348623157E308" prefWidth="380.0" spacing="8.0" HBox.hgrow="ALWAYS">
                <children>
-                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Nome Personagem A" textAlignment="CENTER">
+                  <Label fx:id="nameCharacterA" alignment="CENTER" maxWidth="1.7976931348623157E308" text="Nome Personagem A" textAlignment="CENTER">
                      <font>
                         <Font size="28.0" />
                      </font>
@@ -89,14 +89,14 @@
                   <StackPane prefHeight="250.0" prefWidth="380.0">
                      <children>
                         <Rectangle arcHeight="12.0" arcWidth="12.0" fill="#154e83" height="240.0" stroke="#ddd423" strokeType="INSIDE" strokeWidth="2.0" width="340.0" />
-                        <ImageView fitHeight="230.0" fitWidth="330.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="imgCharacterA" fitHeight="230.0" fitWidth="330.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </StackPane>
                </children>
             </VBox>
             <VBox maxWidth="1.7976931348623157E308" prefWidth="380.0" spacing="8.0" HBox.hgrow="ALWAYS">
                <children>
-                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Nome Personagem B" textAlignment="CENTER">
+                  <Label fx:id="nameCharacterB" alignment="CENTER" maxWidth="1.7976931348623157E308" text="Nome Personagem B" textAlignment="CENTER">
                      <font>
                         <Font size="28.0" />
                      </font>
@@ -104,7 +104,7 @@
                   <StackPane prefHeight="250.0" prefWidth="380.0">
                      <children>
                         <Rectangle arcHeight="12.0" arcWidth="12.0" fill="#154e83" height="240.0" stroke="#ddd423" strokeType="INSIDE" strokeWidth="2.0" width="340.0" />
-                        <ImageView fitHeight="230.0" fitWidth="330.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="imgCharacterB" fitHeight="230.0" fitWidth="330.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </StackPane>
                </children>
