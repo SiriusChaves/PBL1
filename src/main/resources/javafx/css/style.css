@@ -1,3 +1,5 @@
-.label {
-    -fx-background-color: #25766d;
+.selectedButton {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
 }
