@@ -76,7 +76,10 @@
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </padding>
                         </VBox>
-                        <Button fx:id="slot1Button" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleClickedOnSlot1" styleClass="selectedButton" stylesheets="@../css/style.css" />
+                        <Button fx:id="slot1Button" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleClickedOnSlot1" styleClass="selectedButton" stylesheets="@../css/style.css">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Button>
                      </children>
                   </StackPane>
                   <HBox alignment="CENTER" managed="false" prefHeight="45.0" prefWidth="200.0" spacing="15.0" visible="false">
@@ -134,7 +137,10 @@
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </padding>
                         </VBox>
-                        <Button fx:id="slot2Button" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleClickedOnSlot2" styleClass="selectedButton" stylesheets="@../css/style.css" />
+                        <Button fx:id="slot2Button" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleClickedOnSlot2" styleClass="selectedButton" stylesheets="@../css/style.css">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Button>
                      </children>
                   </StackPane>
                   <HBox alignment="CENTER" managed="false" prefHeight="45.0" prefWidth="200.0" spacing="15.0" visible="false">
@@ -192,7 +198,10 @@
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </padding>
                         </VBox>
-                        <Button fx:id="slot3Button" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleClickedOnSlot3" styleClass="selectedButton" stylesheets="@../css/style.css" />
+                        <Button fx:id="slot3Button" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleClickedOnSlot3" styleClass="selectedButton" stylesheets="@../css/style.css">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Button>
                      </children>
                   </StackPane>
                   <HBox alignment="CENTER" managed="false" prefHeight="45.0" prefWidth="200.0" spacing="15.0" visible="false">
