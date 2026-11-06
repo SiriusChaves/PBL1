@@ -14,7 +14,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.view.javafx.controller.GameScreenController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.view.javafx.controller.GameScreenController">
    <top>
       <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
@@ -36,22 +36,25 @@
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
    </padding>
    <bottom>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="300.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="106.0" prefWidth="1326.0">
+            <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="130.0" prefWidth="1326.0" VBox.vgrow="ALWAYS">
                <content>
                   <Label fx:id="storyTextLabel" alignment="TOP_LEFT" maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" text="lorem um texto muito doido de exemplo para simular a narrativa do megabrain sdaallalalaaaaaaaaaaaaaaaaaa" wrapText="true">
                      <font>
                         <Font size="38.0" />
                      </font>
+                     <padding>
+                        <Insets bottom="12.0" left="18.0" right="18.0" top="12.0" />
+                     </padding>
                   </Label>
                </content>
             </ScrollPane>
-            <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0">
+            <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="130.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                <content>
                   <VBox alignment="CENTER" maxWidth="1.7976931348623157E308" spacing="12.0">
                      <children>
-                        <Button fx:id="choice1Button" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="exemplo de escolha 3" wrapText="true">
+                        <Button fx:id="choice1Button" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="49.0" prefWidth="1324.0" text="exemplo de escolha 3" wrapText="true">
                            <font>
                               <Font size="26.0" />
                            </font>
