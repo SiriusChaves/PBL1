@@ -5,8 +5,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import main.controller.GameController;
-import main.view.javafx.controller.GameControllerReceiver;
-import main.view.javafx.controller.ScreenController;
+import main.view.javafx.controller.dependency.GameControllerAware;
+import main.view.javafx.controller.dependency.ScreenController;
 
 import java.io.IOException;
 
@@ -36,8 +36,8 @@ public class ScreenManager {
 
             Parent root = loader.load();
 
-            if (loader.getController() instanceof GameControllerReceiver gameControllerReceiver) {
-                gameControllerReceiver.setGameController(this.gameController);
+            if (loader.getController() instanceof GameControllerAware gameControllerAware) {
+                gameControllerAware.setGameController(this.gameController);
             }
 
             if (loader.getController() instanceof ScreenController screenController) {

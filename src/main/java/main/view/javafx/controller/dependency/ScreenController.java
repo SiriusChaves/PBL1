@@ -1,4 +1,4 @@
-package main.view.javafx.controller;
+package main.view.javafx.controller.dependency;
 
 import main.view.javafx.manager.ScreenManager;
 

@@ -7,12 +7,14 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import main.controller.GameController;
+import main.view.javafx.controller.dependency.GameControllerAware;
+import main.view.javafx.controller.dependency.ScreenController;
 import main.view.javafx.manager.ScreenManager;
 
 /* Lembrar de usar setVisible() e setManeged() para controlar, respectivamente,
 * visibilidade dos elementos e se eles serão usados no calculo de espaço do layout
 * */
-public class SaveScreenController implements ScreenController, GameControllerReceiver {
+public class SaveScreenController implements ScreenController, GameControllerAware {
 
     private ScreenManager screenManager;
 

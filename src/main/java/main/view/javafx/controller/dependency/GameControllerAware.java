@@ -1,7 +1,7 @@
-package main.view.javafx.controller;
+package main.view.javafx.controller.dependency;
 
 import main.controller.GameController;
 
-public interface GameControllerReceiver {
+public interface GameControllerAware {
     void setGameController(GameController gameController);
 }

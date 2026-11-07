@@ -5,9 +5,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
 import main.controller.GameController;
+import main.view.javafx.controller.dependency.GameControllerAware;
+import main.view.javafx.controller.dependency.ScreenController;
 import main.view.javafx.manager.ScreenManager;
 
-public class PreferenceScreenController implements ScreenController, GameControllerReceiver {
+public class PreferenceScreenController implements ScreenController, GameControllerAware {
 
     private ScreenManager screenManager;
 

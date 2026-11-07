@@ -8,7 +8,7 @@ import main.view.javafx.manager.ScreenManager;
 
 public class MegaBrainApplication extends Application {
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
 
         GameController gameController = new GameController(
                 new ChapterDaoJson(),

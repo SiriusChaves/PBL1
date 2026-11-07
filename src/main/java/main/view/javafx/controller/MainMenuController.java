@@ -6,9 +6,11 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import main.controller.GameController;
+import main.view.javafx.controller.dependency.GameControllerAware;
+import main.view.javafx.controller.dependency.ScreenController;
 import main.view.javafx.manager.ScreenManager;
 
-public class MainMenuController implements ScreenController, GameControllerReceiver {
+public class MainMenuController implements ScreenController, GameControllerAware {
 
     private ScreenManager screenManager;
 
