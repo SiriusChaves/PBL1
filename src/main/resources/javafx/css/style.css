@@ -5,12 +5,12 @@
 }
 
 
-.toggle-button{
+.toggle-button:selected {
     -fx-border-color: #35f335;
     -fx-background-color: #6af56a;
 }
 
-.toggle-button:selected{
+.toggle-button{
     -fx-border-color: #f33561;
     -fx-background-color: #ec3939;
 }
