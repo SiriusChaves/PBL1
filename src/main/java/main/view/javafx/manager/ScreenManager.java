@@ -7,6 +7,7 @@ import javafx.stage.Stage;
 import main.controller.GameController;
 import main.view.javafx.controller.dependency.GameControllerAware;
 import main.view.javafx.controller.dependency.ScreenController;
+import main.view.javafx.controller.dependency.ScreenInitializer;
 
 import java.io.IOException;
 
@@ -42,6 +43,10 @@ public class ScreenManager {
 
             if (loader.getController() instanceof ScreenController screenController) {
                 screenController.setScreenManager(this);
+            }
+
+            if (loader.getController() instanceof ScreenInitializer screenInitializer) {
+                screenInitializer.initScreen();
             }
 
             Scene scene = new Scene(root);
