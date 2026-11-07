@@ -30,7 +30,7 @@
                      </font>
                   </Label>
                   <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                  <ToggleButton fx:id="autosaveButton" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#handleToggleAutosave" text="ToggleButton">
+                  <ToggleButton fx:id="autosaveButton" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#handleToggleAutosave" stylesheets="@../css/style.css" text="DESATIVADO">
                      <HBox.margin>
                         <Insets right="40.0" />
                      </HBox.margin></ToggleButton>
@@ -46,7 +46,7 @@
                      </font>
                   </Label>
                   <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                  <ToggleButton fx:id="commandMenuButton" mnemonicParsing="false" onAction="#handleToggleShowCommandMenu" text="ToggleButton">
+                  <ToggleButton fx:id="commandMenuButton" mnemonicParsing="false" onAction="#handleToggleShowCommandMenu" stylesheets="@../css/style.css" text="DESATIVADO">
                      <HBox.margin>
                         <Insets right="40.0" />
                      </HBox.margin></ToggleButton>
@@ -63,7 +63,7 @@
                      </font>
                   </Label>
                   <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                  <ToggleButton fx:id="playerStatusButton" mnemonicParsing="false" onAction="#handleToggleShowPLayerStatus" text="ToggleButton">
+                  <ToggleButton fx:id="playerStatusButton" mnemonicParsing="false" onAction="#handleToggleShowPLayerStatus" stylesheets="@../css/style.css" text="DESATIVADO">
                      <HBox.margin>
                         <Insets right="40.0" />
                      </HBox.margin></ToggleButton>
