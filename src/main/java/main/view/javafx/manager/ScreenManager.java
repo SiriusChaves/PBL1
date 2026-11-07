@@ -4,6 +4,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import main.controller.GameController;
+import main.view.javafx.controller.GameControllerReceiver;
 import main.view.javafx.controller.ScreenController;
 
 import java.io.IOException;
@@ -11,10 +13,12 @@ import java.io.IOException;
 public class ScreenManager {
     private static final String VIEW_PATH = "/javafx/fxml/";
 
-    private Stage mainStage;
+    private final Stage mainStage;
+    private final GameController gameController;
 
-    public ScreenManager(Stage primaryStage) {
+    public ScreenManager(Stage primaryStage, GameController gameController) {
         this.mainStage = primaryStage;
+        this.gameController = gameController;
         primaryStage.setTitle("MegaBrainApplication");
     }
 
@@ -31,6 +35,10 @@ public class ScreenManager {
             FXMLLoader loader = new FXMLLoader(resource);
 
             Parent root = loader.load();
+
+            if (loader.getController() instanceof GameControllerReceiver gameControllerReceiver) {
+                gameControllerReceiver.setGameController(this.gameController);
+            }
 
             if (loader.getController() instanceof ScreenController screenController) {
                 screenController.setScreenManager(this);
