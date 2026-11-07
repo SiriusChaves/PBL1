@@ -4,11 +4,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
+import main.controller.GameController;
 import main.view.javafx.manager.ScreenManager;
 
-public class PreferenceScreenController implements ScreenController {
+public class PreferenceScreenController implements ScreenController, GameControllerReceiver {
 
     private ScreenManager screenManager;
+
+    private GameController gameController;
 
     @FXML
     private ToggleButton autosaveButton;
@@ -25,6 +28,11 @@ public class PreferenceScreenController implements ScreenController {
     @Override
     public void setScreenManager(ScreenManager screenManager) {
         this.screenManager = screenManager;
+    }
+
+    @Override
+    public void setGameController(GameController gameController) {
+        this.gameController = gameController;
     }
 
     @FXML

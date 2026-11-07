@@ -5,11 +5,14 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import main.controller.GameController;
 import main.view.javafx.manager.ScreenManager;
 
-public class MainMenuController implements ScreenController {
+public class MainMenuController implements ScreenController, GameControllerReceiver {
 
     private ScreenManager screenManager;
+
+    private GameController gameController;
 
     @FXML
     private Button achievementsButton;
@@ -32,6 +35,11 @@ public class MainMenuController implements ScreenController {
     @Override
     public void setScreenManager(ScreenManager screenManager) {
         this.screenManager = screenManager;
+    }
+
+    @Override
+    public void setGameController(GameController gameController) {
+        this.gameController = gameController;
     }
 
     @FXML
