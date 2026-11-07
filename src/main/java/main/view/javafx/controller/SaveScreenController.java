@@ -6,12 +6,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
-import main.view.javafx.manager.SceneManager;
+import main.view.javafx.manager.ScreenManager;
 
 /* Lembrar de usar setVisible() e setManeged() para controlar, respectivamente,
 * visibilidade dos elementos e se eles serão usados no calculo de espaço do layout
 * */
-public class SaveScreenController implements SceneController {
+public class SaveScreenController implements ScreenController {
+
+    private ScreenManager screenManager;
 
     @FXML
     private Button backToMenuButton;
@@ -97,11 +99,9 @@ public class SaveScreenController implements SceneController {
     @FXML
     private Button slot3Button;
 
-    private SceneManager sceneManager;
-
     @Override
-    public void setSceneManager(SceneManager sceneManager) {
-        this.sceneManager = sceneManager;
+    public void setScreenManager(ScreenManager screenManager) {
+        this.screenManager = screenManager;
     }
 
     @FXML

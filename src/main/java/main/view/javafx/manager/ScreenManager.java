@@ -4,21 +4,21 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import main.view.javafx.controller.SceneController;
+import main.view.javafx.controller.ScreenController;
 
 import java.io.IOException;
 
-public class SceneManager {
+public class ScreenManager {
     private static final String VIEW_PATH = "/javafx/fxml/";
 
     private Stage mainStage;
 
-    public SceneManager(Stage primaryStage) {
+    public ScreenManager(Stage primaryStage) {
         this.mainStage = primaryStage;
         primaryStage.setTitle("MegaBrainApplication");
     }
 
-    private void loadScene(String fxmlfilename) {
+    private void loadSceneFromFxmlFile(String fxmlfilename) {
         try {
             String fullpath = VIEW_PATH + fxmlfilename;
             var resource = getClass().getResource(fullpath);
@@ -32,8 +32,8 @@ public class SceneManager {
 
             Parent root = loader.load();
 
-            if (loader.getController() instanceof SceneController sceneController) {
-                sceneController.setSceneManager(this);
+            if (loader.getController() instanceof ScreenController screenController) {
+                screenController.setScreenManager(this);
             }
 
             Scene scene = new Scene(root);
@@ -47,15 +47,25 @@ public class SceneManager {
     }
 
     public void showMainMenu() {
-        String mainMenuFxmlfilename = "main_menu.fxml";
+        String mainMenuFxmlFilename = "main_menu.fxml";
 
-        loadScene(mainMenuFxmlfilename);
+        loadSceneFromFxmlFile(mainMenuFxmlFilename);
 
         mainStage.show();
     }
 
     public void showPreferences() {
-        String preferencesFxmlfilename = "preferences_screen.fxml";
-        loadScene(preferencesFxmlfilename);
+        String preferencesFxmlFilename = "preferences_screen.fxml";
+        loadSceneFromFxmlFile(preferencesFxmlFilename);
+    }
+
+    public void showSaveScreen() {
+        String saveScreenFxmlFilename = "save_screen.fxml";
+        loadSceneFromFxmlFile(saveScreenFxmlFilename);
+    }
+
+    public void showGameScreen() {
+        String gameScreenFxmlFilename = "game_screen.fxml";
+        loadSceneFromFxmlFile(gameScreenFxmlFilename);
     }
 }

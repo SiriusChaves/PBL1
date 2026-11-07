@@ -4,12 +4,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import main.view.javafx.manager.SceneManager;
+import main.view.javafx.manager.ScreenManager;
 
 
-public class GameScreenController implements SceneController{
+public class GameScreenController implements ScreenController {
 
-    private SceneManager sceneManager;
+    private ScreenManager screenManager;
 
     @FXML
     private Label chapterActual;
@@ -39,7 +39,7 @@ public class GameScreenController implements SceneController{
     private Label storyTextLabel;
 
     @Override
-    public void setSceneManager(SceneManager sceneManager) {
-        this.sceneManager = sceneManager;
+    public void setScreenManager(ScreenManager screenManager) {
+        this.screenManager = screenManager;
     }
 }
