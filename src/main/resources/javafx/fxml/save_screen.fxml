@@ -44,7 +44,7 @@
                   <StackPane maxWidth="1.7976931348623157E308" prefHeight="390.0" prefWidth="360.0">
                      <children>
                         <Rectangle arcHeight="12.0" arcWidth="12.0" fill="#94cbff" height="370.0" layoutX="10.0" layoutY="10.0" stroke="#bfb945" strokeType="INSIDE" strokeWidth="1.5" width="340.0" />
-                        <VBox alignment="CENTER" managed="false" maxWidth="330.0" prefWidth="320.0" spacing="10.0" visible="false" StackPane.alignment="CENTER">
+                        <VBox fx:id="saveDataContentSlot1" alignment="CENTER" managed="false" maxWidth="330.0" prefWidth="320.0" spacing="10.0" visible="false" StackPane.alignment="CENTER">
                            <children>
                               <ImageView fx:id="imgSlot1" fitHeight="170.0" fitWidth="310.0" pickOnBounds="true" preserveRatio="true" />
                               <Label fx:id="chapterNameSlot1Label" alignment="CENTER" text="Nome do cap slot 1" textAlignment="CENTER" wrapText="true">
@@ -82,7 +82,7 @@
                            </cursor></Button>
                      </children>
                   </StackPane>
-                  <HBox alignment="CENTER" managed="false" prefHeight="45.0" prefWidth="200.0" spacing="15.0" visible="false">
+                  <HBox fx:id="saveActionsSlot1" alignment="CENTER" managed="false" prefHeight="45.0" prefWidth="200.0" spacing="15.0" visible="false">
                      <children>
                         <Button fx:id="restartSaveSlot1Button" mnemonicParsing="false" onAction="#handleRestartSaveSlot1" prefHeight="40.0" prefWidth="140.0" text="reiniciar">
                            <font>
@@ -105,10 +105,10 @@
                   <StackPane maxWidth="1.7976931348623157E308" prefHeight="390.0" prefWidth="360.0">
                      <children>
                         <Rectangle arcHeight="12.0" arcWidth="12.0" fill="#94cbff" height="370.0" stroke="#bfb945" strokeType="INSIDE" strokeWidth="1.5" width="340.0" />
-                        <VBox alignment="CENTER" managed="false" maxWidth="330.0" prefWidth="320.0" spacing="10.0" visible="false" StackPane.alignment="CENTER">
+                        <VBox fx:id="saveDataContentSlot2" alignment="CENTER" managed="false" maxWidth="330.0" prefWidth="320.0" spacing="10.0" visible="false" StackPane.alignment="CENTER">
                            <children>
                               <ImageView fx:id="imgSlot2" fitHeight="170.0" fitWidth="310.0" layoutX="10.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true" />
-                              <Label fx:id="chapterNameSlot2Label" alignment="CENTER" scaleX="0.0" scaleY="0.0" scaleZ="0.0" text="Nome do cap slot 2" textAlignment="CENTER" wrapText="true">
+                              <Label fx:id="chapterNameSlot2Label" alignment="CENTER" text="Nome do cap slot 2" textAlignment="CENTER" wrapText="true">
                                  <font>
                                     <Font size="21.0" />
                                  </font></Label>
@@ -143,7 +143,7 @@
                            </cursor></Button>
                      </children>
                   </StackPane>
-                  <HBox alignment="CENTER" managed="false" prefHeight="45.0" prefWidth="200.0" spacing="15.0" visible="false">
+                  <HBox fx:id="saveActionsSlot2" alignment="CENTER" managed="false" prefHeight="45.0" prefWidth="200.0" spacing="15.0" visible="false">
                      <children>
                         <Button fx:id="restartSaveSlot2Button" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleRestartSaveSlot2" prefHeight="40.0" prefWidth="140.0" text="reiniciar">
                            <font>
@@ -166,7 +166,7 @@
                   <StackPane maxWidth="1.7976931348623157E308" prefHeight="390.0" prefWidth="360.0">
                      <children>
                         <Rectangle arcHeight="12.0" arcWidth="12.0" fill="#94cbff" height="370.0" stroke="#bfb945" strokeType="INSIDE" strokeWidth="1.5" width="340.0" />
-                        <VBox alignment="CENTER" managed="false" maxWidth="330.0" prefWidth="320.0" spacing="10.0" visible="false" StackPane.alignment="CENTER">
+                        <VBox fx:id="saveDataContentSlot3" alignment="CENTER" managed="false" maxWidth="330.0" prefWidth="320.0" spacing="10.0" visible="false" StackPane.alignment="CENTER">
                            <children>
                               <ImageView fx:id="imgSlot3" fitHeight="170.0" fitWidth="310.0" pickOnBounds="true" preserveRatio="true" />
                               <Label fx:id="chapterNameSlot3Label" alignment="CENTER" text="Nome do cap slot 3" textAlignment="CENTER" wrapText="true">
@@ -204,7 +204,7 @@
                            </cursor></Button>
                      </children>
                   </StackPane>
-                  <HBox alignment="CENTER" managed="false" prefHeight="45.0" prefWidth="200.0" spacing="15.0" visible="false">
+                  <HBox fx:id="saveActionsSlot3" alignment="CENTER" managed="false" prefHeight="45.0" prefWidth="200.0" spacing="15.0" visible="false">
                      <children>
                         <Button fx:id="restartSaveSlot3Button" mnemonicParsing="false" onAction="#handleRestartSaveSlot3" prefHeight="40.0" prefWidth="140.0" text="reiniciar">
                            <font>
