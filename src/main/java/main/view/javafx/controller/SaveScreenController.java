@@ -2,8 +2,7 @@ package main.view.javafx.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -15,6 +14,7 @@ import main.view.javafx.controller.dependency.ScreenInitializer;
 import main.view.javafx.manager.ScreenManager;
 
 import java.util.List;
+import java.util.Optional;
 
 /* Lembrar de usar setVisible() e setManeged() para controlar, respectivamente,
 * visibilidade dos elementos e se eles serão usados no calculo de espaço do layout
@@ -159,17 +159,29 @@ public class SaveScreenController implements ScreenController, GameControllerAwa
 
     @FXML
     void handleDeleteSaveSlot1(ActionEvent event) {
+        if (confirmDelete(1)) {
+            gameController.deleteGameSession(String.valueOf(1));
+        }
 
+        updateAllSlots();
     }
 
     @FXML
     void handleDeleteSaveSlot2(ActionEvent event) {
+        if (confirmDelete(2)) {
+            gameController.deleteGameSession(String.valueOf(2));
+        }
 
+        updateAllSlots();
     }
 
     @FXML
     void handleDeleteSaveSlot3(ActionEvent event) {
+        if (confirmDelete(3)) {
+            gameController.deleteGameSession(String.valueOf(3));
+        }
 
+        updateAllSlots();
     }
 
     @FXML
@@ -185,6 +197,36 @@ public class SaveScreenController implements ScreenController, GameControllerAwa
     @FXML
     void handleRestartSaveSlot3(ActionEvent event) {
 
+    }
+
+    private boolean confirmDelete(int slotNumber) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+
+        alert.setTitle(
+                "Deletar Partida"
+        );
+
+        alert.setHeaderText(
+                "Deseja realmente excluir o Slot " + slotNumber + " ?"
+        );
+
+        alert.setContentText(
+                "Todo o progresso será perdido."
+        );
+
+        ButtonType deleteButton = new ButtonType(
+                "Excluir", ButtonBar.ButtonData.OK_DONE
+        );
+
+        ButtonType cancelButton = new ButtonType(
+                "Cancelar", ButtonBar.ButtonData.CANCEL_CLOSE
+        );
+
+        alert.getButtonTypes().setAll(deleteButton, cancelButton);
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        return result.isPresent() && result.get() == deleteButton;
     }
 
     private void updateSlot1(SaveViewDto saveData) {
