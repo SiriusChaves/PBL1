@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.view.javafx.controller.InstructionsScreenController">
+   <center>
+      <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <content>
+            <VBox alignment="CENTER" spacing="15.0">
+               <children>
+                  <Label text="Boas Vindas">
+                     <font>
+                        <Font size="40.0" />
+                     </font></Label>
+                  <Label layoutX="10.0" layoutY="10.0" text="Bem vindo ao Mundo de CyberFall. Suas escolhas moldam o destino do seu personagem." wrapText="true">
+                     <font>
+                        <Font size="28.0" />
+                     </font></Label>
+                  <Label layoutX="646.0" layoutY="40.0" text="Atributos e Regras">
+                     <font>
+                        <Font size="40.0" />
+                     </font></Label>
+                  <Label layoutX="646.0" layoutY="70.0" text="Sanidade: é a sua saúde mental. Chegar a zero significa Game Over. Pense bem antes de tomar suas decisões." wrapText="true">
+                     <font>
+                        <Font size="28.0" />
+                     </font></Label>
+                  <Label layoutX="646.0" layoutY="100.0" text="Conhecimento: ajuda a desvendar segredos e poder liberar caminhos e opções ocultas no futuro." wrapText="true">
+                     <font>
+                        <Font size="28.0" />
+                     </font></Label>
+                  <Label layoutX="646.0" layoutY="130.0" text="Vínculos: suas ações agradam ou irritam os NPCs. Ter aliados pode ajudar nos momentos finais. " wrapText="true">
+                     <font>
+                        <Font size="28.0" />
+                     </font></Label>
+                  <Label layoutX="646.0" layoutY="160.0" text="Como Jogar: ">
+                     <font>
+                        <Font size="40.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="646.0" layoutY="190.0" text="Durante a narrativa, opções numeradas aparecerão. Digite o número correspondente à escolha. Pressione ENTER para  confirmar." wrapText="true">
+                     <font>
+                        <Font size="28.0" />
+                     </font></Label>
+               </children>
+               <padding>
+                  <Insets left="20.0" right="20.0" />
+               </padding>
+            </VBox>
+         </content>
+      </ScrollPane>
+   </center>
+   <padding>
+      <Insets bottom="20.0" left="30.0" right="30.0" top="20.0" />
+   </padding>
+   <top>
+      <Label text="Instruções" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="54.0" />
+         </font>
+      </Label>
+   </top>
+   <bottom>
+      <Button mnemonicParsing="false" onAction="#handleBackToMainMenu" text="Voltar" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="19.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+   </bottom>
+</BorderPane>

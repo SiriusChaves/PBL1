@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" spacing="20.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.view.javafx.controller.CreditsScreenController">
+   <children>
+      <Label alignment="CENTER" text="Créditos" textAlignment="CENTER">
+         <font>
+            <Font size="57.0" />
+         </font>
+      </Label>
+      <Separator prefWidth="200.0" />
+      <Label maxHeight="500.0" maxWidth="600.0" prefHeight="291.0" prefWidth="572.0" text="Desenvolvimento e Programação:&#10; Rodrigo e Sirius&#10; &#10;  Roteiro e Game Design:&#10; Rodrigo e Sirius" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <Separator prefWidth="200.0" />
+      <Button mnemonicParsing="false" onAction="#handleBackToMainMenu" prefHeight="47.0" prefWidth="90.0" text="Voltar">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+   </children>
+   <padding>
+      <Insets bottom="30.0" top="20.0" />
+   </padding>
+</VBox>
