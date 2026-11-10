@@ -144,17 +144,17 @@ public class SaveScreenController implements ScreenController, GameControllerAwa
 
     @FXML
     void handleClickedOnSlot1(ActionEvent event) {
-
+        screenManager.showGameScreen("1");
     }
 
     @FXML
     void handleClickedOnSlot2(ActionEvent event) {
-
+        screenManager.showGameScreen("2");
     }
 
     @FXML
     void handleClickedOnSlot3(ActionEvent event) {
-
+        screenManager.showGameScreen("3");
     }
 
     @FXML

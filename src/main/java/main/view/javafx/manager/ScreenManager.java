@@ -8,6 +8,7 @@ import main.controller.GameController;
 import main.view.javafx.controller.dependency.GameControllerAware;
 import main.view.javafx.controller.dependency.ScreenController;
 import main.view.javafx.controller.dependency.ScreenInitializer;
+import main.view.javafx.controller.dependency.SlotAware;
 
 import java.io.IOException;
 
@@ -49,13 +50,13 @@ public class ScreenManager {
                 screenInitializer.initScreen();
             }
 
+
             Scene scene = new Scene(root);
 
             mainStage.setScene(scene);
 
         } catch (IOException ioException) {
             System.out.println("Erro ao carregar arquivo " + fxmlfilename);
-            return;
         }
     }
 
@@ -77,8 +78,53 @@ public class ScreenManager {
         loadSceneFromFxmlFile(saveScreenFxmlFilename);
     }
 
-    public void showGameScreen() {
+    public void showCreditsScreen() {
+        String creditsScreenFxmlFilename = "credits_screen.fxml";
+        loadSceneFromFxmlFile(creditsScreenFxmlFilename);
+    }
+
+    public void showInstructionsScreen() {
+        String instructionsScreenFxmlFilename = "instructions_screen.fxml";
+        loadSceneFromFxmlFile(instructionsScreenFxmlFilename);
+    }
+
+    public void showGameScreen(String slotNumber) {
         String gameScreenFxmlFilename = "game_screen.fxml";
-        loadSceneFromFxmlFile(gameScreenFxmlFilename);
+        try {
+            String fullpath = VIEW_PATH + gameScreenFxmlFilename;
+            var resource = getClass().getResource(fullpath);
+
+            if (resource == null) {
+                System.out.println("Erro ao carregar arquivo no caminho:\n" + fullpath);
+                return;
+            }
+
+            FXMLLoader loader = new FXMLLoader(resource);
+
+            Parent root = loader.load();
+
+            if (loader.getController() instanceof GameControllerAware gameControllerAware) {
+                gameControllerAware.setGameController(this.gameController);
+            }
+
+            if (loader.getController() instanceof ScreenController screenController) {
+                screenController.setScreenManager(this);
+            }
+
+            if (loader.getController() instanceof SlotAware slotAware) {
+                slotAware.setSlotNumber(slotNumber);
+            }
+
+            if (loader.getController() instanceof ScreenInitializer screenInitializer) {
+                screenInitializer.initScreen();
+            }
+
+            Scene scene = new Scene(root);
+
+            mainStage.setScene(scene);
+
+        } catch (IOException ioException) {
+            System.out.println("Erro ao carregar arquivo " + gameScreenFxmlFilename);
+        }
     }
 }

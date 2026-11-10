@@ -50,11 +50,16 @@
                   </Label>
                </content>
             </ScrollPane>
-            <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="130.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+            <ScrollPane fx:id="choicesScrollPane" fitToWidth="true" hbarPolicy="NEVER" prefHeight="130.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                <content>
                   <VBox alignment="CENTER" maxWidth="1.7976931348623157E308" spacing="12.0">
                      <children>
                         <Button fx:id="choice1Button" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="49.0" prefWidth="1324.0" text="exemplo de escolha 3" wrapText="true">
+                           <font>
+                              <Font size="26.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="choice3Button" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="exemplo de escolha 2" wrapText="true">
                            <font>
                               <Font size="26.0" />
                            </font>
@@ -67,15 +72,15 @@
                               <Font size="26.0" />
                            </font>
                         </Button>
-                        <Button fx:id="choice3Button" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="exemplo de escolha 2" wrapText="true">
-                           <font>
-                              <Font size="26.0" />
-                           </font>
-                        </Button>
                      </children>
                   </VBox>
                </content>
             </ScrollPane>
+            <Button fx:id="continueButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleContinue" prefHeight="49.0" prefWidth="1324.0" text="Continuar para a proxima cena" wrapText="true">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Button>
          </children>
       </VBox>
    </bottom>

@@ -57,12 +57,12 @@ public class MainMenuController implements ScreenController, GameControllerAware
 
     @FXML
     void handleShowCredits(ActionEvent event) {
-
+        screenManager.showCreditsScreen();
     }
 
     @FXML
     void handleShowInstructions(ActionEvent event) {
-
+        screenManager.showInstructionsScreen();
     }
 
     @FXML
