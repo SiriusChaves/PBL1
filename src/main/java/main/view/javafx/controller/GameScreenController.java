@@ -1,10 +1,13 @@
 package main.view.javafx.controller;
 
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
 import main.controller.GameController;
 import main.dto.ChapterDto;
 import main.dto.DialogueDto;
@@ -17,6 +20,7 @@ import main.view.javafx.controller.dependency.SlotAware;
 import main.view.javafx.manager.ScreenManager;
 
 import java.util.List;
+import java.util.Optional;
 
 
 public class GameScreenController implements
@@ -71,6 +75,9 @@ public class GameScreenController implements
     private ScrollPane choicesScrollPane;
 
     @FXML
+    private StackPane containerPauseMenu;
+
+    @FXML
     private void initialize() {
 
         choiceButtons = List.of(
@@ -95,6 +102,27 @@ public class GameScreenController implements
 
         choicesScrollPane.setVisible(false);
         choicesScrollPane.setManaged(false);
+
+        containerPauseMenu.setVisible(false);
+    }
+
+    @FXML
+    void handleResume(ActionEvent event) {
+        containerPauseMenu.setVisible(false);
+    }
+
+    @FXML
+    void handleSaveGame(ActionEvent event) {
+        gameController.saveGame();
+    }
+
+    @FXML
+    void handleBackToMainMenu(ActionEvent event) {
+
+        if (confirmLeaveToMainMenu()) {
+
+            screenManager.showMainMenu();
+        }
     }
 
     @FXML
@@ -117,6 +145,57 @@ public class GameScreenController implements
         }
 
         finishChapter();
+    }
+
+    private void registerKeyBoardsEvents() {
+
+        Scene scene = containerPauseMenu.getScene();
+
+        scene.addEventFilter(
+                KeyEvent.KEY_PRESSED,
+                event -> {
+
+                    if (event.getCode() == KeyCode.P) {
+
+                        togglePause();
+
+                        event.consume();
+                    }
+                }
+        );
+    }
+
+    private boolean confirmLeaveToMainMenu() {
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+
+        alert.setTitle("Voltar ao Menu Principal");
+
+        alert.setHeaderText(
+                "ATENÇÃO: certifique-se de salvar antes de sair."
+        );
+
+        alert.setContentText("Você pode perder seu progresso.");
+
+        ButtonType confirmButton = new ButtonType(
+                "sair", ButtonBar.ButtonData.OK_DONE
+        );
+
+        ButtonType cancelButton = new ButtonType(
+                "cancelar", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+        alert.getButtonTypes().setAll(confirmButton, cancelButton);
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        return result.isPresent() && result.get() == confirmButton;
+    }
+
+    private void togglePause() {
+
+        boolean gameIsPaused = containerPauseMenu.isVisible();
+
+        containerPauseMenu.setVisible(!gameIsPaused);
     }
 
     private void displayCurrentChapter() {
@@ -282,6 +361,8 @@ public class GameScreenController implements
 
     @Override
     public void initScreen() {
+        registerKeyBoardsEvents();
+
         openSlot();
 
         displayCurrentChapter();

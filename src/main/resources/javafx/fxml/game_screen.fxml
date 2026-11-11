@@ -14,110 +14,171 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.view.javafx.controller.GameScreenController">
-   <top>
-      <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label text="Mega Brain">
-               <font>
-                  <Font size="35.0" />
-               </font>
-            </Label>
-            <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-            <Label fx:id="chapterActual" text="Capitulo XX - Titulo">
-               <font>
-                  <Font size="35.0" />
-               </font>
-            </Label>
-         </children>
-      </HBox>
-   </top>
-   <padding>
-      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-   </padding>
-   <bottom>
-      <VBox prefHeight="300.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-         <children>
-            <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="130.0" prefWidth="1326.0" VBox.vgrow="ALWAYS">
-               <content>
-                  <Label fx:id="storyTextLabel" alignment="TOP_LEFT" maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" text="lorem um texto muito doido de exemplo para simular a narrativa do megabrain sdaallalalaaaaaaaaaaaaaaaaaa" wrapText="true">
+<StackPane xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.view.javafx.controller.GameScreenController">
+   <children>
+      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0">
+         <top>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label text="Mega Brain">
                      <font>
-                        <Font size="38.0" />
+                        <Font size="35.0" />
                      </font>
-                     <padding>
-                        <Insets bottom="12.0" left="18.0" right="18.0" top="12.0" />
-                     </padding>
                   </Label>
-               </content>
-            </ScrollPane>
-            <ScrollPane fx:id="choicesScrollPane" fitToWidth="true" hbarPolicy="NEVER" prefHeight="130.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-               <content>
-                  <VBox alignment="CENTER" maxWidth="1.7976931348623157E308" spacing="12.0">
+                  <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                  <Label fx:id="chapterActual" text="Capitulo XX - Titulo">
+                     <font>
+                        <Font size="35.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </top>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+         <bottom>
+            <VBox prefHeight="300.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+               <children>
+                  <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="130.0" prefWidth="1326.0" VBox.vgrow="ALWAYS">
+                     <content>
+                        <Label fx:id="storyTextLabel" alignment="TOP_LEFT" maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" text="lorem um texto muito doido de exemplo para simular a narrativa do megabrain sdaallalalaaaaaaaaaaaaaaaaaa" wrapText="true">
+                           <font>
+                              <Font size="38.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="12.0" left="18.0" right="18.0" top="12.0" />
+                           </padding>
+                        </Label>
+                     </content>
+                  </ScrollPane>
+                  <ScrollPane fx:id="choicesScrollPane" fitToWidth="true" hbarPolicy="NEVER" prefHeight="130.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                     <content>
+                        <VBox alignment="CENTER" maxWidth="1.7976931348623157E308" spacing="12.0">
+                           <children>
+                              <Button fx:id="choice1Button" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="49.0" prefWidth="1324.0" text="exemplo de escolha 3" wrapText="true">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="choice3Button" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="exemplo de escolha 2" wrapText="true">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="choice2Button" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="exemplo de escolha 1" wrapText="true">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </VBox>
+                     </content>
+                  </ScrollPane>
+                  <Button fx:id="continueButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleContinue" prefHeight="49.0" prefWidth="1324.0" text="Continuar para a proxima cena" wrapText="true">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
+         </bottom>
+         <center>
+            <HBox spacing="80.0" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox maxWidth="1.7976931348623157E308" prefWidth="380.0" spacing="8.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <Button fx:id="choice1Button" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="49.0" prefWidth="1324.0" text="exemplo de escolha 3" wrapText="true">
+                        <Label fx:id="nameCharacterA" alignment="CENTER" maxWidth="1.7976931348623157E308" text="Nome Personagem A" textAlignment="CENTER">
                            <font>
-                              <Font size="26.0" />
+                              <Font size="28.0" />
                            </font>
-                        </Button>
-                        <Button fx:id="choice3Button" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="exemplo de escolha 2" wrapText="true">
-                           <font>
-                              <Font size="26.0" />
-                           </font>
-                        </Button>
-                        <Button fx:id="choice2Button" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="exemplo de escolha 1" wrapText="true">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <font>
-                              <Font size="26.0" />
-                           </font>
-                        </Button>
+                        </Label>
+                        <StackPane prefHeight="250.0" prefWidth="380.0">
+                           <children>
+                              <Rectangle arcHeight="12.0" arcWidth="12.0" fill="#154e83" height="240.0" stroke="#ddd423" strokeType="INSIDE" strokeWidth="2.0" width="340.0" />
+                              <ImageView fx:id="imgCharacterA" fitHeight="230.0" fitWidth="330.0" pickOnBounds="true" preserveRatio="true" />
+                           </children>
+                        </StackPane>
                      </children>
                   </VBox>
-               </content>
-            </ScrollPane>
-            <Button fx:id="continueButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleContinue" prefHeight="49.0" prefWidth="1324.0" text="Continuar para a proxima cena" wrapText="true">
-               <font>
-                  <Font size="26.0" />
-               </font>
-            </Button>
-         </children>
-      </VBox>
-   </bottom>
-   <center>
-      <HBox spacing="80.0" BorderPane.alignment="CENTER">
+                  <VBox maxWidth="1.7976931348623157E308" prefWidth="380.0" spacing="8.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label fx:id="nameCharacterB" alignment="CENTER" maxWidth="1.7976931348623157E308" text="Nome Personagem B" textAlignment="CENTER">
+                           <font>
+                              <Font size="28.0" />
+                           </font>
+                        </Label>
+                        <StackPane prefHeight="250.0" prefWidth="380.0">
+                           <children>
+                              <Rectangle arcHeight="12.0" arcWidth="12.0" fill="#154e83" height="240.0" stroke="#ddd423" strokeType="INSIDE" strokeWidth="2.0" width="340.0" />
+                              <ImageView fx:id="imgCharacterB" fitHeight="230.0" fitWidth="330.0" pickOnBounds="true" preserveRatio="true" />
+                           </children>
+                        </StackPane>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </center>
+      </BorderPane>
+      <StackPane fx:id="containerPauseMenu" StackPane.alignment="CENTER">
          <children>
-            <VBox maxWidth="1.7976931348623157E308" prefWidth="380.0" spacing="8.0" HBox.hgrow="ALWAYS">
-               <children>
-                  <Label fx:id="nameCharacterA" alignment="CENTER" maxWidth="1.7976931348623157E308" text="Nome Personagem A" textAlignment="CENTER">
-                     <font>
-                        <Font size="28.0" />
-                     </font>
-                  </Label>
-                  <StackPane prefHeight="250.0" prefWidth="380.0">
-                     <children>
-                        <Rectangle arcHeight="12.0" arcWidth="12.0" fill="#154e83" height="240.0" stroke="#ddd423" strokeType="INSIDE" strokeWidth="2.0" width="340.0" />
-                        <ImageView fx:id="imgCharacterA" fitHeight="230.0" fitWidth="330.0" pickOnBounds="true" preserveRatio="true" />
-                     </children>
-                  </StackPane>
-               </children>
-            </VBox>
-            <VBox maxWidth="1.7976931348623157E308" prefWidth="380.0" spacing="8.0" HBox.hgrow="ALWAYS">
-               <children>
-                  <Label fx:id="nameCharacterB" alignment="CENTER" maxWidth="1.7976931348623157E308" text="Nome Personagem B" textAlignment="CENTER">
-                     <font>
-                        <Font size="28.0" />
-                     </font>
-                  </Label>
-                  <StackPane prefHeight="250.0" prefWidth="380.0">
-                     <children>
-                        <Rectangle arcHeight="12.0" arcWidth="12.0" fill="#154e83" height="240.0" stroke="#ddd423" strokeType="INSIDE" strokeWidth="2.0" width="340.0" />
-                        <ImageView fx:id="imgCharacterB" fitHeight="230.0" fitWidth="330.0" pickOnBounds="true" preserveRatio="true" />
-                     </children>
-                  </StackPane>
-               </children>
+            <VBox alignment="CENTER" maxWidth="420" spacing="18" style="-fx-background-color: #252B3A;                          -fx-border-color: #A18B63;                          -fx-border-width: 2;                          -fx-padding: 30;">
+
+               <Label text="JOGO PAUSADO" />
+
+               <Button alignment="CENTER" onAction="#handleResume" prefWidth="200.0" text="Continuar" textAlignment="CENTER">
+                  <cursor>
+                     <Cursor fx:constant="HAND" />
+                  </cursor>
+                  <font>
+                     <Font size="20.0" />
+                  </font></Button>
+
+               <Button alignment="CENTER" onAction="#handleSaveGame" prefWidth="200.0" text="Salvar jogo" textAlignment="CENTER">
+                  <cursor>
+                     <Cursor fx:constant="HAND" />
+                  </cursor>
+                  <font>
+                     <Font size="20.0" />
+                  </font></Button>
+
+               <Button alignment="CENTER" prefWidth="200.0" text="Status do jogador" textAlignment="CENTER">
+                  <cursor>
+                     <Cursor fx:constant="HAND" />
+                  </cursor>
+                  <font>
+                     <Font size="20.0" />
+                  </font></Button>
+
+               <Button alignment="CENTER" prefWidth="200.0" text="Inventário" textAlignment="CENTER">
+                  <cursor>
+                     <Cursor fx:constant="HAND" />
+                  </cursor>
+                  <font>
+                     <Font size="20.0" />
+                  </font></Button>
+
+               <Button alignment="CENTER" prefWidth="200.0" text="Configurações" textAlignment="CENTER">
+                  <cursor>
+                     <Cursor fx:constant="HAND" />
+                  </cursor>
+                  <font>
+                     <Font size="20.0" />
+                  </font></Button>
+
+               <Button alignment="CENTER" onAction="#handleBackToMainMenu" prefWidth="200.0" text="Sair para o menu" textAlignment="CENTER">
+                  <cursor>
+                     <Cursor fx:constant="HAND" />
+                  </cursor>
+                  <font>
+                     <Font size="20.0" />
+                  </font></Button>
+
             </VBox>
          </children>
-      </HBox>
-   </center>
-</BorderPane>
+      </StackPane>
+   </children>
+</StackPane>

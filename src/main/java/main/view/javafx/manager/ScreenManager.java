@@ -115,11 +115,11 @@ public class ScreenManager {
                 slotAware.setSlotNumber(slotNumber);
             }
 
+            Scene scene = new Scene(root);
+
             if (loader.getController() instanceof ScreenInitializer screenInitializer) {
                 screenInitializer.initScreen();
             }
-
-            Scene scene = new Scene(root);
 
             mainStage.setScene(scene);
 
