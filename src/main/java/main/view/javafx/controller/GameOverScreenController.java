@@ -13,7 +13,7 @@ public class GameOverScreenController implements ScreenController {
     @FXML
     void handleBackToMainMenu(KeyEvent event) {
 
-        if (event.getCode() == KeyCode.ESCAPE) {
+        if (event.getCode() == KeyCode.SPACE) {
 
             screenManager.showMainMenu();
         }
