@@ -93,6 +93,11 @@ public class ScreenManager {
         loadSceneFromFxmlFile(gameOverScreenFxmlFilename);
     }
 
+    public void showEndingScreen() {
+        String endingScreenFxmlFilename = "final_game_screen.fmxl";
+        loadSceneFromFxmlFile(endingScreenFxmlFilename);
+    }
+
     public void showGameScreen(String slotNumber) {
         String gameScreenFxmlFilename = "game_screen.fxml";
         try {

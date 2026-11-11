@@ -311,7 +311,7 @@ public class GameScreenController implements
         if (gameController.isFinalChapter()) {
             gameController.setGameIsCompleted();
             gameController.saveGame();
-            System.out.println("Mostrar tela de finalização");
+            screenManager.showEndingScreen();
             return;
         }
 

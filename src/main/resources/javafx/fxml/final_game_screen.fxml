@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handleBackToMainMenu" prefHeight="768.0" prefWidth="1366.0" spacing="25.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.view.javafx.controller.FinalGameScreenController">
+   <padding>
+      <Insets bottom="25.0" left="35.0" right="35.0" top="25.0" />
+   </padding>
+   <children>
+      <Label text="FIM DA JORNADA">
+         <font>
+            <Font size="57.0" />
+         </font>
+      </Label>
+      <Separator prefWidth="200.0" />
+      <Label layoutX="640.0" layoutY="35.0" text="Você concluiu um dos finais de MegaBrain.">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Label>
+      <Label layoutX="640.0" layoutY="119.0" text="Existe um total de 3 finais, continue explorando.">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Label>
+      <Separator layoutX="45.0" layoutY="68.0" prefWidth="200.0" />
+      <Label layoutX="640.0" layoutY="215.0" text="Pressione ESPAÇO para continuar...">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Label>
+   </children>
+</VBox>
