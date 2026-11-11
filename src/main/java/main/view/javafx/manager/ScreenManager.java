@@ -88,6 +88,11 @@ public class ScreenManager {
         loadSceneFromFxmlFile(instructionsScreenFxmlFilename);
     }
 
+    public void showGameOverScreen() {
+        String gameOverScreenFxmlFilename = "game_over_screen.fxml";
+        loadSceneFromFxmlFile(gameOverScreenFxmlFilename);
+    }
+
     public void showGameScreen(String slotNumber) {
         String gameScreenFxmlFilename = "game_screen.fxml";
         try {

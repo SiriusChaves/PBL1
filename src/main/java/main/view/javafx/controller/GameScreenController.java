@@ -273,7 +273,7 @@ public class GameScreenController implements
         gameController.applySceneChoiceConsequence(choiceIndex);
 
         if (gameController.isGameOver()) {
-            System.out.println("abrir tela de derrota");
+            screenManager.showGameOverScreen();
             return;
         }
 
@@ -299,7 +299,7 @@ public class GameScreenController implements
         gameController.applyChapterFinalChoiceConsequence(choiceIndex);
 
         if (gameController.isGameOver()) {
-            System.out.println("abrir tela de derrota");
+            screenManager.showGameOverScreen();
             return;
         }
 

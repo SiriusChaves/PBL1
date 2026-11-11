@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handleBackToMainMenu" prefHeight="768.0" prefWidth="1366.0" spacing="25.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.view.javafx.controller.GameOverScreenController">
+   <children>
+      <Label text="GAME OVER">
+         <font>
+            <Font size="56.0" />
+         </font>
+      </Label>
+      <Separator prefWidth="200.0" />
+      <Label text="Sua sanidade chegou a 0.">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Label>
+      <Label text="A influência do Mega Brain foi longe demais...">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Label>
+      <Label layoutX="677.0" layoutY="181.0" text="Sua jornada ainda não acabou, tente pensar melhor nas suas escolhas e tente novamente.">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Label>
+      <Separator layoutX="45.0" layoutY="130.0" prefWidth="200.0" />
+      <Label layoutX="677.0" layoutY="214.0" text="Pressione ESPAÇO para prosseguir...">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Label>
+   </children>
+   <padding>
+      <Insets bottom="20.0" left="35.0" right="35.0" top="25.0" />
+   </padding>
+</VBox>
