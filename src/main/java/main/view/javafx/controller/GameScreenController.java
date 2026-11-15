@@ -7,7 +7,9 @@ import javafx.scene.input.KeyEvent;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import main.controller.GameController;
 import main.dto.ChapterDto;
 import main.dto.DialogueDto;
@@ -18,7 +20,6 @@ import main.view.javafx.controller.dependency.ScreenController;
 import main.view.javafx.controller.dependency.ScreenInitializer;
 import main.view.javafx.controller.dependency.SlotAware;
 import main.view.javafx.manager.ScreenManager;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -78,6 +79,37 @@ public class GameScreenController implements
     private StackPane containerPauseMenu;
 
     @FXML
+    private VBox statusContainer;
+
+    @FXML
+    private StackPane containerPlayerPanel;
+
+    @FXML
+    private HBox hudActions;
+
+    @FXML
+    private VBox inventoryItemsContainer;
+
+    @FXML
+    private ScrollPane inventoryPanel;
+
+    @FXML
+    private StackPane playerPanelContent;
+
+    @FXML
+    private Label playerPanelTitle;
+
+    @FXML
+    private ScrollPane relationshipPanel;
+
+    @FXML
+    private VBox relationshipsContainer;
+
+    @FXML
+    private ScrollPane statusPanel;
+
+
+    @FXML
     private void initialize() {
 
         choiceButtons = List.of(
@@ -104,6 +136,35 @@ public class GameScreenController implements
         choicesScrollPane.setManaged(false);
 
         containerPauseMenu.setVisible(false);
+
+        hideAllPlayerPanel();
+
+        containerPlayerPanel.setVisible(false);
+    }
+
+    @FXML
+    void closePlayerPanel(ActionEvent event) {
+        containerPlayerPanel.setVisible(false);
+    }
+
+    @FXML
+    void handleShowInventory(ActionEvent event) {
+        showPlayerPanel(inventoryPanel, "Inventário");
+    }
+
+    @FXML
+    void handleShowRelationships(ActionEvent event) {
+        showPlayerPanel(relationshipPanel, "Vínculos");
+    }
+
+    @FXML
+    void handleShowStatus(ActionEvent event) {
+        showPlayerPanel(statusPanel, "Status do Jogador");
+    }
+
+    @FXML
+    void handlePause(ActionEvent event) {
+        togglePause();
     }
 
     @FXML
@@ -147,7 +208,30 @@ public class GameScreenController implements
         finishChapter();
     }
 
-    private void registerKeyBoardsEvents() {
+    private void hideAllPlayerPanel() {
+        statusPanel.setVisible(false);
+        statusPanel.setManaged(false);
+
+        relationshipPanel.setVisible(false);
+        relationshipPanel.setManaged(false);
+
+        inventoryPanel.setVisible(false);
+        inventoryPanel.setManaged(false);
+    }
+
+    private void showPlayerPanel(ScrollPane playerPane, String title) {
+
+        hideAllPlayerPanel();
+
+        playerPane.setManaged(true);
+        playerPane.setVisible(true);
+
+        playerPanelTitle.setText(title);
+
+        containerPlayerPanel.setVisible(true);
+    }
+
+    private void registerKeyboardsEvents() {
 
         Scene scene = containerPauseMenu.getScene();
 
@@ -330,7 +414,6 @@ public class GameScreenController implements
         }
     }
 
-
     private void displayFinalChoices(ChapterDto chapter) {
         showingFinalChoices = true;
 
@@ -361,7 +444,7 @@ public class GameScreenController implements
 
     @Override
     public void initScreen() {
-        registerKeyBoardsEvents();
+        registerKeyboardsEvents();
 
         openSlot();
 
