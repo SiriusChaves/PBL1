@@ -52,7 +52,7 @@ public class MainMenuController implements ScreenController, GameControllerAware
 
     @FXML
     void handleShowAchievements(ActionEvent event) {
-
+        screenManager.showAchievementScreen();
     }
 
     @FXML

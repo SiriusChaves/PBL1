@@ -98,9 +98,17 @@ public class ScreenManager {
         loadSceneFromFxmlFile(endingScreenFxmlFilename);
     }
 
+    public void showAchievementScreen() {
+        String achievementFxmlFilename = "achievements_screen.fxml";
+        loadSceneFromFxmlFile(achievementFxmlFilename);
+    }
+
     public void showGameScreen(String slotNumber) {
+
         String gameScreenFxmlFilename = "game_screen.fxml";
+
         try {
+
             String fullpath = VIEW_PATH + gameScreenFxmlFilename;
             var resource = getClass().getResource(fullpath);
 
@@ -134,6 +142,7 @@ public class ScreenManager {
             mainStage.setScene(scene);
 
         } catch (IOException ioException) {
+
             System.out.println("Erro ao carregar arquivo " + gameScreenFxmlFilename);
         }
     }
