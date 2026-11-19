@@ -19,13 +19,20 @@ public class ScreenManager {
     private final GameController gameController;
 
     public ScreenManager(Stage primaryStage, GameController gameController) {
+
         this.mainStage = primaryStage;
         this.gameController = gameController;
-        primaryStage.setTitle("MegaBrainApplication");
+
+        mainStage.setTitle("MegaBrain");
+
+        mainStage.setFullScreenExitHint("");
+
     }
 
     private void loadSceneFromFxmlFile(String fxmlfilename) {
+
         try {
+
             String fullpath = VIEW_PATH + fxmlfilename;
             var resource = getClass().getResource(fullpath);
 
@@ -46,14 +53,13 @@ public class ScreenManager {
                 screenController.setScreenManager(this);
             }
 
-            if (loader.getController() instanceof ScreenInitializer screenInitializer) {
-                screenInitializer.initScreen();
-            }
-
-
             Scene scene = new Scene(root);
 
             mainStage.setScene(scene);
+
+            if (loader.getController() instanceof ScreenInitializer screenInitializer) {
+                screenInitializer.initScreen();
+            }
 
         } catch (IOException ioException) {
             System.out.println("Erro ao carregar arquivo " + fxmlfilename);
@@ -61,46 +67,39 @@ public class ScreenManager {
     }
 
     public void showMainMenu() {
-        String mainMenuFxmlFilename = "main_menu.fxml";
-
-        loadSceneFromFxmlFile(mainMenuFxmlFilename);
+        loadSceneFromFxmlFile("main_menu.fxml");
 
         mainStage.show();
+
+        mainStage.setFullScreen(true);
     }
 
     public void showPreferences() {
-        String preferencesFxmlFilename = "preferences_screen.fxml";
-        loadSceneFromFxmlFile(preferencesFxmlFilename);
+        loadSceneFromFxmlFile("preferences_screen.fxml");
     }
 
     public void showSaveScreen() {
-        String saveScreenFxmlFilename = "save_screen.fxml";
-        loadSceneFromFxmlFile(saveScreenFxmlFilename);
+        loadSceneFromFxmlFile("save_screen.fxml");
     }
 
     public void showCreditsScreen() {
-        String creditsScreenFxmlFilename = "credits_screen.fxml";
-        loadSceneFromFxmlFile(creditsScreenFxmlFilename);
+        loadSceneFromFxmlFile("credits_screen.fxml");
     }
 
     public void showInstructionsScreen() {
-        String instructionsScreenFxmlFilename = "instructions_screen.fxml";
-        loadSceneFromFxmlFile(instructionsScreenFxmlFilename);
+        loadSceneFromFxmlFile("instructions_screen.fxml");
     }
 
     public void showGameOverScreen() {
-        String gameOverScreenFxmlFilename = "game_over_screen.fxml";
-        loadSceneFromFxmlFile(gameOverScreenFxmlFilename);
+        loadSceneFromFxmlFile("game_over_screen.fxml");
     }
 
     public void showEndingScreen() {
-        String endingScreenFxmlFilename = "final_game_screen.fmxl";
-        loadSceneFromFxmlFile(endingScreenFxmlFilename);
+        loadSceneFromFxmlFile("final_game_screen.fxml");
     }
 
     public void showAchievementScreen() {
-        String achievementFxmlFilename = "achievements_screen.fxml";
-        loadSceneFromFxmlFile(achievementFxmlFilename);
+        loadSceneFromFxmlFile("achievements_screen.fxml");
     }
 
     public void showGameScreen(String slotNumber) {
@@ -135,11 +134,13 @@ public class ScreenManager {
 
             Scene scene = new Scene(root);
 
+            mainStage.setScene(scene);
+
             if (loader.getController() instanceof ScreenInitializer screenInitializer) {
                 screenInitializer.initScreen();
             }
 
-            mainStage.setScene(scene);
+
 
         } catch (IOException ioException) {
 

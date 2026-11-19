@@ -4,6 +4,7 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.ImageView?>
@@ -149,18 +150,9 @@
             </HBox>
          </center>
       </BorderPane>
-      <StackPane fx:id="containerPauseMenu"
-                 visible="false"
-                 pickOnBounds="true"
-                 style="-fx-background-color: rgba(0,0,0,0.75);">
+      <StackPane fx:id="containerPauseMenu" pickOnBounds="true" style="-fx-background-color: rgba(0,0,0,0.75);" visible="false">
          <children>
-            <VBox alignment="CENTER"
-                  maxWidth="420"
-                  spacing="18"
-                  style="-fx-background-color: #252B3A;
-                     -fx-border-color: #A18B63;
-                     -fx-border-width: 2;
-                     -fx-padding: 30;">
+            <VBox alignment="CENTER" maxWidth="420" spacing="18" style="-fx-background-color: #252B3A;                      -fx-border-color: #A18B63;                      -fx-border-width: 2;                      -fx-padding: 30;">
 
                <Label text="JOGO PAUSADO" />
 
@@ -219,46 +211,64 @@
                      <children>
                         <ScrollPane fx:id="inventoryPanel" fitToWidth="true" hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0">
                            <content>
-                              <VBox fx:id="inventoryItemsContainer" prefHeight="200.0" prefWidth="100.0" spacing="12.0">
-                                 <children>
-                                    <Label text="Itens do Inventário">
-                                       <font>
-                                          <Font size="20.0" />
-                                       </font></Label>
-                                 </children>
-                              </VBox>
+                              <VBox fx:id="inventoryItemsContainer" prefWidth="820.0" spacing="12.0" />
                            </content>
                         </ScrollPane>
                         <ScrollPane fx:id="statusPanel" fitToWidth="true" hbarPolicy="NEVER" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0">
                            <content>
-                              <VBox fx:id="statusContainer" prefHeight="200.0" prefWidth="100.0" spacing="12.0">
+                              <VBox fx:id="statusContainer" prefWidth="820.0" spacing="22.0">
                                  <children>
-                                    <Label text="Status do Jogador">
+                                    <Label fx:id="playerNameLabel" style="-fx-font-size: 24px;: 24;" text="Jogador">
                                        <font>
-                                          <Font size="20.0" />
+                                          <Font size="24.0" />
                                        </font></Label>
-                                    <Label layoutX="10.0" layoutY="10.0" text="Sanidade: --">
-                                       <font>
-                                          <Font size="19.0" />
-                                       </font></Label>
-                                    <Label layoutX="10.0" layoutY="40.0" text="Conhecimento: --">
-                                       <font>
-                                          <Font size="20.0" />
-                                       </font></Label>
+                                    <VBox prefHeight="200.0" prefWidth="100.0" spacing="8.0">
+                                       <children>
+                                          <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                             <children>
+                                                <Label text="Sanidade">
+                                                   <font>
+                                                      <Font size="19.0" />
+                                                   </font>
+                                                </Label>
+                                                <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                                                <Label fx:id="sanityValueLabel" text="-- / --">
+                                                   <font>
+                                                      <Font size="17.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                          <ProgressBar fx:id="sanityProgressBar" maxWidth="1.7976931348623157E308" prefWidth="700.0" progress="0.0" />
+                                       </children>
+                                    </VBox>
+                                    <VBox layoutX="10.0" layoutY="67.0" prefHeight="200.0" prefWidth="100.0" spacing="8.0">
+                                       <children>
+                                          <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                             <children>
+                                                <Label text="Conhecimento">
+                                                   <font>
+                                                      <Font size="19.0" />
+                                                   </font>
+                                                </Label>
+                                                <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                                                <Label fx:id="knowledgeValueLabel" text="-- / --">
+                                                   <font>
+                                                      <Font size="17.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                          <ProgressBar fx:id="knowledgeProgressBar" maxWidth="1.7976931348623157E308" prefWidth="700.0" progress="0.0" />
+                                       </children>
+                                    </VBox>
                                  </children>
                               </VBox>
                            </content>
                         </ScrollPane>
                         <ScrollPane fx:id="relationshipPanel" fitToWidth="true" hbarPolicy="NEVER" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0">
                            <content>
-                              <VBox fx:id="relationshipsContainer" prefHeight="200.0" prefWidth="100.0" spacing="12.0">
-                                 <children>
-                                    <Label text="Vínculos com os personagens">
-                                       <font>
-                                          <Font size="20.0" />
-                                       </font></Label>
-                                 </children>
-                              </VBox>
+                              <VBox fx:id="relationshipsContainer" prefWidth="820.0" spacing="12.0" />
                            </content>
                         </ScrollPane>
                      </children>
