@@ -84,10 +84,6 @@
                   </StackPane>
                   <HBox fx:id="saveActionsSlot1" alignment="CENTER" managed="false" prefHeight="45.0" prefWidth="200.0" spacing="15.0" visible="false">
                      <children>
-                        <Button fx:id="restartSaveSlot1Button" mnemonicParsing="false" onAction="#handleRestartSaveSlot1" prefHeight="40.0" prefWidth="140.0" text="reiniciar">
-                           <font>
-                              <Font size="16.0" />
-                           </font></Button>
                         <Button fx:id="deleteSaveSlot1Button" mnemonicParsing="false" onAction="#handleDeleteSaveSlot1" prefHeight="40.0" prefWidth="140.0" text="deletar">
                            <font>
                               <Font size="16.0" />
@@ -145,10 +141,6 @@
                   </StackPane>
                   <HBox fx:id="saveActionsSlot2" alignment="CENTER" managed="false" prefHeight="45.0" prefWidth="200.0" spacing="15.0" visible="false">
                      <children>
-                        <Button fx:id="restartSaveSlot2Button" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleRestartSaveSlot2" prefHeight="40.0" prefWidth="140.0" text="reiniciar">
-                           <font>
-                              <Font size="16.0" />
-                           </font></Button>
                         <Button fx:id="deleteSaveSlot2Button" layoutX="76.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleDeleteSaveSlot2" prefHeight="40.0" prefWidth="140.0" text="deletar">
                            <font>
                               <Font size="16.0" />
@@ -206,10 +198,6 @@
                   </StackPane>
                   <HBox fx:id="saveActionsSlot3" alignment="CENTER" managed="false" prefHeight="45.0" prefWidth="200.0" spacing="15.0" visible="false">
                      <children>
-                        <Button fx:id="restartSaveSlot3Button" mnemonicParsing="false" onAction="#handleRestartSaveSlot3" prefHeight="40.0" prefWidth="140.0" text="reiniciar">
-                           <font>
-                              <Font size="16.0" />
-                           </font></Button>
                         <Button fx:id="deleteSaveSlot3Button" mnemonicParsing="false" onAction="#handleDeleteSaveSlot3" prefHeight="40.0" prefWidth="140.0" text="deletar">
                            <font>
                               <Font size="16.0" />
