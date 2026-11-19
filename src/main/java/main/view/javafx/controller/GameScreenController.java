@@ -174,7 +174,16 @@ public class GameScreenController implements
 
     @FXML
     void handleSaveGame(ActionEvent event) {
-        gameController.saveGame();
+
+        try {
+
+            gameController.saveGame();
+
+            showSaveSuccessAlert();
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
     }
 
     @FXML
@@ -206,6 +215,17 @@ public class GameScreenController implements
         }
 
         finishChapter();
+    }
+
+    private void showSaveSuccessAlert() {
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+
+        alert.setTitle("Salvar jogo");
+        alert.setHeaderText("Jogo salvo!");
+        alert.setContentText("Seu progresso foi salvo com sucesso.");
+
+        alert.showAndWait();
     }
 
     private void hideAllPlayerPanel() {
