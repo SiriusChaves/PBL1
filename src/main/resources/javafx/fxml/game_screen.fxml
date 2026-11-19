@@ -180,30 +180,6 @@
                      <Font size="20.0" />
                   </font></Button>
 
-               <Button alignment="CENTER" prefWidth="200.0" text="Status do jogador" textAlignment="CENTER">
-                  <cursor>
-                     <Cursor fx:constant="HAND" />
-                  </cursor>
-                  <font>
-                     <Font size="20.0" />
-                  </font></Button>
-
-               <Button alignment="CENTER" prefWidth="200.0" text="Inventário" textAlignment="CENTER">
-                  <cursor>
-                     <Cursor fx:constant="HAND" />
-                  </cursor>
-                  <font>
-                     <Font size="20.0" />
-                  </font></Button>
-
-               <Button alignment="CENTER" prefWidth="200.0" text="Configurações" textAlignment="CENTER">
-                  <cursor>
-                     <Cursor fx:constant="HAND" />
-                  </cursor>
-                  <font>
-                     <Font size="20.0" />
-                  </font></Button>
-
                <Button alignment="CENTER" onAction="#handleBackToMainMenu" prefWidth="200.0" text="Sair para o menu" textAlignment="CENTER">
                   <cursor>
                      <Cursor fx:constant="HAND" />
