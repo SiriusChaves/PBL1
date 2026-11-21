@@ -47,6 +47,13 @@
             <version>21</version>
         </dependency>
 
+        <!-- Suporte para tocar a música de fundo-->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-media</artifactId>
+            <version>21.0.6</version>
+        </dependency>
+
     </dependencies>
 
     <build>

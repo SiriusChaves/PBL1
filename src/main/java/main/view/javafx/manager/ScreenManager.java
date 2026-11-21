@@ -18,12 +18,18 @@ public class ScreenManager {
     private final Stage mainStage;
     private final GameController gameController;
     private final GameFacade gameFacade;
+    private final BackgroundMusicManager musicManager;
 
-    public ScreenManager(Stage primaryStage, GameController gameController) {
+    public ScreenManager(
+            Stage primaryStage,
+            GameController gameController,
+            BackgroundMusicManager musicManager
+    ) {
 
         this.mainStage = primaryStage;
         this.gameController = gameController;
         this.gameFacade = new GameFacade(gameController);
+        this.musicManager = musicManager;
 
         mainStage.setTitle("MegaBrain");
 
@@ -63,6 +69,10 @@ public class ScreenManager {
 
             if (loaderController instanceof GameFacadeAware gameFacadeAware) {
                 gameFacadeAware.setGameFacade(this.gameFacade);
+            }
+
+            if (loaderController instanceof MusicManagerAware musicManagerAware) {
+                musicManagerAware.setMusicManager(this.musicManager);
             }
 
             controllerSetup.accept(loaderController);

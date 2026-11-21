@@ -8,20 +8,27 @@ import main.controller.GameController;
 import main.model.profile.Preference;
 import main.model.profile.UserProfile;
 import main.view.javafx.controller.dependency.GameControllerAware;
+import main.view.javafx.controller.dependency.MusicManagerAware;
 import main.view.javafx.controller.dependency.ScreenController;
 import main.view.javafx.controller.dependency.ScreenInitializer;
+import main.view.javafx.manager.BackgroundMusicManager;
 import main.view.javafx.manager.ScreenManager;
 
 import java.util.EnumSet;
 
-public class PreferenceScreenController implements
+public class
+
+        PreferenceScreenController implements
         ScreenController,
         GameControllerAware,
-        ScreenInitializer {
+        ScreenInitializer,
+        MusicManagerAware {
 
     private ScreenManager screenManager;
 
     private GameController gameController;
+
+    private BackgroundMusicManager musicManager;
 
     @FXML
     private ToggleButton autosaveButton;
@@ -34,6 +41,9 @@ public class PreferenceScreenController implements
 
     @FXML
     private ToggleButton playerStatusButton;
+
+    @FXML
+    private ToggleButton backgroundMusicButton;
 
     @Override
     public void setScreenManager(ScreenManager screenManager) {
@@ -68,6 +78,22 @@ public class PreferenceScreenController implements
         initScreen();
     }
 
+    @FXML
+    void handleToggleBackgroundMusic(ActionEvent actionEvent) {
+
+        gameController.togglePreference(Preference.BACKGROUND_MUSIC);
+
+        boolean enabled = gameController.isBackgroundMusicEnabled();
+
+        backgroundMusicButton.setSelected(enabled);
+        backgroundMusicButton.setText(
+                enabled ? "ATIVADO" : "DESATIVADO"
+        );
+
+        musicManager.setEnabled(enabled);
+    }
+
+
     @Override
     public void initScreen() {
         UserProfile userProfile = gameController.loadUserProfile();
@@ -97,5 +123,20 @@ public class PreferenceScreenController implements
             playerStatusButton.setText("DESATIVADO");
             playerStatusButton.setSelected(false);
         }
+
+        boolean musicEnabled = preferences.contains(Preference.BACKGROUND_MUSIC);
+
+        backgroundMusicButton.setSelected(musicEnabled);
+
+        backgroundMusicButton.setText(
+                musicEnabled ? "ATIVADO" : "DESATIVADO"
+                );
+        musicManager.setEnabled(musicEnabled);
+
+    }
+
+    @Override
+    public void setMusicManager(BackgroundMusicManager musicManager) {
+        this.musicManager = musicManager;
     }
 }

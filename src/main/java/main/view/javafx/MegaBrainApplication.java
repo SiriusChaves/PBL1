@@ -4,11 +4,17 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import main.controller.GameController;
 import main.persistence.json.*;
+import main.view.javafx.manager.BackgroundMusicManager;
 import main.view.javafx.manager.ScreenManager;
 
 public class MegaBrainApplication extends Application {
+
     @Override
     public void start(Stage primaryStage) {
+
+        BackgroundMusicManager backgroundMusicManager = new BackgroundMusicManager(
+                "/javafx/audio/background.mp3"
+        );
 
         GameController gameController = new GameController(
                 new ChapterDaoJson(),
@@ -18,7 +24,10 @@ public class MegaBrainApplication extends Application {
                 new UserProfileDaoJson()
         );
 
-        ScreenManager screenManager = new ScreenManager(primaryStage, gameController);
+        ScreenManager screenManager = new ScreenManager(
+                primaryStage,
+                gameController,
+                backgroundMusicManager);
 
         screenManager.showMainMenu();
     }

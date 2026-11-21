@@ -39,6 +39,13 @@ public class GameController {
         this.userProfileService = new UserProfileService(profileDao);
     }
 
+    public boolean isBackgroundMusicEnabled() {
+
+        return userProfileService
+                .loadUserProfile()
+                .hasPreference(Preference.BACKGROUND_MUSIC);
+    }
+
     public boolean isAutosaveEnabled() {
 
         return userProfileService

@@ -4,7 +4,8 @@ public enum Preference {
     AUTOSAVE(1,"Save automático no início dos capítulos"),
     SHOW_COMMAND_HUD(2, "Sempre exibir na tela o menu de comandos usáveis"),
     SHOW_PLAYER_HUD(3, "Sempre exibir o status atual do jogador"),
-    DEFAULT(4, "Opção default");
+    DEFAULT(4, "Opção default"),
+    BACKGROUND_MUSIC(5, "Tocar música de fundo (exclusivo para javafx)");
 
 
     private final Integer value;
