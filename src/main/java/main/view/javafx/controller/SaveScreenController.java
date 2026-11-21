@@ -9,6 +9,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import main.controller.GameController;
 import main.dto.SaveViewDto;
+import main.model.profile.UserProfile;
 import main.view.javafx.controller.dependency.GameControllerAware;
 import main.view.javafx.controller.dependency.ScreenController;
 import main.view.javafx.controller.dependency.ScreenInitializer;
@@ -188,7 +189,15 @@ public class SaveScreenController implements
 
         if (confirmDelete(slotNumber)) {
 
-            gameController.deleteGameSession(String.valueOf(slotNumber));
+            String slotNumberStr = String.valueOf(slotNumber);
+
+            UserProfile userProfile = gameController.loadUserProfile();
+
+            if (slotNumberStr.equals(userProfile.getLastPlayedSlotId())) {
+                gameController.updateLastPlayedSlot("-1");
+            }
+
+            gameController.deleteGameSession(slotNumberStr);
 
             updateAllSlots();
         }

@@ -6,5 +6,13 @@
   {
     "name": "FINAL 1: A NOVA ORDEM MONDIAL",
     "description": "Você concluiu a campanha do Arquiteto e estabeleceu uma nova Ordem Mundial movida pelo MegaBrain"
+  },
+  {
+    "name": "AMIGO DA VIZINHANÇA",
+    "description": "Você obteve o nível máximo de amizade com todos os NPCs"
+  },
+  {
+    "name": "FINAL 2: A ERA DO SILÊNCIO",
+    "description": "Você concluiu a campanha do Estudante  e impediu os avanços do MegaBrain"
   }
 ]

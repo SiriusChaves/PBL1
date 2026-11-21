@@ -14,7 +14,10 @@ import main.view.javafx.manager.ScreenManager;
 
 import java.util.EnumSet;
 
-public class PreferenceScreenController implements ScreenController, GameControllerAware, ScreenInitializer {
+public class PreferenceScreenController implements
+        ScreenController,
+        GameControllerAware,
+        ScreenInitializer {
 
     private ScreenManager screenManager;
 

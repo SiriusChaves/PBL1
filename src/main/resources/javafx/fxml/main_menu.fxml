@@ -17,6 +17,14 @@
       </Label>
       <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="433.0" prefWidth="306.0" spacing="18.0" StackPane.alignment="CENTER">
          <children>
+            <Button alignment="CENTER" maxHeight="50.0" maxWidth="250.0" minHeight="50.0" minWidth="250.0" mnemonicParsing="false" onAction="#handleContinueLastGame" text="Continuar " textAlignment="JUSTIFY">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <font>
+                  <Font name="FiraCode Nerd Font Mono Light" size="19.0" />
+               </font>
+            </Button>
             <Button fx:id="startGameButton" alignment="CENTER" maxHeight="50.0" maxWidth="250.0" minHeight="50.0" minWidth="250.0" mnemonicParsing="false" onAction="#handleStartGame" text="Iniciar Partida" textAlignment="JUSTIFY">
                <cursor>
                   <Cursor fx:constant="HAND" />

@@ -1,8 +1,6 @@
 {
-  "lastPlayedSlotId": "1",
+  "lastPlayedSlotId": "-1",
   "preferences": [
-    "AUTOSAVE",
-    "SHOW_COMMAND_HUD",
-    "SHOW_PLAYER_HUD"
+    "AUTOSAVE"
   ]
 }
