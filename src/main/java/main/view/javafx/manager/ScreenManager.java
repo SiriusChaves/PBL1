@@ -122,8 +122,6 @@ public class ScreenManager {
             if (controller instanceof SlotAware slotAware) {
                 slotAware.setSlotNumber(slotNumber);
 
-                gameController.updateLastPlayedSlot(slotNumber);
-
             } else {
                 throw new IllegalStateException(
                         "O controller da game_screen.fxml deve implementar SlotAware"

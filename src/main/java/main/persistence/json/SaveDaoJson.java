@@ -39,6 +39,8 @@ public class SaveDaoJson implements SaveDao {
                 );
             }
 
+            Files.createDirectories(path.getParent());
+
             Files.createFile(path);
 
         } catch (IOException ioException) {
@@ -61,6 +63,8 @@ public class SaveDaoJson implements SaveDao {
         );
 
         try (Writer writer = Files.newBufferedWriter(path)) {
+
+            Files.createDirectories(path.getParent());
 
             GSON.toJson(savePersistenceDto, writer);
 

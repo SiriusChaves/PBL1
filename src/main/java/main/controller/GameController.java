@@ -39,6 +39,13 @@ public class GameController {
         this.userProfileService = new UserProfileService(profileDao);
     }
 
+    public boolean isAutosaveEnabled() {
+
+        return userProfileService
+                .loadUserProfile()
+                .hasPreference(Preference.AUTOSAVE);
+    }
+
     public UserProfile loadUserProfile() {
         return userProfileService.loadUserProfile();
     }
@@ -103,6 +110,8 @@ public class GameController {
                 gameSession.loadDataOfSave(),
                 gameSession.getSlotIndex()
         );
+
+        updateLastPlayedSlot(gameSession.getSlotIndex());
     }
 
     public boolean hasSaveDataAndSaveExists(String slotIndex) {
@@ -110,11 +119,14 @@ public class GameController {
     }
 
     public void loadGame(String slotIndex) {
+
         this.gameSession =
                 saveService.restoreGameSessionFromPersistence(
                         chapterDao,
                         slotIndex
                 );
+
+        updateLastPlayedSlot(slotIndex);
     }
 
     public void startNewGame(String slotIndex) {
@@ -143,12 +155,35 @@ public class GameController {
 
             if (save != null)  {
 
+                GameStateDto state = save.gameStateDto();
+
+                String progressSummary;
+
+                if (state.isGameCompleted()) {
+
+                    progressSummary = "Campanha concluída";
+
+                } else {
+
+                    String scene = state.currentSceneId() == null
+                            ? "Início"
+                            : state.currentSceneId();
+
+                    int items = state.itemsId().size();
+                    int flags = state.activeGameFlags().size();
+
+                    progressSummary = "Cena " + scene
+                            + " - " + items + " itens"
+                            + " - " + flags + " marcadores narrativos";
+                }
+
                 saveViewDtoList.add(
 
                         new SaveViewDto(
                             save.playerName(),
                             save.dataHora(),
                             save.lastChapterName(),
+                            progressSummary,
                             save.gameStateDto().isGameCompleted()
                         )
                 );

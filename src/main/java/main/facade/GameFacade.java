@@ -12,12 +12,16 @@ public class GameFacade {
 
     public GameFlowResult chooseSceneOption(int choiceIndex) {
 
+        autosaveIfEnabled();
+
         gameController.applySceneChoiceConsequence(choiceIndex);
 
         return continueNarrative();
     }
 
     public GameFlowResult chooseFinalOption(int choiceIndex) {
+
+        autosaveIfEnabled();
 
         gameController.applyChapterFinalChoiceConsequence(choiceIndex);
 
@@ -64,5 +68,12 @@ public class GameFacade {
 
     public void saveCurrentGame() {
         gameController.saveGame();
+    }
+
+    private void autosaveIfEnabled() {
+
+        if (gameController.isAutosaveEnabled()) {
+            saveCurrentGame();
+        }
     }
 }

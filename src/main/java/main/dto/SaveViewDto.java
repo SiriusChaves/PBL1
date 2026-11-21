@@ -4,5 +4,6 @@ public record SaveViewDto(
         String playerName,
         String dateSave,
         String currentChapterName,
+        String progressSummary,
         boolean isGameCompleted
 ) {}

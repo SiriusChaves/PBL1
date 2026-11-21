@@ -206,14 +206,18 @@ public class GameScreenController implements
     @FXML
     void handleSaveGame(ActionEvent event) {
 
+        if (!confirmSaveOverwrite()) {
+            return;
+        }
+
         try {
 
             gameFacade.saveCurrentGame();
 
             showSaveSuccessAlert();
 
-        } catch (Exception exception) {
-            exception.printStackTrace();
+        } catch (RuntimeException exception) {
+            showSaveErrorAlert(exception.getMessage());
         }
     }
 
@@ -234,6 +238,48 @@ public class GameScreenController implements
         handleGameFlowResult(result);
     }
 
+    private boolean confirmSaveOverwrite() {
+
+        if (!gameController.hasSaveDataAndSaveExists(slotNumber)) {
+            return true;
+        }
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+
+        alert.setTitle("Sobrescrever partida");
+
+        alert.setHeaderText("Deseja substituir o save atual?");
+
+        alert.setContentText(
+                "O progresso anteriormente salvo será substituído pelo atual."
+        );
+
+        ButtonType saveButton = new ButtonType(
+                "Salvar", ButtonBar.ButtonData.OK_DONE
+        );
+
+        ButtonType cancelButton = new ButtonType(
+                "Cancelar", ButtonBar.ButtonData.CANCEL_CLOSE
+        );
+
+        alert.getButtonTypes().setAll(saveButton, cancelButton);
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        return result.isPresent() && result.get() == saveButton;
+    }
+
+    private void showSaveErrorAlert(String message) {
+
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+
+        alert.setTitle("Erro no gerenciamento de saves");
+        alert.setHeaderText("Não foi possível concluir a operação.");
+        alert.setContentText(message);
+
+        alert.showAndWait();
+    }
+
     private void handleGameFlowResult(GameFlowResult result) {
 
         switch (result) {
@@ -251,7 +297,11 @@ public class GameScreenController implements
         }
     }
 
-    private void updateProgressBar(ProgressBar progressBar, Label valueLabel, int currentValue, int maxValue) {
+    private void updateProgressBar(
+            ProgressBar progressBar,
+            Label valueLabel,
+            int currentValue,
+            int maxValue) {
 
         double progress = (double) currentValue / maxValue;
 

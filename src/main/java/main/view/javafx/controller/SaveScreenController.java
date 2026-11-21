@@ -29,7 +29,8 @@ public class SaveScreenController implements
             HBox actions,
             Label personName,
             Label dateTime,
-            Label chapterName
+            Label chapterName,
+            Label progressSummary
     ) {}
 
     private List<SlotView> slotViews;
@@ -140,6 +141,15 @@ public class SaveScreenController implements
     @FXML
     private Button slot3Button;
 
+    @FXML
+    private Label progressSummarySlot1Label;
+
+    @FXML
+    private Label progressSummarySlot2Label;
+
+    @FXML
+    private Label progressSummarySlot3Label;
+
     @Override
     public void setScreenManager(ScreenManager screenManager) {
         this.screenManager = screenManager;
@@ -185,22 +195,109 @@ public class SaveScreenController implements
         deleteSaveSlot(3);
     }
 
-    private void deleteSaveSlot(int slotNumber) {
+    @FXML
+    void handleRestartSaveSlot1(ActionEvent event) {
+        restartSaveSlot(1);
+    }
 
-        if (confirmDelete(slotNumber)) {
+    @FXML
+    void handleRestartSaveSlot2(ActionEvent event) {
+        restartSaveSlot(2);
+    }
 
-            String slotNumberStr = String.valueOf(slotNumber);
+    @FXML
+    void handleRestartSaveSlot3(ActionEvent event) {
+        restartSaveSlot(3);
+    }
 
-            UserProfile userProfile = gameController.loadUserProfile();
+    private boolean confirmRestart(int slotNumber) {
 
-            if (slotNumberStr.equals(userProfile.getLastPlayedSlotId())) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+
+        alert.setTitle("Reiniciar partida");
+        alert.setHeaderText(
+                "Deseja reiniciar a partida do Slot " + slotNumber + "?"
+        );
+
+        alert.setContentText(
+                "Todo o progresso salvo será substituído por uma nova partida."
+        );
+
+        ButtonType restartButton = new ButtonType(
+                "Reiniciar", ButtonBar.ButtonData.OK_DONE
+        );
+
+        ButtonType cancelButton = new ButtonType(
+                "Cancelar", ButtonBar.ButtonData.CANCEL_CLOSE
+        );
+
+        alert.getButtonTypes().setAll(restartButton, cancelButton);
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        return result.isPresent() && result.get() == restartButton;
+    }
+
+    private void restartSaveSlot(int slotNumber) {
+
+        if (!confirmRestart(slotNumber)) {
+            return;
+        }
+
+        String slot = String.valueOf(slotNumber);
+
+        try {
+
+            gameController.prepareSaveSlot(slot, true);
+
+            UserProfile profile = gameController.loadUserProfile();
+
+            if (slot.equals(profile.getLastPlayedSlotId())) {
                 gameController.updateLastPlayedSlot("-1");
             }
 
-            gameController.deleteGameSession(slotNumberStr);
+            screenManager.showGameScreen(slot);
+
+        } catch (RuntimeException exception) {
+
+            showSaveErrorAlert(exception.getMessage());
+        }
+    }
+    private void deleteSaveSlot(int slotNumber) {
+
+        if (!confirmDelete(slotNumber)) {
+            return;
+        }
+
+        String slot = String.valueOf(slotNumber);
+
+        try {
+
+            gameController.deleteGameSession(slot);
+
+            UserProfile profile = gameController.loadUserProfile();
+
+            if (slot.equals(profile.getLastPlayedSlotId())) {
+                gameController.updateLastPlayedSlot("-1");
+            }
 
             updateAllSlots();
+
+        } catch (RuntimeException exception) {
+
+            showSaveErrorAlert(exception.getMessage());
         }
+    }
+
+    private void showSaveErrorAlert(String message) {
+
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+
+        alert.setTitle("Erro no gerenciamento de saves");
+        alert.setHeaderText("Não foi possível concluir a operação.");
+        alert.setContentText(message);
+
+        alert.showAndWait();
     }
 
     private void initializeSlotViews() {
@@ -212,7 +309,8 @@ public class SaveScreenController implements
                         saveActionsSlot1,
                         personNameSlot1Label,
                         datetimeSlot1Label,
-                        chapterNameSlot1Label
+                        chapterNameSlot1Label,
+                        progressSummarySlot1Label
                 ),
 
                 new SlotView(
@@ -221,7 +319,8 @@ public class SaveScreenController implements
                         saveActionsSlot2,
                         personNameSlot2Label,
                         datetimeSlot2Label,
-                        chapterNameSlot2Label
+                        chapterNameSlot2Label,
+                        progressSummarySlot2Label
                 ),
 
                 new SlotView(
@@ -230,7 +329,8 @@ public class SaveScreenController implements
                         saveActionsSlot3,
                         personNameSlot3Label,
                         datetimeSlot3Label,
-                        chapterNameSlot3Label
+                        chapterNameSlot3Label,
+                        progressSummarySlot3Label
                 )
         );
     }
@@ -255,6 +355,7 @@ public class SaveScreenController implements
         slot.personName.setText(saveData.playerName());
         slot.dateTime().setText(saveData.dateSave());
         slot.chapterName.setText(saveData.currentChapterName());
+        slot.progressSummary.setText(saveData.progressSummary());
     }
 
     private boolean confirmDelete(int slotNumber) {

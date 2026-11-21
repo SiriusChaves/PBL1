@@ -80,14 +80,19 @@ public class MainMenuController implements ScreenController, GameControllerAware
     @FXML
     void handleContinueLastGame(ActionEvent event) {
 
-        String lastPlayedSlotId = gameController.loadUserProfile().getLastPlayedSlotId();
+        String slot = gameController
+                .loadUserProfile()
+                .getLastPlayedSlotId();
 
-        if (lastPlayedSlotId.equals("-1")) {
+        if (slot.equals("-1") ||
+                slot == null ||
+                !gameController.hasSaveDataAndSaveExists(slot)) {
+
             showNoGameToContinueAlert();
             return;
         }
 
-        screenManager.showGameScreen(lastPlayedSlotId);
+        screenManager.showGameScreen(slot);
     }
 
     private void showNoGameToContinueAlert() {
