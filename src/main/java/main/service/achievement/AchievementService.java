@@ -1,5 +1,6 @@
 package main.service.achievement;
 
+import main.model.achievement.AchievementUnlockStrategy;
 import main.persistence.dao.AchievementDao;
 import main.dto.AchievementDto;
 import main.dto.GameStateDto;
@@ -58,44 +59,59 @@ public class AchievementService {
 
     private List<Achievement> loadAchievements() {
 
+        AchievementUnlockStrategy final3Strategy = gameState ->
+                gameState.isGameCompleted() &&
+                gameState.currentChapterId().equals("10");
+
+        AchievementUnlockStrategy final2Strategy = gameState ->
+                gameState.isGameCompleted() &&
+                gameState.currentChapterId().equals("9");
+
+        AchievementUnlockStrategy final1Strategy = gameState ->
+                gameState.isGameCompleted() &&
+                gameState.currentChapterId().equals("8");
+
+        AchievementUnlockStrategy failedStrategy = gameState -> gameState.player().sanity() <= 0;
+
+        AchievementUnlockStrategy bestFriendsStrategy = gameState -> gameState.relationships()
+                .stream()
+                .allMatch(npc -> npc.trustLevelTier().equals("ALIADO PLENO"));
+
         Achievement unlockedFinal3 = new Achievement(
                 "1",
                 "FINAL 3: A ASCENSÃO DO MEGA BRAIN",
                 "Você concluiu o Final 3: o MegaBrain virtualizou todo o mundo",
-                gameState -> gameState.isGameCompleted() &&
-                        gameState.currentChapterId().equals("10")
+                final3Strategy
+
         );
 
         Achievement unlockedFinal2 = new Achievement(
                 "2",
                 "FINAL 2: A ERA DO SILÊNCIO",
                 "Você concluiu a campanha do Estudante  e impediu os avanços do MegaBrain",
-                gameState -> gameState.isGameCompleted() &&
-                        gameState.currentChapterId().equals("9")
+                final2Strategy
         );
 
         Achievement unlockedFinal1 = new Achievement(
                 "3",
                 "FINAL 1: A NOVA ORDEM MONDIAL",
                 "Você concluiu a campanha do Arquiteto e estabeleceu uma nova Ordem Mundial movida pelo MegaBrain",
-                gameState -> gameState.isGameCompleted() &&
-                        gameState.currentChapterId().equals("8")
+                final1Strategy
+
         );
 
         Achievement failedMission = new Achievement(
                 "5",
                 "!!!GAME OVER!!!",
                 "Você chegou a 0 de sanidade mental e falhou na sua missão",
-                gameState -> gameState.player().sanity() <= 0
+                failedStrategy
         );
 
         Achievement bestFriends = new Achievement(
                 "4",
                 "AMIGO DA VIZINHANÇA",
                 "Você obteve o nível máximo de amizade com todos os NPCs",
-                gameState -> gameState.relationships()
-                        .stream()
-                        .allMatch(npc -> npc.trustLevelTier().equals("ALIADO PLENO"))
+                bestFriendsStrategy
 
         );
 

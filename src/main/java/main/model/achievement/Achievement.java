@@ -8,17 +8,22 @@ public class Achievement {
     private final String id;
     private final String name;
     private final String description;
-    private final Predicate<GameStateDto> requiresToUnlock;
+    private final AchievementUnlockStrategy unlockStrategy;
 
-    public Achievement(String id, String name, String description, Predicate<GameStateDto> predicate) {
+    public Achievement(
+            String id,
+            String name,
+            String description,
+            AchievementUnlockStrategy unlockStrategy) {
+
         this.id = id;
         this.name = name;
         this.description = description;
-        this.requiresToUnlock = predicate;
+        this.unlockStrategy = unlockStrategy;
     }
 
     public boolean isUnlocked(GameStateDto gameState) {
-        return requiresToUnlock.test(gameState);
+        return unlockStrategy.canUnlock(gameState);
     }
 
     public String getId() {
