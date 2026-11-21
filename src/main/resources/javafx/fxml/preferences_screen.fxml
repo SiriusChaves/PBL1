@@ -6,6 +6,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
@@ -14,18 +16,26 @@
 
 <StackPane alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.view.javafx.controller.PreferenceScreenController">
    <children>
+      <ImageView fitHeight="768.0" fitWidth="1366.0" pickOnBounds="true" smooth="false">
+         <image>
+            <Image url="@../images/backgrounds/initial_background.png" />
+         </image>
+      </ImageView>
       <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="597.0" prefWidth="876.0" spacing="15.0">
          <children>
-            <Label alignment="TOP_CENTER" text="PREFERÊNCIAS">
+            <Label alignment="TOP_CENTER" text="PREFERÊNCIAS" textFill="WHITE">
                <font>
                   <Font size="57.0" />
                </font>
+               <padding>
+                  <Insets top="20.0" />
+               </padding>
             </Label>
             <Separator prefWidth="200.0" />
             <Region prefHeight="200.0" prefWidth="200.0" />
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="50.0">
                <children>
-                  <Label prefHeight="36.0" prefWidth="241.0" text="Save automático " HBox.hgrow="ALWAYS">
+                  <Label prefHeight="36.0" prefWidth="241.0" text="Save automático " textFill="WHITE" HBox.hgrow="ALWAYS">
                      <font>
                         <Font size="25.0" />
                      </font>
@@ -47,7 +57,7 @@
                </padding></HBox>
             <HBox layoutX="10.0" layoutY="91.0" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
                <children>
-                  <Label text="Exibir comandos usáveis na tela">
+                  <Label text="Exibir comandos usáveis na tela" textFill="WHITE">
                      <font>
                         <Font size="25.0" />
                      </font>
@@ -70,7 +80,7 @@
             </HBox>
             <HBox layoutX="10.0" layoutY="187.0" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
                <children>
-                  <Label prefHeight="36.0" prefWidth="241.0" text="Música de Fundo" HBox.hgrow="ALWAYS">
+                  <Label prefHeight="36.0" prefWidth="241.0" text="Música de Fundo" textFill="WHITE" HBox.hgrow="ALWAYS">
                      <font>
                         <Font size="25.0" />
                      </font>
@@ -94,7 +104,7 @@
             </HBox>
             <HBox layoutX="10.0" layoutY="532.0" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
                <children>
-                  <Label text="Exibir status do jogador na tela">
+                  <Label text="Exibir status do jogador na tela" textFill="WHITE">
                      <font>
                         <Font size="25.0" />
                      </font>
@@ -119,7 +129,7 @@
             <Separator prefWidth="200.0" />
             <Button fx:id="backButton" alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#handleBackToMainMenu" text="Voltar">
                <font>
-                  <Font name="FiraCode Nerd Font Mono Reg" size="13.0" />
+                  <Font name="FiraCode Nerd Font Mono Reg" size="18.0" />
                </font>
                <VBox.margin>
                   <Insets bottom="100.0" />
@@ -128,6 +138,6 @@
          </children></VBox>
    </children>
    <padding>
-      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+      <Insets bottom="20.0" left="20.0" right="20.0" />
    </padding>
 </StackPane>

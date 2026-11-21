@@ -95,7 +95,6 @@ public class ScreenManager {
 
         mainStage.show();
 
-        mainStage.setFullScreen(true);
     }
 
     public void showPreferences() {

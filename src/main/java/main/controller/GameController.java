@@ -14,6 +14,8 @@ import main.service.game.GameSession;
 import main.service.save.SaveService;
 import main.service.profile.UserProfileService;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -152,6 +154,11 @@ public class GameController {
         return gameSession.loadDataOfSave();
     }
 
+
+    private String formatDateTime(String dateTime) {
+        return LocalDateTime.parse(dateTime).format(DateTimeFormatter.ofPattern("dd/MM/yyyy 'às' HH:mm"));
+    }
+
     public List<SaveViewDto> getDataOfAllSaves() {
 
         List<SavePersistenceDto> savePersistenceDtoList = saveService.getDataOfAllSaves();
@@ -188,7 +195,7 @@ public class GameController {
 
                         new SaveViewDto(
                             save.playerName(),
-                            save.dataHora(),
+                            formatDateTime(save.dataHora()),
                             save.lastChapterName(),
                             progressSummary,
                             save.gameStateDto().isGameCompleted()

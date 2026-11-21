@@ -14,3 +14,14 @@
     -fx-border-color: #f33561;
     -fx-background-color: #ec3939;
 }
+
+.screen_background {
+    -fx-background-position: center center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+    -fx-background-color: #171323;
+}
+
+.initial-background {
+    -fx-background-image: url("javafx/images/backgrounds/game_over_and_final_background.png");
+}
