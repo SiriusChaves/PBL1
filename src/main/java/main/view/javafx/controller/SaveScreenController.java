@@ -2,6 +2,7 @@ package main.view.javafx.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -16,10 +17,21 @@ import main.view.javafx.manager.ScreenManager;
 import java.util.List;
 import java.util.Optional;
 
-/* Lembrar de usar setVisible() e setManeged() para controlar, respectivamente,
-* visibilidade dos elementos e se eles serão usados no calculo de espaço do layout
-* */
-public class SaveScreenController implements ScreenController, GameControllerAware, ScreenInitializer {
+public class SaveScreenController implements
+        ScreenController,
+        GameControllerAware,
+        ScreenInitializer {
+
+    private record SlotView(
+            VBox emptyContent,
+            VBox saveDataContent,
+            HBox actions,
+            Label personName,
+            Label dateTime,
+            Label chapterName
+    ) {}
+
+    private List<SlotView> slotViews;
 
     private ScreenManager screenManager;
 
@@ -159,44 +171,81 @@ public class SaveScreenController implements ScreenController, GameControllerAwa
 
     @FXML
     void handleDeleteSaveSlot1(ActionEvent event) {
-        if (confirmDelete(1)) {
-            gameController.deleteGameSession(String.valueOf(1));
-        }
-
-        updateAllSlots();
+        deleteSaveSlot(1);
     }
 
     @FXML
     void handleDeleteSaveSlot2(ActionEvent event) {
-        if (confirmDelete(2)) {
-            gameController.deleteGameSession(String.valueOf(2));
-        }
-
-        updateAllSlots();
+        deleteSaveSlot(2);
     }
 
     @FXML
     void handleDeleteSaveSlot3(ActionEvent event) {
-        if (confirmDelete(3)) {
-            gameController.deleteGameSession(String.valueOf(3));
+        deleteSaveSlot(3);
+    }
+
+    private void deleteSaveSlot(int slotNumber) {
+
+        if (confirmDelete(slotNumber)) {
+
+            gameController.deleteGameSession(String.valueOf(slotNumber));
+
+            updateAllSlots();
+        }
+    }
+
+    private void initializeSlotViews() {
+
+        slotViews = List.of(
+                new SlotView(
+                        emptyContentSlot1,
+                        saveDataContentSlot1,
+                        saveActionsSlot1,
+                        personNameSlot1Label,
+                        datetimeSlot1Label,
+                        chapterNameSlot1Label
+                ),
+
+                new SlotView(
+                        emptyContentSlot2,
+                        saveDataContentSlot2,
+                        saveActionsSlot2,
+                        personNameSlot2Label,
+                        datetimeSlot2Label,
+                        chapterNameSlot2Label
+                ),
+
+                new SlotView(
+                        emptyContentSlot3,
+                        saveDataContentSlot3,
+                        saveActionsSlot3,
+                        personNameSlot3Label,
+                        datetimeSlot3Label,
+                        chapterNameSlot3Label
+                )
+        );
+    }
+
+    private void setNodeState(Node node, boolean active) {
+        node.setVisible(active);
+        node.setManaged(active);
+    }
+
+    private void updateSlot(SlotView slot, SaveViewDto saveData) {
+
+        boolean hasData = saveData != null;
+
+        setNodeState(slot.emptyContent(), !hasData);
+        setNodeState(slot.saveDataContent(), hasData);
+        setNodeState(slot.actions(), hasData);
+
+        if (!hasData) {
+            return;
         }
 
-        updateAllSlots();
-    }
-
-    @FXML
-    void handleRestartSaveSlot1(ActionEvent event) {
-
-    }
-
-    @FXML
-    void handleRestartSaveSlot2(ActionEvent event) {
-
-    }
-
-    @FXML
-    void handleRestartSaveSlot3(ActionEvent event) {
-
+        slot.personName.setText(saveData.playerName());
+        slot.dateTime().setText(saveData.dateSave());
+        slot.chapterName.setText(saveData.currentChapterName());
     }
 
     private boolean confirmDelete(int slotNumber) {
@@ -229,108 +278,27 @@ public class SaveScreenController implements ScreenController, GameControllerAwa
         return result.isPresent() && result.get() == deleteButton;
     }
 
-    private void updateSlot1(SaveViewDto saveData) {
-        boolean hasData = saveData != null;
-
-        if (!hasData) {
-            saveDataContentSlot1.setVisible(false);
-            saveDataContentSlot1.setManaged(false);
-
-            emptyContentSlot1.setVisible(true);
-            emptyContentSlot1.setManaged(true);
-
-            saveActionsSlot1.setVisible(false);
-            saveActionsSlot1.setManaged(false);
-
-        } else {
-
-            emptyContentSlot1.setVisible(false);
-            emptyContentSlot1.setManaged(false);
-
-            saveDataContentSlot1.setVisible(true);
-            saveDataContentSlot1.setManaged(true);
-
-            personNameSlot1Label.setText(saveData.playerName());
-            datetimeSlot1Label.setText(saveData.dateSave());
-            chapterNameSlot1Label.setText(saveData.currentChapterName());
-
-            saveActionsSlot1.setVisible(true);
-            saveActionsSlot1.setManaged(true);
-        }
-    }
-
-    private void updateSlot2(SaveViewDto saveData) {
-        boolean hasData = saveData != null;
-
-        if (!hasData) {
-            saveDataContentSlot2.setVisible(false);
-            saveDataContentSlot2.setManaged(false);
-
-            emptyContentSlot2.setVisible(true);
-            emptyContentSlot2.setManaged(true);
-
-            saveActionsSlot2.setVisible(false);
-            saveActionsSlot2.setManaged(false);
-
-        } else {
-
-            emptyContentSlot2.setVisible(false);
-            emptyContentSlot2.setManaged(false);
-
-            saveDataContentSlot2.setVisible(true);
-            saveDataContentSlot2.setManaged(true);
-
-            personNameSlot2Label.setText(saveData.playerName());
-            datetimeSlot2Label.setText(saveData.dateSave());
-            chapterNameSlot2Label.setText(saveData.currentChapterName());
-
-            saveActionsSlot2.setVisible(true);
-            saveActionsSlot2.setManaged(true);
-        }
-    }
-
-    private void updateSlot3(SaveViewDto saveData) {
-        boolean hasData = saveData != null;
-
-        if (!hasData) {
-
-            saveDataContentSlot3.setVisible(false);
-            saveDataContentSlot3.setManaged(false);
-
-            emptyContentSlot3.setVisible(true);
-            emptyContentSlot3.setManaged(true);
-
-            saveActionsSlot3.setVisible(false);
-            saveActionsSlot3.setManaged(false);
-
-        } else {
-
-            emptyContentSlot3.setVisible(false);
-            emptyContentSlot3.setManaged(false);
-
-            saveDataContentSlot3.setVisible(true);
-            saveDataContentSlot3.setManaged(true);
-
-            personNameSlot3Label.setText(saveData.playerName());
-            datetimeSlot3Label.setText(saveData.dateSave());
-            chapterNameSlot3Label.setText(saveData.currentChapterName());
-
-            saveActionsSlot3.setVisible(true);
-            saveActionsSlot3.setManaged(true);
-        }
-    }
-
     public void updateAllSlots() {
 
         List<SaveViewDto> saves = gameController.getDataOfAllSaves();
 
-        updateSlot1(saves.getFirst());
-        updateSlot2(saves.get(1));
-        updateSlot3(saves.getLast());
+        if (saves.size() != slotViews.size()) {
+
+            throw new IllegalStateException(
+                    "A quantidade de saves não corresponde a quantidade de slots."
+            );
+        }
+
+        for (int i = 0; i < slotViews.size(); i++) {
+
+            updateSlot(slotViews.get(i), saves.get(i));
+        }
     }
 
     @Override
     public void initScreen() {
+        initializeSlotViews();
         updateAllSlots();
     }
 }
+
