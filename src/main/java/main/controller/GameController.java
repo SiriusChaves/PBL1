@@ -62,6 +62,14 @@ public class GameController {
                 .hasNextScene();
     }
 
+    public boolean hasAvailableChapterFinalChoices() {
+
+        return !gameSession
+                .getStoryService()
+                .getAvailableChapterFinalChoices()
+                .isEmpty();
+    }
+
     public boolean isGameCompleted() {
         return gameSession.isGameCompleted();
     }

@@ -15,24 +15,28 @@ import javafx.scene.control.ProgressBar;
 import main.controller.GameController;
 import main.dto.*;
 import main.exception.ChapterNotFoundException;
-import main.view.javafx.controller.dependency.GameControllerAware;
-import main.view.javafx.controller.dependency.ScreenController;
-import main.view.javafx.controller.dependency.ScreenInitializer;
-import main.view.javafx.controller.dependency.SlotAware;
+import main.facade.GameFacade;
+import main.facade.GameFlowResult;
+import main.view.javafx.controller.dependency.*;
 import main.view.javafx.manager.ScreenManager;
 import java.util.List;
 import java.util.Optional;
+
+import static main.facade.GameFlowResult.SCENE_UPDATED;
 
 
 public class GameScreenController implements
         ScreenController,
         GameControllerAware,
+        GameFacadeAware,
         ScreenInitializer,
         SlotAware {
 
     private ScreenManager screenManager;
 
     private GameController gameController;
+
+    private GameFacade gameFacade;
 
     private String slotNumber;
 
@@ -204,7 +208,7 @@ public class GameScreenController implements
 
         try {
 
-            gameController.saveGame();
+            gameFacade.saveCurrentGame();
 
             showSaveSuccessAlert();
 
@@ -225,23 +229,26 @@ public class GameScreenController implements
     @FXML
     private void handleContinue() {
 
-        if (gameController.hasNextScene()) {
+        GameFlowResult result = gameFacade.continueNarrative();
 
-            gameController.advanceToNextScene();
+        handleGameFlowResult(result);
+    }
 
-            displayCurrentScene();
+    private void handleGameFlowResult(GameFlowResult result) {
 
-            return;
+        switch (result) {
+
+            case  SCENE_UPDATED -> displayCurrentScene();
+
+            case FINAL_CHOICES_AVAILABLE ->
+                displayFinalChoices(actualChapterInScreen);
+
+            case CHAPTER_FINISHED -> displayCurrentChapter();
+
+            case GAME_COMPLETED -> screenManager.showEndingScreen();
+
+            case GAME_OVER -> screenManager.showGameOverScreen();
         }
-
-        if (actualChapterInScreen.numberLastChoices() > 0) {
-
-            displayFinalChoices(actualChapterInScreen);
-
-            return;
-        }
-
-        finishChapter();
     }
 
     private void updateProgressBar(ProgressBar progressBar, Label valueLabel, int currentValue, int maxValue) {
@@ -594,66 +601,17 @@ public class GameScreenController implements
         }
     }
 
-    private void handleSceneChoice(int choiceIndex) {
-
-        gameController.applySceneChoiceConsequence(choiceIndex);
-
-        if (gameController.isGameOver()) {
-            screenManager.showGameOverScreen();
-            return;
-        }
-
-        if (gameController.hasNextScene()) {
-            gameController.advanceToNextScene();
-
-            displayCurrentScene();
-
-        } else {
-
-            if (this.actualChapterInScreen.numberLastChoices() > 0) {
-
-                displayFinalChoices(actualChapterInScreen);
-
-            } else {
-
-                finishChapter();
-            }
-        }
-    }
-
-    private void handleFinalChoice(int choiceIndex) {
-        gameController.applyChapterFinalChoiceConsequence(choiceIndex);
-
-        if (gameController.isGameOver()) {
-            screenManager.showGameOverScreen();
-            return;
-        }
-
-        finishChapter();
-    }
-
-    private void finishChapter() {
-
-        if (gameController.isFinalChapter()) {
-            gameController.setGameIsCompleted();
-            gameController.saveGame();
-            screenManager.showEndingScreen();
-            return;
-        }
-
-        displayCurrentChapter();
-    }
-
     private void handleChoice(int choiceIndex) {
 
+        GameFlowResult result;
+
         if (showingFinalChoices) {
-
-            handleFinalChoice(choiceIndex);
-
+            result = gameFacade.chooseFinalOption(choiceIndex);
         } else {
-
-            handleSceneChoice(choiceIndex);
+            result = gameFacade.chooseSceneOption(choiceIndex);
         }
+
+        handleGameFlowResult(result);
     }
 
     private void displayFinalChoices(ChapterDto chapter) {
@@ -696,5 +654,10 @@ public class GameScreenController implements
     @Override
     public void setSlotNumber(String slotNumber) {
         this.slotNumber = slotNumber;
+    }
+
+    @Override
+    public void setGameFacade(GameFacade gameFacade) {
+        this.gameFacade = gameFacade;
     }
 }

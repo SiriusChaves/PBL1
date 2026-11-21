@@ -5,10 +5,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import main.controller.GameController;
-import main.view.javafx.controller.dependency.GameControllerAware;
-import main.view.javafx.controller.dependency.ScreenController;
-import main.view.javafx.controller.dependency.ScreenInitializer;
-import main.view.javafx.controller.dependency.SlotAware;
+import main.facade.GameFacade;
+import main.view.javafx.controller.dependency.*;
 
 import java.io.IOException;
 import java.util.function.Consumer;
@@ -19,11 +17,13 @@ public class ScreenManager {
 
     private final Stage mainStage;
     private final GameController gameController;
+    private final GameFacade gameFacade;
 
     public ScreenManager(Stage primaryStage, GameController gameController) {
 
         this.mainStage = primaryStage;
         this.gameController = gameController;
+        this.gameFacade = new GameFacade(gameController);
 
         mainStage.setTitle("MegaBrain");
 
@@ -59,6 +59,10 @@ public class ScreenManager {
 
             if (loaderController instanceof ScreenController screenController) {
                 screenController.setScreenManager(this);
+            }
+
+            if (loaderController instanceof GameFacadeAware gameFacadeAware) {
+                gameFacadeAware.setGameFacade(this.gameFacade);
             }
 
             controllerSetup.accept(loaderController);
