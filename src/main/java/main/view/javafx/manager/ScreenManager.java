@@ -11,8 +11,10 @@ import main.view.javafx.controller.dependency.ScreenInitializer;
 import main.view.javafx.controller.dependency.SlotAware;
 
 import java.io.IOException;
+import java.util.function.Consumer;
 
 public class ScreenManager {
+
     private static final String VIEW_PATH = "/javafx/fxml/";
 
     private final Stage mainStage;
@@ -29,11 +31,15 @@ public class ScreenManager {
 
     }
 
-    private void loadSceneFromFxmlFile(String fxmlfilename) {
+    private void loadSceneFromFxmlFile(String fxmlFilename) {
+        loadSceneFromFxmlFile(fxmlFilename, controller -> {});
+    }
+
+    private void loadSceneFromFxmlFile(String fxmlFilename, Consumer<Object> controllerSetup) {
 
         try {
 
-            String fullpath = VIEW_PATH + fxmlfilename;
+            String fullpath = VIEW_PATH + fxmlFilename;
             var resource = getClass().getResource(fullpath);
 
             if (resource == null) {
@@ -45,24 +51,28 @@ public class ScreenManager {
 
             Parent root = loader.load();
 
-            if (loader.getController() instanceof GameControllerAware gameControllerAware) {
+            var loaderController = loader.getController();
+
+            if (loaderController instanceof GameControllerAware gameControllerAware) {
                 gameControllerAware.setGameController(this.gameController);
             }
 
-            if (loader.getController() instanceof ScreenController screenController) {
+            if (loaderController instanceof ScreenController screenController) {
                 screenController.setScreenManager(this);
             }
+
+            controllerSetup.accept(loaderController);
 
             Scene scene = new Scene(root);
 
             mainStage.setScene(scene);
 
-            if (loader.getController() instanceof ScreenInitializer screenInitializer) {
+            if (loaderController instanceof ScreenInitializer screenInitializer) {
                 screenInitializer.initScreen();
             }
 
         } catch (IOException ioException) {
-            System.out.println("Erro ao carregar arquivo " + fxmlfilename);
+            System.out.println("Erro ao carregar arquivo " + fxmlFilename);
         }
     }
 
@@ -103,48 +113,15 @@ public class ScreenManager {
     }
 
     public void showGameScreen(String slotNumber) {
+        loadSceneFromFxmlFile("game_screen.fxml", controller -> {
 
-        String gameScreenFxmlFilename = "game_screen.fxml";
-
-        try {
-
-            String fullpath = VIEW_PATH + gameScreenFxmlFilename;
-            var resource = getClass().getResource(fullpath);
-
-            if (resource == null) {
-                System.out.println("Erro ao carregar arquivo no caminho:\n" + fullpath);
-                return;
-            }
-
-            FXMLLoader loader = new FXMLLoader(resource);
-
-            Parent root = loader.load();
-
-            if (loader.getController() instanceof GameControllerAware gameControllerAware) {
-                gameControllerAware.setGameController(this.gameController);
-            }
-
-            if (loader.getController() instanceof ScreenController screenController) {
-                screenController.setScreenManager(this);
-            }
-
-            if (loader.getController() instanceof SlotAware slotAware) {
+            if (controller instanceof SlotAware slotAware) {
                 slotAware.setSlotNumber(slotNumber);
+            } else {
+                throw new IllegalStateException(
+                        "O controller da game_screen.fxml deve implementar SlotAware"
+                );
             }
-
-            Scene scene = new Scene(root);
-
-            mainStage.setScene(scene);
-
-            if (loader.getController() instanceof ScreenInitializer screenInitializer) {
-                screenInitializer.initScreen();
-            }
-
-
-
-        } catch (IOException ioException) {
-
-            System.out.println("Erro ao carregar arquivo " + gameScreenFxmlFilename);
-        }
+        });
     }
 }
