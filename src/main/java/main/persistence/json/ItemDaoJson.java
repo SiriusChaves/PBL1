@@ -13,25 +13,40 @@ import java.nio.file.Path;
 
 public class ItemDaoJson implements ItemDao {
     @Override
-    public ItemPersistenceDto[] loadItems() throws ItemNotFoundException {
+    public ItemPersistenceDto[] loadItems()
+            throws ItemNotFoundException {
 
-        Path path = Path.of(
-                "src", "main", "resources", "items", "items.json"
-        );
+        String resourcePath = "/items/items.json";
 
-        Gson gson = new GsonBuilder()
-                .setPrettyPrinting()
-                .create();
+        try (var inputStream =
+                     getClass().getResourceAsStream(resourcePath)) {
 
-        try (Reader reader = Files.newBufferedReader(path)) {
-
-            return gson.fromJson(reader, ItemPersistenceDto[].class);
-
-        } catch (IOException ioException) {
-
+            if (inputStream == null) {
                 throw new ItemNotFoundException(
-                        "Erro ao carregar um item do arquivo de items.json"
+                        "Arquivo items.json não encontrado."
                 );
+            }
+
+            try (Reader reader = new java.io.InputStreamReader(
+                    inputStream,
+                    java.nio.charset.StandardCharsets.UTF_8
+            )) {
+
+                Gson gson = new GsonBuilder()
+                        .setPrettyPrinting()
+                        .create();
+
+                return gson.fromJson(
+                        reader,
+                        ItemPersistenceDto[].class
+                );
+            }
+
+        } catch (IOException exception) {
+
+            throw new ItemNotFoundException(
+                    "Erro ao carregar os itens do jogo."
+            );
         }
     }
 }

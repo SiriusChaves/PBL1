@@ -2,8 +2,10 @@ package main.persistence.json;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonParseException;
 import main.exception.UserProfileErrorException;
 import main.model.profile.UserProfile;
+import main.persistence.StoragePaths;
 import main.persistence.dao.UserProfileDao;
 
 import java.io.IOException;
@@ -22,13 +24,17 @@ public class UserProfileDaoJson implements UserProfileDao {
     @Override
     public void save(UserProfile userProfile) throws UserProfileErrorException {
 
-        Path path = Path.of(
-                "data", "profile", "profile.json"
-        );
+        Path path = StoragePaths.getProfileFile();
 
-        try (Writer writer = Files.newBufferedWriter(path)) {
+        try {
 
-            GSON.toJson(userProfile, writer);
+            Files.createDirectories(path.getParent());
+
+            try (Writer writer = Files.newBufferedWriter(path)) {
+
+                GSON.toJson(userProfile, writer);
+
+            }
 
         } catch (IOException ioException) {
 
@@ -39,20 +45,32 @@ public class UserProfileDaoJson implements UserProfileDao {
     }
 
     @Override
-    public UserProfile loadUserProfile() throws UserProfileErrorException {
+    public UserProfile loadUserProfile() {
 
-        Path path = Path.of(
-                "data", "profile", "profile.json"
-        );
+        Path path = StoragePaths.getProfileFile();
 
-        try (Reader reader = Files.newBufferedReader(path)) {
+        try {
+            Files.createDirectories(path.getParent());
 
-            return GSON.fromJson(reader, UserProfile.class);
+            if (Files.notExists(path)) {
+                UserProfile defaultProfile = new UserProfile();
+                save(defaultProfile);
+                return defaultProfile;
+            }
 
-        } catch (IOException ioException) {
+            try (Reader reader = Files.newBufferedReader(path)) {
+                UserProfile profile = GSON.fromJson(reader, UserProfile.class);
 
+                if (profile == null) {
+                    throw new IOException("Arquivo de perfil vazio.");
+                }
+
+                return profile;
+            }
+
+        } catch (IOException | JsonParseException exception) {
             throw new UserProfileErrorException(
-                    "Erro ao carregar usuário do Json"
+                    "Erro ao carregar o perfil do usuário."
             );
         }
     }

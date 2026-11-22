@@ -2,6 +2,7 @@ package main.persistence.json;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import main.persistence.StoragePaths;
 import main.persistence.dto.SavePersistenceDto;
 import main.exception.FileOfSaveNotCreateException;
 import main.exception.GameNotSaveException;
@@ -25,12 +26,8 @@ public class SaveDaoJson implements SaveDao {
     @Override
     public void createSlotOfSave(String slotIndex) throws FileOfSaveNotCreateException {
 
-        Path path = Path.of(
-                "data",
-                "saves",
-                "slot" + slotIndex,
-                "slot" + slotIndex + ".json"
-        );
+        Path path = StoragePaths.getSaveFile(slotIndex);
+
 
         try {
             if (Files.exists(path)) {
@@ -55,18 +52,14 @@ public class SaveDaoJson implements SaveDao {
     public void save(SavePersistenceDto savePersistenceDto, String slotIndex)
             throws GameNotSaveException {
 
-        Path path = Path.of(
-                "data",
-                "saves",
-                "slot" + slotIndex,
-                "slot" + slotIndex + ".json"
-        );
-
-        try (Writer writer = Files.newBufferedWriter(path)) {
-
+        Path path = StoragePaths.getSaveFile(slotIndex);
+        try {
             Files.createDirectories(path.getParent());
 
-            GSON.toJson(savePersistenceDto, writer);
+            try (Writer writer = Files.newBufferedWriter(path)) {
+
+                GSON.toJson(savePersistenceDto, writer);
+            }
 
         } catch (IOException ioException) {
 
@@ -79,12 +72,8 @@ public class SaveDaoJson implements SaveDao {
     @Override
     public void delete(String slotIndex) throws SlotOfSaveNotFoundException {
 
-        Path path = Path.of(
-                "data",
-                "saves",
-                "slot" + slotIndex,
-                "slot" + slotIndex + ".json"
-        );
+        Path path = StoragePaths.getSaveFile(slotIndex);
+
 
        try {
            Files.deleteIfExists(path);
@@ -104,12 +93,8 @@ public class SaveDaoJson implements SaveDao {
         if (!saveFileExists(slotIndex))
             return null;
 
-        Path path = Path.of(
-                "data",
-                "saves",
-                "slot" + slotIndex,
-                "slot" + slotIndex + ".json"
-        );
+        Path path = StoragePaths.getSaveFile(slotIndex);
+
 
         try (Reader reader = Files.newBufferedReader(path)) {
 
@@ -126,12 +111,8 @@ public class SaveDaoJson implements SaveDao {
     @Override
     public boolean saveFileExists(String slotIndex) {
 
-        Path path = Path.of(
-                "data",
-                "saves",
-                "slot" + slotIndex,
-                "slot" + slotIndex + ".json"
-        );
+        Path path = StoragePaths.getSaveFile(slotIndex);
+
 
             return (Files.exists(path));
     }
@@ -147,12 +128,8 @@ public class SaveDaoJson implements SaveDao {
 
             try {
 
-                Path path = Path.of(
-                        "data",
-                        "saves",
-                        "slot" + slotIndex,
-                        "slot" + slotIndex + ".json"
-                );
+                Path path = StoragePaths.getSaveFile(slotIndex);
+
 
                 return Files.size(path) > 0;
 

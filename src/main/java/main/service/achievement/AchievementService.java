@@ -28,10 +28,13 @@ public class AchievementService {
                 .map(AchievementMapper::toDto)
                 .toArray(AchievementDto[]::new);
 
-        AchievementDto[] achievementFromDao = achievementDao.loadAchievements();
+        AchievementDto[] achievementFromDao =
+                achievementDao.loadAchievements();
 
         List<AchievementDto> achievementDtoList = new ArrayList<>(
-                Arrays.stream(achievementFromDao).toList()
+                achievementFromDao == null
+                        ? List.of()
+                        : Arrays.asList(achievementFromDao)
         );
 
         for (var unlockedAchievement : unlockedAchievements)
@@ -44,17 +47,10 @@ public class AchievementService {
     }
 
     public List<AchievementDto> loadAchievementsDto() {
+        AchievementDto[] achievementsFromSave =
+                achievementDao.loadAchievements();
 
-        AchievementDto[] achievementsFromSave = achievementDao.loadAchievements();
-
-        if (achievementsFromSave != null) {
-
-            return Arrays.stream(achievementsFromSave).toList();
-
-        } else {
-
-            return Collections.emptyList();
-        }
+        return Arrays.stream(achievementsFromSave).toList();
     }
 
     private List<Achievement> loadAchievements() {

@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import main.dto.AchievementDto;
 import main.exception.AchievementsNotLoadException;
 import main.exception.AchievementsNotSaveException;
+import main.persistence.StoragePaths;
 import main.persistence.dao.AchievementDao;
 
 import java.io.IOException;
@@ -23,9 +24,11 @@ public class AchievementDaoJson implements AchievementDao {
     @Override
     public AchievementDto[] loadAchievements() throws AchievementsNotLoadException {
 
-        Path path = Path.of(
-                "data", "achievements", "achievements.json"
-        );
+        Path path = StoragePaths.getAchievementsFile();
+
+        if (Files.notExists(path)) {
+            return new AchievementDto[0];
+        }
 
         try (Reader reader = Files.newBufferedReader(path)) {
 
@@ -42,18 +45,19 @@ public class AchievementDaoJson implements AchievementDao {
     @Override
     public void save(AchievementDto[] achievements) throws AchievementsNotSaveException {
 
-        Path path = Path.of(
-                "data", "achievements", "achievements.json"
-        );
+        Path path = StoragePaths.getAchievementsFile();
 
-        try (Writer writer = Files.newBufferedWriter(path)) {
+        try {
+            Files.createDirectories(path.getParent());
 
-            GSON.toJson(achievements, writer);
+            try (Writer writer = Files.newBufferedWriter(path)) {
+                GSON.toJson(achievements, writer);
+            }
 
-        } catch (Exception exception) {
+        } catch (IOException exception) {
 
             throw new AchievementsNotSaveException(
-                    "Não foi possivel salvar as conquistas do usuário"
+                    "Não foi possível salvar as conquistas do usuário"
             );
         }
     }

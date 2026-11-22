@@ -7,6 +7,7 @@ import main.persistence.dao.ChapterDao;
 
 import java.io.IOException;
 import java.io.Reader;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
@@ -17,19 +18,24 @@ public class ChapterDaoJson implements ChapterDao {
     @Override
     public Chapter findByID(String idChapter) throws ChapterNotFoundException {
 
-        Path path = Path.of(
-                "src",
-                "main",
-                "resources",
-                "chapters",
-                "chapter" + idChapter + ".json"
-        );
+        String resourcePath = "/chapters/chapter" + idChapter + ".json";
 
-        Gson gson = new Gson();
+        try (var inputStream = getClass().getResourceAsStream(resourcePath)) {
 
-        try (Reader reader = Files.newBufferedReader(path)) {
+            if (inputStream == null) {
+                throw new ChapterNotFoundException(
+                        "Capítulo inexistente: " + idChapter
+                );
+            }
 
-             return gson.fromJson(reader, Chapter.class);
+            try (Reader reader = new java.io.InputStreamReader(
+                    inputStream,
+                    StandardCharsets.UTF_8
+            )) {
+                Gson gson = new Gson();
+
+                return gson.fromJson(reader, Chapter.class);
+            }
 
         } catch (IOException ioException) {
 
