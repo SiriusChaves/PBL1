@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
@@ -9,15 +11,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<StackPane xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.view.javafx.controller.FinalGameScreenController">
+<StackPane fx:id="rootPane" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.view.javafx.controller.FinalGameScreenController">
    <children>
-      <ImageView fitHeight="768.0" fitWidth="1366.0" pickOnBounds="true" smooth="false">
+      <ImageView fitHeight="768.0" fitWidth="1366.0" mouseTransparent="true" pickOnBounds="true" smooth="false">
          <image>
             <Image url="@../images/backgrounds/Painel%20Duplo_%20Ruína%20e%20Aurora.jpg" />
          </image>
       </ImageView>
-      <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handleBackToMainMenu" prefHeight="768.0" prefWidth="1366.0" spacing="25.0">
+      <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" spacing="25.0" styleClass="final-game-panel">
          <padding>
             <Insets bottom="25.0" left="35.0" right="35.0" top="25.0" />
          </padding>
@@ -26,20 +27,24 @@
                <font>
                   <Font size="57.0" />
                </font>
+               <styleClass>
+                  <String fx:value="mb-title" />
+                  <String fx:value="final-game-title" />
+               </styleClass>
             </Label>
-            <Separator prefWidth="200.0" />
-            <Label layoutX="640.0" layoutY="35.0" text="Você concluiu um dos finais de MegaBrain." textFill="WHITE">
+            <Separator prefWidth="200.0" styleClass="final-game-separator" />
+            <Label layoutX="640.0" layoutY="35.0" styleClass="final-game-main-message" text="Você concluiu um dos finais de MegaBrain." textFill="WHITE">
                <font>
                   <Font size="28.0" />
                </font>
             </Label>
-            <Label layoutX="640.0" layoutY="119.0" text="Existe um total de 3 finais, continue explorando." textFill="WHITE">
+            <Label layoutX="640.0" layoutY="119.0" styleClass="final-game-secondary-message" text="Existe um total de 3 finais, continue explorando." textFill="WHITE">
                <font>
                   <Font size="28.0" />
                </font>
             </Label>
-            <Separator layoutX="45.0" layoutY="68.0" prefWidth="200.0" />
-            <Label layoutX="640.0" layoutY="215.0" text="Pressione ESPAÇO para continuar..." textFill="WHITE">
+            <Separator layoutX="45.0" layoutY="68.0" prefWidth="200.0" styleClass="final-game-separator" />
+            <Label layoutX="640.0" layoutY="215.0" styleClass="final-game-instruction" text="Pressione ESPAÇO para continuar..." textFill="WHITE">
                <font>
                   <Font size="28.0" />
                </font>
@@ -47,4 +52,12 @@
          </children>
       </VBox>
    </children>
+   <stylesheets>
+      <URL value="@../css/common.css" />
+      <URL value="@../css/final-game.css" />
+   </stylesheets>
+   <styleClass>
+      <String fx:value="final-game-root" />
+      <String fx:value="mb-root" />
+   </styleClass>
 </StackPane>

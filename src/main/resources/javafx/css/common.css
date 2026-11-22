@@ -1,0 +1,103 @@
+.mb-root {
+    -fx-background-color: #171323;
+    -fx-font-family: "Monospaced";
+}
+
+.mb-title {
+    -fx-font-family: "Monospaced";
+    -fx-font-size: 42px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #F4EEFF;
+    -fx-effect: dropshadow(gaussian, rgba(182, 139, 255, 0.58), 14, 0.30, 0, 0);
+}
+
+.mb-section-title {
+    -fx-font-family: "Monospaced";
+    -fx-font-size: 25px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #E8D9FF;
+}
+
+.mb-label {
+    -fx-font-family: "Monospaced";
+    -fx-font-size: 14px;
+    -fx-text-fill: #E5DDF0;
+}
+
+.mb-muted-label {
+    -fx-font-family: "Monospaced";
+    -fx-font-size: 12px;
+    -fx-text-fill: #B7A9C9;
+}
+
+.mb-button {
+    -fx-background-color: linear-gradient(to bottom, #604681, #3B2A52);
+    -fx-background-radius: 3px;
+    -fx-border-color: #9B78C5;
+    -fx-border-width: 2px;
+    -fx-border-radius: 3px;
+    -fx-text-fill: #F7F1FF;
+    -fx-font-family: "Monospaced";
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 18px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.38), 7, 0.15, 0, 3);
+}
+
+.mb-button:hover {
+    -fx-background-color: linear-gradient(to bottom, #795BA0, #50386E);
+    -fx-border-color: #D8BDFF;
+    -fx-text-fill: #FFFFFF;
+    -fx-effect: dropshadow(gaussian, rgba(174, 132, 255, 0.55), 13, 0.25, 0, 0);
+    -fx-translate-y: -1px;
+}
+
+.mb-button:pressed {
+    -fx-background-color: #30213F;
+    -fx-border-color: #B99ADD;
+    -fx-translate-y: 1px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 3, 0.1, 0, 1);
+}
+
+.mb-button:focused {
+    -fx-border-color: #FFFFFF;
+    -fx-border-width: 2px;
+    -fx-border-insets: -2px;
+}
+
+.mb-button-secondary {
+    -fx-background-color: rgba(26, 21, 39, 0.88);
+    -fx-border-color: #66527F;
+    -fx-text-fill: #E0D5EC;
+}
+
+.mb-button-secondary:hover {
+    -fx-background-color: rgba(73, 53, 101, 0.96);
+    -fx-border-color: #C4A7E8;
+    -fx-text-fill: #FFFFFF;
+}
+
+.mb-panel {
+    -fx-background-color: rgba(20, 16, 31, 0.88);
+    -fx-background-radius: 3px;
+    -fx-border-color: rgba(159, 123, 199, 0.86);
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 3px;
+    -fx-padding: 16px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.42), 12, 0.18, 0, 4);
+}
+
+.mb-scroll-pane,
+.mb-scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+.mb-scroll-pane {
+    -fx-background: transparent;
+    -fx-border-color: transparent;
+}
+
+.mb-scroll-pane > .corner {
+    -fx-background-color: transparent;
+}

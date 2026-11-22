@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -19,45 +21,45 @@
 
 <StackPane xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.view.javafx.controller.GameScreenController">
    <children>
-      <ImageView fitHeight="768.0" fitWidth="1366.0" pickOnBounds="true" smooth="false">
+      <ImageView fitHeight="768.0" fitWidth="1366.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" smooth="false">
          <image>
             <Image url="@../images/backgrounds/game_background.png" />
          </image>
       </ImageView>
-      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0">
+      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" styleClass="game-screen-layout">
          <top>
-            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="15.0" BorderPane.alignment="CENTER">
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="15.0" styleClass="game-header" BorderPane.alignment="CENTER">
                <children>
-                  <Label text="Mega Brain" textFill="WHITE">
+                  <Label styleClass="game-brand" text="Mega Brain" textFill="WHITE">
                      <font>
                         <Font size="35.0" />
                      </font>
                   </Label>
                   <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                  <Label fx:id="chapterActual" text="Capitulo XX - Titulo" textFill="WHITE">
+                  <Label fx:id="chapterActual" styleClass="game-chapter-title" text="Capitulo XX - Titulo" textFill="WHITE">
                      <font>
                         <Font size="25.0" />
                      </font>
                   </Label>
-                  <Separator orientation="VERTICAL" prefHeight="200.0" />
-                  <HBox fx:id="hudActions" alignment="CENTER_LEFT">
+                  <Separator orientation="VERTICAL" prefHeight="200.0" styleClass="game-header-separator" />
+                  <HBox fx:id="hudActions" alignment="CENTER_LEFT" styleClass="game-hud-actions">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#handleShowStatus" text="status">
+                        <Button mnemonicParsing="false" onAction="#handleShowStatus" styleClass="game-hud-button" text="status">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleShowInventory" text="inventário">
+                        <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleShowInventory" styleClass="game-hud-button" text="inventário">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Button layoutX="70.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleShowRelationships" text="vinculos">
+                        <Button layoutX="70.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleShowRelationships" styleClass="game-hud-button" text="vinculos">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Button layoutX="143.0" layoutY="10.0" mnemonicParsing="false" onAction="#handlePause" text="pausar">
+                        <Button layoutX="143.0" layoutY="10.0" mnemonicParsing="false" onAction="#handlePause" styleClass="game-hud-button" text="pausar">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -71,11 +73,11 @@
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </padding>
          <bottom>
-            <VBox prefHeight="300.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+            <VBox prefHeight="300.0" prefWidth="100.0" styleClass="game-bottom-area" BorderPane.alignment="CENTER">
                <children>
-                  <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="130.0" prefWidth="1326.0" VBox.vgrow="ALWAYS">
+                  <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="130.0" prefWidth="1326.0" styleClass="game-story-scroll" VBox.vgrow="ALWAYS">
                      <content>
-                        <Label fx:id="storyTextLabel" alignment="TOP_LEFT" maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" text="lorem um texto muito doido de exemplo para simular a narrativa do megabrain sdaallalalaaaaaaaaaaaaaaaaaa" wrapText="true">
+                        <Label fx:id="storyTextLabel" alignment="TOP_LEFT" maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" styleClass="game-story-text" text="lorem um texto muito doido de exemplo para simular a narrativa do megabrain sdaallalalaaaaaaaaaaaaaaaaaa" wrapText="true">
                            <font>
                               <Font size="38.0" />
                            </font>
@@ -85,21 +87,21 @@
                         </Label>
                      </content>
                   </ScrollPane>
-                  <ScrollPane fx:id="choicesScrollPane" fitToWidth="true" hbarPolicy="NEVER" prefHeight="130.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                  <ScrollPane fx:id="choicesScrollPane" fitToWidth="true" hbarPolicy="NEVER" prefHeight="130.0" prefWidth="200.0" styleClass="game-choices-scroll" VBox.vgrow="ALWAYS">
                      <content>
-                        <VBox alignment="CENTER" maxWidth="1.7976931348623157E308" spacing="12.0">
+                        <VBox alignment="CENTER" maxWidth="1.7976931348623157E308" spacing="12.0" styleClass="game-choices-list">
                            <children>
-                              <Button fx:id="choice1Button" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="49.0" prefWidth="1324.0" text="exemplo de escolha 3" wrapText="true">
+                              <Button fx:id="choice1Button" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="49.0" prefWidth="1324.0" styleClass="game-choice-button" text="exemplo de escolha 3" wrapText="true">
                                  <font>
                                     <Font size="26.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="choice2Button" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="exemplo de escolha 2" wrapText="true">
+                              <Button fx:id="choice2Button" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="game-choice-button" text="exemplo de escolha 2" wrapText="true">
                                  <font>
                                     <Font size="26.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="choice3Button" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="exemplo de escolha 1" wrapText="true">
+                              <Button fx:id="choice3Button" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="game-choice-button" text="exemplo de escolha 1" wrapText="true">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
@@ -111,7 +113,7 @@
                         </VBox>
                      </content>
                   </ScrollPane>
-                  <Button fx:id="continueButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleContinue" prefHeight="49.0" prefWidth="1324.0" text="Continuar para a proxima cena" wrapText="true">
+                  <Button fx:id="continueButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleContinue" prefHeight="49.0" prefWidth="1324.0" styleClass="game-continue-button" text="Continuar para a proxima cena" wrapText="true">
                      <font>
                         <Font size="26.0" />
                      </font>
@@ -120,33 +122,33 @@
             </VBox>
          </bottom>
          <center>
-            <HBox spacing="80.0" BorderPane.alignment="CENTER">
+            <HBox spacing="80.0" styleClass="game-character-area" BorderPane.alignment="CENTER">
                <children>
-                  <VBox maxWidth="1.7976931348623157E308" prefWidth="380.0" spacing="8.0" HBox.hgrow="ALWAYS">
+                  <VBox maxWidth="1.7976931348623157E308" prefWidth="380.0" spacing="8.0" styleClass="game-character-card" HBox.hgrow="ALWAYS">
                      <children>
-                        <Label fx:id="nameCharacterA" alignment="CENTER" maxWidth="1.7976931348623157E308" text="Nome Personagem A" textAlignment="CENTER" textFill="WHITE">
+                        <Label fx:id="nameCharacterA" alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="game-character-name" text="Nome Personagem A" textAlignment="CENTER" textFill="WHITE">
                            <font>
                               <Font size="28.0" />
                            </font>
                         </Label>
-                        <StackPane prefHeight="250.0" prefWidth="380.0">
+                        <StackPane prefHeight="250.0" prefWidth="380.0" styleClass="game-character-frame">
                            <children>
-                              <Rectangle arcHeight="12.0" arcWidth="12.0" fill="#154e83" height="240.0" stroke="#ddd423" strokeType="INSIDE" strokeWidth="2.0" width="340.0" />
+                              <Rectangle arcHeight="12.0" arcWidth="12.0" fill="#154e83" height="240.0" stroke="#ddd423" strokeType="INSIDE" strokeWidth="2.0" styleClass="game-character-frame-surface" width="340.0" />
                               <ImageView fx:id="imgCharacterA" fitHeight="230.0" fitWidth="330.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </StackPane>
                      </children>
                   </VBox>
-                  <VBox maxWidth="1.7976931348623157E308" prefWidth="380.0" spacing="8.0" HBox.hgrow="ALWAYS">
+                  <VBox maxWidth="1.7976931348623157E308" prefWidth="380.0" spacing="8.0" styleClass="game-character-card" HBox.hgrow="ALWAYS">
                      <children>
-                        <Label fx:id="nameCharacterB" alignment="CENTER" maxWidth="1.7976931348623157E308" text="Nome Personagem B" textAlignment="CENTER" textFill="WHITE">
+                        <Label fx:id="nameCharacterB" alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="game-character-name" text="Nome Personagem B" textAlignment="CENTER" textFill="WHITE">
                            <font>
                               <Font size="28.0" />
                            </font>
                         </Label>
-                        <StackPane prefHeight="250.0" prefWidth="380.0">
+                        <StackPane prefHeight="250.0" prefWidth="380.0" styleClass="game-character-frame">
                            <children>
-                              <Rectangle arcHeight="12.0" arcWidth="12.0" fill="#154e83" height="240.0" stroke="#ddd423" strokeType="INSIDE" strokeWidth="2.0" width="340.0" />
+                              <Rectangle arcHeight="12.0" arcWidth="12.0" fill="#154e83" height="240.0" stroke="#ddd423" strokeType="INSIDE" strokeWidth="2.0" styleClass="game-character-frame-surface" width="340.0" />
                               <ImageView fx:id="imgCharacterB" fitHeight="230.0" fitWidth="330.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </StackPane>
@@ -156,13 +158,13 @@
             </HBox>
          </center>
       </BorderPane>
-      <StackPane fx:id="containerPauseMenu" pickOnBounds="true" style="-fx-background-color: rgba(0,0,0,0.75);" visible="false">
+      <StackPane fx:id="containerPauseMenu" pickOnBounds="true" style="-fx-background-color: rgba(0,0,0,0.75);" styleClass="game-overlay" visible="false">
          <children>
-            <VBox alignment="CENTER" maxWidth="420" spacing="18" style="-fx-background-color: #252B3A;                      -fx-border-color: #A18B63;                      -fx-border-width: 2;                      -fx-padding: 30;">
+            <VBox alignment="CENTER" maxWidth="420" spacing="18">
 
-               <Label text="JOGO PAUSADO" />
+               <Label styleClass="game-overlay-title" text="JOGO PAUSADO" />
 
-               <Button alignment="CENTER" onAction="#handleResume" prefWidth="200.0" text="Continuar" textAlignment="CENTER">
+               <Button alignment="CENTER" onAction="#handleResume" prefWidth="200.0" styleClass="game-modal-button" text="Continuar" textAlignment="CENTER">
                   <cursor>
                      <Cursor fx:constant="HAND" />
                   </cursor>
@@ -170,7 +172,7 @@
                      <Font size="20.0" />
                   </font></Button>
 
-               <Button alignment="CENTER" onAction="#handleSaveGame" prefWidth="200.0" text="Salvar jogo" textAlignment="CENTER">
+               <Button alignment="CENTER" onAction="#handleSaveGame" prefWidth="200.0" styleClass="game-modal-button" text="Salvar jogo" textAlignment="CENTER">
                   <cursor>
                      <Cursor fx:constant="HAND" />
                   </cursor>
@@ -178,13 +180,18 @@
                      <Font size="20.0" />
                   </font></Button>
 
-               <Button alignment="CENTER" onAction="#handleBackToMainMenu" prefWidth="200.0" text="Sair para o menu" textAlignment="CENTER">
+               <Button alignment="CENTER" onAction="#handleBackToMainMenu" prefWidth="200.0" styleClass="game-modal-button" text="Sair para o menu" textAlignment="CENTER">
                   <cursor>
                      <Cursor fx:constant="HAND" />
                   </cursor>
                   <font>
                      <Font size="20.0" />
                   </font></Button>
+               <styleClass>
+                  <String fx:value="mb-panel" />
+                  <String fx:value="game-modal-panel" />
+                  <String fx:value="pause-panel" />
+               </styleClass>
 
             </VBox>
          </children>
@@ -192,39 +199,47 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </StackPane>
-      <StackPane fx:id="containerPlayerPanel" alignment="CENTER" pickOnBounds="true" style="-fx-background-color: rgba(0,0,0,0.75);">
+      <StackPane fx:id="containerPlayerPanel" alignment="CENTER" pickOnBounds="true">
          <children>
-            <VBox alignment="CENTER" maxHeight="650.0" maxWidth="900.0" prefHeight="650.0" prefWidth="900.0" spacing="16.0" style="-fx-background-color: #252B3A;                      -fx-border-color: #A18B63;                      -fx-border-width: 2;                      -fx-padding: 25;">
+            <VBox alignment="CENTER" maxHeight="650.0" maxWidth="900.0" prefHeight="650.0" prefWidth="900.0" spacing="16.0">
                <children>
-                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" styleClass="player-panel-header">
                      <children>
-                        <Label fx:id="playerPanelTitle" text="INVENTÁRIO" textFill="WHITE">
+                        <Label fx:id="playerPanelTitle" styleClass="player-panel-title" text="INVENTÁRIO" textFill="WHITE">
                            <font>
                               <Font size="20.0" />
                            </font></Label>
                         <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                        <Button mnemonicParsing="false" onAction="#closePlayerPanel" text="fechar" />
+                        <Button mnemonicParsing="false" onAction="#closePlayerPanel" text="fechar">
+                           <styleClass>
+                              <String fx:value="mb-button" />
+                              <String fx:value="mb-button-secondary" />
+                           </styleClass></Button>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="12.0">
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="12.0" styleClass="player-panel-tabs">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#handleShowInventory" text="Inventário" />
-                        <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleShowStatus" text="Status" />
-                        <Button layoutX="70.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleShowRelationships" text="Vínculos" />
+                        <Button mnemonicParsing="false" onAction="#handleShowInventory" styleClass="player-panel-tab-button" text="Inventário" />
+                        <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleShowStatus" styleClass="player-panel-tab-button" text="Status" />
+                        <Button layoutX="70.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleShowRelationships" styleClass="player-panel-tab-button" text="Vínculos" />
                      </children>
                   </HBox>
-                  <StackPane fx:id="playerPanelContent" prefHeight="480.0" prefWidth="820.0" VBox.vgrow="ALWAYS">
+                  <StackPane fx:id="playerPanelContent" prefHeight="480.0" prefWidth="820.0" styleClass="player-panel-content" VBox.vgrow="ALWAYS">
                      <children>
                         <ScrollPane fx:id="inventoryPanel" fitToWidth="true" hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0">
                            <content>
-                              <VBox fx:id="inventoryItemsContainer" prefWidth="820.0" spacing="12.0" />
+                              <VBox fx:id="inventoryItemsContainer" prefWidth="820.0" spacing="12.0" styleClass="game-dynamic-list" />
                            </content>
+                           <styleClass>
+                              <String fx:value="mb-scroll-pane" />
+                              <String fx:value="game-panel-scroll" />
+                           </styleClass>
                         </ScrollPane>
                         <ScrollPane fx:id="statusPanel" fitToWidth="true" hbarPolicy="NEVER" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0">
                            <content>
-                              <VBox fx:id="statusContainer" prefWidth="820.0" spacing="22.0">
+                              <VBox fx:id="statusContainer" prefWidth="820.0" spacing="22.0" styleClass="game-dynamic-list">
                                  <children>
-                                    <Label fx:id="playerNameLabel" style="-fx-font-size: 24px;: 24;" text="Jogador">
+                                    <Label fx:id="playerNameLabel" styleClass="game-player-name" text="Jogador">
                                        <font>
                                           <Font size="24.0" />
                                        </font></Label>
@@ -232,56 +247,89 @@
                                        <children>
                                           <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <Label text="Sanidade">
+                                                <Label styleClass="game-stat-label" text="Sanidade">
                                                    <font>
                                                       <Font size="19.0" />
                                                    </font>
                                                 </Label>
                                                 <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                                                <Label fx:id="sanityValueLabel" text="-- / --">
+                                                <Label fx:id="sanityValueLabel" styleClass="game-stat-value" text="-- / --">
                                                    <font>
                                                       <Font size="17.0" />
                                                    </font>
                                                 </Label>
                                              </children>
                                           </HBox>
-                                          <ProgressBar fx:id="sanityProgressBar" maxWidth="1.7976931348623157E308" prefWidth="700.0" progress="0.0" />
+                                          <ProgressBar fx:id="sanityProgressBar" maxWidth="1.7976931348623157E308" prefWidth="700.0" progress="0.0">
+                                             <styleClass>
+                                                <String fx:value="game-progress-bar" />
+                                                <String fx:value="sanity-progress" />
+                                             </styleClass></ProgressBar>
                                        </children>
                                     </VBox>
-                                    <VBox layoutX="10.0" layoutY="67.0" prefHeight="200.0" prefWidth="100.0" spacing="8.0">
+                                    <VBox layoutX="10.0" layoutY="67.0" prefHeight="200.0" prefWidth="100.0" spacing="8.0" styleClass="game-dynamic-list">
                                        <children>
                                           <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <Label text="Conhecimento">
+                                                <Label styleClass="game-stat-label" text="Conhecimento">
                                                    <font>
                                                       <Font size="19.0" />
                                                    </font>
                                                 </Label>
                                                 <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                                                <Label fx:id="knowledgeValueLabel" text="-- / --">
+                                                <Label fx:id="knowledgeValueLabel" styleClass="game-stat-value" text="-- / --">
                                                    <font>
                                                       <Font size="17.0" />
                                                    </font>
                                                 </Label>
                                              </children>
                                           </HBox>
-                                          <ProgressBar fx:id="knowledgeProgressBar" maxWidth="1.7976931348623157E308" prefWidth="700.0" progress="0.0" />
+                                          <ProgressBar fx:id="knowledgeProgressBar" maxWidth="1.7976931348623157E308" prefWidth="700.0" progress="0.0">
+                                             <styleClass>
+                                                <String fx:value="game-progress-bar" />
+                                                <String fx:value="knowledge-progress" />
+                                             </styleClass></ProgressBar>
                                        </children>
                                     </VBox>
                                  </children>
                               </VBox>
                            </content>
+                           <styleClass>
+                              <String fx:value="mb-scroll-pane" />
+                              <String fx:value="game-panel-scroll" />
+                           </styleClass>
                         </ScrollPane>
                         <ScrollPane fx:id="relationshipPanel" fitToWidth="true" hbarPolicy="NEVER" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0">
                            <content>
-                              <VBox fx:id="relationshipsContainer" prefWidth="820.0" spacing="12.0" />
+                              <VBox fx:id="relationshipsContainer" prefWidth="820.0" spacing="12.0" styleClass="game-dynamic-list" />
                            </content>
+                           <styleClass>
+                              <String fx:value="mb-scroll-pane" />
+                              <String fx:value="game-panel-scroll" />
+                           </styleClass>
                         </ScrollPane>
                      </children>
                   </StackPane>
                </children>
+               <styleClass>
+                  <String fx:value="mb-panel" />
+                  <String fx:value="game-modal-panel" />
+                  <String fx:value="player-panel-card" />
+               </styleClass>
             </VBox>
          </children>
+         <styleClass>
+            <String fx:value="game-overlay" />
+            <String fx:value="player-panel-overlay" />
+         </styleClass>
       </StackPane>
    </children>
+   <stylesheets>
+      <URL value="@../css/common.css" />
+      <URL value="@../css/game-screen.css" />
+   </stylesheets>
+   <styleClass>
+      <String fx:value="mb-root" />
+      <String fx:value="game-screen-root" />
+   </styleClass>
 </StackPane>

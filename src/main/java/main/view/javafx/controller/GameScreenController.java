@@ -341,10 +341,7 @@ public class GameScreenController implements
 
         Label title = new Label("Itens do Inventário");
 
-        title.setStyle(
-                "-fx-font-size: 22px;" +
-                "-fx-font-weight: bold;"
-        );
+        title.getStyleClass().add("game-dynamic-list-heading");
 
         inventoryItemsContainer.getChildren().add(title);
 
@@ -352,7 +349,7 @@ public class GameScreenController implements
 
             Label emptyMessage = new Label("Nenhum item obtido.");
 
-            emptyMessage.setStyle("-fx-font-size: 17px;");
+            emptyMessage.getStyleClass().add("game-dynamic-empty-message");
 
             inventoryItemsContainer.getChildren().add(emptyMessage);
 
@@ -369,37 +366,27 @@ public class GameScreenController implements
 
     private VBox createItemCard(ItemViewDto item) {
 
-        VBox card = new VBox(8);
-
-        card.setPadding(new Insets(14));
+        VBox card = new VBox();
 
         card.setMaxWidth(Double.MAX_VALUE);
 
-        card.setStyle(
-                "-fx-background-color: #343B4D;" +
-                "-fx-border-color: #A18B63;" +
-                "-fx-border-radius: 6;" +
-                "-fx-background-radius: 6;"
-        );
+        card.getStyleClass().add("game-dynamic-card");
+
 
         Label itemName = new Label(item.name());
 
-        itemName.setStyle(
-                "-fx-font-size: 19px;" +
-                "-fx-font-weight: bold;" +
-                "-fx-text-fill: white;"
-        );
+        itemName.setWrapText(true);
+
+        itemName.getStyleClass().add("game-dynamic-card-title");
+
 
         Label itemDescription = new Label(item.description());
 
         itemDescription.setWrapText(true);
-
         itemDescription.setMaxWidth(Double.MAX_VALUE);
 
-        itemDescription.setStyle(
-                "-fx-font-size: 16px;" +
-                "-fx-text-fill: white;"
-        );
+        itemDescription.getStyleClass().add("game-dynamic-card-description");
+
 
         card.getChildren().addAll(
                 itemName,
@@ -418,20 +405,15 @@ public class GameScreenController implements
 
         Label title = new Label("Vínculos com os personagens");
 
-        title.setStyle(
-                "-fx-font-size: 22px;" +
-                "-fx-font-weight: bold;"
-        );
+        title.getStyleClass().add("game-dynamic-list-heading");
 
         relationshipsContainer.getChildren().add(title);
 
         if (relationships == null || relationships.isEmpty()) {
 
-            Label emptyMessage = new Label(
-                    "Nenhum vínculo registrado."
-            );
+            Label emptyMessage = new Label("Nenhum vínculo registrado.");
 
-            emptyMessage.setStyle("-fx-font-size: 17px;");
+            emptyMessage.getStyleClass().add("game-dynamic-empty-message");
 
             relationshipsContainer.getChildren().add(emptyMessage);
 
@@ -448,43 +430,37 @@ public class GameScreenController implements
 
     private VBox createRelationshipCard(NpcDto npc) {
 
-        VBox card = new VBox(8);
+        VBox card = new VBox();
 
-        card.setPadding(new Insets(14));
         card.setMaxWidth(Double.MAX_VALUE);
 
-        card.setStyle(
-                "-fx-background-color: #343B4D;" +
-                "-fx-border-color: #A18B63;" +
-                "-fx-border-radius: 6;" +
-                "-fx-background-radius: 6;"
-        );
+        card.getStyleClass().add("game-dynamic-card");
+
 
         Label npcName = new Label(npc.name());
 
-        npcName.setStyle(
-                "-fx-font-size: 19px;" +
-                "-fx-font-weight: bold;" +
-                "-fx-text-fill: white;"
-        );
+        npcName.setWrapText(true);
+
+        npcName.getStyleClass().add("game-dynamic-card-title");
+
 
         Label trustTier = new Label(
                 "Nível do vínculo: " + npc.trustLevelTier()
         );
 
+        trustTier.getStyleClass().add(
+                "game-dynamic-card-description"
+        );
+
+
         Label trustValue = new Label(
                 "Confiança: " + npc.trustLevel()
         );
 
-        trustTier.setStyle(
-                "-fx-font-size: 16px;" +
-                "-fx-text-fill: white;"
+        trustValue.getStyleClass().add(
+                "game-dynamic-card-description"
         );
 
-        trustValue.setStyle(
-                "-fx-font-size: 16px;" +
-                "-fx-text-fill: white;"
-        );
 
         card.getChildren().addAll(
                 npcName,

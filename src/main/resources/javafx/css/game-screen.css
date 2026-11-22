@@ -1,0 +1,428 @@
+.game-screen-root {
+    -fx-background-color: #171323;
+}
+
+.game-screen-layout {
+    -fx-background-color: transparent;
+}
+
+.game-header {
+    -fx-alignment: center-left;
+    -fx-spacing: 14px;
+    -fx-padding: 12px 16px;
+    -fx-background-color: rgba(23, 19, 35, 0.84);
+    -fx-background-radius: 4px;
+    -fx-border-color: rgba(152, 114, 200, 0.70);
+    -fx-border-width: 1px;
+    -fx-border-radius: 4px;
+}
+
+.game-brand {
+    -fx-font-family: "Monospaced";
+    -fx-font-size: 27px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #E8D9FF;
+    -fx-effect: dropshadow(gaussian, rgba(166, 125, 224, 0.42), 10, 0.18, 0, 0);
+}
+
+.game-chapter-title {
+    -fx-font-family: "Monospaced";
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #D9C9EF;
+}
+
+.game-header-separator .line {
+    -fx-border-color: rgba(152, 114, 200, 0.78);
+    -fx-border-width: 0 0 0 1px;
+}
+
+.game-hud-actions {
+    -fx-alignment: center-left;
+    -fx-spacing: 7px;
+}
+
+.game-hud-button {
+    -fx-background-color: rgba(73, 53, 101, 0.94);
+    -fx-text-fill: #F0E8FA;
+    -fx-font-family: "Monospaced";
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-padding: 9px 11px;
+    -fx-background-radius: 3px;
+    -fx-border-color: #8063A5;
+    -fx-border-width: 1px;
+    -fx-border-radius: 3px;
+    -fx-cursor: hand;
+}
+
+.game-hud-button:hover {
+    -fx-background-color: #65488A;
+    -fx-border-color: #D0B5F4;
+    -fx-effect: dropshadow(gaussian, rgba(185, 145, 236, 0.42), 10, 0.2, 0, 0);
+}
+
+.game-hud-button:pressed {
+    -fx-background-color: #302345;
+}
+
+.game-character-area {
+    -fx-alignment: center;
+    -fx-spacing: 80px;
+    -fx-padding: 12px 50px 20px 50px;
+}
+
+.game-character-card {
+    -fx-alignment: top-center;
+    -fx-spacing: 9px;
+    -fx-max-width: 380px;
+}
+
+.game-character-name {
+    -fx-font-family: "Monospaced";
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #F0E8FA;
+    -fx-padding: 5px 12px;
+    -fx-background-color: rgba(23, 19, 35, 0.78);
+    -fx-background-radius: 3px;
+    -fx-border-color: rgba(152, 114, 200, 0.62);
+    -fx-border-width: 1px;
+    -fx-border-radius: 3px;
+}
+
+.game-character-frame {
+    -fx-alignment: center;
+    -fx-padding: 5px;
+    -fx-background-color: rgba(28, 23, 43, 0.76);
+    -fx-background-radius: 4px;
+    -fx-border-color: #9872C8;
+    -fx-border-width: 2px;
+    -fx-border-radius: 4px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.42), 14, 0.18, 0, 4);
+}
+
+.game-character-frame-surface {
+    -fx-fill: rgba(26, 34, 54, 0.94);
+    -fx-stroke: #9872C8;
+    -fx-stroke-width: 1.5px;
+}
+
+.game-bottom-area {
+    -fx-spacing: 10px;
+    -fx-padding: 10px 0 0 0;
+}
+
+.game-story-scroll,
+.game-choices-scroll,
+.game-panel-scroll {
+    -fx-background-color: rgba(26, 21, 39, 0.90);
+    -fx-background: rgba(26, 21, 39, 0.90);
+    -fx-border-color: rgba(152, 114, 200, 0.74);
+    -fx-border-width: 1px;
+    -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
+    -fx-padding: 3px;
+}
+
+.game-story-scroll > .viewport,
+.game-choices-scroll > .viewport,
+.game-panel-scroll > .viewport {
+    -fx-background-color: transparent;
+}
+
+.game-story-text {
+    -fx-font-family: "Monospaced";
+    -fx-font-size: 19px;
+    -fx-text-fill: #F0E8FA;
+    -fx-padding: 12px 18px;
+}
+
+.game-choices-list {
+    -fx-alignment: center;
+    -fx-spacing: 9px;
+    -fx-padding: 8px 10px;
+    -fx-background-color: transparent;
+}
+
+.game-choice-button {
+    -fx-min-height: 48px;
+    -fx-padding: 10px 16px;
+    -fx-background-color: rgba(57, 43, 78, 0.96);
+    -fx-text-fill: #F0E8FA;
+    -fx-font-family: "Monospaced";
+    -fx-font-size: 16px;
+    -fx-alignment: center-left;
+    -fx-text-alignment: left;
+    -fx-wrap-text: true;
+    -fx-background-radius: 3px;
+    -fx-border-color: #8063A5;
+    -fx-border-width: 1px;
+    -fx-border-radius: 3px;
+    -fx-cursor: hand;
+}
+
+.game-choice-button:hover {
+    -fx-background-color: #60447F;
+    -fx-border-color: #D0B5F4;
+    -fx-effect: dropshadow(gaussian, rgba(185, 145, 236, 0.34), 9, 0.18, 0, 0);
+}
+
+.game-choice-button:pressed {
+    -fx-background-color: #302345;
+}
+
+.game-continue-button {
+    -fx-min-height: 48px;
+    -fx-padding: 10px 16px;
+    -fx-background-color: #65488A;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: "Monospaced";
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 3px;
+    -fx-border-color: #C6A4ED;
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 3px;
+    -fx-cursor: hand;
+}
+
+.game-continue-button:hover {
+    -fx-background-color: #7956A2;
+    -fx-border-color: #E5D2FF;
+    -fx-effect: dropshadow(gaussian, rgba(185, 145, 236, 0.45), 12, 0.2, 0, 0);
+}
+
+.game-continue-button:pressed {
+    -fx-background-color: #493565;
+}
+
+.game-overlay {
+    -fx-background-color: rgba(7, 5, 13, 0.78);
+}
+
+.game-modal-panel {
+    -fx-alignment: center;
+    -fx-spacing: 16px;
+    -fx-padding: 28px;
+    -fx-background-color: rgba(47, 37, 65, 0.97);
+    -fx-background-radius: 4px;
+    -fx-border-color: #9872C8;
+    -fx-border-width: 2px;
+    -fx-border-radius: 4px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.56), 24, 0.22, 0, 8);
+}
+
+.pause-panel {
+    -fx-max-width: 440px;
+    -fx-alignment: center;
+    -fx-spacing: 17px;
+    -fx-padding: 30px 36px;
+}
+
+.game-overlay-title {
+    -fx-font-family: "Monospaced";
+    -fx-font-size: 23px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #E8D9FF;
+    -fx-padding: 0 0 8px 0;
+}
+
+.game-modal-button {
+    -fx-min-width: 200px;
+    -fx-min-height: 42px;
+    -fx-background-color: #493565;
+    -fx-text-fill: #F0E8FA;
+    -fx-font-family: "Monospaced";
+    -fx-font-size: 15px;
+    -fx-background-radius: 3px;
+    -fx-border-color: #9872C8;
+    -fx-border-width: 1px;
+    -fx-border-radius: 3px;
+    -fx-cursor: hand;
+}
+
+.game-modal-button:hover {
+    -fx-background-color: #65488A;
+    -fx-border-color: #DCC6F7;
+}
+
+.game-modal-button:pressed {
+    -fx-background-color: #302345;
+}
+
+.player-panel-overlay {
+    -fx-background-color: rgba(7, 5, 13, 0.80);
+}
+
+.player-panel-card {
+    -fx-max-width: 900px;
+    -fx-max-height: 650px;
+    -fx-spacing: 15px;
+    -fx-padding: 24px;
+}
+
+.player-panel-header {
+    -fx-alignment: center-left;
+    -fx-spacing: 12px;
+    -fx-padding: 0 0 10px 0;
+}
+
+.player-panel-title {
+    -fx-font-family: "Monospaced";
+    -fx-font-size: 21px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #E8D9FF;
+}
+
+.player-panel-tabs {
+    -fx-alignment: center;
+    -fx-spacing: 10px;
+    -fx-padding: 8px 0;
+}
+
+.player-panel-tab-button {
+    -fx-min-width: 125px;
+    -fx-min-height: 38px;
+    -fx-background-color: rgba(57, 43, 78, 0.96);
+    -fx-text-fill: #E7DCF3;
+    -fx-font-family: "Monospaced";
+    -fx-font-size: 13px;
+    -fx-background-radius: 3px;
+    -fx-border-color: #72558F;
+    -fx-border-width: 1px;
+    -fx-border-radius: 3px;
+    -fx-cursor: hand;
+}
+
+.player-panel-tab-button:hover,
+.player-panel-tab-button:focused {
+    -fx-background-color: #65488A;
+    -fx-border-color: #CDB1EE;
+}
+
+.player-panel-content {
+    -fx-background-color: rgba(25, 20, 38, 0.58);
+    -fx-background-radius: 3px;
+    -fx-border-color: rgba(152, 114, 200, 0.52);
+    -fx-border-width: 1px;
+    -fx-border-radius: 3px;
+    -fx-padding: 10px;
+}
+
+.game-dynamic-list {
+    -fx-spacing: 12px;
+    -fx-padding: 12px;
+    -fx-background-color: transparent;
+}
+
+.game-player-name {
+    -fx-font-family: "Monospaced";
+    -fx-font-size: 23px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #E8D9FF;
+}
+
+.game-stat-label {
+    -fx-font-family: "Monospaced";
+    -fx-font-size: 16px;
+    -fx-text-fill: #E5DDF0;
+}
+
+.game-stat-value {
+    -fx-font-family: "Monospaced";
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #F0E8FA;
+}
+
+.game-progress-bar {
+    -fx-pref-height: 15px;
+    -fx-background-radius: 3px;
+    -fx-border-radius: 3px;
+}
+
+.game-progress-bar > .track {
+    -fx-background-color: rgba(12, 10, 20, 0.90);
+    -fx-background-radius: 3px;
+    -fx-border-color: rgba(152, 114, 200, 0.55);
+    -fx-border-radius: 3px;
+}
+
+.sanity-progress > .bar {
+    -fx-background-color: linear-gradient(to right, #9A4769, #E58AA8);
+    -fx-background-radius: 3px;
+    -fx-background-insets: 2px;
+}
+
+.knowledge-progress > .bar {
+    -fx-background-color: linear-gradient(to right, #466BA7, #8CAFEA);
+    -fx-background-radius: 3px;
+    -fx-background-insets: 2px;
+}
+
+.game-dynamic-card {
+    -fx-spacing: 8px;
+    -fx-padding: 12px;
+    -fx-background-color: rgba(57, 43, 78, 0.78);
+    -fx-background-radius: 3px;
+    -fx-border-color: rgba(152, 114, 200, 0.65);
+    -fx-border-width: 1px;
+    -fx-border-radius: 3px;
+}
+
+.game-dynamic-card-title {
+    -fx-font-family: "Monospaced";
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #E8D9FF;
+}
+
+.game-dynamic-card-description {
+    -fx-font-family: "Monospaced";
+    -fx-font-size: 13px;
+    -fx-text-fill: #D5C9E2;
+}
+
+.game-dynamic-list-heading {
+    -fx-font-family: "Monospaced";
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #E8D9FF;
+
+    -fx-padding: 5px 0 10px 0;
+}
+
+.game-dynamic-empty-message {
+    -fx-font-family: "Monospaced";
+    -fx-font-size: 15px;
+    -fx-text-fill: #BFAFD1;
+
+    -fx-padding: 12px;
+}
+
+.game-story-scroll .scroll-bar:vertical,
+.game-choices-scroll .scroll-bar:vertical,
+.game-panel-scroll .scroll-bar:vertical {
+    -fx-background-color: rgba(23, 19, 35, 0.60);
+    -fx-pref-width: 11px;
+}
+
+.game-story-scroll .scroll-bar:vertical .thumb,
+.game-choices-scroll .scroll-bar:vertical .thumb,
+.game-panel-scroll .scroll-bar:vertical .thumb {
+    -fx-background-color: #76549B;
+    -fx-background-radius: 4px;
+}
+
+.game-story-scroll .scroll-bar:vertical .thumb:hover,
+.game-choices-scroll .scroll-bar:vertical .thumb:hover,
+.game-panel-scroll .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: #A887D0;
+}
+
+.game-story-scroll .scroll-bar:vertical .track,
+.game-choices-scroll .scroll-bar:vertical .track,
+.game-panel-scroll .scroll-bar:vertical .track {
+    -fx-background-color: transparent;
+}

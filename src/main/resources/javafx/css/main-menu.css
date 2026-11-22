@@ -1,0 +1,50 @@
+.main-menu-root {
+    -fx-background-color: #171323;
+}
+
+.main-menu-title {
+    -fx-font-family: "Monospaced";
+    -fx-font-size: 57px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #FBF7FF;
+    -fx-effect: dropshadow(gaussian, rgba(184, 145, 255, 0.82), 19, 0.36, 0, 0);
+}
+
+.main-menu-actions {
+    -fx-alignment: center;
+    -fx-spacing: 10px;
+    -fx-padding: 8px 12px;
+    -fx-background-color: rgba(17, 12, 29, 0.48);
+    -fx-background-radius: 4px;
+    -fx-border-color: rgba(180, 145, 220, 0.42);
+    -fx-border-width: 1px;
+    -fx-border-radius: 4px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.36), 13, 0.18, 0, 4);
+}
+
+.main-menu-button {
+    -fx-min-width: 250px;
+    -fx-pref-width: 250px;
+    -fx-max-width: 250px;
+    -fx-min-height: 50px;
+    -fx-pref-height: 50px;
+    -fx-max-height: 50px;
+    -fx-font-size: 16px;
+}
+
+.main-menu-button-primary {
+    -fx-background-color: linear-gradient(to bottom, #76539A, #49315F);
+    -fx-border-color: #D1B1F5;
+    -fx-text-fill: #FFFFFF;
+    -fx-effect: dropshadow(gaussian, rgba(157, 111, 211, 0.30), 10, 0.18, 0, 2);
+}
+
+.main-menu-button-primary:hover {
+    -fx-background-color: linear-gradient(to bottom, #9470B9, #60427E);
+    -fx-border-color: #FFFFFF;
+    -fx-effect: dropshadow(gaussian, rgba(196, 157, 255, 0.68), 16, 0.30, 0, 0);
+}
+
+.main-menu-button-primary:pressed {
+    -fx-background-color: #3B294F;
+}

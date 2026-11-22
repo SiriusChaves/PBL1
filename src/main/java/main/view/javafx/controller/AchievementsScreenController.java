@@ -27,6 +27,11 @@ public class AchievementsScreenController implements
         GameControllerAware,
         ScreenInitializer {
 
+    private record AchievementDisplayData(
+            String name,
+            String description
+    ) {}
+
     private ScreenManager screenManager;
 
     private GameController gameController;
@@ -65,7 +70,10 @@ public class AchievementsScreenController implements
         screenManager.showMainMenu();
     }
 
-    private HBox createAchievementItem(String achievementText) {
+    private HBox createAchievementItem(
+            String achievementName,
+            String achievementDescription
+    ) {
 
         ImageView imageView = new ImageView(achievemtImage);
 
@@ -73,32 +81,50 @@ public class AchievementsScreenController implements
         imageView.setFitWidth(64);
         imageView.setPreserveRatio(true);
 
-        Label achievementLabel = new Label(achievementText);
+        imageView.getStyleClass().add("achievement-image");
 
-        achievementLabel.setWrapText(true);
 
-        achievementLabel.setMaxWidth(Double.MAX_VALUE);
+        Label nameLabel = new Label(achievementName);
 
-        achievementLabel.setFont(Font.font("Arial", 25));
+        nameLabel.setWrapText(true);
 
-        HBox.setHgrow(achievementLabel, Priority.ALWAYS);
+        nameLabel.getStyleClass().add("achievement-name");
 
-        HBox item = new HBox(18, imageView, achievementLabel);
+
+        Label descriptionLabel = new Label(achievementDescription);
+
+        descriptionLabel.setWrapText(true);
+        descriptionLabel.setMaxWidth(Double.MAX_VALUE);
+
+        descriptionLabel.getStyleClass().add("achievement-description");
+
+        VBox textContainer = new VBox(
+                6,
+                nameLabel,
+                descriptionLabel
+        );
+
+        HBox.setHgrow(textContainer, Priority.ALWAYS);
+
+        HBox item = new HBox(
+                imageView,
+                textContainer
+        );
 
         item.setAlignment(Pos.CENTER_LEFT);
-
-        item.setPadding(new Insets(14));
-
         item.setMaxWidth(Double.MAX_VALUE);
+
+        item.getStyleClass().add("achievement-card");
 
         return item;
     }
 
-    private void displayAchievements(List<String> achievements) {
+    private void displayAchievements(List<AchievementDisplayData> achievements) {
 
         achievementsContainer.getChildren().clear();
 
-        boolean hasAchievements = achievements != null && !achievements.isEmpty();
+        boolean hasAchievements =
+                achievements != null && !achievements.isEmpty();
 
         achievementsScrollPane.setVisible(hasAchievements);
         achievementsScrollPane.setManaged(hasAchievements);
@@ -110,9 +136,12 @@ public class AchievementsScreenController implements
             return;
         }
 
-        for (String achievement :achievements) {
+        for (AchievementDisplayData achievement : achievements) {
 
-            HBox item = createAchievementItem(achievement);
+            HBox item = createAchievementItem(
+                    achievement.name(),
+                    achievement.description()
+            );
 
             achievementsContainer.getChildren().add(item);
         }
@@ -131,10 +160,16 @@ public class AchievementsScreenController implements
     @Override
     public void initScreen() {
 
-        List<String> achievements = gameController.loadAchievements()
-                .stream()
-                .map(achievement -> achievement.name() + " - " + achievement.description())
-                .toList();
+        List<AchievementDisplayData> achievements =
+                gameController.loadAchievements()
+                        .stream()
+                        .map(achievement ->
+                                new AchievementDisplayData(
+                                        achievement.name(),
+                                        achievement.description()
+                                )
+                        )
+                        .toList();
 
         displayAchievements(achievements);
     }

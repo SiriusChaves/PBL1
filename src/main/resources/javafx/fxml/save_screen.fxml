@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -14,24 +16,27 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-
 <StackPane xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.view.javafx.controller.SaveScreenController">
    <children>
-      <ImageView fitHeight="768.0" fitWidth="1366.0" pickOnBounds="true" smooth="false">
+      <ImageView fitHeight="768.0" fitWidth="1366.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" smooth="false">
          <image>
             <Image url="@../images/backgrounds/initial_background.png" />
          </image>
       </ImageView>
-      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0">
+      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" styleClass="save-screen-layout">
          <top>
-            <VBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="100.0" spacing="12.0" BorderPane.alignment="CENTER">
+            <VBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="100.0" spacing="12.0" styleClass="save-screen-header" BorderPane.alignment="CENTER">
                <children>
                   <Label alignment="TOP_CENTER" text="Selecionar Save" textAlignment="CENTER" textFill="WHITE" VBox.vgrow="ALWAYS">
                      <font>
                         <Font size="36.0" />
                      </font>
+                     <styleClass>
+                        <String fx:value="mb-title" />
+                        <String fx:value="save-screen-title" />
+                     </styleClass>
                   </Label>
-                  <Separator prefWidth="200.0" />
+                  <Separator prefWidth="200.0" styleClass="save-screen-separator" />
                </children>
                <padding>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="30.0" />
@@ -42,50 +47,50 @@
             </VBox>
          </top>
          <center>
-            <HBox maxWidth="1.7976931348623157E308" prefHeight="333.0" spacing="28.0" BorderPane.alignment="CENTER">
+            <HBox maxWidth="1.7976931348623157E308" prefHeight="333.0" spacing="28.0" styleClass="save-slots-container" BorderPane.alignment="CENTER">
                <children>
-                  <VBox fx:id="occupiedContentSlot1" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="400.0" minWidth="320.0" prefHeight="480.0" prefWidth="380.0" spacing="12.0" HBox.hgrow="ALWAYS">
+                  <VBox fx:id="occupiedContentSlot1" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="400.0" minWidth="320.0" prefHeight="480.0" prefWidth="380.0" spacing="12.0" styleClass="save-slot-column" HBox.hgrow="ALWAYS">
                      <children>
-                        <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Slot 1" textAlignment="CENTER" textFill="WHITE">
+                        <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="save-slot-heading" text="Slot 1" textAlignment="CENTER" textFill="WHITE">
                            <font>
                               <Font size="23.0" />
                            </font>
                         </Label>
-                        <StackPane maxWidth="1.7976931348623157E308" prefHeight="390.0" prefWidth="360.0">
+                        <StackPane maxWidth="1.7976931348623157E308" prefHeight="390.0" prefWidth="360.0" styleClass="save-slot-frame">
                            <children>
-                              <Rectangle arcHeight="12.0" arcWidth="12.0" fill="#94cbff" height="370.0" layoutX="10.0" layoutY="10.0" stroke="#bfb945" strokeType="INSIDE" strokeWidth="1.5" width="340.0" />
-                              <VBox fx:id="saveDataContentSlot1" alignment="CENTER" managed="false" maxWidth="330.0" prefWidth="320.0" spacing="10.0" visible="false" StackPane.alignment="CENTER">
+                              <Rectangle arcHeight="12.0" arcWidth="12.0" fill="#94cbff" height="370.0" layoutX="10.0" layoutY="10.0" stroke="#bfb945" strokeType="INSIDE" strokeWidth="1.5" styleClass="save-slot-surface" width="340.0" />
+                              <VBox fx:id="saveDataContentSlot1" alignment="CENTER" managed="false" maxWidth="330.0" prefWidth="320.0" spacing="10.0" styleClass="save-data-content" visible="false" StackPane.alignment="CENTER">
                                  <children>
-                                    <ImageView fx:id="imgSlot1" fitHeight="170.0" fitWidth="310.0" pickOnBounds="true" smooth="false">
+                                    <ImageView fx:id="imgSlot1" fitHeight="170.0" fitWidth="310.0" pickOnBounds="true" smooth="false" styleClass="save-preview-image">
                                        <image>
                                           <Image url="@../images/backgrounds/game_over_and_final_background.png" />
                                        </image>
                                     </ImageView>
-                                    <Label fx:id="chapterNameSlot1Label" alignment="CENTER" text="Nome do cap slot 1" textAlignment="CENTER" wrapText="true">
+                                    <Label fx:id="chapterNameSlot1Label" alignment="CENTER" styleClass="save-chapter-name" text="Nome do cap slot 1" textAlignment="CENTER" wrapText="true">
                                        <font>
                                           <Font size="21.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="personNameSlot1Label" layoutX="10.0" layoutY="160.0" text="nome protagonista slot 1" textAlignment="CENTER">
+                                    <Label fx:id="personNameSlot1Label" layoutX="10.0" layoutY="160.0" styleClass="save-player-name" text="nome protagonista slot 1" textAlignment="CENTER">
                                        <font>
                                           <Font size="16.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="datetimeSlot1Label" alignment="CENTER" layoutX="10.0" layoutY="178.0" text="14/11/2026 • 19:42" textAlignment="CENTER">
+                                    <Label fx:id="datetimeSlot1Label" alignment="CENTER" layoutX="10.0" layoutY="178.0" styleClass="save-datetime" text="14/11/2026 • 19:42" textAlignment="CENTER">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
                                     </Label>
       
-                                    <Label fx:id="progressSummarySlot1Label" alignment="CENTER" text="Resumo da progressão" wrapText="true" />
+                                    <Label fx:id="progressSummarySlot1Label" alignment="CENTER" styleClass="save-progress-summary" text="Resumo da progressão" wrapText="true" />
                                  </children>
                                  <padding>
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </padding>
                               </VBox>
-                              <VBox fx:id="emptyContentSlot1" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="320.0" spacing="12.0" StackPane.alignment="CENTER">
+                              <VBox fx:id="emptyContentSlot1" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="320.0" spacing="12.0" styleClass="empty-slot-content" StackPane.alignment="CENTER">
                                  <children>
-                                    <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Iniciar novo jogo" textAlignment="CENTER">
+                                    <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="empty-slot-label" text="Iniciar novo jogo" textAlignment="CENTER">
                                        <font>
                                           <Font size="21.0" />
                                        </font>
@@ -95,68 +100,78 @@
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </padding>
                               </VBox>
-                              <Button fx:id="slot1Button" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleClickedOnSlot1" styleClass="selectedButton" stylesheets="@../css/style.css">
+                              <Button fx:id="slot1Button" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleClickedOnSlot1" styleClass="save-slot-select-button">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </Button>
                            </children>
                         </StackPane>
-                        <HBox fx:id="saveActionsSlot1" alignment="CENTER" managed="false" prefHeight="45.0" prefWidth="200.0" spacing="15.0" visible="false">
+                        <HBox fx:id="saveActionsSlot1" alignment="CENTER" managed="false" prefHeight="45.0" prefWidth="200.0" spacing="15.0" styleClass="save-slot-actions" visible="false">
                            <children>
-                              <Button fx:id="restartSaveSlot1Button" onAction="#handleRestartSaveSlot1" prefHeight="40.0" prefWidth="140.0" text="Reiniciar" />
+                              <Button fx:id="restartSaveSlot1Button" onAction="#handleRestartSaveSlot1" prefHeight="40.0" prefWidth="140.0" text="Reiniciar">
+                                 <styleClass>
+                                    <String fx:value="mb-button" />
+                                    <String fx:value="save-action-button" />
+                                    <String fx:value="save-restart-button" />
+                                 </styleClass></Button>
                               <Button fx:id="deleteSaveSlot1Button" mnemonicParsing="false" onAction="#handleDeleteSaveSlot1" prefHeight="40.0" prefWidth="140.0" text="deletar">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
+                                 <styleClass>
+                                    <String fx:value="mb-button" />
+                                    <String fx:value="save-action-button" />
+                                    <String fx:value="save-delete-button" />
+                                 </styleClass>
                               </Button>
                            </children>
                         </HBox>
                      </children>
                   </VBox>
-                  <VBox fx:id="occupiedContentSlot2" alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="400.0" minWidth="320.0" prefHeight="480.0" prefWidth="380.0" spacing="12.0" HBox.hgrow="ALWAYS">
+                  <VBox fx:id="occupiedContentSlot2" alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="400.0" minWidth="320.0" prefHeight="480.0" prefWidth="380.0" spacing="12.0" styleClass="save-slot-column" HBox.hgrow="ALWAYS">
                      <children>
-                        <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Slot 2" textAlignment="CENTER" textFill="WHITE">
+                        <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="save-slot-heading" text="Slot 2" textAlignment="CENTER" textFill="WHITE">
                            <font>
                               <Font size="23.0" />
                            </font>
                         </Label>
-                        <StackPane maxWidth="1.7976931348623157E308" prefHeight="390.0" prefWidth="360.0">
+                        <StackPane maxWidth="1.7976931348623157E308" prefHeight="390.0" prefWidth="360.0" styleClass="save-slot-frame">
                            <children>
-                              <Rectangle arcHeight="12.0" arcWidth="12.0" fill="#94cbff" height="370.0" stroke="#bfb945" strokeType="INSIDE" strokeWidth="1.5" width="340.0" />
-                              <VBox fx:id="saveDataContentSlot2" alignment="CENTER" managed="false" maxWidth="330.0" prefWidth="320.0" spacing="10.0" visible="false" StackPane.alignment="CENTER">
+                              <Rectangle arcHeight="12.0" arcWidth="12.0" fill="#94cbff" height="370.0" stroke="#bfb945" strokeType="INSIDE" strokeWidth="1.5" styleClass="save-slot-surface" width="340.0" />
+                              <VBox fx:id="saveDataContentSlot2" alignment="CENTER" managed="false" maxWidth="330.0" prefWidth="320.0" spacing="10.0" styleClass="save-data-content" visible="false" StackPane.alignment="CENTER">
                                  <children>
-                                    <ImageView fx:id="imgSlot2" fitHeight="170.0" fitWidth="310.0" layoutX="10.0" layoutY="160.0" pickOnBounds="true" smooth="false">
+                                    <ImageView fx:id="imgSlot2" fitHeight="170.0" fitWidth="310.0" layoutX="10.0" layoutY="160.0" pickOnBounds="true" smooth="false" styleClass="save-preview-image">
                                        <image>
                                           <Image url="@../images/backgrounds/game_over_and_final_background.png" />
                                        </image>
                                     </ImageView>
-                                    <Label fx:id="chapterNameSlot2Label" alignment="CENTER" text="Nome do cap slot 2" textAlignment="CENTER" wrapText="true">
+                                    <Label fx:id="chapterNameSlot2Label" alignment="CENTER" styleClass="save-chapter-name" text="Nome do cap slot 2" textAlignment="CENTER" wrapText="true">
                                        <font>
                                           <Font size="21.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="personNameSlot2Label" layoutX="10.0" layoutY="160.0" text="nome do protagonista slot 2" textAlignment="CENTER">
+                                    <Label fx:id="personNameSlot2Label" layoutX="10.0" layoutY="160.0" styleClass="save-player-name" text="nome do protagonista slot 2" textAlignment="CENTER">
                                        <font>
                                           <Font size="16.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="datetimeSlot2Label" alignment="CENTER" layoutX="10.0" layoutY="178.0" text="14/11/2026 • 19:42" textAlignment="CENTER">
+                                    <Label fx:id="datetimeSlot2Label" alignment="CENTER" layoutX="10.0" layoutY="178.0" styleClass="save-datetime" text="14/11/2026 • 19:42" textAlignment="CENTER">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
                                     </Label>
       
-                                    <Label fx:id="progressSummarySlot2Label" alignment="CENTER" text="Resumo da progressão" wrapText="true" />
+                                    <Label fx:id="progressSummarySlot2Label" alignment="CENTER" styleClass="save-progress-summary" text="Resumo da progressão" wrapText="true" />
       
                                  </children>
                                  <padding>
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </padding>
                               </VBox>
-                              <VBox fx:id="emptyContentSlot2" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="320.0" spacing="12.0" StackPane.alignment="CENTER">
+                              <VBox fx:id="emptyContentSlot2" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="320.0" spacing="12.0" styleClass="empty-slot-content" StackPane.alignment="CENTER">
                                  <children>
-                                    <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Iniciar novo jogo" textAlignment="CENTER">
+                                    <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="empty-slot-label" text="Iniciar novo jogo" textAlignment="CENTER">
                                        <font>
                                           <Font size="21.0" />
                                        </font>
@@ -166,67 +181,77 @@
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </padding>
                               </VBox>
-                              <Button fx:id="slot2Button" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleClickedOnSlot2" styleClass="selectedButton" stylesheets="@../css/style.css">
+                              <Button fx:id="slot2Button" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleClickedOnSlot2" styleClass="save-slot-select-button">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </Button>
                            </children>
                         </StackPane>
-                        <HBox fx:id="saveActionsSlot2" alignment="CENTER" managed="false" prefHeight="45.0" prefWidth="200.0" spacing="15.0" visible="false">
+                        <HBox fx:id="saveActionsSlot2" alignment="CENTER" managed="false" prefHeight="45.0" prefWidth="200.0" spacing="15.0" styleClass="save-slot-actions" visible="false">
                            <children>
       
-                              <Button fx:id="restartSaveSlot2Button" onAction="#handleRestartSaveSlot2" prefHeight="40.0" prefWidth="140.0" text="Reiniciar" />
+                              <Button fx:id="restartSaveSlot2Button" onAction="#handleRestartSaveSlot2" prefHeight="40.0" prefWidth="140.0" text="Reiniciar">
+                                 <styleClass>
+                                    <String fx:value="mb-button" />
+                                    <String fx:value="save-action-button" />
+                                    <String fx:value="save-restart-button" />
+                                 </styleClass></Button>
                               <Button fx:id="deleteSaveSlot2Button" layoutX="76.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleDeleteSaveSlot2" prefHeight="40.0" prefWidth="140.0" text="deletar">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
+                                 <styleClass>
+                                    <String fx:value="mb-button" />
+                                    <String fx:value="save-action-button" />
+                                    <String fx:value="save-delete-button" />
+                                 </styleClass>
                               </Button>
                            </children>
                         </HBox>
                      </children>
                   </VBox>
-                  <VBox fx:id="occupiedContentSlot3" alignment="TOP_CENTER" layoutX="110.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="400.0" minWidth="320.0" prefHeight="480.0" prefWidth="380.0" spacing="12.0" HBox.hgrow="ALWAYS">
+                  <VBox fx:id="occupiedContentSlot3" alignment="TOP_CENTER" layoutX="110.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="400.0" minWidth="320.0" prefHeight="480.0" prefWidth="380.0" spacing="12.0" styleClass="save-slot-column" HBox.hgrow="ALWAYS">
                      <children>
-                        <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Slot 3" textAlignment="CENTER" textFill="WHITE">
+                        <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="save-slot-heading" text="Slot 3" textAlignment="CENTER" textFill="WHITE">
                            <font>
                               <Font size="23.0" />
                            </font>
                         </Label>
-                        <StackPane maxWidth="1.7976931348623157E308" prefHeight="390.0" prefWidth="360.0">
+                        <StackPane maxWidth="1.7976931348623157E308" prefHeight="390.0" prefWidth="360.0" styleClass="save-slot-frame">
                            <children>
-                              <Rectangle arcHeight="12.0" arcWidth="12.0" fill="#94cbff" height="370.0" stroke="#bfb945" strokeType="INSIDE" strokeWidth="1.5" width="340.0" />
-                              <VBox fx:id="saveDataContentSlot3" alignment="CENTER" managed="false" maxWidth="330.0" prefWidth="320.0" spacing="10.0" visible="false" StackPane.alignment="CENTER">
+                              <Rectangle arcHeight="12.0" arcWidth="12.0" fill="#94cbff" height="370.0" stroke="#bfb945" strokeType="INSIDE" strokeWidth="1.5" styleClass="save-slot-surface" width="340.0" />
+                              <VBox fx:id="saveDataContentSlot3" alignment="CENTER" managed="false" maxWidth="330.0" prefWidth="320.0" spacing="10.0" styleClass="save-data-content" visible="false" StackPane.alignment="CENTER">
                                  <children>
-                                    <ImageView fx:id="imgSlot3" fitHeight="170.0" fitWidth="310.0" pickOnBounds="true" smooth="false">
+                                    <ImageView fx:id="imgSlot3" fitHeight="170.0" fitWidth="310.0" pickOnBounds="true" smooth="false" styleClass="save-preview-image">
                                        <image>
                                           <Image url="@../images/backgrounds/game_over_and_final_background.png" />
                                        </image>
                                     </ImageView>
-                                    <Label fx:id="chapterNameSlot3Label" alignment="CENTER" text="Nome do cap slot 3" textAlignment="CENTER" wrapText="true">
+                                    <Label fx:id="chapterNameSlot3Label" alignment="CENTER" styleClass="save-chapter-name" text="Nome do cap slot 3" textAlignment="CENTER" wrapText="true">
                                        <font>
                                           <Font size="21.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="personNameSlot3Label" layoutX="10.0" layoutY="160.0" text="nome protagonista slot 3" textAlignment="CENTER">
+                                    <Label fx:id="personNameSlot3Label" layoutX="10.0" layoutY="160.0" styleClass="save-player-name" text="nome protagonista slot 3" textAlignment="CENTER">
                                        <font>
                                           <Font size="16.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="datetimeSlot3Label" alignment="CENTER" layoutX="10.0" layoutY="178.0" text="14/11/2026 • 19:42" textAlignment="CENTER">
+                                    <Label fx:id="datetimeSlot3Label" alignment="CENTER" layoutX="10.0" layoutY="178.0" styleClass="save-datetime" text="14/11/2026 • 19:42" textAlignment="CENTER">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="progressSummarySlot3Label" alignment="CENTER" text="Resumo da progressão" wrapText="true" />
+                                    <Label fx:id="progressSummarySlot3Label" alignment="CENTER" styleClass="save-progress-summary" text="Resumo da progressão" wrapText="true" />
                                  </children>
                                  <padding>
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </padding>
                               </VBox>
-                              <VBox fx:id="emptyContentSlot3" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="320.0" spacing="12.0" StackPane.alignment="CENTER">
+                              <VBox fx:id="emptyContentSlot3" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="320.0" spacing="12.0" styleClass="empty-slot-content" StackPane.alignment="CENTER">
                                  <children>
-                                    <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Iniciar novo jogo" textAlignment="CENTER">
+                                    <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="empty-slot-label" text="Iniciar novo jogo" textAlignment="CENTER">
                                        <font>
                                           <Font size="21.0" />
                                        </font>
@@ -236,21 +261,31 @@
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </padding>
                               </VBox>
-                              <Button fx:id="slot3Button" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleClickedOnSlot3" styleClass="selectedButton" stylesheets="@../css/style.css">
+                              <Button fx:id="slot3Button" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleClickedOnSlot3" styleClass="save-slot-select-button">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </Button>
                            </children>
                         </StackPane>
-                        <HBox fx:id="saveActionsSlot3" alignment="CENTER" managed="false" prefHeight="45.0" prefWidth="200.0" spacing="15.0" visible="false">
+                        <HBox fx:id="saveActionsSlot3" alignment="CENTER" managed="false" prefHeight="45.0" prefWidth="200.0" spacing="15.0" styleClass="save-slot-actions" visible="false">
                            <children>
       
-                              <Button fx:id="restartSaveSlot3Button" onAction="#handleRestartSaveSlot3" prefHeight="40.0" prefWidth="140.0" text="Reiniciar" />
+                              <Button fx:id="restartSaveSlot3Button" onAction="#handleRestartSaveSlot3" prefHeight="40.0" prefWidth="140.0" text="Reiniciar">
+                                 <styleClass>
+                                    <String fx:value="mb-button" />
+                                    <String fx:value="save-action-button" />
+                                    <String fx:value="save-restart-button" />
+                                 </styleClass></Button>
                               <Button fx:id="deleteSaveSlot3Button" mnemonicParsing="false" onAction="#handleDeleteSaveSlot3" prefHeight="40.0" prefWidth="140.0" text="deletar">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
+                                 <styleClass>
+                                    <String fx:value="mb-button" />
+                                    <String fx:value="save-action-button" />
+                                    <String fx:value="save-delete-button" />
+                                 </styleClass>
                               </Button>
                            </children>
                         </HBox>
@@ -263,9 +298,9 @@
             </HBox>
          </center>
          <bottom>
-            <VBox alignment="CENTER" prefHeight="85.0" prefWidth="100.0" spacing="12.0" BorderPane.alignment="CENTER">
+            <VBox alignment="CENTER" prefHeight="85.0" prefWidth="100.0" spacing="12.0" styleClass="save-screen-footer" BorderPane.alignment="CENTER">
                <children>
-                  <Separator prefWidth="200.0" />
+                  <Separator prefWidth="200.0" styleClass="save-screen-separator" />
                   <Button fx:id="backToMenuButton" alignment="CENTER" mnemonicParsing="false" onAction="#handleBackToMenu" prefHeight="42.0" prefWidth="200.0" text="Voltar para o menu">
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -273,6 +308,11 @@
                      <font>
                         <Font size="18.0" />
                      </font>
+                     <styleClass>
+                        <String fx:value="mb-button" />
+                        <String fx:value="mb-button-secondary" />
+                        <String fx:value="save-back-button" />
+                     </styleClass>
                   </Button>
                </children>
             </VBox>
@@ -282,4 +322,12 @@
          </padding>
       </BorderPane>
    </children>
+   <stylesheets>
+      <URL value="@../css/common.css" />
+      <URL value="@../css/save-screen.css" />
+   </stylesheets>
+   <styleClass>
+      <String fx:value="mb-root" />
+      <String fx:value="save-screen-root" />
+   </styleClass>
 </StackPane>

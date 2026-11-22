@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -12,10 +14,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <StackPane xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.view.javafx.controller.InstructionsScreenController">
    <children>
-      <ImageView fitHeight="768.0" fitWidth="1366.0" pickOnBounds="true" smooth="false">
+      <ImageView fitHeight="768.0" fitWidth="1366.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" smooth="false">
          <image>
             <Image url="@../images/backgrounds/initial_background.png" />
          </image>
@@ -24,9 +25,9 @@
          <center>
             <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <content>
-                  <VBox alignment="CENTER" spacing="15.0">
+                  <VBox alignment="CENTER" spacing="15.0" styleClass="instructions-content">
                      <children>
-                        <Label text="Boas Vindas">
+                        <Label styleClass="instructions-section-title" text="Boas Vindas">
                            <font>
                               <Font size="40.0" />
                            </font>
@@ -35,8 +36,12 @@
                            <font>
                               <Font size="28.0" />
                            </font>
+                           <styleClass>
+                              <String fx:value="mb-label" />
+                              <String fx:value="instructions-body" />
+                           </styleClass>
                         </Label>
-                        <Label layoutX="646.0" layoutY="40.0" text="Atributos e Regras">
+                        <Label layoutX="646.0" layoutY="40.0" styleClass="instructions-section-title" text="Atributos e Regras">
                            <font>
                               <Font size="40.0" />
                            </font>
@@ -45,18 +50,30 @@
                            <font>
                               <Font size="28.0" />
                            </font>
+                           <styleClass>
+                              <String fx:value="mb-label" />
+                              <String fx:value="instructions-body" />
+                           </styleClass>
                         </Label>
                         <Label layoutX="646.0" layoutY="100.0" text="Conhecimento: ajuda a desvendar segredos e poder liberar caminhos e opções ocultas no futuro." wrapText="true">
                            <font>
                               <Font size="28.0" />
                            </font>
+                           <styleClass>
+                              <String fx:value="mb-label" />
+                              <String fx:value="instructions-body" />
+                           </styleClass>
                         </Label>
                         <Label layoutX="646.0" layoutY="130.0" text="Vínculos: suas ações agradam ou irritam os NPCs. Ter aliados pode ajudar nos momentos finais. " wrapText="true">
                            <font>
                               <Font size="28.0" />
                            </font>
+                           <styleClass>
+                              <String fx:value="mb-label" />
+                              <String fx:value="instructions-body" />
+                           </styleClass>
                         </Label>
-                        <Label layoutX="646.0" layoutY="160.0" text="Como Jogar: ">
+                        <Label layoutX="646.0" layoutY="160.0" styleClass="instructions-section-title" text="Como Jogar: ">
                            <font>
                               <Font size="40.0" />
                            </font>
@@ -65,6 +82,10 @@
                            <font>
                               <Font size="28.0" />
                            </font>
+                           <styleClass>
+                              <String fx:value="mb-label" />
+                              <String fx:value="instructions-body" />
+                           </styleClass>
                         </Label>
                      </children>
                      <padding>
@@ -72,6 +93,10 @@
                      </padding>
                   </VBox>
                </content>
+               <styleClass>
+                  <String fx:value="mb-scroll-pane" />
+                  <String fx:value="instructions-scroll" />
+               </styleClass>
             </ScrollPane>
          </center>
          <padding>
@@ -82,6 +107,10 @@
                <font>
                   <Font size="54.0" />
                </font>
+               <styleClass>
+                  <String fx:value="mb-title" />
+                  <String fx:value="instructions-title" />
+               </styleClass>
             </Label>
          </top>
          <bottom>
@@ -92,8 +121,29 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
+               <styleClass>
+                  <String fx:value="mb-button" />
+                  <String fx:value="mb-button-secondary" />
+                  <String fx:value="instructions-back-button" />
+               </styleClass>
             </Button>
          </bottom>
+         <stylesheets>
+            <URL value="@../css/common.css" />
+            <URL value="@../css/instructions.css" />
+         </stylesheets>
+         <styleClass>
+            <String fx:value="mb-panel" />
+            <String fx:value="instructions-panel" />
+         </styleClass>
       </BorderPane>
    </children>
+   <stylesheets>
+      <URL value="@../css/common.css" />
+      <URL value="@../css/instructions.css" />
+   </stylesheets>
+   <styleClass>
+      <String fx:value="mb-root" />
+      <String fx:value="instructions-root" />
+   </styleClass>
 </StackPane>

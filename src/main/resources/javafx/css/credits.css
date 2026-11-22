@@ -1,0 +1,66 @@
+.credits-root {
+    -fx-background-color: #171323;
+}
+
+.credits-panel {
+    -fx-alignment: center;
+    -fx-spacing: 22px;
+    -fx-pref-width: 820px;
+    -fx-pref-height: 570px;
+    -fx-max-width: 820px;
+    -fx-max-height: 570px;
+    -fx-padding: 34px 46px 30px 46px;
+}
+
+.credits-title {
+    -fx-font-size: 48px;
+    -fx-padding: 0 0 5px 0;
+}
+
+.credits-separator {
+    -fx-padding: 4px 0 4px 0;
+}
+
+.credits-separator > .line {
+    -fx-border-color: rgba(175, 139, 216, 0.70);
+    -fx-border-width: 1px 0 0 0;
+}
+
+.credits-section {
+    -fx-alignment: center;
+    -fx-spacing: 11px;
+    -fx-padding: 18px 22px;
+    -fx-background-color: rgba(43, 34, 61, 0.62);
+    -fx-background-radius: 3px;
+    -fx-border-color: rgba(133, 104, 165, 0.52);
+    -fx-border-width: 1px;
+    -fx-border-radius: 3px;
+    -fx-pref-width: 610px;
+}
+
+.credits-role {
+    -fx-font-family: "Monospaced";
+    -fx-font-size: 19px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #CDB3EF;
+    -fx-text-alignment: center;
+    -fx-wrap-text: true;
+}
+
+.credits-names {
+    -fx-font-family: "Monospaced";
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #F0E8FA;
+    -fx-text-alignment: center;
+}
+
+.credits-back-button {
+    -fx-min-width: 190px;
+    -fx-pref-width: 190px;
+    -fx-max-width: 190px;
+    -fx-min-height: 44px;
+    -fx-pref-height: 44px;
+    -fx-max-height: 44px;
+    -fx-font-size: 15px;
+}

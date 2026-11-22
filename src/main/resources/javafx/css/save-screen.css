@@ -1,0 +1,218 @@
+.save-screen-root {
+    -fx-background-color: #171323;
+}
+
+.save-screen-layout {
+    -fx-background-color: transparent;
+}
+
+.save-screen-header {
+    -fx-alignment: center;
+    -fx-spacing: 12px;
+    -fx-padding: 24px 20px 20px 20px;
+}
+
+.save-screen-title {
+    -fx-font-family: "Monospaced";
+    -fx-font-size: 38px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #F4EEFF;
+    -fx-effect: dropshadow(gaussian, rgba(182, 139, 255, 0.58), 14, 0.30, 0, 0);
+}
+
+.save-screen-separator > .line {
+    -fx-border-color: rgba(165, 129, 205, 0.78);
+    -fx-border-width: 1px 0 0 0;
+}
+
+.save-slots-container {
+    -fx-alignment: center;
+    -fx-spacing: 28px;
+    -fx-padding: 10px 8px 8px 8px;
+    -fx-background-color: transparent;
+}
+
+.save-slot-column {
+    -fx-alignment: top-center;
+    -fx-spacing: 12px;
+    -fx-padding: 6px 5px;
+    -fx-background-color: transparent;
+}
+
+.save-slot-heading {
+    -fx-font-family: "Monospaced";
+    -fx-font-size: 21px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #E8D9FF;
+    -fx-effect: dropshadow(gaussian, rgba(171, 128, 224, 0.30), 7, 0.16, 0, 0);
+}
+
+.save-slot-frame {
+    -fx-background-color: transparent;
+    -fx-padding: 4px;
+}
+
+.save-slot-surface {
+    -fx-fill: linear-gradient(to bottom right,
+        rgba(57, 44, 78, 0.97),
+        rgba(31, 25, 46, 0.97));
+    -fx-stroke: rgba(154, 121, 192, 0.92);
+    -fx-stroke-width: 1.6px;
+}
+
+.save-data-content {
+    -fx-alignment: center;
+    -fx-spacing: 9px;
+    -fx-padding: 12px;
+    -fx-background-color: transparent;
+}
+
+.save-preview-image {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.40), 9, 0.18, 0, 3);
+}
+
+.save-chapter-name {
+    -fx-font-family: "Monospaced";
+    -fx-font-size: 17px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #F0E8FA;
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+}
+
+.save-player-name {
+    -fx-font-family: "Monospaced";
+    -fx-font-size: 13px;
+    -fx-text-fill: #DED2EC;
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+}
+
+.save-datetime {
+    -fx-font-family: "Monospaced";
+    -fx-font-size: 11px;
+    -fx-text-fill: #BFAFD1;
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+}
+
+.save-progress-summary {
+    -fx-font-family: "Monospaced";
+    -fx-font-size: 12px;
+    -fx-text-fill: #D5C9E2;
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+    -fx-wrap-text: true;
+}
+
+.empty-slot-content {
+    -fx-alignment: center;
+    -fx-spacing: 12px;
+    -fx-padding: 14px;
+    -fx-background-color: transparent;
+}
+
+.empty-slot-label {
+    -fx-font-family: "Monospaced";
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #DCCBEF;
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+}
+
+.save-slot-select-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 4px;
+    -fx-border-color: transparent;
+    -fx-border-radius: 4px;
+    -fx-border-width: 2px;
+    -fx-padding: 0;
+    -fx-cursor: hand;
+}
+
+.save-slot-select-button:hover {
+    -fx-background-color: rgba(176, 139, 220, 0.10);
+    -fx-border-color: rgba(205, 178, 239, 0.90);
+}
+
+.save-slot-select-button:pressed {
+    -fx-background-color: rgba(111, 77, 151, 0.20);
+    -fx-border-color: #D8BDFF;
+}
+
+.save-slot-select-button:focused {
+    -fx-border-color: #F0E5FF;
+    -fx-border-width: 2px;
+    -fx-border-insets: -2px;
+}
+
+.save-slot-actions {
+    -fx-alignment: center;
+    -fx-spacing: 12px;
+    -fx-padding: 2px 0 0 0;
+}
+
+.save-action-button {
+    -fx-min-width: 132px;
+    -fx-pref-width: 140px;
+    -fx-max-width: 140px;
+    -fx-min-height: 38px;
+    -fx-pref-height: 40px;
+    -fx-max-height: 40px;
+    -fx-font-family: "Monospaced";
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 3px;
+    -fx-border-radius: 3px;
+    -fx-border-width: 1.5px;
+    -fx-text-fill: #F7F1FF;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.30), 5, 0.12, 0, 2);
+}
+
+.save-restart-button {
+    -fx-background-color: linear-gradient(to bottom, #604681, #3B2A52);
+    -fx-border-color: #9B78C5;
+}
+
+.save-restart-button:hover {
+    -fx-background-color: linear-gradient(to bottom, #795BA0, #50386E);
+    -fx-border-color: #D8BDFF;
+}
+
+.save-delete-button {
+    -fx-background-color: linear-gradient(to bottom, #71404F, #492B3B);
+    -fx-border-color: #B87991;
+    -fx-text-fill: #FFF0F4;
+}
+
+.save-delete-button:hover {
+    -fx-background-color: linear-gradient(to bottom, #92536A, #61374D);
+    -fx-border-color: #E5AFC1;
+}
+
+.save-action-button:pressed {
+    -fx-translate-y: 1px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.20), 2, 0.08, 0, 1);
+}
+
+.save-action-button:focused {
+    -fx-border-color: #FFFFFF;
+}
+
+.save-screen-footer {
+    -fx-alignment: center;
+    -fx-spacing: 12px;
+    -fx-padding: 8px 0 2px 0;
+}
+
+.save-back-button {
+    -fx-min-width: 200px;
+    -fx-pref-width: 200px;
+    -fx-max-width: 200px;
+    -fx-min-height: 42px;
+    -fx-pref-height: 42px;
+    -fx-max-height: 42px;
+    -fx-font-size: 14px;
+}

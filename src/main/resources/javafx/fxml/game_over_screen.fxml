@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
@@ -9,38 +11,42 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.view.javafx.controller.GameOverScreenController">
+<StackPane fx:id="rootPane" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.view.javafx.controller.GameOverScreenController">
    <children>
-      <ImageView fitHeight="768.0" fitWidth="1366.0" mouseTransparent="true" pickOnBounds="true" smooth="false">
+      <ImageView fitHeight="768.0" fitWidth="1366.0" mouseTransparent="true" pickOnBounds="true" smooth="false" StackPane.alignment="CENTER">
          <image>
             <Image url="@../images/backgrounds/game_over_and_final_background.png" />
          </image>
       </ImageView>
-      <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handleBackToMainMenu" prefHeight="768.0" prefWidth="1366.0" spacing="25.0">
+      <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" spacing="25.0">
          <children>
             <Label text="GAME OVER" textFill="WHITE">
                <font>
                   <Font size="56.0" />
                </font>
+               <styleClass>
+                  <String fx:value="mb-title" />
+                  <String fx:value="game-over-title" />
+               </styleClass>
             </Label>
-            <Separator prefWidth="200.0" />
-            <Label text="Sua sanidade chegou a 0." textFill="WHITE">
+            <Separator prefWidth="200.0" styleClass="game-over-separator" />
+            <Label styleClass="game-over-main-message" text="Sua sanidade chegou a 0." textFill="WHITE">
                <font>
                   <Font size="28.0" />
                </font>
             </Label>
-            <Label text="A influência do Mega Brain foi longe demais..." textFill="WHITE">
+            <Label styleClass="game-over-secondary-message" text="A influência do Mega Brain foi longe demais..." textFill="WHITE">
                <font>
                   <Font size="28.0" />
                </font>
             </Label>
-            <Label layoutX="677.0" layoutY="181.0" text="Sua jornada ainda não acabou, tente pensar melhor nas suas escolhas e tente novamente." textFill="WHITE">
+            <Label layoutX="677.0" layoutY="181.0" styleClass="game-over-guidance" text="Sua jornada ainda não acabou, tente pensar melhor nas suas escolhas e tente novamente." textFill="WHITE">
                <font>
                   <Font size="28.0" />
                </font>
             </Label>
-            <Separator layoutX="45.0" layoutY="130.0" prefWidth="200.0" />
-            <Label layoutX="677.0" layoutY="214.0" text="Pressione ESPAÇO para prosseguir..." textFill="WHITE">
+            <Separator layoutX="45.0" layoutY="130.0" prefWidth="200.0" styleClass="game-over-separator" />
+            <Label layoutX="677.0" layoutY="214.0" styleClass="game-over-instruction" text="Pressione ESPAÇO para prosseguir..." textFill="WHITE">
                <font>
                   <Font size="28.0" />
                </font>
@@ -49,6 +55,18 @@
          <padding>
             <Insets bottom="20.0" left="35.0" right="35.0" top="25.0" />
          </padding>
+         <styleClass>
+            <String fx:value="mb-panel" />
+            <String fx:value="game-over-panel" />
+         </styleClass>
       </VBox>
    </children>
+   <stylesheets>
+      <URL value="@../css/common.css" />
+      <URL value="@../css/game-over.css" />
+   </stylesheets>
+   <styleClass>
+      <String fx:value="mb-root" />
+      <String fx:value="game-over-root" />
+   </styleClass>
 </StackPane>

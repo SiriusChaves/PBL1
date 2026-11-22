@@ -1,0 +1,137 @@
+.achievements-root {
+    -fx-background-color: #171323;
+}
+
+.achievements-overlay {
+    -fx-background-color: rgba(12, 8, 22, 0.30);
+}
+
+.achievements-layout {
+    -fx-background-color: transparent;
+}
+
+.achievements-header {
+    -fx-spacing: 16px;
+    -fx-padding: 0 0 18px 0;
+}
+
+.achievements-title {
+    -fx-font-size: 44px;
+    -fx-text-fill: #F4EEFF;
+    -fx-effect: dropshadow(gaussian, rgba(182, 139, 255, 0.62), 15, 0.30, 0, 0);
+}
+
+.achievements-separator {
+    -fx-background-color: rgba(152, 114, 200, 0.75);
+    -fx-padding: 1px 0 1px 0;
+}
+
+.achievements-content {
+    -fx-background-color: rgba(20, 16, 31, 0.82);
+    -fx-background-radius: 3px;
+    -fx-border-color: rgba(159, 123, 199, 0.78);
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 3px;
+    -fx-padding: 12px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.38), 12, 0.18, 0, 4);
+}
+
+.achievements-scroll {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 2px;
+}
+
+.achievements-scroll > .viewport {
+    -fx-background-color: transparent;
+}
+
+.achievements-scroll > .corner {
+    -fx-background-color: transparent;
+}
+
+.achievements-list {
+    -fx-background-color: transparent;
+    -fx-padding: 12px;
+}
+
+.achievements-empty-state {
+    -fx-font-family: "Monospaced";
+    -fx-font-size: 22px;
+    -fx-text-fill: #D5C8E5;
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+    -fx-padding: 28px;
+    -fx-max-width: 660px;
+}
+
+.achievements-back-button {
+    -fx-min-width: 150px;
+    -fx-min-height: 46px;
+    -fx-font-size: 16px;
+}
+
+.achievement-card {
+    -fx-background-color: linear-gradient(to bottom right,
+        rgba(48, 37, 67, 0.98),
+        rgba(31, 25, 45, 0.98));
+    -fx-background-radius: 3px;
+    -fx-border-color: rgba(137, 105, 174, 0.88);
+    -fx-border-width: 1.2px;
+    -fx-border-radius: 3px;
+    -fx-padding: 14px;
+    -fx-spacing: 14px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.28), 7, 0.15, 0, 3);
+}
+
+.achievement-card:hover {
+    -fx-border-color: #B99ADD;
+    -fx-background-color: linear-gradient(to bottom right,
+        rgba(61, 45, 84, 0.99),
+        rgba(38, 29, 55, 0.99));
+}
+
+.achievement-name {
+    -fx-font-family: "Monospaced";
+    -fx-font-size: 17px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #E8D9FF;
+}
+
+.achievement-description {
+    -fx-font-family: "Monospaced";
+    -fx-font-size: 13px;
+    -fx-text-fill: #D5C9E2;
+    -fx-wrap-text: true;
+}
+
+.achievement-image {
+    -fx-effect: dropshadow(gaussian, rgba(171, 128, 224, 0.25), 8, 0.15, 0, 0);
+}
+
+.achievements-scroll .scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-pref-width: 11px;
+    -fx-padding: 2px;
+}
+
+.achievements-scroll .scroll-bar:vertical .thumb {
+    -fx-background-color: #695184;
+    -fx-background-radius: 3px;
+}
+
+.achievements-scroll .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: #9872C8;
+}
+
+.achievements-scroll .scroll-bar:vertical .track {
+    -fx-background-color: rgba(35, 27, 48, 0.65);
+    -fx-background-radius: 3px;
+}
+
+.achievements-scroll .scroll-bar .increment-button,
+.achievements-scroll .scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}

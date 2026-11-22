@@ -1,0 +1,81 @@
+.final-game-root {
+    -fx-background-color: #100F19;
+}
+
+.final-game-overlay {
+    -fx-background-color: rgba(9, 8, 19, 0.34);
+}
+
+.final-game-panel {
+    -fx-alignment: center;
+    -fx-spacing: 24px;
+    -fx-padding: 42px 76px 38px 76px;
+
+    -fx-max-width: 1120px;
+    -fx-max-height: 570px;
+
+    -fx-background-color: rgba(61, 59, 75, 0.86);
+
+    -fx-background-radius: 4px;
+
+    -fx-border-color: rgba(218, 195, 145, 0.95);
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 4px;
+
+    -fx-effect: dropshadow(
+            gaussian,
+            rgba(0, 0, 0, 0.34),
+            25, 0.22, 0, 8
+    );
+}
+
+.final-game-title {
+    -fx-font-family: "Monospaced";
+    -fx-font-size: 58px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #F2E6BE;
+    -fx-effect: dropshadow(gaussian, rgba(224, 190, 112, 0.72), 20, 0.34, 0, 0);
+}
+
+.final-game-separator {
+    -fx-padding: 2px 0 2px 0;
+}
+
+.final-game-separator > .line {
+    -fx-border-color: transparent transparent rgba(190, 164, 113, 0.72) transparent;
+    -fx-border-width: 0 0 1px 0;
+}
+
+.final-game-main-message {
+    -fx-font-family: "Monospaced";
+    -fx-font-size: 27px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #F5F0E3;
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+    -fx-wrap-text: true;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.48), 5, 0.1, 0, 2);
+}
+
+.final-game-secondary-message {
+    -fx-font-family: "Monospaced";
+    -fx-font-size: 21px;
+    -fx-text-fill: #D9D3E2;
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+    -fx-wrap-text: true;
+}
+
+.final-game-instruction {
+    -fx-font-family: "Monospaced";
+    -fx-font-size: 17px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #E8D8AC;
+    -fx-padding: 12px 22px 12px 22px;
+    -fx-background-color: rgba(76, 65, 48, 0.48);
+    -fx-border-color: rgba(190, 164, 113, 0.72);
+    -fx-border-width: 1px;
+    -fx-border-radius: 2px;
+    -fx-background-radius: 2px;
+    -fx-effect: dropshadow(gaussian, rgba(190, 164, 113, 0.20), 10, 0.18, 0, 0);
+}
