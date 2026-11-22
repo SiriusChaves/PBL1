@@ -426,3 +426,49 @@
 .game-panel-scroll .scroll-bar:vertical .track {
     -fx-background-color: transparent;
 }
+
+.game-notification {
+    -fx-background-color: rgba(15, 29, 46, 0.96);
+
+    -fx-border-color: #3d6683;
+    -fx-border-width: 1 1 1 4;
+
+    -fx-padding: 12 16 12 16;
+
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+
+    -fx-effect: dropshadow(
+            gaussian,
+            rgba(0, 0, 0, 0.45),
+            14,
+            0.2,
+            0,
+            4
+    );
+}
+
+
+.game-notification-positive {
+    -fx-border-color: #72c99a;
+}
+
+.game-notification-negative {
+    -fx-border-color: #e17b83;
+}
+
+.game-notification-neutral {
+    -fx-border-color: #d7be65;
+}
+
+
+.game-notification-title {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 17px;
+    -fx-font-weight: bold;
+}
+
+.game-notification-message {
+    -fx-text-fill: #dce8f2;
+    -fx-font-size: 14px;
+}

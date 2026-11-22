@@ -1,8 +1,10 @@
 package main.view.javafx.controller;
 
+import javafx.animation.*;
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.effect.Glow;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.event.ActionEvent;
@@ -12,22 +14,20 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.ProgressBar;
+import javafx.util.Duration;
 import main.controller.GameController;
 import main.dto.*;
 import main.exception.ChapterNotFoundException;
 import main.facade.GameFacade;
 import main.facade.GameFlowResult;
-import main.observer.GameEvent;
-import main.observer.GameEventType;
-import main.observer.GameObserver;
+import main.observer.*;
 import main.view.javafx.controller.dependency.*;
 import main.view.javafx.manager.ScreenManager;
 import main.view.javafx.util.CharacterSpriteResolver;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
-
 
 public class GameScreenController implements
         ScreenController,
@@ -62,6 +62,11 @@ public class GameScreenController implements
     private static final int MAX_SANITY = 100;
 
     private static final int MAX_KNOWLEDGE = 100;
+
+    private final List<Animation> activeAnimations = new ArrayList<>();
+
+    @FXML
+    private VBox notificationsContainer;
 
     @FXML
     private Label chapterActual;
@@ -249,6 +254,261 @@ public class GameScreenController implements
         GameFlowResult result = gameFacade.continueNarrative();
 
         handleGameFlowResult(result);
+    }
+
+    private void showNotification(
+            String title,
+            String message,
+            String styleVariant
+    ) {
+
+        VBox notification = new VBox(5);
+
+        notification.setPrefWidth(360);
+        notification.setMaxWidth(360);
+
+        notification.getStyleClass().addAll(
+                "game-notification",
+                "game-notification-" + styleVariant
+        );
+
+        Label titleLabel = new Label(title);
+        titleLabel.getStyleClass().add("game-notification-title");
+
+        Label messageLabel = new Label(message);
+        messageLabel.setWrapText(true);
+        messageLabel.getStyleClass().add("game-notification-message");
+
+        notification.getChildren().addAll(
+                titleLabel,
+                messageLabel
+        );
+
+        notification.setOpacity(0);
+        notification.setTranslateX(24);
+
+        notificationsContainer.getChildren().add(0, notification);
+
+        FadeTransition fadeIn = new FadeTransition(
+                Duration.millis(200),
+                notification
+        );
+
+        fadeIn.setFromValue(0);
+        fadeIn.setToValue(1);
+
+        TranslateTransition slideIn = new TranslateTransition(
+                Duration.millis(200),
+                notification
+        );
+
+        slideIn.setFromX(24);
+        slideIn.setToX(0);
+
+        ParallelTransition entrance = new ParallelTransition(
+                fadeIn,
+                slideIn
+        );
+
+        PauseTransition hold = new PauseTransition(
+                Duration.seconds(4)
+        );
+
+        FadeTransition fadeOut = new FadeTransition(
+                Duration.millis(350),
+                notification
+        );
+
+        fadeOut.setFromValue(1);
+        fadeOut.setToValue(0);
+
+        SequentialTransition sequence = new SequentialTransition(
+                entrance,
+                hold,
+                fadeOut
+        );
+
+        playAnimation(
+                sequence,
+                () -> notificationsContainer.getChildren().remove(notification)
+        );
+    }
+
+    private void playAnimation(Animation animation, Runnable onFinished) {
+
+        activeAnimations.add(animation);
+        animation.setOnFinished(event -> {
+
+            activeAnimations.remove(animation);
+
+            if (onFinished != null) {
+                onFinished.run();
+            }
+        });
+
+        animation.play();
+    }
+
+    private void handleItemAcquired(ItemAcquired item) {
+
+        if (inventoryPanel.isVisible()) {
+            displayInventory();
+        }
+
+        showNotification(
+                "Novo item adquirido: " + item.name(),
+                item.description(),
+                "positive"
+        );
+    }
+
+    private void handleFlagUnlocked(FlagUnlocked flag) {
+
+        showNotification(
+                "Marco histórico desbloqueado",
+                "Você marcou um acontecimento importante na história.",
+                "neutral"
+        );
+    }
+
+    private void handleRelationshipChange(RelationshipChange change) {
+
+        if (relationshipPanel.isVisible()) {
+            displayRelationships();
+        }
+
+        boolean increased = change.difference() > 0;
+
+        String title = increased
+                ? "Vínculo fortalecido"
+                : "Vínculo abalado";
+
+        String direction = increased
+                ? "confiança aumentou"
+                : "confiança diminuiu";
+
+        String message = change.npcName()
+                + ": " + direction
+                + " (" + change.previousTrustLevel()
+                + " → " + change.currentTrustLevel() + ")";
+
+        showNotification(
+                title,
+                message,
+                increased ? "positive" : "negative"
+        );
+    }
+
+    private void handlePlayerAttributeChange(
+            PlayerAttributeChange change
+    ) {
+
+        if (statusPanel.isVisible()) {
+            displayPlayerStatus();
+        }
+
+        animateProtagonist(change);
+
+        int difference = change.difference();
+
+        String amount = (difference > 0 ? "+" : "") + difference;
+
+        showNotification(
+                change.attribute().displayName() + " " + amount,
+                change.increased()
+                        ? "Seu atributo aumentou."
+                        : "Seu atributo diminuiu.",
+                change.increased() ? "positive" : "negative"
+        );
+    }
+
+    private void animateProtagonist(PlayerAttributeChange change) {
+
+        if (imgCharacterA.getImage() == null) {
+            return;
+        }
+
+        if (change.increased()) {
+
+
+            Glow glow = new Glow(0.0);
+
+            imgCharacterA.setEffect(glow);
+
+            Timeline glowPulse = new Timeline(
+                    new KeyFrame(
+                            Duration.ZERO,
+                            new KeyValue(glow.levelProperty(), 0.0)
+                    ),
+                    new KeyFrame(
+                            Duration.millis(180),
+                            new KeyValue(glow.levelProperty(), 0.8)
+                    ),
+                    new KeyFrame(
+                            Duration.millis(450),
+                            new KeyValue(glow.levelProperty(), 0.0)
+                    )
+            );
+
+            ScaleTransition scale = new ScaleTransition(
+                    Duration.millis(230),
+                    imgCharacterA
+            );
+
+            scale.setFromX(1.0);
+            scale.setFromY(1.0);
+
+            scale.setToX(1.09);
+            scale.setToY(1.09);
+
+            scale.setCycleCount(2);
+            scale.setAutoReverse(true);
+
+            ParallelTransition animation = new ParallelTransition(
+                    glowPulse,
+                    scale
+            );
+
+            playAnimation(animation, () -> {
+                imgCharacterA.setEffect(null);
+                imgCharacterA.setScaleX(1.0);
+                imgCharacterA.setScaleY(1.0);
+            });
+
+        } else {
+
+            TranslateTransition shake = new TranslateTransition(
+                    Duration.millis(55),
+                    imgCharacterA
+            );
+
+            shake.setFromX(0);
+            shake.setToX(7);
+
+            shake.setCycleCount(6);
+            shake.setAutoReverse(true);
+
+            FadeTransition fade = new FadeTransition(
+                    Duration.millis(120),
+                    imgCharacterA
+            );
+
+            fade.setFromValue(1.0);
+            fade.setToValue(0.60);
+
+            fade.setCycleCount(3);
+            fade.setAutoReverse(true);
+
+            ParallelTransition animation = new ParallelTransition(
+                    shake,
+                    fade
+            );
+
+            playAnimation(animation, () -> {
+                imgCharacterA.setTranslateX(0);
+                imgCharacterA.setOpacity(1.0);
+            });
+        }
     }
 
     private boolean confirmSaveOverwrite() {
@@ -736,18 +996,48 @@ public class GameScreenController implements
     @Override
     public void onGameEvent(GameEvent event) {
 
-        if (event.type() != GameEventType.SCENE_CHANGED) {
-            return;
-        }
-
-        if (!(event.payload() instanceof SceneDto scene)) {
-            return;
-        }
-
         Runnable updateTask = () -> {
 
-            if (!disposed) {
-                updateCharacterSprite(scene);
+            if (disposed) {
+                return;
+            }
+
+            switch (event.type()) {
+
+                case SCENE_CHANGED -> {
+
+                    if (event.payload() instanceof SceneDto scene) {
+                        updateCharacterSprite(scene);
+                    }
+                }
+
+                case PLAYER_ATTRIBUTE_CHANGED -> {
+
+                    if (event.payload() instanceof PlayerAttributeChange change) {
+                        handlePlayerAttributeChange(change);
+                    }
+                }
+
+                case ITEM_ACQUIRED -> {
+
+                    if (event.payload() instanceof ItemAcquired item) {
+                        handleItemAcquired(item);
+                    }
+                }
+
+                case FLAG_UNLOCKED -> {
+
+                    if (event.payload() instanceof FlagUnlocked flag) {
+                        handleFlagUnlocked(flag);
+                    }
+                }
+
+                case RELATIONSHIP_CHANGED -> {
+
+                    if (event.payload() instanceof RelationshipChange change) {
+                        handleRelationshipChange(change);
+                    }
+                }
             }
         };
 
@@ -763,6 +1053,7 @@ public class GameScreenController implements
 
     @Override
     public void dispose() {
+
         disposed = true;
 
         if (observerRegistered) {
@@ -771,5 +1062,19 @@ public class GameScreenController implements
 
             observerRegistered = false;
         }
+
+        for (Animation animation : List.copyOf(activeAnimations)) {
+            animation.stop();
+        }
+
+        activeAnimations.clear();
+
+        notificationsContainer.getChildren().clear();
+
+        imgCharacterA.setEffect(null);
+        imgCharacterA.setScaleX(1.0);
+        imgCharacterA.setScaleY(1.0);
+        imgCharacterA.setTranslateX(0);
+        imgCharacterA.setOpacity(1.0);
     }
 }

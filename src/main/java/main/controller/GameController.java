@@ -5,12 +5,10 @@ import main.exception.ChapterNotFoundException;
 import main.mapper.ChapterMapper;
 import main.mapper.PlayerMapper;
 import main.mapper.SceneMapper;
+import main.model.player.Item;
 import main.model.profile.Preference;
 import main.model.profile.UserProfile;
-import main.observer.GameEvent;
-import main.observer.GameEventManager;
-import main.observer.GameEventType;
-import main.observer.GameObserver;
+import main.observer.*;
 import main.persistence.dao.*;
 import main.persistence.dto.SavePersistenceDto;
 import main.service.achievement.AchievementService;
@@ -20,11 +18,23 @@ import main.service.profile.UserProfileService;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class GameController {
+
+    private record ItemSnapshot(
+            String id,
+            String name,
+            String description
+    ) {}
+
+    private record GameStateSnapshot(
+            int sanity,
+            int knowledge,
+            Map<String, Integer> relationshipTrust,
+            Map<String, ItemSnapshot> inventoryItems,
+            Set<String> activeFlags
+    ) {}
 
     private GameSession gameSession;
     private SaveService saveService;
@@ -44,6 +54,138 @@ public class GameController {
         this.saveService = new SaveService(saveDao, itemDao);
         this.achievementService = new AchievementService(achievementDao);
         this.userProfileService = new UserProfileService(profileDao);
+    }
+
+    private GameStateSnapshot captureGameState() {
+
+        var player = gameSession.getPlayer();
+
+        Map<String, Integer> relationships = new HashMap<>();
+
+        player.getRelationships().forEach((name, npc) -> {
+            relationships.put(name, npc.getTrustLevel());
+        });
+
+        Map<String, ItemSnapshot> items = new HashMap<>();
+
+        for (Item item : player.getInventory().getItems().values()) {
+
+            items.put(
+                    item.getId(),
+                    new ItemSnapshot(
+                            item.getId(),
+                            item.getName(),
+                            item.getDescription()
+                    )
+            );
+        }
+
+        Set<String> flags = Set.copyOf(
+                gameSession.getGameFlags().getActiveFlags()
+        );
+
+        return new GameStateSnapshot(
+                player.getSanity(),
+                player.getKnowledge(),
+                Map.copyOf(relationships),
+                Map.copyOf(items),
+                flags
+        );
+
+    }
+
+    private void publishStateChanges(GameStateSnapshot previous, GameStateSnapshot current
+    ) {
+
+        // SANIDADE
+        if (previous.sanity() != current.sanity()) {
+
+            gameEventManager.notifyObservers(
+                    new GameEvent(
+                            GameEventType.PLAYER_ATTRIBUTE_CHANGED,
+                            new PlayerAttributeChange(
+                                    PlayerAttribute.SANITY,
+                                    previous.sanity(),
+                                    current.sanity()
+                            )
+                    )
+            );
+        }
+
+        if (previous.knowledge() != current.knowledge()) {
+
+            gameEventManager.notifyObservers(
+                    new GameEvent(
+                            GameEventType.PLAYER_ATTRIBUTE_CHANGED,
+                            new PlayerAttributeChange(
+                                    PlayerAttribute.KNOWLEDGE,
+                                    previous.knowledge(),
+                                    current.knowledge()
+                            )
+                    )
+            );
+        }
+
+        for (Map.Entry<String, ItemSnapshot> entry :
+                current.inventoryItems().entrySet()) {
+
+            String itemId = entry.getKey();
+
+            if (!previous.inventoryItems().containsKey(itemId)) {
+
+                ItemSnapshot item = entry.getValue();
+
+                gameEventManager.notifyObservers(
+                        new GameEvent(
+                                GameEventType.ITEM_ACQUIRED,
+                                new ItemAcquired(
+                                        item.id(),
+                                        item.name(),
+                                        item.description()
+                                )
+                        )
+                );
+            }
+        }
+
+        for (String flag : current.activeFlags()) {
+
+            if (!previous.activeFlags().contains(flag)) {
+
+                gameEventManager.notifyObservers(
+                        new GameEvent(
+                                GameEventType.FLAG_UNLOCKED,
+                                new FlagUnlocked(flag)
+                        )
+                );
+            }
+        }
+
+        for (Map.Entry<String, Integer> entry :
+                current.relationshipTrust().entrySet()) {
+
+            String npcName = entry.getKey();
+
+            Integer previousTrust =
+                    previous.relationshipTrust().get(npcName);
+
+            int currentTrust = entry.getValue();
+
+            if (previousTrust != null &&
+                    previousTrust != currentTrust) {
+
+                gameEventManager.notifyObservers(
+                        new GameEvent(
+                                GameEventType.RELATIONSHIP_CHANGED,
+                                new RelationshipChange(
+                                        npcName,
+                                        previousTrust,
+                                        currentTrust
+                                )
+                        )
+                );
+            }
+        }
     }
 
     public void addObserver(GameObserver observer) {
@@ -293,15 +435,31 @@ public class GameController {
 
     public void applySceneChoiceConsequence(int choiceIndex) {
 
+        GameStateSnapshot previousState = captureGameState();
+
         gameSession.getStoryService().applySceneChoiceConsequence(choiceIndex);
 
-        achievementService.saveUnlockedAchievements(gameSession.getGameState());
+        achievementService.saveUnlockedAchievements(
+                gameSession.getGameState()
+        );
+
+        GameStateSnapshot currentState = captureGameState();
+
+        publishStateChanges(previousState, currentState);
     }
 
     public void applyChapterFinalChoiceConsequence(int choiceIndex) {
 
+        GameStateSnapshot previousState = captureGameState();
+
         gameSession.getStoryService().applyChapterFinalChoiceConsequence(choiceIndex);
 
-        achievementService.saveUnlockedAchievements(gameSession.getGameState());
+        achievementService.saveUnlockedAchievements(
+                gameSession.getGameState()
+        );
+
+        GameStateSnapshot currentState = captureGameState();
+
+        publishStateChanges(previousState, currentState);
     }
 }

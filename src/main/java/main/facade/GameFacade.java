@@ -12,18 +12,18 @@ public class GameFacade {
 
     public GameFlowResult chooseSceneOption(int choiceIndex) {
 
-        autosaveIfEnabled();
-
         gameController.applySceneChoiceConsequence(choiceIndex);
+
+        autosaveIfEnabled();
 
         return continueNarrative();
     }
 
     public GameFlowResult chooseFinalOption(int choiceIndex) {
 
-        autosaveIfEnabled();
-
         gameController.applyChapterFinalChoiceConsequence(choiceIndex);
+
+        autosaveIfEnabled();
 
         if (gameController.isGameOver()) {
             return GameFlowResult.GAME_OVER;

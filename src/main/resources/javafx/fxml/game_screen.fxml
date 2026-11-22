@@ -158,6 +158,13 @@
             </HBox>
          </center>
       </BorderPane>
+
+      <VBox fx:id="notificationsContainer" alignment="TOP_RIGHT" maxWidth="390.0" mouseTransparent="true" spacing="10.0" StackPane.alignment="TOP_RIGHT">
+         <padding>
+            <Insets top="120.0" right="35.0"/>
+         </padding>
+      </VBox>
+
       <StackPane fx:id="containerPauseMenu" pickOnBounds="true" style="-fx-background-color: rgba(0,0,0,0.75);" styleClass="game-overlay" visible="false">
          <children>
             <VBox alignment="CENTER" maxWidth="420" spacing="18">
