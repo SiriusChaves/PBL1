@@ -7,6 +7,10 @@ import main.mapper.PlayerMapper;
 import main.mapper.SceneMapper;
 import main.model.profile.Preference;
 import main.model.profile.UserProfile;
+import main.observer.GameEvent;
+import main.observer.GameEventManager;
+import main.observer.GameEventType;
+import main.observer.GameObserver;
 import main.persistence.dao.*;
 import main.persistence.dto.SavePersistenceDto;
 import main.service.achievement.AchievementService;
@@ -27,6 +31,7 @@ public class GameController {
     private final ChapterDao chapterDao;
     private AchievementService achievementService;
     private UserProfileService userProfileService;
+    private final GameEventManager gameEventManager = new GameEventManager();
 
     public GameController(
             ChapterDao chapterDao,
@@ -39,6 +44,26 @@ public class GameController {
         this.saveService = new SaveService(saveDao, itemDao);
         this.achievementService = new AchievementService(achievementDao);
         this.userProfileService = new UserProfileService(profileDao);
+    }
+
+    public void addObserver(GameObserver observer) {
+        gameEventManager.addObserver(observer);
+    }
+
+    public void removeObserver(GameObserver observer) {
+        gameEventManager.removeObserver(observer);
+    }
+
+    public void notifySceneChanged() {
+
+        SceneDto currentScene = loadCurrentScene();
+
+        GameEvent event = new GameEvent(
+                GameEventType.SCENE_CHANGED,
+                currentScene
+        );
+
+        gameEventManager.notifyObservers(event);
     }
 
     public boolean isBackgroundMusicEnabled() {
@@ -219,10 +244,14 @@ public class GameController {
 
         achievementService.saveUnlockedAchievements(gameSession.getGameState());
 
-        return ChapterMapper.toDto(
+        ChapterDto chapterDto =  ChapterMapper.toDto(
                 gameSession.getStoryService().getCurrentChapter(),
                 gameSession.getStoryService().getAvailableChapterFinalChoices()
         );
+
+        notifySceneChanged();
+
+        return chapterDto;
     }
 
     public SceneDto loadCurrentScene() {
@@ -253,8 +282,13 @@ public class GameController {
 
     public void advanceToNextScene() {
 
-        if (hasNextScene())
-            gameSession.getStoryService().advanceToNextScene();
+        if (!hasNextScene()) {
+            return;
+        }
+
+        gameSession.getStoryService().advanceToNextScene();
+
+        notifySceneChanged();
     }
 
     public void applySceneChoiceConsequence(int choiceIndex) {

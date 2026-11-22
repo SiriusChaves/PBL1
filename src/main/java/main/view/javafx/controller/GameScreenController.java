@@ -1,6 +1,6 @@
 package main.view.javafx.controller;
 
-import javafx.geometry.Insets;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
@@ -17,12 +17,16 @@ import main.dto.*;
 import main.exception.ChapterNotFoundException;
 import main.facade.GameFacade;
 import main.facade.GameFlowResult;
+import main.observer.GameEvent;
+import main.observer.GameEventType;
+import main.observer.GameObserver;
 import main.view.javafx.controller.dependency.*;
 import main.view.javafx.manager.ScreenManager;
+import main.view.javafx.util.CharacterSpriteResolver;
+
 import java.util.List;
 import java.util.Optional;
 
-import static main.facade.GameFlowResult.SCENE_UPDATED;
 
 
 public class GameScreenController implements
@@ -30,13 +34,22 @@ public class GameScreenController implements
         GameControllerAware,
         GameFacadeAware,
         ScreenInitializer,
-        SlotAware {
+        SlotAware,
+        GameObserver,
+        ScreenDisposable {
 
     private ScreenManager screenManager;
 
     private GameController gameController;
 
     private GameFacade gameFacade;
+
+    private final CharacterSpriteResolver spriteResolver =
+            new CharacterSpriteResolver();
+
+    private boolean observerRegistered = false;
+
+    private boolean disposed = false;
 
     private String slotNumber;
 
@@ -658,6 +671,30 @@ public class GameScreenController implements
         }
     }
 
+    private void updateCharacterSprite(SceneDto scene) {
+
+        PlayerDto player = gameController.loadPlayerData();
+
+        String protagonistName = player.name();
+
+
+
+        CharacterSpriteResolver.ResolvedCharacter protagonist =
+                spriteResolver.resolveProtagonist(protagonistName);
+
+        CharacterSpriteResolver.ResolvedCharacter companion =
+                spriteResolver.resolveSceneCharacter(
+                        scene,
+                        protagonistName
+                );
+
+        imgCharacterA.setImage(protagonist.image());
+        nameCharacterA.setText(protagonist.name());
+
+        imgCharacterB.setImage(companion.image());
+        nameCharacterB.setText(companion.name());
+    }
+
     @Override
     public void setScreenManager(ScreenManager screenManager) {
         this.screenManager = screenManager;
@@ -670,6 +707,15 @@ public class GameScreenController implements
 
     @Override
     public void initScreen() {
+
+        disposed = false;
+
+        if (!observerRegistered) {
+            gameController.addObserver(this);
+
+            observerRegistered = true;
+        }
+
         registerKeyboardsEvents();
 
         openSlot();
@@ -685,5 +731,45 @@ public class GameScreenController implements
     @Override
     public void setGameFacade(GameFacade gameFacade) {
         this.gameFacade = gameFacade;
+    }
+
+    @Override
+    public void onGameEvent(GameEvent event) {
+
+        if (event.type() != GameEventType.SCENE_CHANGED) {
+            return;
+        }
+
+        if (!(event.payload() instanceof SceneDto scene)) {
+            return;
+        }
+
+        Runnable updateTask = () -> {
+
+            if (!disposed) {
+                updateCharacterSprite(scene);
+            }
+        };
+
+        if (Platform.isFxApplicationThread()) {
+
+            updateTask.run();
+
+        } else {
+
+            Platform.runLater(updateTask);
+        }
+    }
+
+    @Override
+    public void dispose() {
+        disposed = true;
+
+        if (observerRegistered) {
+
+            gameController.removeObserver(this);
+
+            observerRegistered = false;
+        }
     }
 }

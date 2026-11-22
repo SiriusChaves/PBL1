@@ -9,6 +9,7 @@ import main.facade.GameFacade;
 import main.view.javafx.controller.dependency.*;
 
 import java.io.IOException;
+import java.util.Objects;
 import java.util.function.Consumer;
 
 public class ScreenManager {
@@ -19,6 +20,8 @@ public class ScreenManager {
     private final GameController gameController;
     private final GameFacade gameFacade;
     private final BackgroundMusicManager musicManager;
+
+    private Object currentController;
 
     public ScreenManager(
             Stage primaryStage,
@@ -79,7 +82,13 @@ public class ScreenManager {
 
             Scene scene = new Scene(root);
 
+            if (currentController instanceof ScreenDisposable disposable) {
+                disposable.dispose();
+            }
+
             mainStage.setScene(scene);
+
+            currentController = loaderController;
 
             if (loaderController instanceof ScreenInitializer screenInitializer) {
                 screenInitializer.initScreen();

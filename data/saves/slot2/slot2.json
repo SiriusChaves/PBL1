@@ -1,19 +1,21 @@
 {
   "playerName": "O Estudante",
-  "dataHora": "2026-11-21T21:49:19.602524474",
-  "lastChapterName": "O Laboratório Abandonado de Hardware",
+  "dataHora": "2026-11-22T10:06:40.577777192",
+  "lastChapterName": "Final 2: A Era do Silêncio",
   "gameStateDto": {
     "player": {
       "name": "O Estudante",
-      "sanity": 50,
+      "sanity": 45,
       "knowledge": 45
     },
-    "currentChapterId": "5",
-    "nextChapterId": "6",
-    "currentSceneId": "11C",
+    "currentChapterId": "9",
+    "nextChapterId": "fim",
+    "currentSceneId": "F2-2",
     "itemsId": [
       "13B",
-      "5"
+      "3",
+      "5",
+      "7"
     ],
     "relationships": [
       {
@@ -41,7 +43,7 @@
       "Suspeita contra o arquiteto",
       "Guardou info"
     ],
-    "isGameCompleted": false,
+    "isGameCompleted": true,
     "currentSceneIndex": 1
   }
 }
