@@ -1,5 +1,11 @@
-*.iml
-.idea/
-out/
-target/
-data/
+
+#IntelliJ
+/*.iml
+/.idea/
+
+# Maven
+/out/
+/target/
+
+# Dados locais do Jogador
+/data/
