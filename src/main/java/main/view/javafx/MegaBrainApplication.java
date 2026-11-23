@@ -13,7 +13,7 @@ public class MegaBrainApplication extends Application {
     public void start(Stage primaryStage) {
 
         BackgroundMusicManager backgroundMusicManager = new BackgroundMusicManager(
-                "/javafx/audio/background.mp3"
+                "/javafx/audio/background.wav"
         );
 
         GameController gameController = new GameController(
